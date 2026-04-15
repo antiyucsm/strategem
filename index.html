@@ -909,9 +909,9 @@ body::before {
 .dateline-bar { animation-delay: 0.12s; }
 .toc          { animation-delay: 0.18s; }
 
-/* ============ RESPONSIVE ============ */
+/* ============ RESPONSIVE — TABLET ============ */
 @media (max-width: 1000px) {
-  .paper { padding: 20px 22px 60px; }
+  .paper { padding: 22px 28px 60px; }
   .story { grid-template-columns: 1fr; gap: 32px; }
   .article { column-count: 1; }
   .toc { grid-template-columns: 1fr; gap: 10px; text-align: center; }
@@ -921,8 +921,96 @@ body::before {
   .below-fold .col + .col { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 24px; }
   .folio, .dateline-bar { grid-template-columns: 1fr; gap: 4px; text-align: center; }
   .folio .r, .dateline-bar .right { text-align: center; }
-  .reflection { margin-left: -22px; margin-right: -22px; padding: 32px 22px; }
+  .reflection { margin-left: -28px; margin-right: -28px; padding: 36px 28px; }
 }
+
+/* ============ RESPONSIVE — PHONE ============ */
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; }
+  .paper { padding: 14px 16px 48px; }
+
+  .folio { font-size: 8.5px; letter-spacing: 0.15em; padding-bottom: 8px; gap: 2px; }
+
+  .masthead { padding: 14px 0 8px; }
+  .mast-title { font-size: 56px; letter-spacing: -0.04em; }
+  .mast-subtitle { font-size: 13px; letter-spacing: 0.02em; }
+  .mast-sub-rule { width: 22px; margin: 0 8px 2px; }
+
+  .dateline-bar { font-size: 9px; letter-spacing: 0.16em; padding: 8px 0; }
+
+  .toc { font-size: 11px; letter-spacing: 0.12em; padding: 12px 0 14px; }
+  .toc .num { font-size: 20px; }
+  .toc a { display: inline-block; padding: 4px 0; }
+
+  .below-fold { gap: 22px; padding-top: 24px; }
+  .below-fold .col + .col { padding-top: 20px; }
+  .sec-label { font-size: 9px; letter-spacing: 0.18em; }
+  .sec-title { font-size: 24px; }
+  .below-fold p { font-size: 14px; line-height: 1.55; }
+  .below-fold li { font-size: 13px; padding-left: 28px; }
+  .classic-quote { font-size: 17px; padding-left: 14px; }
+
+  .section-div { padding: 32px 0 16px; margin-top: 14px; gap: 6px; margin-bottom: 20px; }
+  .section-div .rom { font-size: 48px; }
+  .section-div .title { font-size: 28px; letter-spacing: -0.02em; }
+  .section-div .meta { font-size: 9px; letter-spacing: 0.16em; line-height: 1.6; }
+
+  .story { gap: 28px; margin-bottom: 44px; }
+  .story .headline { font-size: 34px; letter-spacing: -0.028em; line-height: 1; }
+  .story .deck { font-size: 16px; line-height: 1.35; }
+  .story .byline { font-size: 9px; letter-spacing: 0.14em; padding: 10px 0; }
+  .story .byline .sep { margin: 0 8px; }
+
+  .article { font-size: 15.5px; line-height: 1.58; text-align: left; hyphens: none; }
+  .article p.lead { font-size: 16px; line-height: 1.5; }
+  .article p.lead::first-letter { font-size: 60px; margin: 4px 8px 0 0; line-height: 0.85; }
+  .article h3 { font-size: 19px; margin: 14px 0 6px; }
+  .article .emphasis { font-size: 16px; padding-left: 12px; margin: 10px 0; }
+  .article .dateline-intro { font-size: 9px; letter-spacing: 0.14em; }
+
+  .sidebar { gap: 18px; }
+  .panel { padding: 16px 16px 18px; }
+  .panel-label { font-size: 8.5px; letter-spacing: 0.2em; }
+  .panel-title { font-size: 21px; }
+  .actor-name { font-size: 13px; flex-wrap: wrap; gap: 4px; }
+  .actor-name .tag { font-size: 8px; padding: 2px 5px 3px; }
+  .actor-meta { font-size: 12.5px; line-height: 1.42; }
+  .actor-meta span { font-size: 7.5px; letter-spacing: 0.12em; }
+  .law-num { font-size: 24px; }
+  .law-text { font-size: 12px; line-height: 1.38; }
+  .law-text strong { font-size: 10px; letter-spacing: 0.14em; }
+  .munger-body { font-size: 13px; }
+  .munger-body li { font-size: 12.5px; }
+
+  .article-quote { padding: 24px 12px 26px; margin-bottom: 44px; }
+  .article-quote blockquote { font-size: 20px; line-height: 1.28; }
+  .article-quote cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 12px; }
+
+  .tape { margin: -20px -16px 44px; padding: 24px 14px 18px; }
+  .tape-label { font-size: 9px; letter-spacing: 0.22em; }
+  .tape-title { font-size: 26px; }
+  .tape-grid { gap: 14px; }
+  .tape-cell { min-height: 300px; padding: 12px 12px 4px; }
+  .tape-chart { height: 180px; }
+  .tape-move { height: 92px; }
+  .tape-cell .sym .name { font-size: 16px; }
+  .tape-note { font-size: 8.5px; letter-spacing: 0.18em; }
+
+  .full-pull { margin: 24px 0 36px; padding: 28px 14px; }
+  .full-pull blockquote { font-size: 22px; line-height: 1.22; }
+  .full-pull cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 16px; }
+
+  .reflection { margin-left: -16px; margin-right: -16px; padding: 32px 18px; margin-top: 40px; }
+  .reflection .label { font-size: 9px; letter-spacing: 0.22em; }
+  .reflection .question { font-size: 22px; line-height: 1.26; }
+
+  .colophon { font-size: 8.5px; letter-spacing: 0.14em; gap: 4px; grid-template-columns: 1fr; text-align: center; }
+  .colophon .r, .colophon .c { text-align: center; }
+}
+
+/* Prevent accidental horizontal overflow */
+html, body { overflow-x: hidden; max-width: 100vw; }
+.paper { overflow-wrap: break-word; }
 </style>
 </head>
 <body>
