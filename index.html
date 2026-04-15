@@ -703,6 +703,180 @@ body::before {
   .bet-card { min-height: 0; }
 }
 
+/* ============ YOUR CALL — prediction capture ============ */
+.bet-slot { display: flex; flex-direction: column; }
+.bet-slot .bet-card { border-bottom: 1px dashed var(--rule-soft); }
+
+.your-call {
+  border: 1px solid var(--ink);
+  border-top: none;
+  border-bottom: none;
+  background: var(--paper);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.your-call:last-child { border-bottom: 1px solid var(--ink); }
+
+/* The Stratagem's independent call */
+.stratagem-call {
+  border: 1px solid var(--ink);
+  border-top: 1px dashed var(--rule-soft);
+  background: var(--paper-alt);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.sc-head em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+.sc-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.sc-because {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.yc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.yc-row { display: flex; align-items: baseline; gap: 8px; }
+.your-call input {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  border: none;
+  border-bottom: 1px solid var(--rule-soft);
+  background: transparent;
+  padding: 2px 2px;
+  color: var(--ink);
+  outline: none;
+}
+.your-call input:focus { border-bottom-color: var(--accent-bet); }
+.your-call input::placeholder { color: var(--muted); opacity: 0.6; }
+.yc-value { font-weight: 700; }
+.your-call[data-call-type="prob"] .yc-value { width: 3em; text-align: center; }
+.your-call[data-call-type="date"] .yc-value { width: auto; font-weight: 500; color-scheme: light; }
+.your-call[data-call-type="text"] .yc-value { flex: 1; font-weight: 500; }
+.yc-because { flex: 1; font-family: 'Instrument Serif', serif !important; font-style: italic; font-size: 13px !important; font-weight: 400 !important; }
+.yc-suffix { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+
+/* Export bar — Ledger call-to-action */
+.export-bar {
+  margin: 56px 0 40px;
+  padding: 44px 36px 44px;
+  background: var(--paper-alt);
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  text-align: center;
+}
+.export-bar .eb-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.export-bar .eb-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 38px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+.export-bar .eb-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+.export-bar .eb-count {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 640px;
+  margin: 0 auto 26px;
+}
+.export-bar .eb-btn-primary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 18px 36px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.export-bar .eb-btn-primary:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.export-bar .eb-btn-primary:disabled { background: transparent; color: var(--muted); border-color: var(--rule); cursor: not-allowed; }
+.export-bar .eb-btn-secondary { background: transparent; color: var(--ink); }
+.export-bar .eb-btn-secondary:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.export-bar .eb-actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+.export-bar .eb-status {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-top: 16px;
+  min-height: 1.3em;
+}
+.export-bar .eb-clear {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+.export-bar .eb-clear:hover { color: var(--ink); }
+
+@media (max-width: 640px) {
+  .export-bar { padding: 30px 20px; margin: 36px 0 28px; }
+  .export-bar .eb-title { font-size: 27px; }
+  .export-bar .eb-count { font-size: 16px; }
+  .export-bar .eb-btn-primary { padding: 14px 24px; font-size: 11.5px; }
+}
+
 /* ============ THE TAPE — MARKETS ============ */
 .tape {
   margin: -32px -56px 56px;
@@ -1147,7 +1321,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
 .paper { overflow-wrap: break-word; }
 </style>
 </head>
-<body>
+<body data-issue-id="issue-004" data-issue-date="2026-04-15">
 
 <div class="paper">
 
@@ -1326,36 +1500,75 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     </div>
     <p class="bet-claim"><strong>Our call</strong> The operation's early-weeks effectiveness is over-determined; its middle-weeks fragility is not. Coalition tension between US tactical aims and Israeli regime-change aims is the canonical failure axis. Watch Law 47.</p>
     <div class="bet-grid">
-      <a class="bet-card" href="https://polymarket.com/event/trump-announces-us-blockade-of-hormuz-lifted-by" target="_blank" rel="noopener">
-        <div class="bet-q">When does Trump announce the Hormuz blockade lifted?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">Multi-date</span>
-            <span class="bet-arrow">→</span>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/event/trump-announces-us-blockade-of-hormuz-lifted-by" target="_blank" rel="noopener"
+           data-market-id="hormuz-blockade-lifted"
+           data-market-question="When does Trump announce the Hormuz blockade lifted?"
+           data-market-resolves="2026-12-31"
+           data-market-odds="multi-date"
+           data-stratagem-value="2026-07-15"
+           data-stratagem-because="coalition tension between US tactical aims and Israeli regime-change aims peaks in middle weeks, forcing an off-ramp">
+          <div class="bet-q">When does Trump announce the Hormuz blockade lifted?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">Multi-date</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · $488K volume</div>
           </div>
-          <div class="bet-foot">Polymarket · $488K volume</div>
+        </a>
+        <div class="your-call" data-call-type="date">
+          <div class="yc-head">Your call · date</div>
+          <div class="yc-row"><input class="yc-value" type="date" data-market-id="hormuz-blockade-lifted" data-field="value"></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="hormuz-blockade-lifted" data-field="because"></div>
         </div>
-      </a>
-      <a class="bet-card" href="https://polymarket.com/event/iran-x-israelus-conflict-ends-by" target="_blank" rel="noopener">
-        <div class="bet-q">Iran × Israel/US conflict ends by…?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">96%</span>
-            <span class="bet-arrow">→</span>
+      </div>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/event/iran-x-israelus-conflict-ends-by" target="_blank" rel="noopener"
+           data-market-id="iran-israel-conflict-ends-2026"
+           data-market-question="Iran × Israel/US conflict ends by Dec 31 2026"
+           data-market-resolves="2026-12-31"
+           data-market-odds="96%"
+           data-stratagem-value="70"
+           data-stratagem-because="low-intensity persistence and deniable pressure campaigns are the historical base case — ‘ends’ is less clean than 96% suggests">
+          <div class="bet-q">Iran × Israel/US conflict ends by Dec 31, 2026?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">96%</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">by Dec 31 · $39.9M volume</div>
           </div>
-          <div class="bet-foot">by Dec 31 · $39.9M volume</div>
+        </a>
+        <div class="your-call" data-call-type="prob">
+          <div class="yc-head">Your call · %</div>
+          <div class="yc-row"><input class="yc-value" type="number" min="10" max="90" step="10" placeholder="__" data-market-id="iran-israel-conflict-ends-2026" data-field="value"><span class="yc-suffix">%</span></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="iran-israel-conflict-ends-2026" data-field="because"></div>
         </div>
-      </a>
-      <a class="bet-card" href="https://polymarket.com/event/iran-agrees-to-unrestricted-shipping-through-hormuz-in-april" target="_blank" rel="noopener">
-        <div class="bet-q">Iran agrees to unrestricted Hormuz shipping in April?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">23%</span>
-            <span class="bet-arrow">→</span>
+      </div>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/event/iran-agrees-to-unrestricted-shipping-through-hormuz-in-april" target="_blank" rel="noopener"
+           data-market-id="iran-hormuz-shipping-april"
+           data-market-question="Iran agrees to unrestricted Hormuz shipping in April 2026"
+           data-market-resolves="2026-04-30"
+           data-market-odds="23%"
+           data-stratagem-value="15"
+           data-stratagem-because="Tehran can't publicly abandon Hormuz as a deterrence asset — the symbolic cost is too high even under pressure">
+          <div class="bet-q">Iran agrees to unrestricted Hormuz shipping in April 2026?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">23%</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · "Yes"</div>
           </div>
-          <div class="bet-foot">Polymarket · "Yes"</div>
+        </a>
+        <div class="your-call" data-call-type="prob">
+          <div class="yc-head">Your call · %</div>
+          <div class="yc-row"><input class="yc-value" type="number" min="10" max="90" step="10" placeholder="__" data-market-id="iran-hormuz-shipping-april" data-field="value"><span class="yc-suffix">%</span></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="iran-hormuz-shipping-april" data-field="because"></div>
         </div>
-      </a>
+      </div>
     </div>
   </section>
 
@@ -1477,36 +1690,75 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     </div>
     <p class="bet-claim"><strong>Our call</strong> The round's arithmetic survives until the marginal enterprise buyer stops paying. The three failure axes — hyperscaler capex deceleration, a rival architecture, regulator re-classification — are each low-probability in-year but compound cumulatively.</p>
     <div class="bet-grid">
-      <a class="bet-card" href="https://polymarket.com/tech/openai" target="_blank" rel="noopener">
-        <div class="bet-q">OpenAI valuation above $1T in 2026?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">60%</span>
-            <span class="bet-arrow">→</span>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/tech/openai" target="_blank" rel="noopener"
+           data-market-id="openai-valuation-1t-2026"
+           data-market-question="OpenAI valuation above $1T in 2026"
+           data-market-resolves="2026-12-31"
+           data-market-odds="60%"
+           data-stratagem-value="55"
+           data-stratagem-because="valuation inflation usually peaks late-cycle; $1T is reachable but 2026 may miss if a tape correction arrives first">
+          <div class="bet-q">OpenAI valuation above $1T in 2026?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">60%</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · "Yes"</div>
           </div>
-          <div class="bet-foot">Polymarket · "Yes"</div>
+        </a>
+        <div class="your-call" data-call-type="prob">
+          <div class="yc-head">Your call · %</div>
+          <div class="yc-row"><input class="yc-value" type="number" min="10" max="90" step="10" placeholder="__" data-market-id="openai-valuation-1t-2026" data-field="value"><span class="yc-suffix">%</span></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="openai-valuation-1t-2026" data-field="because"></div>
         </div>
-      </a>
-      <a class="bet-card" href="https://polymarket.com/event/ai-bubble-burst-by" target="_blank" rel="noopener">
-        <div class="bet-q">AI bubble burst by end 2026?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">15%</span>
-            <span class="bet-arrow">→</span>
+      </div>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/event/ai-bubble-burst-by" target="_blank" rel="noopener"
+           data-market-id="ai-bubble-burst-2026"
+           data-market-question="AI bubble burst by end 2026"
+           data-market-resolves="2026-12-31"
+           data-market-odds="15%"
+           data-stratagem-value="20"
+           data-stratagem-because="three compounding failure axes — capex deceleration, rival architecture, regulator reclassification — are each low-probability in-year but cumulatively non-trivial">
+          <div class="bet-q">AI bubble burst by end 2026?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">15%</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · "Yes"</div>
           </div>
-          <div class="bet-foot">Polymarket · "Yes"</div>
+        </a>
+        <div class="your-call" data-call-type="prob">
+          <div class="yc-head">Your call · %</div>
+          <div class="yc-row"><input class="yc-value" type="number" min="10" max="90" step="10" placeholder="__" data-market-id="ai-bubble-burst-2026" data-field="value"><span class="yc-suffix">%</span></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="ai-bubble-burst-2026" data-field="because"></div>
         </div>
-      </a>
-      <a class="bet-card" href="https://polymarket.com/tech/openai" target="_blank" rel="noopener">
-        <div class="bet-q">OpenAI IPO by end of 2026?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">40%</span>
-            <span class="bet-arrow">→</span>
+      </div>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/tech/openai" target="_blank" rel="noopener"
+           data-market-id="openai-ipo-2026"
+           data-market-question="OpenAI IPO by end of 2026"
+           data-market-resolves="2026-12-31"
+           data-market-odds="40%"
+           data-stratagem-value="30"
+           data-stratagem-because="private capital remains abundant; Altman prefers the optionality of staying private over IPO disclosure constraints">
+          <div class="bet-q">OpenAI IPO by end of 2026?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">40%</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · "Yes"</div>
           </div>
-          <div class="bet-foot">Polymarket · "Yes"</div>
+        </a>
+        <div class="your-call" data-call-type="prob">
+          <div class="yc-head">Your call · %</div>
+          <div class="yc-row"><input class="yc-value" type="number" min="10" max="90" step="10" placeholder="__" data-market-id="openai-ipo-2026" data-field="value"><span class="yc-suffix">%</span></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="openai-ipo-2026" data-field="because"></div>
         </div>
-      </a>
+      </div>
     </div>
   </section>
 
@@ -1719,37 +1971,89 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     </div>
     <p class="bet-claim"><strong>Our call</strong> Merz's immediate position is structurally more stable than it feels — crisis governments tend to survive the crisis that installed them. The harder test comes late-cycle, when the oil shock has cleared and the compound commitments still have to be paid.</p>
     <div class="bet-grid">
-      <a class="bet-card" href="https://polymarket.com/predictions/germany" target="_blank" rel="noopener">
-        <div class="bet-q">Merz out as Chancellor before 2027?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">~8%</span>
-            <span class="bet-arrow">→</span>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/predictions/germany" target="_blank" rel="noopener"
+           data-market-id="merz-out-before-2027"
+           data-market-question="Merz out as Chancellor before 2027"
+           data-market-resolves="2026-12-31"
+           data-market-odds="~8%"
+           data-stratagem-value="10"
+           data-stratagem-because="crisis governments tend to survive the crisis that installed them; structural stability is higher than the coalition noise suggests">
+          <div class="bet-q">Merz out as Chancellor before 2027?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">~8%</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · "Yes"</div>
           </div>
-          <div class="bet-foot">Polymarket · "Yes"</div>
+        </a>
+        <div class="your-call" data-call-type="prob">
+          <div class="yc-head">Your call · %</div>
+          <div class="yc-row"><input class="yc-value" type="number" min="10" max="90" step="10" placeholder="__" data-market-id="merz-out-before-2027" data-field="value"><span class="yc-suffix">%</span></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="merz-out-before-2027" data-field="because"></div>
         </div>
-      </a>
-      <a class="bet-card" href="https://polymarket.com/event/which-party-wins-2nd-most-seats-in-german-election/will-afd-win-the-second-most-seats-in-the-next-german-election" target="_blank" rel="noopener">
-        <div class="bet-q">AfD wins second-most seats, next German election?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">78%</span>
-            <span class="bet-arrow">→</span>
+      </div>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/event/which-party-wins-2nd-most-seats-in-german-election/will-afd-win-the-second-most-seats-in-the-next-german-election" target="_blank" rel="noopener"
+           data-market-id="afd-second-most-seats"
+           data-market-question="AfD wins second-most seats in next German federal election"
+           data-market-resolves="TBD"
+           data-market-odds="78%"
+           data-stratagem-value="65"
+           data-stratagem-because="a mainstream firewall strategy could still compress AfD share; 78% reads slightly over-confident">
+          <div class="bet-q">AfD wins second-most seats, next German election?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">78%</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · "Yes"</div>
           </div>
-          <div class="bet-foot">Polymarket · "Yes"</div>
+        </a>
+        <div class="your-call" data-call-type="prob">
+          <div class="yc-head">Your call · %</div>
+          <div class="yc-row"><input class="yc-value" type="number" min="10" max="90" step="10" placeholder="__" data-market-id="afd-second-most-seats" data-field="value"><span class="yc-suffix">%</span></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="afd-second-most-seats" data-field="because"></div>
         </div>
-      </a>
-      <a class="bet-card" href="https://polymarket.com/event/berlin-state-election-winner" target="_blank" rel="noopener">
-        <div class="bet-q">Berlin state election — winning party?</div>
-        <div>
-          <div class="bet-odds-row">
-            <span class="bet-odds">Open</span>
-            <span class="bet-arrow">→</span>
+      </div>
+      <div class="bet-slot">
+        <a class="bet-card" href="https://polymarket.com/event/berlin-state-election-winner" target="_blank" rel="noopener"
+           data-market-id="berlin-state-election-winner"
+           data-market-question="Berlin state election winning party"
+           data-market-resolves="TBD"
+           data-market-odds="multi-outcome"
+           data-stratagem-value="CDU"
+           data-stratagem-because="SPD's structural decline in Berlin combined with CDU national momentum makes CDU the base case">
+          <div class="bet-q">Berlin state election — winning party?</div>
+          <div>
+            <div class="bet-odds-row">
+              <span class="bet-odds">Open</span>
+              <span class="bet-arrow">→</span>
+            </div>
+            <div class="bet-foot">Polymarket · multi-outcome</div>
           </div>
-          <div class="bet-foot">Polymarket · multi-outcome</div>
+        </a>
+        <div class="your-call" data-call-type="text">
+          <div class="yc-head">Your call · party</div>
+          <div class="yc-row"><input class="yc-value" type="text" placeholder="CDU / SPD / AfD / …" data-market-id="berlin-state-election-winner" data-field="value"></div>
+          <div class="yc-row"><input class="yc-because" type="text" placeholder="because…" data-market-id="berlin-state-election-winner" data-field="because"></div>
         </div>
-      </a>
+      </div>
     </div>
+  </section>
+
+  <!-- EXPORT BAR — Log your calls to the Ledger before closing the paper -->
+  <section class="export-bar" aria-label="Log predictions to Ledger">
+    <div class="eb-label">Crawl · your ledger</div>
+    <h3 class="eb-title">Log your <em>calls</em> before you close the paper.</h3>
+    <p class="eb-count" id="yc-count">No predictions filled yet — scroll back and stake a number on the ones you have a view on.</p>
+    <div class="eb-actions">
+      <button id="yc-export" class="eb-btn-primary" type="button" disabled>Copy to Ledger</button>
+      <button id="yc-export-beliefs" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy to Beliefs</button>
+    </div>
+    <div class="eb-status" id="yc-status"></div>
+    <div><button id="yc-clear" class="eb-clear" type="button">Clear this edition's fields</button></div>
   </section>
 
   <!-- SECTION III — CLOSING QUOTE -->
@@ -1782,6 +2086,141 @@ html, body { overflow-x: hidden; max-width: 100vw; }
   </div>
 
 </div>
+
+<script>
+(function(){
+  const issueId   = document.body.dataset.issueId   || 'issue-unknown';
+  const issueDate = document.body.dataset.issueDate || new Date().toISOString().slice(0,10);
+  const issueNum  = (issueId.match(/\d+/) || ['?'])[0];
+  const countEl   = document.getElementById('yc-count');
+  const statusEl  = document.getElementById('yc-status');
+  const exportBtn = document.getElementById('yc-export');
+  const beliefsBtn= document.getElementById('yc-export-beliefs');
+  const clearBtn  = document.getElementById('yc-clear');
+
+  // 1) Render the Stratagem's call inside each slot from data- attributes
+  document.querySelectorAll('.bet-slot').forEach(slot => {
+    const card   = slot.querySelector('.bet-card');
+    const value  = card.dataset.stratagemValue;
+    const because= card.dataset.stratagemBecause;
+    if (!value) return;
+    const type = slot.querySelector('.your-call').dataset.callType || 'prob';
+    const display = (type === 'prob') ? `${value}%` : value;
+    const sc = document.createElement('div');
+    sc.className = 'stratagem-call';
+    sc.innerHTML =
+      `<div class="sc-head">The Stratagem's call</div>` +
+      `<div class="sc-value">${display}</div>` +
+      `<div class="sc-because">${because}</div>`;
+    slot.appendChild(sc);
+  });
+
+  // 2) Wire auto-save on all inputs
+  const inputs = document.querySelectorAll('.your-call input');
+  const keyFor = (mid, field) => `ledger:${issueId}:${mid}:${field}`;
+  inputs.forEach(input => {
+    const k = keyFor(input.dataset.marketId, input.dataset.field);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) input.value = saved;
+    input.addEventListener('input', () => {
+      if (input.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, input.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  function collect() {
+    const out = [];
+    document.querySelectorAll('.bet-slot').forEach(slot => {
+      const card = slot.querySelector('.bet-card');
+      const yc   = slot.querySelector('.your-call');
+      const raw  = slot.querySelector('.yc-value').value.trim();
+      if (!raw) return;
+      const type = yc.dataset.callType || 'prob';
+      const display = (type === 'prob') ? `${raw}%` : raw;
+      const scVal = card.dataset.stratagemValue;
+      const stratagemDisplay = scVal ? ((type === 'prob') ? `${scVal}%` : scVal) : '—';
+      out.push({
+        mid: card.dataset.marketId,
+        question: card.dataset.marketQuestion,
+        resolves: card.dataset.marketResolves || 'TBD',
+        you: display,
+        stratagem: stratagemDisplay,
+        stratagemBecause: card.dataset.stratagemBecause || '',
+        market: card.dataset.marketOdds || '—',
+        because: slot.querySelector('.yc-because').value.trim()
+      });
+    });
+    return out;
+  }
+
+  function formatLedger(preds) {
+    return preds.map(p => {
+      const because = p.because ? `because ${p.because}` : `because —`;
+      return `- ${issueDate} → ${p.resolves} · YOU ${p.you} · STRATAGEM ${p.stratagem} · MARKET ${p.market} · ${p.question} · ${because} [market: Polymarket "${p.question}"]`;
+    }).join('\n');
+  }
+
+  function formatBeliefs(preds) {
+    return preds.map(p => {
+      const reason = p.because || '—';
+      return `#### ${issueDate} — ${p.question}\n**My call:** ${p.you}\n${reason}`;
+    }).join('\n\n');
+  }
+
+  function update() {
+    const n = collect().length;
+    if (n === 0) {
+      countEl.textContent = 'No predictions filled yet — scroll back and stake a number on the ones you have a view on.';
+      exportBtn.textContent = 'Copy to Ledger';
+      beliefsBtn.textContent = 'Copy to Beliefs';
+    } else {
+      countEl.textContent = `You've staked ${n} call${n===1?'':'s'} this morning. Log ${n===1?'it':'them'} while the reading is still fresh — this is the Crawl.`;
+      exportBtn.textContent = `Copy ${n} call${n===1?'':'s'} to Ledger`;
+      beliefsBtn.textContent = `Copy ${n} belief${n===1?'':'s'}`;
+    }
+    exportBtn.disabled = (n === 0);
+    beliefsBtn.disabled = (n === 0);
+  }
+
+  async function copyToClipboard(text, okMsg) {
+    try {
+      await navigator.clipboard.writeText(text);
+      statusEl.textContent = okMsg;
+    } catch (e) {
+      window.prompt('Clipboard blocked — copy this manually (Cmd+C, Enter):', text);
+      statusEl.textContent = 'Ready to paste.';
+    }
+  }
+
+  exportBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n` + formatLedger(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI The Ledger.md under ## Open`);
+  });
+
+  beliefsBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = formatBeliefs(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI Political Beliefs.md under ## Entries`);
+  });
+
+  clearBtn.addEventListener('click', () => {
+    if (!confirm("Clear all filled fields for this issue? Only do this AFTER you've pasted them into both the Ledger and Political Beliefs.")) return;
+    inputs.forEach(input => {
+      localStorage.removeItem(keyFor(input.dataset.marketId, input.dataset.field));
+      input.value = '';
+    });
+    statusEl.textContent = 'Fields cleared.';
+    update();
+  });
+
+  update();
+})();
+</script>
 
 </body>
 </html>
