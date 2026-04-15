@@ -1,0 +1,2 @@
+# strategem
+Daily Newspaper
