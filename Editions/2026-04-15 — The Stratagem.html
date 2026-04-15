@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Stratagem — No. 003 · 15 April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e0c08;
+  --ink-soft: #2a2620;
+  --ink-mid: #403a30;
+  --paper: #eee3ca;
+  --paper-alt: #e5d9bc;
+  --paper-deep: #d9cba8;
+  --paper-shade: #c9b98f;
+  --rule: rgba(14, 12, 8, 0.25);
+  --rule-soft: rgba(14, 12, 8, 0.14);
+  --accent: #6d1418;
+  --accent-2: #2d4a2f;   /* economics green */
+  --accent-3: #1c3a5f;   /* europe navy */
+  --muted: #736856;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 14, 'SOFT' 30;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.55;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 5%, rgba(109, 20, 24, 0.04), transparent 50%),
+    radial-gradient(ellipse at 90% 95%, rgba(14, 12, 8, 0.06), transparent 55%),
+    radial-gradient(ellipse at 60% 40%, rgba(201, 185, 143, 0.28), transparent 65%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.11;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.paper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 56px 80px;
+  position: relative;
+}
+
+/* ============ FOLIO ============ */
+.folio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.folio .c { text-align: center; }
+.folio .r { text-align: right; }
+
+/* ============ MASTHEAD ============ */
+.masthead {
+  text-align: center;
+  padding: 22px 0 14px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px double var(--ink);
+  position: relative;
+}
+.masthead::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 10px;
+  height: 1px;
+  background: var(--ink);
+}
+.mast-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'wght' 900;
+  font-size: clamp(60px, 12vw, 148px);
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+  margin-bottom: 6px;
+}
+.mast-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  font-variation-settings: normal;
+}
+.mast-subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.mast-sub-rule {
+  display: inline-block;
+  width: 40px; height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin: 0 12px 3px;
+}
+
+/* ============ DATELINE BAR ============ */
+.dateline-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 10px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 3px double var(--ink);
+  align-items: center;
+}
+.dateline-bar .center { text-align: center; color: var(--accent); font-weight: 700; }
+.dateline-bar .right { text-align: right; }
+.dateline-bar strong { color: var(--ink); font-weight: 700; }
+
+/* ============ INDEX / TOC ============ */
+.toc {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto 1fr;
+  gap: 16px;
+  padding: 16px 0 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.toc .num {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.toc .sec { font-weight: 700; color: var(--ink); }
+.toc a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.toc a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+/* ============ SECTION DIVIDER ============ */
+.section-div {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 26px;
+  align-items: center;
+  padding: 44px 0 20px;
+  margin-top: 20px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 28px;
+}
+.section-div .rom {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 84px;
+  line-height: 0.85;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+}
+.section-div.s2 .rom { color: var(--accent-2); }
+.section-div.s3 .rom { color: var(--accent-3); }
+
+.section-div .title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0;
+  font-size: 52px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.section-div .title em {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.section-div.s2 .title em { color: var(--accent-2); }
+.section-div.s3 .title em { color: var(--accent-3); }
+
+.section-div .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+.section-div .meta strong { color: var(--ink); }
+
+/* ============ STORY LAYOUT ============ */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 44px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.story .headline {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 0.96;
+  letter-spacing: -0.032em;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.story .headline em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .headline em { color: var(--accent-2); }
+.story.s3 .headline em { color: var(--accent-3); }
+
+.story .deck {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height: 1.34;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+
+.story .byline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+.story .byline strong { color: var(--ink); }
+.story .byline .sep { margin: 0 12px; color: var(--accent); }
+.story.s2 .byline .sep { color: var(--accent-2); }
+.story.s3 .byline .sep { color: var(--accent-3); }
+
+/* ARTICLE */
+.article {
+  column-count: 2;
+  column-gap: 34px;
+  column-rule: 1px solid var(--rule-soft);
+  font-size: 15px;
+  line-height: 1.58;
+  text-align: justify;
+  hyphens: auto;
+  color: var(--ink-soft);
+}
+.article p {
+  margin-bottom: 11px;
+  break-inside: avoid-column;
+}
+.article p.lead { font-size: 16.5px; line-height: 1.48; }
+.article .dateline-intro {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 8px;
+}
+.story.s2 .article .dateline-intro { color: var(--accent-2); }
+.story.s3 .article .dateline-intro { color: var(--accent-3); }
+
+.article p.lead::first-letter {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20, 'wght' 500;
+  font-weight: 500;
+  font-size: 80px;
+  float: left;
+  line-height: 0.82;
+  margin: 6px 11px 0 0;
+  color: var(--accent);
+  padding-right: 4px;
+}
+.story.s2 .article p.lead::first-letter { color: var(--accent-2); }
+.story.s3 .article p.lead::first-letter { color: var(--accent-3); }
+
+.article h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 21px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 16px 0 8px;
+  color: var(--ink);
+  break-after: avoid-column;
+}
+.article h3 em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .article h3 em { color: var(--accent-2); }
+.story.s3 .article h3 em { color: var(--accent-3); }
+
+.article strong { color: var(--ink); font-weight: 600; }
+.article .emphasis {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17.5px;
+  color: var(--ink);
+  display: block;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 14px;
+  margin: 10px 0;
+  break-inside: avoid-column;
+  line-height: 1.32;
+}
+.story.s2 .article .emphasis { border-left-color: var(--accent-2); }
+.story.s3 .article .emphasis { border-left-color: var(--accent-3); }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 22px; }
+
+.panel {
+  border: 1px solid var(--ink);
+  background: var(--paper-alt);
+  padding: 18px 20px 20px;
+  position: relative;
+}
+.panel.dark {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.panel.accent { background: var(--paper-deep); }
+
+.panel-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.story.s2 .panel-label { color: var(--accent-2); }
+.story.s3 .panel-label { color: var(--accent-3); }
+
+.panel.dark .panel-label {
+  color: var(--paper-deep);
+  border-bottom-color: rgba(238, 227, 202, 0.2);
+}
+
+.panel-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 23px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.panel.dark .panel-title { color: var(--paper); }
+.panel-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .panel-title em { color: var(--accent-2); }
+.story.s3 .panel-title em { color: var(--accent-3); }
+.panel.dark .panel-title em { color: #d68e92; }
+.story.s2 .panel.dark .panel-title em { color: #9cc6a0; }
+.story.s3 .panel.dark .panel-title em { color: #a5c3e6; }
+
+/* actors */
+.actors { display: flex; flex-direction: column; gap: 11px; }
+.actor {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.actor:last-child { border-bottom: none; padding-bottom: 0; }
+.actor-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 13.5px;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3px;
+}
+.actor-name .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+  background: var(--accent);
+  padding: 2px 6px 3px;
+  text-transform: uppercase;
+}
+.story.s2 .actor-name .tag { background: var(--accent-2); }
+.story.s3 .actor-name .tag { background: var(--accent-3); }
+.actor-meta {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.actor-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  display: block;
+  margin-top: 3px;
+}
+.story.s2 .actor-meta span { color: var(--accent-2); }
+.story.s3 .actor-meta span { color: var(--accent-3); }
+
+/* laws */
+.laws { display: flex; flex-direction: column; gap: 10px; }
+.law {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(238, 227, 202, 0.18);
+}
+.law:last-child { border-bottom: none; }
+.law-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144;
+  font-size: 28px;
+  line-height: 0.9;
+  color: #d68e92;
+  letter-spacing: -0.04em;
+  text-align: right;
+}
+.story.s2 .law-num { color: #9cc6a0; }
+.story.s3 .law-num { color: #a5c3e6; }
+.law-text { font-size: 12.5px; line-height: 1.38; color: var(--paper-deep); }
+.law-text strong {
+  display: block;
+  color: var(--paper);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* munger */
+.munger-body { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+.munger-body strong { color: var(--ink); }
+.munger-body ul { list-style: none; margin-top: 8px; }
+.munger-body li {
+  padding: 6px 0 6px 18px;
+  position: relative;
+  font-size: 12.5px;
+  line-height: 1.38;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.munger-body li:last-child { border-bottom: none; }
+.munger-body li::before {
+  content: '✦';
+  position: absolute;
+  left: 0; top: 6px;
+  color: var(--accent);
+  font-size: 9px;
+}
+.story.s2 .munger-body li::before { color: var(--accent-2); }
+.story.s3 .munger-body li::before { color: var(--accent-3); }
+
+/* ============ ARTICLE QUOTE (per section) ============ */
+.article-quote {
+  margin: 0 0 56px;
+  padding: 30px 20px 32px;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  --qc: var(--accent);
+}
+.article-quote.q2 { --qc: var(--accent-2); }
+.article-quote.q3 { --qc: var(--accent-3); }
+
+.article-quote::before {
+  content: '❦';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper);
+  padding: 0 14px;
+  color: var(--qc);
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.article-quote blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 32px);
+  line-height: 1.26;
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+.article-quote blockquote .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--qc);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+
+.article-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article-quote cite::before { content: '— '; color: var(--qc); }
+
+/* ============ THE TAPE — MARKETS ============ */
+.tape {
+  margin: -32px -56px 56px;
+  padding: 32px 40px 26px;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+}
+
+.tape-header {
+  text-align: center;
+  margin-bottom: 22px;
+  position: relative;
+}
+.tape-header::before,
+.tape-header::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 1px;
+  background: var(--accent-2);
+  opacity: 0.5;
+}
+.tape-header::before { left: calc(50% - 220px); }
+.tape-header::after  { right: calc(50% - 220px); }
+
+.tape-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.tape-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.tape-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent-2);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+
+.tape-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.tape-cell {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 14px 14px 4px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.tape-cell .sym {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.tape-cell .sym .name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.tape-cell .sym .ticker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--accent-2);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.tape-chart {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+.tape-chart iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move {
+  height: 96px;
+  margin-top: 8px;
+  border-top: 1px solid var(--rule-soft);
+  padding-top: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.tape-move iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move-label {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+}
+.tape-cell { min-height: 340px; }
+.tape-note {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+@media (max-width: 1000px) {
+  .tape { margin-left: -22px; margin-right: -22px; padding: 24px 18px 20px; }
+  .tape-grid { grid-template-columns: 1fr; }
+  .tape-header::before, .tape-header::after { display: none; }
+}
+
+/* ============ FULL PULL QUOTE ============ */
+.full-pull {
+  margin: 28px 0 42px;
+  padding: 36px 20px;
+  text-align: center;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+  position: relative;
+}
+.full-pull blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(26px, 3.5vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.full-pull .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+.full-pull cite {
+  display: block;
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.full-pull cite::before { content: '— '; color: var(--accent); }
+
+/* ============ BELOW THE FOLD ============ */
+.below-fold {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 38px;
+  padding-top: 32px;
+  border-top: 3px double var(--ink);
+}
+.below-fold.prologue {
+  padding-top: 38px;
+  padding-bottom: 28px;
+  margin-top: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.below-fold .col { padding-right: 8px; }
+.below-fold .col + .col { border-left: 1px solid var(--rule); padding-left: 30px; }
+
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.sec-label::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 26px;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.sec-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.below-fold p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.below-fold ul { list-style: none; counter-reset: romanlist; }
+.below-fold li {
+  counter-increment: romanlist;
+  padding: 8px 0 8px 30px;
+  position: relative;
+  font-size: 13px;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--rule-soft);
+  color: var(--ink-soft);
+}
+.below-fold li::before {
+  content: counter(romanlist, upper-roman) '.';
+  position: absolute;
+  left: 0; top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.classic-quote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 14px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+}
+.attrib {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* ============ REFLECTION ============ */
+.reflection {
+  margin-top: 48px;
+  padding: 44px 56px;
+  border-top: 3px double var(--ink);
+  border-bottom: 4px solid var(--ink);
+  text-align: center;
+  background: var(--paper-deep);
+  margin-left: -56px;
+  margin-right: -56px;
+}
+.reflection .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.reflection .question {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 34px);
+  line-height: 1.22;
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--ink);
+}
+
+/* ============ COLOPHON ============ */
+.colophon {
+  margin-top: 36px;
+  padding-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: 1px solid var(--rule-soft);
+}
+.colophon .c { text-align: center; color: var(--ink-soft); }
+.colophon .r { text-align: right; }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.folio, .masthead, .dateline-bar, .toc, .section-div, .story,
+.full-pull, .below-fold, .reflection, .colophon {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.folio        { animation-delay: 0.00s; }
+.masthead     { animation-delay: 0.05s; }
+.dateline-bar { animation-delay: 0.12s; }
+.toc          { animation-delay: 0.18s; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1000px) {
+  .paper { padding: 20px 22px 60px; }
+  .story { grid-template-columns: 1fr; gap: 32px; }
+  .article { column-count: 1; }
+  .toc { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div .meta { text-align: center; }
+  .below-fold { grid-template-columns: 1fr; gap: 28px; }
+  .below-fold .col + .col { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .folio, .dateline-bar { grid-template-columns: 1fr; gap: 4px; text-align: center; }
+  .folio .r, .dateline-bar .right { text-align: center; }
+  .reflection { margin-left: -22px; margin-right: -22px; padding: 32px 22px; }
+}
+</style>
+</head>
+<body>
+
+<div class="paper">
+
+  <!-- FOLIO -->
+  <div class="folio">
+    <div>Vol. I · No. 003</div>
+    <div class="c">Daily Edition · Private</div>
+    <div class="r">Page 1 of 1</div>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <h1 class="mast-title">The <em>Stratagem</em></h1>
+    <div class="mast-subtitle">
+      <span class="mast-sub-rule"></span>
+      Power · Statecraft · Strategy · Virtue
+      <span class="mast-sub-rule"></span>
+    </div>
+  </header>
+
+  <!-- DATELINE -->
+  <div class="dateline-bar">
+    <div>Wednesday · <strong>15 April 2026</strong></div>
+    <div class="center">Three Theatres · One Lens</div>
+    <div class="right">Reading time ≈ 15 min</div>
+  </div>
+
+  <!-- INDEX / TOC -->
+  <nav class="toc">
+    <div class="num">I.</div>
+    <div><a href="#sec-i"><span class="sec">International</span> · The Strait as Chessboard</a></div>
+    <div class="num">II.</div>
+    <div><a href="#sec-ii"><span class="sec">Economics</span> · The Circular $122 Billion</a></div>
+    <div class="num">III.</div>
+    <div><a href="#sec-iii"><span class="sec">Europe &amp; Germany</span> · Berlin, Bystander</a></div>
+  </nav>
+
+  <!-- ================================= -->
+  <!-- PROLOGUE — WISDOM BEFORE THE NEWS -->
+  <!-- ================================= -->
+
+  <section class="below-fold prologue">
+    <div class="col">
+      <div class="sec-label">Law of the Day · No. 23</div>
+      <h3 class="sec-title">Concentrate <em>Your</em> Forces.</h3>
+      <p>Power itself always exists in concentrated forms. Single-mindedness, against opponents who are less focused — such an arrow finds its mark every time.</p>
+      <p><em>Yet know the limit.</em> When tied to a single source, if that source falls, you fall with it. Concentration is a sword with two edges.</p>
+      <ul>
+        <li>Find the single point whose absence decides the contest.</li>
+        <li>Place your weight there. Do not thin it across fronts.</li>
+        <li>Identify what happens if that point fails — plan for it.</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">From the Classics</div>
+      <h3 class="sec-title">Clausewitz &amp; <em>Sun Tzu.</em></h3>
+      <blockquote class="classic-quote">Be very strong; first in general, then at the decisive point. There is no higher and simpler law of strategy than that of keeping one's forces concentrated.</blockquote>
+      <p class="attrib">— Carl von Clausewitz</p>
+      <blockquote class="classic-quote">Attack where he is unprepared. Appear where you are not expected.</blockquote>
+      <p class="attrib">— Sun Tzu</p>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">The Practitioner's Note</div>
+      <h3 class="sec-title">On your own <em>Hormuz.</em></h3>
+      <p>Each life contains choke points. A single client, a single relationship, a single income — points whose pressure decides the whole.</p>
+      <p><strong>Of your adversary:</strong> where is <em>their</em> Hormuz? What single point, if squeezed, decides more than its size?</p>
+      <p><strong>Of yourself:</strong> where is <em>your</em> Hormuz? Diversify that point — or fortify it until it cannot be squeezed.</p>
+    </div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION I — INTERNATIONAL         -->
+  <!-- ================================= -->
+
+  <div class="section-div" id="sec-i">
+    <div class="rom">I.</div>
+    <div class="title"><em>International</em> · The Theatre of Nations</div>
+    <div class="meta">
+      <div><strong>Filed</strong> Islamabad / Washington</div>
+      <div>Lead Analysis · Power Dynamics</div>
+    </div>
+  </div>
+
+  <article class="story">
+    <div>
+      <h2 class="headline">Concentration <em>of</em> Force</h2>
+      <p class="deck">Washington closes Iran's arteries at Hormuz. Read it not as crisis, but as case study — a demonstration of <em>where</em> power is applied, not <em>how much</em> of it.</p>
+      <div class="byline">From the Desk of <strong>Statecraft</strong><span class="sep">·</span>Filed <strong>Islamabad &amp; Washington</strong><span class="sep">·</span>15 April 2026</div>
+
+      <div class="article">
+        <p class="lead"><span class="dateline-intro">Islamabad —</span><strong>A</strong> state with superior force rarely uses all of it. It concentrates it, places it where absence would cost the other side everything, and waits. That — more than any kinetic act — is what the United States did this week with Iran. The choice of <em>where</em> to apply pressure, rather than <em>how much</em>, is the instructive element.</p>
+
+        <p>Following a twenty-one-hour summit in Pakistan that ended without agreement, U.S. Central Command began enforcing a blockade of Iranian ports. Within the first twenty-four hours, no ship had passed. Six merchant vessels complied with direction and turned back. No shots were fired.</p>
+
+        <h3>The <em>arrow</em>, not the army.</h3>
+
+        <p>Iran's adversarial position rests on two instruments: its enrichment program, and its capacity to disturb oil markets through allied proxies. Both are now fixed publicly as American "red lines." To negotiate over them is to admit their existence; to refuse is to invite the arrow.</p>
+
+        <p>The design is Clausewitz's: be strong in general, then <em>very strong at the decisive point</em>. The decisive point at Hormuz is not military — it is the transit of Iranian economic life. One narrow waterway carries everything an extended campaign would take months to degrade.</p>
+
+        <span class="emphasis">"A single-mindedness of purpose and total concentration on the goal… such an arrow will find its mark every time." — Law 23.</span>
+
+        <h3>Unpredictability as <em>cadence</em>.</h3>
+
+        <p>Within a single news cycle, the White House moved from <em>blockade announced</em> to <em>talks might resume in forty-eight hours</em>. That is not indecision. It is Law 17 applied in motion: cultivate unpredictability. Iran must calibrate not against a position, but against a moving pattern. Proxies find the rules altered mid-response; allies watch ground shift before they commit.</p>
+
+        <h3>Invert <em>before</em> you admire.</h3>
+
+        <p>Munger's discipline: ask what makes this a disaster. Asymmetric retaliation by proxies — the blockade's "clean" frame shatters. Brent sustained above one-hundred-and-twenty dollars — the political cost reverses onto Washington. Allied fatigue — the near-shoring consensus erodes. None is improbable. Each converts concentration from virtue to vulnerability.</p>
+
+        <p>The reader is not asked to approve or condemn, only to read. By Friday, the tape will have told us more.</p>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-label">The Actors</div>
+        <h3 class="panel-title">Who stands <em>where</em>.</h3>
+        <div class="actors">
+          <div class="actor">
+            <div class="actor-name">United States <span class="tag">Agent</span></div>
+            <div class="actor-meta">Naval superiority, dollar system.<span>Intent · Reset the red lines permanently</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Iran <span class="tag">Target</span></div>
+            <div class="actor-meta">Enrichment, proxies, martyrdom posture.<span>Intent · Concede tactically, preserve regime</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">JD Vance <span class="tag">Courtier</span></div>
+            <div class="actor-meta">Bears deniable risk for the throne.<span>Intent · Succeed without outshining</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Israel <span class="tag">Silent</span></div>
+            <div class="actor-meta">Absence is position.<span>Intent · Let others expend the force</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Oil Tape <span class="tag">Mirror</span></div>
+            <div class="actor-meta">Brent ≈ $102. IMF growth trimmed to 3.1%.<span>Intent · Reveal truth by price</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel dark">
+        <div class="panel-label">Laws in Play</div>
+        <h3 class="panel-title">Greene's <em>ledger</em>.</h3>
+        <div class="laws">
+          <div class="law"><div class="law-num">15</div><div class="law-text"><strong>Crush totally</strong>No half-measures. Remove the capacity, not the threat.</div></div>
+          <div class="law"><div class="law-num">17</div><div class="law-text"><strong>Unpredictability</strong>Blockade one day, talks the next. The rhythm is the weapon.</div></div>
+          <div class="law"><div class="law-num">23</div><div class="law-text"><strong>Concentrate</strong>One choke point does the work of an army.</div></div>
+          <div class="law"><div class="law-num">24</div><div class="law-text"><strong>Perfect courtier</strong>Vance carries risk; the principal keeps mobility.</div></div>
+        </div>
+      </div>
+
+      <div class="panel accent">
+        <div class="panel-label">The Munger Lens</div>
+        <h3 class="panel-title">Invert. <em>What breaks?</em></h3>
+        <div class="munger-body">
+          <ul>
+            <li>Proxies retaliate asymmetrically — clean frame shatters.</li>
+            <li>Brent above $120 sustained — Washington pays at the pump.</li>
+            <li>Allies break on sanctions fatigue — friend-shoring unravels.</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>Find the incentive — find the outcome.</strong></p>
+        </div>
+      </div>
+    </aside>
+  </article>
+
+  <!-- SECTION I — CLOSING QUOTE -->
+  <div class="article-quote q1">
+    <blockquote>
+      <span class="mark">“</span>The strong do what they can, and the weak suffer what they must.<span class="mark">”</span>
+    </blockquote>
+    <cite>Thucydides · History of the Peloponnesian War</cite>
+  </div>
+
+  <!-- ================================= -->
+  <!-- SECTION II — ECONOMICS            -->
+  <!-- ================================= -->
+
+  <div class="section-div s2" id="sec-ii">
+    <div class="rom">II.</div>
+    <div class="title"><em>Economics</em> · The Ledger of Capital</div>
+    <div class="meta">
+      <div><strong>Filed</strong> San Francisco / Seattle</div>
+      <div>Tech · Finance · Markets</div>
+    </div>
+  </div>
+
+  <article class="story s2">
+    <div>
+      <h2 class="headline">The <em>Circular</em> $122 Billion</h2>
+      <p class="deck">OpenAI closes the largest private round in history — funded, in part, by the very hardware vendor it most depends upon. Read the <em>ledger</em>, not the headline.</p>
+      <div class="byline">From the Desk of <strong>Capital</strong><span class="sep">·</span>Filed <strong>San Francisco</strong><span class="sep">·</span>15 April 2026</div>
+
+      <div class="article">
+        <p class="lead"><span class="dateline-intro">San Francisco —</span><strong>W</strong>hen the supplier funds the purchaser, one should pause before admiring the deal. OpenAI's record $122 billion round — valuing the company at $852 billion — was led by Amazon ($50B), Nvidia ($30B) and SoftBank ($30B). Each has a different reason to be in the room. Only one has a reason that circles back to its own income statement.</p>
+
+        <p>Nvidia's investment in its largest customer is, in ledger terms, an investment in the durability of Nvidia's own demand curve. The chips OpenAI must buy to justify $852 billion in enterprise value do not buy themselves. By funding the buyer, the seller underwrites the buying.</p>
+
+        <h3>Incentive-caused <em>bias</em>, at scale.</h3>
+
+        <p>This is the cleanest public example of what Munger called incentive-caused bias — a force so powerful that normally decent people will rationalize decisions they would never make if the reward structure were different. It is not accusation. It is arithmetic.</p>
+
+        <p>Consider the hyperscaler capex for 2026: Amazon ≈ $200B, Google ≈ $180B, with total industry spend projected near <strong>$700 billion</strong>. A share of that flows, inevitably, through Nvidia. A share of what Nvidia receives is then reinvested into the buyers of the chips. The capital is not obviously misallocated — but it is undeniably <em>circular</em>.</p>
+
+        <span class="emphasis">"Never, ever think about something else when you should be thinking about the power of incentives." — Charles T. Munger.</span>
+
+        <h3>The <em>Lollapalooza</em>.</h3>
+
+        <p>Munger's Lollapalooza names the compounding effect of several forces converging — social proof (every hyperscaler spending), authority (the Son / Huang / Altman axis), commitment and consistency (each round larger than the last), incentive-caused bias (vendor-financed demand). Read together, they explain the <em>speed</em> of the valuations, not merely their size.</p>
+
+        <p>For the student of power: OpenAI executes Law 11 — <em>keep people dependent on you</em>. A platform on which 900 million work each week, and on which hyperscalers now have $80B co-staked, is a dependency, not a product. Dependency, made mutual, becomes gravity.</p>
+
+        <h3>Invert <em>before</em> you admire.</h3>
+
+        <p>If hyperscaler capex slows by even 30 percent — a capacity absorption event, a regulatory intervention, a rival model class — the circular flow reverses. Nvidia's revenue falls; its own equity stakes mark down; the valuations they supported cool; OpenAI's next round prices differently. Three links in the chain, one direction of travel.</p>
+
+        <p>Watch Nvidia's April 16 earnings. Watch AWS AI's capacity, still reported at $15B run-rate and <em>still capacity-constrained</em>. Watch the first serious mention of pricing discipline. That will be the signal.</p>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-label">The Actors</div>
+        <h3 class="panel-title">Who funds <em>whom</em>.</h3>
+        <div class="actors">
+          <div class="actor">
+            <div class="actor-name">OpenAI <span class="tag">Platform</span></div>
+            <div class="actor-meta">900M weekly users · $25B ARR.<span>Intent · Lock in compute, lock in scale</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Nvidia <span class="tag">Supplier</span></div>
+            <div class="actor-meta">Invests in its biggest customer.<span>Intent · Extend its own demand curve</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Amazon <span class="tag">Hedge</span></div>
+            <div class="actor-meta">Backs Anthropic and OpenAI both.<span>Intent · Own the workload wherever it lands</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">SoftBank <span class="tag">Concentrator</span></div>
+            <div class="actor-meta">Son's pattern. Large, early, concentrated.<span>Intent · Be the face of the turn</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Anthropic <span class="tag">Rival</span></div>
+            <div class="actor-meta">Patron now backs both sides.<span>Intent · Differentiate on safety and enterprise</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Capex Tape <span class="tag">Mirror</span></div>
+            <div class="actor-meta">≈ $700B hyperscaler spend in 2026.<span>Intent · Reveal sustainability</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel dark">
+        <div class="panel-label">Laws in Play</div>
+        <h3 class="panel-title">Greene's <em>ledger</em>.</h3>
+        <div class="laws">
+          <div class="law"><div class="law-num">11</div><div class="law-text"><strong>Keep dependent</strong>OpenAI as platform; the vendors locked to it.</div></div>
+          <div class="law"><div class="law-num">13</div><div class="law-text"><strong>Self-interest</strong>Nvidia's investment is the lever made visible.</div></div>
+          <div class="law"><div class="law-num">23</div><div class="law-text"><strong>Concentrate</strong>$700B of capex at a handful of names.</div></div>
+          <div class="law"><div class="law-num">7</div><div class="law-text"><strong>Credit</strong>Altman positioned as the face of the round.</div></div>
+        </div>
+      </div>
+
+      <div class="panel accent">
+        <div class="panel-label">The Munger Lens</div>
+        <h3 class="panel-title">Circular <em>capital</em>.</h3>
+        <div class="munger-body">
+          <p><strong>Incentive-caused bias.</strong> Supplier funds purchaser. Both report healthier numbers than either would alone.</p>
+          <ul>
+            <li>If hyperscaler capex slows 30%, the flow reverses down the chain.</li>
+            <li>If a rival model class displaces the incumbent, equity stakes re-rate.</li>
+            <li>If regulators view cross-holding as concerted, scrutiny begins.</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>Model the pressures, not the actors.</strong></p>
+        </div>
+      </div>
+    </aside>
+  </article>
+
+  <!-- SECTION II — CLOSING QUOTE -->
+  <div class="article-quote q2">
+    <blockquote>
+      <span class="mark">“</span>Show me the incentive, and I will show you the outcome.<span class="mark">”</span>
+    </blockquote>
+    <cite>Charles T. Munger</cite>
+  </div>
+
+  <!-- THE TAPE — LIVE MARKETS -->
+  <section class="tape">
+    <div class="tape-header">
+      <div class="tape-label">— The Tape —</div>
+      <h3 class="tape-title">Three <em>Mirrors</em> of Capital</h3>
+    </div>
+    <div class="tape-grid">
+
+      <!-- S&P 500 (via SPY ETF — free on TradingView) -->
+      <div class="tape-cell">
+        <div class="sym">
+          <span class="name">S&amp;P 500</span>
+          <span class="ticker">SPY · YTD</span>
+        </div>
+        <div class="tape-chart">
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22AMEX%3ASPY%22%2C%22dateRange%22%3A%22YTD%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22autosize%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+        <div class="tape-move">
+          <span class="tape-move-label">Last Session</span>
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/single-quote/?locale=en#%7B%22symbol%22%3A%22AMEX%3ASPY%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- TESLA -->
+      <div class="tape-cell">
+        <div class="sym">
+          <span class="name">Tesla</span>
+          <span class="ticker">TSLA · YTD</span>
+        </div>
+        <div class="tape-chart">
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22NASDAQ%3ATSLA%22%2C%22dateRange%22%3A%22YTD%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22autosize%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+        <div class="tape-move">
+          <span class="tape-move-label">Last Session</span>
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/single-quote/?locale=en#%7B%22symbol%22%3A%22NASDAQ%3ATSLA%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- BITCOIN -->
+      <div class="tape-cell">
+        <div class="sym">
+          <span class="name">Bitcoin</span>
+          <span class="ticker">BTC · YTD</span>
+        </div>
+        <div class="tape-chart">
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22dateRange%22%3A%22YTD%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22autosize%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+        <div class="tape-move">
+          <span class="tape-move-label">Last Session</span>
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/single-quote/?locale=en#%7B%22symbol%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+    <p class="tape-note">YTD trajectory · last session's open → close below each chart</p>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION III — EUROPE / GERMANY    -->
+  <!-- ================================= -->
+
+  <div class="section-div s3" id="sec-iii">
+    <div class="rom">III.</div>
+    <div class="title"><em>Europe</em> · The Continental Ledger</div>
+    <div class="meta">
+      <div><strong>Filed</strong> Berlin / Brussels</div>
+      <div>Germany · EU · Policy</div>
+    </div>
+  </div>
+
+  <article class="story s3">
+    <div>
+      <h2 class="headline">Berlin, <em>Bystander</em></h2>
+      <p class="deck">Germany's "fiscal reawakening" meets the strait. Merz learns what every medium power eventually learns — sovereignty ends at the price of <em>Brent</em>.</p>
+      <div class="byline">From the Desk of <strong>Europe</strong><span class="sep">·</span>Filed <strong>Berlin &amp; Brussels</strong><span class="sep">·</span>15 April 2026</div>
+
+      <div class="article">
+        <p class="lead"><span class="dateline-intro">Berlin —</span><strong>T</strong>he most consequential economic decision of the German quarter was not made in Berlin. It was made aboard a U.S. carrier somewhere west of the Strait of Hormuz. Growth forecasts for 2026 and 2027 have been cut. Inflation, which the Merz government had planned to outrun, returns through the fuel pump. The eight-and-a-half-percent minimum-wage rise intended to unlock real wage gains now sits against a moving inflation line.</p>
+
+        <p>The uncomfortable lesson is not new — it is older than the Federal Republic itself. A mid-sized export economy in a long peace is structurally exposed to the <em>wars of others</em>. Germany writes the rules of its labor market; it does not write the price of Brent crude.</p>
+
+        <h3>The cost of the <em>silent chair</em>.</h3>
+
+        <p>Where the Stratagem's first section described Washington as agent and Tehran as target, Germany occupies a third category worth naming carefully: the <em>silent chair</em>. No seat at the table of decision. Every line of the outcome delivered to its balance sheet.</p>
+
+        <p>This is not weakness. It is position. But position untended becomes liability. Law 20 counsels: <em>do not commit inadvertently to anyone</em>. Germany's energy posture, its export dependence on China, its security reliance on Washington — each is a commitment compounded over decades. None is easily reversed in a single political cycle.</p>
+
+        <span class="emphasis">The board does not pay its cost in battles lost. It pays in forecasts cut — quarter after quarter.</span>
+
+        <h3>The <em>domestic</em> echo.</h3>
+
+        <p>Here the Munger lesson applies inwards. The AfD does not need to author policy. It needs only to name the cost. Every inflation print not produced by Berlin becomes, in the populist register, a failure of Berlin. Inflation imported through oil is politically indistinguishable from inflation created at home. Voters feel the pump; causation is a story for editors.</p>
+
+        <p>Merz's fiscal pivot — the cautious reawakening of state investment that S&amp;P called the story of 2026 — was always going to be judged against external conditions. It is being judged against worse ones than its authors expected.</p>
+
+        <h3>What the <em>student</em> takes away.</h3>
+
+        <p>Three readings, portable to one's own affairs. <strong>First</strong>, identify the silent chairs in your life — contracts, suppliers, reputations shaped by decisions you will not be invited to make. <strong>Second</strong>, name the structural commitments whose costs reveal themselves only in crises. <strong>Third</strong>, do not confuse calm with control. Much of what feels stable is merely the absence, for now, of a pressure test.</p>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-label">The Actors</div>
+        <h3 class="panel-title">The continental <em>ledger</em>.</h3>
+        <div class="actors">
+          <div class="actor">
+            <div class="actor-name">Friedrich Merz <span class="tag">Principal</span></div>
+            <div class="actor-meta">CDU / grand coalition. Fiscal reawakening.<span>Intent · Deliver growth without debt panic</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">AfD <span class="tag">Spoiler</span></div>
+            <div class="actor-meta">State elections 2026 approaching.<span>Intent · Convert imported pain into mandate</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">EU / Brussels <span class="tag">Chorus</span></div>
+            <div class="actor-meta">Coordinates but cannot deliver alone.<span>Intent · Present unity, subsidize impact</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Industry <span class="tag">Payor</span></div>
+            <div class="actor-meta">Chemicals, steel, auto — energy sensitive.<span>Intent · Extract relief, preserve margin</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Household <span class="tag">Subject</span></div>
+            <div class="actor-meta">Feels inflation, not its causes.<span>Intent · Punish who is in power when pain arrives</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Washington · Tehran <span class="tag">Authors</span></div>
+            <div class="actor-meta">Distant. Decisive. Unseated from the board.<span>Intent · Resolve their own game</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel dark">
+        <div class="panel-label">Laws in Play</div>
+        <h3 class="panel-title">Greene's <em>ledger</em>.</h3>
+        <div class="laws">
+          <div class="law"><div class="law-num">20</div><div class="law-text"><strong>Don't commit</strong>Overcommitment to paths you do not control is slow-acting poison.</div></div>
+          <div class="law"><div class="law-num">32</div><div class="law-text"><strong>Play fantasies</strong>AfD sells the clarity of a simple story. Populism is narrative before it is policy.</div></div>
+          <div class="law"><div class="law-num">22</div><div class="law-text"><strong>Surrender to recover</strong>Accept short-term fiscal strain to preserve long-term position.</div></div>
+          <div class="law"><div class="law-num">4</div><div class="law-text"><strong>Say less</strong>Every premature forecast is a hostage to the next data print.</div></div>
+        </div>
+      </div>
+
+      <div class="panel accent">
+        <div class="panel-label">The Munger Lens</div>
+        <h3 class="panel-title">The <em>Lollapalooza</em> of pain.</h3>
+        <div class="munger-body">
+          <p>No single cause breaks a political cycle. A stack does.</p>
+          <ul>
+            <li>Oil shock · inflation returns through the pump.</li>
+            <li>Regional elections · AfD harvests the disorientation.</li>
+            <li>Fiscal pivot mid-flight · debt narrative sharpens.</li>
+            <li>EU fragmentation · coordination cost rises.</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>Invert.</strong> What does Berlin need to <em>not</em> do? Overpromise, over-subsidize, over-commit.</p>
+        </div>
+      </div>
+    </aside>
+  </article>
+
+  <!-- SECTION III — CLOSING QUOTE -->
+  <div class="article-quote q3">
+    <blockquote>
+      <span class="mark">“</span>A person who does not think ahead about the distant future, is sure to be troubled by the worries close at hand.<span class="mark">”</span>
+    </blockquote>
+    <cite>Confucius · The Analects</cite>
+  </div>
+
+  <!-- FULL PULL QUOTE -->
+  <div class="full-pull">
+    <blockquote>
+      <span class="mark">“</span>The supreme art of war is to subdue the enemy without fighting.<span class="mark">”</span>
+    </blockquote>
+    <cite>Sun Tzu · The Art of War</cite>
+  </div>
+
+  <!-- REFLECTION -->
+  <footer class="reflection">
+    <div class="label">— Question for the Day —</div>
+    <p class="question">Which <em>silent chairs</em> do you occupy — tables where the decisions that shape your life are made without you — and which of them is it still possible for you to join?</p>
+  </footer>
+
+  <!-- COLOPHON -->
+  <div class="colophon">
+    <div>Folio 003 · MMXXVI</div>
+    <div class="c">The Stratagem · Private Edition · R. Becker</div>
+    <div class="r">— fin —</div>
+  </div>
+
+</div>
+
+</body>
+</html>
