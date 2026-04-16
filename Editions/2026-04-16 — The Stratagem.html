@@ -870,6 +870,46 @@ body::before {
 }
 .export-bar .eb-clear:hover { color: var(--ink); }
 
+/* ============ READER NOTES — per-article comments ============ */
+.reader-notes {
+  margin: 0 0 48px;
+  padding: 22px 28px 24px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-alt);
+}
+.rn-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-bet, var(--accent));
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.reader-notes textarea {
+  width: 100%;
+  min-height: 80px;
+  max-height: 300px;
+  resize: vertical;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  padding: 12px 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+.reader-notes textarea:focus { border-color: var(--accent-bet, var(--accent)); }
+.reader-notes textarea::placeholder { color: var(--muted); opacity: 0.5; }
+@media (max-width: 640px) {
+  .reader-notes { padding: 16px 16px 18px; }
+  .reader-notes textarea { font-size: 14px; min-height: 60px; }
+}
+
 @media (max-width: 640px) {
   .export-bar { padding: 30px 20px; margin: 36px 0 28px; }
   .export-bar .eb-title { font-size: 27px; }
@@ -1572,6 +1612,12 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     </div>
   </section>
 
+  <!-- SECTION I — READER NOTES -->
+  <div class="reader-notes s1">
+    <div class="rn-head">Your notes · Section I</div>
+    <textarea data-note-id="sec-i" placeholder="Your reaction, disagreements, questions…"></textarea>
+  </div>
+
   <!-- SECTION I — CLOSING QUOTE -->
   <div class="article-quote q1">
     <blockquote>
@@ -1765,6 +1811,12 @@ html, body { overflow-x: hidden; max-width: 100vw; }
       </div>
     </div>
   </section>
+
+  <!-- SECTION II — READER NOTES -->
+  <div class="reader-notes s2">
+    <div class="rn-head">Your notes · Section II</div>
+    <textarea data-note-id="sec-ii" placeholder="Your reaction, disagreements, questions…"></textarea>
+  </div>
 
   <!-- SECTION II — CLOSING QUOTE -->
   <div class="article-quote q2">
@@ -2049,6 +2101,12 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     </div>
   </section>
 
+  <!-- SECTION III — READER NOTES -->
+  <div class="reader-notes s3">
+    <div class="rn-head">Your notes · Section III</div>
+    <textarea data-note-id="sec-iii" placeholder="Your reaction, disagreements, questions…"></textarea>
+  </div>
+
   <!-- EXPORT BAR — Log your calls to the Ledger before closing the paper -->
   <section class="export-bar" aria-label="Log predictions to Ledger">
     <div class="eb-label">Crawl · your ledger</div>
@@ -2057,6 +2115,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     <div class="eb-actions">
       <button id="yc-export" class="eb-btn-primary" type="button" disabled>Copy to Ledger</button>
       <button id="yc-export-beliefs" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy to Beliefs</button>
+      <button id="yc-export-notes" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy notes</button>
     </div>
     <div class="eb-status" id="yc-status"></div>
     <div><button id="yc-clear" class="eb-clear" type="button">Clear this edition's fields</button></div>
@@ -2103,6 +2162,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
   const exportBtn = document.getElementById('yc-export');
   const beliefsBtn= document.getElementById('yc-export-beliefs');
   const clearBtn  = document.getElementById('yc-clear');
+  const notesBtn  = document.getElementById('yc-export-notes');
 
   // 1) Render the Stratagem's call inside each slot from data- attributes
   document.querySelectorAll('.bet-slot').forEach(slot => {
@@ -2121,7 +2181,22 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     slot.appendChild(sc);
   });
 
-  // 2) Wire auto-save on all inputs
+  // 2a) Wire auto-save on reader-notes textareas
+  const noteTAs = document.querySelectorAll('.reader-notes textarea');
+  const noteKeyFor = (noteId) => `notes:${issueId}:${noteId}`;
+  noteTAs.forEach(ta => {
+    const k = noteKeyFor(ta.dataset.noteId);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) ta.value = saved;
+    ta.addEventListener('input', () => {
+      if (ta.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, ta.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  // 2b) Wire auto-save on all inputs
   const inputs = document.querySelectorAll('.your-call input');
   const keyFor = (mid, field) => `ledger:${issueId}:${mid}:${field}`;
   inputs.forEach(input => {
@@ -2175,19 +2250,43 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     }).join('\n\n');
   }
 
+  function collectNotes() {
+    const out = [];
+    const headlines = document.querySelectorAll('.headline');
+    noteTAs.forEach((ta, i) => {
+      const text = ta.value.trim();
+      if (!text) return;
+      const hl = headlines[i] ? headlines[i].textContent.trim() : `Section ${i+1}`;
+      const rom = ['I', 'II', 'III'][i] || `${i+1}`;
+      out.push({ rom, headline: hl, text });
+    });
+    return out;
+  }
+
+  function formatNotes(notes) {
+    return notes.map(n => `#### ${n.rom}. ${n.headline}\n${n.text}`).join('\n\n');
+  }
+
   function update() {
     const n = collect().length;
-    if (n === 0) {
-      countEl.textContent = 'No predictions filled yet — scroll back and stake a number on the ones you have a view on.';
+    const nn = collectNotes().length;
+    if (n === 0 && nn === 0) {
+      countEl.textContent = 'No predictions or notes yet — scroll back and engage with the stories.';
       exportBtn.textContent = 'Copy to Ledger';
       beliefsBtn.textContent = 'Copy to Beliefs';
+      notesBtn.textContent = 'Copy notes';
     } else {
-      countEl.textContent = `You've staked ${n} call${n===1?'':'s'} this morning. Log ${n===1?'it':'them'} while the reading is still fresh — this is the Crawl.`;
-      exportBtn.textContent = `Copy ${n} call${n===1?'':'s'} to Ledger`;
-      beliefsBtn.textContent = `Copy ${n} belief${n===1?'':'s'}`;
+      const parts = [];
+      if (n > 0) parts.push(`${n} call${n===1?'':'s'}`);
+      if (nn > 0) parts.push(`${nn} note${nn===1?'':'s'}`);
+      countEl.textContent = `You've logged ${parts.join(' and ')} this morning. Export while the reading is still fresh.`;
+      exportBtn.textContent = n > 0 ? `Copy ${n} call${n===1?'':'s'} to Ledger` : 'Copy to Ledger';
+      beliefsBtn.textContent = n > 0 ? `Copy ${n} belief${n===1?'':'s'}` : 'Copy to Beliefs';
+      notesBtn.textContent = nn > 0 ? `Copy ${nn} note${nn===1?'':'s'}` : 'Copy notes';
     }
     exportBtn.disabled = (n === 0);
     beliefsBtn.disabled = (n === 0);
+    notesBtn.disabled = (nn === 0);
   }
 
   async function copyToClipboard(text, okMsg) {
@@ -2214,11 +2313,22 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI Political Beliefs.md under ## Entries`);
   });
 
+  notesBtn.addEventListener('click', () => {
+    const notes = collectNotes();
+    if (!notes.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n\n` + formatNotes(notes);
+    copyToClipboard(text, `✓ ${notes.length} note${notes.length===1?'':'s'} copied — paste into your vault`);
+  });
+
   clearBtn.addEventListener('click', () => {
-    if (!confirm("Clear all filled fields for this issue? Only do this AFTER you've pasted them into both the Ledger and Political Beliefs.")) return;
+    if (!confirm("Clear all filled fields for this issue? Only do this AFTER you've exported everything.")) return;
     inputs.forEach(input => {
       localStorage.removeItem(keyFor(input.dataset.marketId, input.dataset.field));
       input.value = '';
+    });
+    noteTAs.forEach(ta => {
+      localStorage.removeItem(noteKeyFor(ta.dataset.noteId));
+      ta.value = '';
     });
     statusEl.textContent = 'Fields cleared.';
     update();
