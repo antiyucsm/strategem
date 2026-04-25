@@ -2193,7 +2193,6 @@ html, body { overflow-x: hidden; max-width: 100vw; }
         you: display,
         stratagem: stratagemDisplay,
         stratagemBecause: card.dataset.stratagemBecause || '',
-        market: card.dataset.marketOdds || '—',
         because: slot.querySelector('.yc-because').value.trim()
       });
     });
@@ -2203,7 +2202,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
   function formatLedger(preds) {
     return preds.map(p => {
       const because = p.because ? `because ${p.because}` : `because —`;
-      return `- ${issueDate} → ${p.resolves} · YOU ${p.you} · STRATAGEM ${p.stratagem} · MARKET ${p.market} · ${p.question} · ${because} [market: Polymarket "${p.question}"]`;
+      return `- ${issueDate} → ${p.resolves} · YOU ${p.you} · STRATAGEM ${p.stratagem} · ${p.question} · ${because} [market: Polymarket "${p.question}"]`;
     }).join('\n');
   }
 
