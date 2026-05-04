@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Stratagem — No. 017 · 27 April 2026</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#0e0c08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e0c08;
+  --ink-soft: #2a2620;
+  --ink-mid: #403a30;
+  --paper: #eee3ca;
+  --paper-alt: #e5d9bc;
+  --paper-deep: #d9cba8;
+  --paper-shade: #c9b98f;
+  --rule: rgba(14, 12, 8, 0.25);
+  --rule-soft: rgba(14, 12, 8, 0.14);
+  --accent: #6d1418;
+  --accent-2: #2d4a2f;   /* economics green */
+  --accent-3: #1c3a5f;   /* europe navy */
+  --muted: #736856;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 14, 'SOFT' 30;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.55;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 5%, rgba(109, 20, 24, 0.04), transparent 50%),
+    radial-gradient(ellipse at 90% 95%, rgba(14, 12, 8, 0.06), transparent 55%),
+    radial-gradient(ellipse at 60% 40%, rgba(201, 185, 143, 0.28), transparent 65%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.11;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.paper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 56px 80px;
+  position: relative;
+}
+
+/* ============ FOLIO ============ */
+.folio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.folio .c { text-align: center; }
+.folio .r { text-align: right; }
+
+/* ============ MASTHEAD ============ */
+.masthead {
+  text-align: center;
+  padding: 22px 0 14px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px double var(--ink);
+  position: relative;
+}
+.masthead::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 10px;
+  height: 1px;
+  background: var(--ink);
+}
+.mast-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'wght' 900;
+  font-size: clamp(60px, 12vw, 148px);
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+  margin-bottom: 6px;
+}
+.mast-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  font-variation-settings: normal;
+}
+.mast-subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.mast-sub-rule {
+  display: inline-block;
+  width: 40px; height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin: 0 12px 3px;
+}
+
+/* ============ DATELINE BAR ============ */
+.dateline-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 10px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 3px double var(--ink);
+  align-items: center;
+}
+.dateline-bar .center { text-align: center; color: var(--accent); font-weight: 700; }
+.dateline-bar .right { text-align: right; }
+.dateline-bar strong { color: var(--ink); font-weight: 700; }
+
+/* ============ INDEX / TOC ============ */
+.toc {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto 1fr;
+  gap: 16px;
+  padding: 16px 0 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.toc .num {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.toc .sec { font-weight: 700; color: var(--ink); }
+.toc a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.toc a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+/* ============ SECTION DIVIDER ============ */
+.section-div {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 26px;
+  align-items: center;
+  padding: 44px 0 20px;
+  margin-top: 20px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 28px;
+}
+.section-div .rom {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 84px;
+  line-height: 0.85;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+}
+.section-div.s2 .rom { color: var(--accent-2); }
+.section-div.s3 .rom { color: var(--accent-3); }
+
+.section-div .title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0;
+  font-size: 52px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.section-div .title em {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.section-div.s2 .title em { color: var(--accent-2); }
+.section-div.s3 .title em { color: var(--accent-3); }
+
+.section-div .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+.section-div .meta strong { color: var(--ink); }
+
+/* ============ STORY LAYOUT ============ */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 44px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.story .headline {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 0.96;
+  letter-spacing: -0.032em;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.story .headline em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .headline em { color: var(--accent-2); }
+.story.s3 .headline em { color: var(--accent-3); }
+
+.story .deck {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height: 1.34;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+
+.story .byline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+.story .byline strong { color: var(--ink); }
+.story .byline .sep { margin: 0 12px; color: var(--accent); }
+.story.s2 .byline .sep { color: var(--accent-2); }
+.story.s3 .byline .sep { color: var(--accent-3); }
+
+/* ARTICLE */
+.article {
+  column-count: 2;
+  column-gap: 34px;
+  column-rule: 1px solid var(--rule-soft);
+  font-size: 15px;
+  line-height: 1.58;
+  text-align: justify;
+  hyphens: auto;
+  color: var(--ink-soft);
+}
+.article p {
+  margin-bottom: 11px;
+  break-inside: avoid-column;
+}
+.article p.lead { font-size: 16.5px; line-height: 1.48; }
+.article .dateline-intro {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 8px;
+}
+.story.s2 .article .dateline-intro { color: var(--accent-2); }
+.story.s3 .article .dateline-intro { color: var(--accent-3); }
+
+.article p.lead::first-letter {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20, 'wght' 500;
+  font-weight: 500;
+  font-size: 80px;
+  float: left;
+  line-height: 0.82;
+  margin: 6px 11px 0 0;
+  color: var(--accent);
+  padding-right: 4px;
+}
+.story.s2 .article p.lead::first-letter { color: var(--accent-2); }
+.story.s3 .article p.lead::first-letter { color: var(--accent-3); }
+
+.article h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 21px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 16px 0 8px;
+  color: var(--ink);
+  break-after: avoid-column;
+}
+.article h3 em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .article h3 em { color: var(--accent-2); }
+.story.s3 .article h3 em { color: var(--accent-3); }
+
+.article strong { color: var(--ink); font-weight: 600; }
+.article .emphasis {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17.5px;
+  color: var(--ink);
+  display: block;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 14px;
+  margin: 10px 0;
+  break-inside: avoid-column;
+  line-height: 1.32;
+}
+.story.s2 .article .emphasis { border-left-color: var(--accent-2); }
+.story.s3 .article .emphasis { border-left-color: var(--accent-3); }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 22px; }
+
+.panel {
+  border: 1px solid var(--ink);
+  background: var(--paper-alt);
+  padding: 18px 20px 20px;
+  position: relative;
+}
+.panel.dark {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.panel.accent { background: var(--paper-deep); }
+
+.panel-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.story.s2 .panel-label { color: var(--accent-2); }
+.story.s3 .panel-label { color: var(--accent-3); }
+
+.panel.dark .panel-label {
+  color: var(--paper-deep);
+  border-bottom-color: rgba(238, 227, 202, 0.2);
+}
+
+.panel-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 23px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.panel.dark .panel-title { color: var(--paper); }
+.panel-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .panel-title em { color: var(--accent-2); }
+.story.s3 .panel-title em { color: var(--accent-3); }
+.panel.dark .panel-title em { color: #d68e92; }
+.story.s2 .panel.dark .panel-title em { color: #9cc6a0; }
+.story.s3 .panel.dark .panel-title em { color: #a5c3e6; }
+
+/* actors */
+.actors { display: flex; flex-direction: column; gap: 11px; }
+.actor {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.actor:last-child { border-bottom: none; padding-bottom: 0; }
+.actor-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 13.5px;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3px;
+}
+.actor-name .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+  background: var(--accent);
+  padding: 2px 6px 3px;
+  text-transform: uppercase;
+}
+.story.s2 .actor-name .tag { background: var(--accent-2); }
+.story.s3 .actor-name .tag { background: var(--accent-3); }
+.actor-meta {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.actor-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  display: block;
+  margin-top: 3px;
+}
+.story.s2 .actor-meta span { color: var(--accent-2); }
+.story.s3 .actor-meta span { color: var(--accent-3); }
+
+/* laws */
+.laws { display: flex; flex-direction: column; gap: 10px; }
+.law {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(238, 227, 202, 0.18);
+}
+.law:last-child { border-bottom: none; }
+.law-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144;
+  font-size: 28px;
+  line-height: 0.9;
+  color: #d68e92;
+  letter-spacing: -0.04em;
+  text-align: right;
+}
+.story.s2 .law-num { color: #9cc6a0; }
+.story.s3 .law-num { color: #a5c3e6; }
+.law-text { font-size: 12.5px; line-height: 1.38; color: var(--paper-deep); }
+.law-text strong {
+  display: block;
+  color: var(--paper);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* munger */
+.munger-body { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+.munger-body strong { color: var(--ink); }
+.munger-body ul { list-style: none; margin-top: 8px; }
+.munger-body li {
+  padding: 6px 0 6px 18px;
+  position: relative;
+  font-size: 12.5px;
+  line-height: 1.38;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.munger-body li:last-child { border-bottom: none; }
+.munger-body li::before {
+  content: '✦';
+  position: absolute;
+  left: 0; top: 6px;
+  color: var(--accent);
+  font-size: 9px;
+}
+.story.s2 .munger-body li::before { color: var(--accent-2); }
+.story.s3 .munger-body li::before { color: var(--accent-3); }
+
+/* ============ ARTICLE QUOTE (per section) ============ */
+.article-quote {
+  margin: 0 0 56px;
+  padding: 30px 20px 32px;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  --qc: var(--accent);
+}
+.article-quote.q2 { --qc: var(--accent-2); }
+.article-quote.q3 { --qc: var(--accent-3); }
+
+.article-quote::before {
+  content: '❦';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper);
+  padding: 0 14px;
+  color: var(--qc);
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.article-quote blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 32px);
+  line-height: 1.26;
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+.article-quote blockquote .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--qc);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+
+.article-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article-quote cite::before { content: '— '; color: var(--qc); }
+
+/* ============ BET PANEL — Polymarket integration ============ */
+.bet-panel {
+  margin: 0 0 48px;
+  padding: 26px 28px 28px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-alt);
+  --accent-bet: var(--accent);
+}
+.bet-panel.s2 { --accent-bet: var(--accent-2); }
+.bet-panel.s3 { --accent-bet: var(--accent-3); }
+
+.bet-head { text-align: center; margin-bottom: 14px; }
+.bet-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.bet-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.bet-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent-bet);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+
+.bet-claim {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto 22px;
+  text-align: center;
+}
+.bet-claim strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent-bet);
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.bet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.bet-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 14px 16px 12px;
+  text-decoration: none;
+  color: inherit;
+  min-height: 130px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.bet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 var(--accent-bet);
+}
+.bet-q {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 15px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.bet-odds-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-soft);
+}
+.bet-odds {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--accent-bet);
+}
+.bet-arrow {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent-bet);
+}
+.bet-foot {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  .bet-panel { padding: 20px 16px; }
+  .bet-grid { grid-template-columns: 1fr; gap: 10px; }
+  .bet-title { font-size: 21px; }
+  .bet-claim { font-size: 15.5px; }
+  .bet-card { min-height: 0; }
+}
+
+/* ============ YOUR CALL — prediction capture ============ */
+.bet-slot { display: flex; flex-direction: column; }
+.bet-slot .bet-card { border-bottom: 1px dashed var(--rule-soft); }
+
+.your-call {
+  border: 1px solid var(--ink);
+  border-top: none;
+  border-bottom: none;
+  background: var(--paper);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.your-call:last-child { border-bottom: 1px solid var(--ink); }
+
+/* The Stratagem's independent call */
+.stratagem-call {
+  border: 1px solid var(--ink);
+  border-top: 1px dashed var(--rule-soft);
+  background: var(--paper-alt);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.sc-head em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+.sc-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.sc-because {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.yc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.yc-row { display: flex; align-items: baseline; gap: 8px; }
+.your-call input {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  border: none;
+  border-bottom: 1px solid var(--rule-soft);
+  background: transparent;
+  padding: 2px 2px;
+  color: var(--ink);
+  outline: none;
+}
+.your-call input:focus { border-bottom-color: var(--accent-bet); }
+.your-call input::placeholder { color: var(--muted); opacity: 0.6; }
+.yc-value { font-weight: 700; }
+.your-call[data-call-type="prob"] .yc-value { width: 3em; text-align: center; }
+.your-call[data-call-type="date"] .yc-value { width: auto; font-weight: 500; color-scheme: light; }
+.your-call[data-call-type="text"] .yc-value { flex: 1; font-weight: 500; }
+.yc-because { flex: 1; font-family: 'Instrument Serif', serif !important; font-style: italic; font-size: 13px !important; font-weight: 400 !important; }
+.yc-suffix { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+
+/* Export bar — Ledger call-to-action */
+.export-bar {
+  margin: 56px 0 40px;
+  padding: 44px 36px 44px;
+  background: var(--paper-alt);
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  text-align: center;
+}
+.export-bar .eb-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.export-bar .eb-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 38px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+.export-bar .eb-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+.export-bar .eb-count {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 640px;
+  margin: 0 auto 26px;
+}
+.export-bar .eb-btn-primary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 18px 36px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.export-bar .eb-btn-primary:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.export-bar .eb-btn-primary:disabled { background: transparent; color: var(--muted); border-color: var(--rule); cursor: not-allowed; }
+.export-bar .eb-btn-secondary { background: transparent; color: var(--ink); }
+.export-bar .eb-btn-secondary:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.export-bar .eb-actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+.export-bar .eb-status {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-top: 16px;
+  min-height: 1.3em;
+}
+.export-bar .eb-clear {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+.export-bar .eb-clear:hover { color: var(--ink); }
+
+/* ============ READER NOTES — per-article comments ============ */
+.reader-notes {
+  margin: 0 0 48px;
+  padding: 22px 28px 24px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-alt);
+}
+.rn-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-bet, var(--accent));
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.reader-notes textarea {
+  width: 100%;
+  min-height: 80px;
+  max-height: 300px;
+  resize: vertical;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  padding: 12px 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+.reader-notes textarea:focus { border-color: var(--accent-bet, var(--accent)); }
+.reader-notes textarea::placeholder { color: var(--muted); opacity: 0.5; }
+@media (max-width: 640px) {
+  .reader-notes { padding: 16px 16px 18px; }
+  .reader-notes textarea { font-size: 14px; min-height: 60px; }
+}
+
+@media (max-width: 640px) {
+  .export-bar { padding: 30px 20px; margin: 36px 0 28px; }
+  .export-bar .eb-title { font-size: 27px; }
+  .export-bar .eb-count { font-size: 16px; }
+  .export-bar .eb-btn-primary { padding: 14px 24px; font-size: 11.5px; }
+}
+
+/* ============ THE TAPE — MARKETS ============ */
+.tape {
+  margin: -32px -56px 56px;
+  padding: 32px 40px 26px;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+}
+
+.tape-header {
+  text-align: center;
+  margin-bottom: 22px;
+  position: relative;
+}
+.tape-header::before,
+.tape-header::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 1px;
+  background: var(--accent-2);
+  opacity: 0.5;
+}
+.tape-header::before { left: calc(50% - 220px); }
+.tape-header::after  { right: calc(50% - 220px); }
+
+.tape-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.tape-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.tape-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent-2);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+
+.tape-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.tape-cell {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 14px 14px 4px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.tape-cell .sym {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.tape-cell .sym .name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.tape-cell .sym .ticker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--accent-2);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.tape-chart {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+.tape-chart iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move {
+  height: 96px;
+  margin-top: 8px;
+  border-top: 1px solid var(--rule-soft);
+  padding-top: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.tape-move iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move-label {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+}
+.tape-cell { min-height: 340px; }
+.tape-note {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+@media (max-width: 1000px) {
+  .tape { margin-left: -22px; margin-right: -22px; padding: 24px 18px 20px; }
+  .tape-grid { grid-template-columns: 1fr; }
+  .tape-header::before, .tape-header::after { display: none; }
+}
+
+/* ============ FULL PULL QUOTE ============ */
+.full-pull {
+  margin: 28px 0 42px;
+  padding: 36px 20px;
+  text-align: center;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+  position: relative;
+}
+.full-pull blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(26px, 3.5vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.full-pull .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+.full-pull cite {
+  display: block;
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.full-pull cite::before { content: '— '; color: var(--accent); }
+
+/* ============ BELOW THE FOLD ============ */
+.below-fold {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 38px;
+  padding-top: 32px;
+  border-top: 3px double var(--ink);
+}
+.below-fold.prologue {
+  padding-top: 38px;
+  padding-bottom: 28px;
+  margin-top: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.below-fold .col { padding-right: 8px; }
+.below-fold .col + .col { border-left: 1px solid var(--rule); padding-left: 30px; }
+
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.sec-label::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 26px;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.sec-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.below-fold p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.below-fold ul { list-style: none; counter-reset: romanlist; }
+.below-fold li {
+  counter-increment: romanlist;
+  padding: 8px 0 8px 30px;
+  position: relative;
+  font-size: 13px;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--rule-soft);
+  color: var(--ink-soft);
+}
+.below-fold li::before {
+  content: counter(romanlist, upper-roman) '.';
+  position: absolute;
+  left: 0; top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.classic-quote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 14px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+}
+.attrib {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* ============ REFLECTION ============ */
+.reflection {
+  margin-top: 48px;
+  padding: 44px 56px;
+  border-top: 3px double var(--ink);
+  border-bottom: 4px solid var(--ink);
+  text-align: center;
+  background: var(--paper-deep);
+  margin-left: -56px;
+  margin-right: -56px;
+}
+.reflection .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.reflection .question {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 34px);
+  line-height: 1.22;
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--ink);
+}
+
+/* ============ COLOPHON ============ */
+.colophon {
+  margin-top: 36px;
+  padding-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: 1px solid var(--rule-soft);
+}
+.colophon .c { text-align: center; color: var(--ink-soft); }
+.colophon .r { text-align: right; }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.folio, .masthead, .dateline-bar, .toc, .section-div, .story,
+.full-pull, .below-fold, .reflection, .colophon {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.folio        { animation-delay: 0.00s; }
+.masthead     { animation-delay: 0.05s; }
+.dateline-bar { animation-delay: 0.12s; }
+.toc          { animation-delay: 0.18s; }
+
+/* ============ RESPONSIVE — TABLET ============ */
+@media (max-width: 1000px) {
+  .paper { padding: 22px 28px 60px; }
+  .story { grid-template-columns: 1fr; gap: 32px; }
+  .article { column-count: 1; }
+  .toc { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div .meta { text-align: center; }
+  .below-fold { grid-template-columns: 1fr; gap: 28px; }
+  .below-fold .col + .col { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .folio, .dateline-bar { grid-template-columns: 1fr; gap: 4px; text-align: center; }
+  .folio .r, .dateline-bar .right { text-align: center; }
+  .reflection { margin-left: -28px; margin-right: -28px; padding: 36px 28px; }
+}
+
+/* ============ RESPONSIVE — PHONE ============ */
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; }
+  .paper { padding: 14px 16px 48px; }
+
+  .folio { font-size: 8.5px; letter-spacing: 0.15em; padding-bottom: 8px; gap: 2px; }
+
+  .masthead { padding: 14px 0 8px; }
+  .mast-title { font-size: 56px; letter-spacing: -0.04em; }
+  .mast-subtitle { font-size: 13px; letter-spacing: 0.02em; }
+  .mast-sub-rule { width: 22px; margin: 0 8px 2px; }
+
+  .dateline-bar { font-size: 9px; letter-spacing: 0.16em; padding: 8px 0; }
+
+  .toc { font-size: 11px; letter-spacing: 0.12em; padding: 12px 0 14px; }
+  .toc .num { font-size: 20px; }
+  .toc a { display: inline-block; padding: 4px 0; }
+
+  .below-fold { gap: 22px; padding-top: 24px; }
+  .below-fold .col + .col { padding-top: 20px; }
+  .sec-label { font-size: 9px; letter-spacing: 0.18em; }
+  .sec-title { font-size: 24px; }
+  .below-fold p { font-size: 14px; line-height: 1.55; }
+  .below-fold li { font-size: 13px; padding-left: 28px; }
+  .classic-quote { font-size: 17px; padding-left: 14px; }
+
+  .section-div { padding: 32px 0 16px; margin-top: 14px; gap: 6px; margin-bottom: 20px; }
+  .section-div .rom { font-size: 48px; }
+  .section-div .title { font-size: 28px; letter-spacing: -0.02em; }
+  .section-div .meta { font-size: 9px; letter-spacing: 0.16em; line-height: 1.6; }
+
+  .story { gap: 28px; margin-bottom: 44px; }
+  .story .headline { font-size: 34px; letter-spacing: -0.028em; line-height: 1; }
+  .story .deck { font-size: 16px; line-height: 1.35; }
+  .story .byline { font-size: 9px; letter-spacing: 0.14em; padding: 10px 0; }
+  .story .byline .sep { margin: 0 8px; }
+
+  .article { font-size: 15.5px; line-height: 1.58; text-align: left; hyphens: none; }
+  .article p.lead { font-size: 16px; line-height: 1.5; }
+  .article p.lead::first-letter { font-size: 60px; margin: 4px 8px 0 0; line-height: 0.85; }
+  .article h3 { font-size: 19px; margin: 14px 0 6px; }
+  .article .emphasis { font-size: 16px; padding-left: 12px; margin: 10px 0; }
+  .article .dateline-intro { font-size: 9px; letter-spacing: 0.14em; }
+
+  .sidebar { gap: 18px; }
+  .panel { padding: 16px 16px 18px; }
+  .panel-label { font-size: 8.5px; letter-spacing: 0.2em; }
+  .panel-title { font-size: 21px; }
+  .actor-name { font-size: 13px; flex-wrap: wrap; gap: 4px; }
+  .actor-name .tag { font-size: 8px; padding: 2px 5px 3px; }
+  .actor-meta { font-size: 12.5px; line-height: 1.42; }
+  .actor-meta span { font-size: 7.5px; letter-spacing: 0.12em; }
+  .law-num { font-size: 24px; }
+  .law-text { font-size: 12px; line-height: 1.38; }
+  .law-text strong { font-size: 10px; letter-spacing: 0.14em; }
+  .munger-body { font-size: 13px; }
+  .munger-body li { font-size: 12.5px; }
+
+  .article-quote { padding: 24px 12px 26px; margin-bottom: 44px; }
+  .article-quote blockquote { font-size: 20px; line-height: 1.28; }
+  .article-quote cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 12px; }
+
+  .tape { margin: -20px -16px 44px; padding: 24px 14px 18px; }
+  .tape-label { font-size: 9px; letter-spacing: 0.22em; }
+  .tape-title { font-size: 26px; }
+  .tape-grid { gap: 14px; }
+  .tape-cell { min-height: 300px; padding: 12px 12px 4px; }
+  .tape-chart { height: 180px; }
+  .tape-move { height: 92px; }
+  .tape-cell .sym .name { font-size: 16px; }
+  .tape-note { font-size: 8.5px; letter-spacing: 0.18em; }
+
+  .full-pull { margin: 24px 0 36px; padding: 28px 14px; }
+  .full-pull blockquote { font-size: 22px; line-height: 1.22; }
+  .full-pull cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 16px; }
+
+  .reflection { margin-left: -16px; margin-right: -16px; padding: 32px 18px; margin-top: 40px; }
+  .reflection .label { font-size: 9px; letter-spacing: 0.22em; }
+  .reflection .question { font-size: 22px; line-height: 1.26; }
+
+  .colophon { font-size: 8.5px; letter-spacing: 0.14em; gap: 4px; grid-template-columns: 1fr; text-align: center; }
+  .colophon .r, .colophon .c { text-align: center; }
+}
+
+/* Prevent accidental horizontal overflow */
+html, body { overflow-x: hidden; max-width: 100vw; }
+.paper { overflow-wrap: break-word; }
+</style>
+</head>
+<body data-issue-id="issue-024" data-issue-date="2026-05-04">
+
+<div class="paper">
+
+  <!-- FOLIO -->
+  <div class="folio">
+    <div>Vol. I · No. 024</div>
+    <div class="c">Daily Edition · Private</div>
+    <div class="r">Page 1 of 1</div>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <h1 class="mast-title">The <em>Stratagem</em></h1>
+    <div class="mast-subtitle">
+      <span class="mast-sub-rule"></span>
+      Power · Statecraft · Strategy · Virtue
+      <span class="mast-sub-rule"></span>
+    </div>
+  </header>
+
+  <!-- DATELINE -->
+  <div class="dateline-bar">
+    <div>Monday · <strong>4 May 2026</strong></div>
+    <div class="center">Three Theatres · One Lens</div>
+    <div class="right">Reading time ≈ 15 min</div>
+  </div>
+
+  <!-- INDEX / TOC -->
+  <nav class="toc">
+    <div class="num">I.</div>
+    <div><a href="#sec-i"><span class="sec">International</span> · The Beijing Calendar</a></div>
+    <div class="num">II.</div>
+    <div><a href="#sec-ii"><span class="sec">Economics</span> · The Omaha Succession</a></div>
+    <div class="num">III.</div>
+    <div><a href="#sec-iii"><span class="sec">Europe &amp; Germany</span> · The Warsaw Umbrella</a></div>
+  </nav>
+
+  <!-- ================================= -->
+  <!-- SECTION I — INTERNATIONAL         -->
+  <!-- ================================= -->
+
+  <div class="section-div" id="sec-i">
+    <div class="rom">I.</div>
+    <div class="title"><em>International</em> · The Theatre of Nations</div>
+    <div class="meta">
+      <div><strong>Filed</strong> Beijing / Washington / Taipei</div>
+      <div>Lead Analysis · The Summit Calendar &amp; What Sits at the Top of It</div>
+    </div>
+  </div>
+
+  <article class="story">
+    <div>
+      <h2 class="headline">The Beijing <em>Calendar</em></h2>
+      <p class="deck">A US Air Force C-17 transport landed at Beijing Capital on Saturday afternoon carrying the advance party for President Trump's state visit on 14–15 May — the first US presidential trip to the People's Republic since 2017, rescheduled twice on the Iran calendar and now formally on the books. The Foreign Ministry briefing in Beijing on Sunday confirmed Xi Jinping has placed Taiwan at the top of the bilateral agenda, a deliberate departure from the South Korea APEC sidelines meeting last autumn at which the question was held off. Beijing has spent the week stage-managing the surroundings: the PLAN sailed two carrier groups out of Hainan and Qingdao on overlapping tracks through the Bashi Channel, the State Council published ten new economic incentives for Taiwanese businesses, and the Cyberspace Administration suspended a tranche of accounts that had been platforming separatist material. Two weeks before the wheels-up, the host has chosen the room.</p>
+      <div class="byline">From the Desk of <strong>Statecraft</strong><span class="sep">·</span>Filed <strong>Beijing &amp; Washington</strong><span class="sep">·</span>4 May 2026</div>
+
+      <div class="article">
+        <p class="lead"><span class="dateline-intro">Beijing —</span><strong>T</strong>he summit was first agreed at the South Korea APEC margin in November and held off twice — once when the Iran war began on 28 February and Trump's bandwidth collapsed onto the Hormuz file, again in late March when the Khamenei succession destabilised the ceasefire calendar. The third date held. Air Force One is wheels-up from Joint Base Andrews on the night of 13 May; the formal welcome on the South Lawn of Tiananmen at 11:00 local on the 14th; the working dinner in Zhongnanhai that evening; the bilateral declaration, if there is one, by the close of the 15th. The advance C-17 on Saturday is the operational signal. So is the calibrated language out of the Foreign Ministry, in which spokeswoman Mao Ning said on Sunday that the leaders would discuss "the most pressing question of mutual concern, which is the question of Taiwan." The American read-out described the visit as "broad-spectrum, with trade, fentanyl, and regional security on the table." Beijing has named the file. Washington has changed the subject.</p>
+
+        <p>Read the staging. The two PLAN carrier groups — <em>Shandong</em> out of Hainan, <em>Liaoning</em> out of Qingdao — are not in the Taiwan Strait. They are routing through the Bashi Channel and the Miyako Gap respectively, the two waterways that bracket Taiwan from the south and the east. The exercise pattern is the one Beijing rehearsed for the 2022 Pelosi response and refined in the August 2024 Joint Sword series: a circling deployment that demonstrates the operational geometry of a quarantine without crossing the threshold of a blockade. The economic sweetener landed in parallel — ten new incentives for Taiwanese mainland-listed firms, including expedited customs and a seven-day currency-swap settlement. The Cyberspace Administration suspended 4,200 accounts for "splittist content" the same week. Confucius on the rectification of names: when the names are not correct, language is not in accordance with the truth of things; when language is not in accordance, affairs cannot be carried on to success. Beijing is rectifying the names of the room before the guest arrives.</p>
+
+        <span class="emphasis">"The supreme art of war is to subdue the enemy without fighting." — Sun Tzu, <em>The Art of War</em>, III. Xi's calendar choice is the textbook expression. The visit is being framed as a peace deliverable — the first since 2017, the optics of the receiving line, the language of stability — and inside that framing the host extracts the agenda concession the visiting party would refuse if it were named directly.</span>
+
+        <h3>The <em>seating</em> question.</h3>
+
+        <p>Greene's Law 6 — <em>court attention at all cost</em> — is the public layer; Law 3 — <em>conceal your intentions</em> — is the operating one. Trump's instinct is for the photograph at the gate: the deliverable summit, the handshake, the trade headline that converts forty days of bad oil prices into a single televised win. Xi's instinct is for the agenda inside the room. The Trump White House has spent two weeks attempting to set the public framing as "trade and fentanyl"; the Beijing system has spent the same two weeks setting the agenda as Taiwan, the chip-export controls, and the US naval blockade of Iranian oil that has produced China's blocking statute against secondary sanctions on its refineries. Each side is attempting to define what the summit is about. The host's geographical advantage — the right to script the rooms, the order of the meetings, the dishes at the dinner — is the lever the Stratagem reads as decisive on agenda. Whoever names the question wins half the answer.</p>
+
+        <p>Mearsheimer's reading of the post-1945 hegemonic competition applies underneath. The United States is the offshore balancer in East Asia and the resident continental power on the question is the People's Republic. The structural fact under the summit is that Beijing has the home-field claim on Taiwan, the longer attention span, the larger inventory of unilateral instruments (anti-secession law, anti-foreign sanctions law, the air defence identification zone, the customs apparatus, the cyber portfolio), and the calendar discipline of a single-party state in which the leadership horizon runs twenty years rather than four. Washington has the alliance architecture, the technological lead, and the carrier presence — but the carrier presence has been thinned by the demands of Hormuz, and the alliance architecture has just absorbed the public threat to withdraw US troops from Germany, Italy, and Spain. Xi is meeting a counterparty whose alliance system is visibly paying down credibility in real time on a different theatre. The summit's structural backdrop is not symmetrical.</p>
+
+        <h3>The <em>Taiwan</em> seam.</h3>
+
+        <p>What Xi will ask is not a Taiwan settlement — the question is decades, not days — but a Taiwan signal. Three are on the menu. The first is a public reaffirmation of the One China policy in Trump's own voice; the language has been recited by every American president since Carter and has cost nothing visible to recite, but Trump has avoided it on the public record for the second term. The second is a tonal commitment on arms sales — not a halt, but a slowdown, perhaps a postponement of the Block-IV Harpoon and the F-16V upgrade tranches that Taipei has been waiting on since 2024. The third is a Taiwan-Strait operational signal: a quiet US pull-back from the routine FONOP cadence, framed as "de-escalation" while the carriers are still on the Bashi-Miyako tracks. Voss on the leverage of the implicit deal: the side that names a concession in plain language has already conceded; the side that names it as accommodation has gained twice. Xi is preparing to offer trade language and fentanyl language as accommodation against Taiwan-shaped silence. Each silence is a concession the room can read without anyone needing to sign it.</p>
+
+        <p>Lee Kuan Yew's reading of the Sino-American contest, written in his last decade, sits as the structural overlay. The contest, he argued, would be settled not in a war but in the slow accumulation of what each system rewarded — the American system's openness against the Chinese system's discipline, the American alliance system against the Chinese inland mass, the dollar against the renminbi, the chips against the rare earths. Each summit on this calendar is a snapshot of the running ledger. The Beijing summit on 14–15 May lands at the moment the American alliance system is visibly paying down credit on Iran and Europe simultaneously. The reading is not that this summit settles anything — it is that the photograph at the gate, framed as a deliverable, is already a rebalancing on the ledger before the leaders shake hands.</p>
+
+        <h3>What the <em>reading</em> names.</h3>
+
+        <p>Two layers carry the story. Tactical: the agenda war is the negotiation, and the host has won the first round by naming Taiwan publicly while the visitor's team is still saying "trade and fentanyl." The two carrier groups, the ten incentives, and the cyber suspensions are the staging that locks the framing in. Structural: a hegemonic transition in which the resident continental power has the home-field claim on the disputed island, the longer attention span, and the inventory of unilateral instruments — meeting an offshore balancer whose alliance system is paying down credit on two parallel theatres at the same moment. What is not load-bearing today is the question of an invasion or a blockade in the next ninety days; the structural cost of either, with the carriers thinned and the chip stack still vulnerable, has not changed. The Taiwan question moves on the summit calendar in language, not in arms. The pieces on the board next Friday afternoon will be in the same squares; the framing of the squares will not.</p>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-label">The Actors</div>
+        <h3 class="panel-title">Who scripts the <em>room</em>.</h3>
+        <div class="actors">
+          <div class="actor">
+            <div class="actor-name">Xi Jinping <span class="tag">PRC · President &amp; CMC Chair</span></div>
+            <div class="actor-meta">Returns from the Moscow Victory Day parade on 10 May to host Trump on 14–15 May; the choreography of the two appearances inside one week is the deliberate pairing. Has placed Taiwan publicly at the top of the bilateral agenda — a departure from the South Korea margin in November, when the file was held off. Carries no domestic political constraint on the timeline of the meeting.<span>Intent &middot; Extract a Taiwan-shaped signal — One-China reaffirmation, arms-sales slowdown, FONOP pull-back — under the framing of accommodation rather than concession; convert the deliverable photograph at the gate into a structural rebalancing on the running Sino-American ledger</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Donald Trump <span class="tag">US · President</span></div>
+            <div class="actor-meta">First US presidential trip to the PRC since 2017; the visit was twice rescheduled on the Iran calendar before this date held. Public framing has been "trade and fentanyl"; Beijing's framing has been Taiwan. Foreign-policy bandwidth is split — Hormuz, the European troop drawdown, the Russia–Ukraine settlement track — at the moment of departure.<span>Intent &middot; Bring back a deliverable trade-and-fentanyl headline that converts the bad oil and Iran-war news cycle into a single televised win; concede on Taiwan-shaped silence rather than language because silence can be denied at home, language cannot</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Wang Yi <span class="tag">PRC · Foreign Minister &amp; Politburo Member</span></div>
+            <div class="actor-meta">Will manage the working-level negotiation in the day before the leader meeting; has handled the agenda-shaping calls with Marco Rubio's deputy weekly through April. Is the operational author of the "most pressing question" framing Mao Ning delivered on Sunday. Carries the institutional memory of every Taiwan summit since the 1995–96 crisis.<span>Intent &middot; Lock the agenda framing in the working-level meeting on the 13th so the leaders' meeting has only Taiwan-shaped language to negotiate; preserve the symmetry between the public framing and the private framing so the deliverable matches the room</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Marco Rubio <span class="tag">US · Secretary of State</span></div>
+            <div class="actor-meta">Will fly Air Force One with Trump; carries the Taiwan-hawkish posture of his Senate years and the political instinct of the Trump second term simultaneously. The internal White House debate over the One-China language has been visible in Bloomberg and Politico for ten days. Is the cabinet figure most exposed if the Taiwan signal slips publicly.<span>Intent &middot; Hold the line against an explicit Taiwan-shaped concession in the leaders' communique; manage the gap between the principal's deliverable instinct and the agency's hawkish institutional position; preserve the Senate-confirmation political coalition through the post-summit news cycle</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Lai Ching-te <span class="tag">ROC · President</span></div>
+            <div class="actor-meta">Will be in Taipei on the 14th–15th, off the camera, watching the agenda. Is the third party to the negotiation without a seat at it. The Block-IV Harpoon and F-16V upgrade tranches are the visible measure of the US commitment Beijing is asking to slow; Lai has spent April lobbying every channel — Senate Armed Services, the JCS, the Indo-Pacific Command — to keep the cadence intact.<span>Intent &middot; Convert the visible-American-commitment file into a structural commitment Beijing cannot extract a slowdown from in the summit room; preserve the optical and operational baseline that makes a quarantine more costly than the carriers' Bashi-Miyako tracks alone could deter</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">PLAN carrier groups <span class="tag">PRC · Eastern &amp; Southern fleets</span></div>
+            <div class="actor-meta"><em>Shandong</em> sailed from Hainan into the Bashi Channel on 1 May; <em>Liaoning</em> tracked from Qingdao toward the Miyako Gap on the same day. The deployment pattern repeats the 2022 Pelosi response and the August 2024 Joint Sword series — a circling geometry that demonstrates the operational form of a quarantine without crossing the threshold of a blockade.<span>Intent &middot; Function as the visible deterrent layer behind the diplomatic agenda; show the operational geometry of the Taiwan-shaped problem the summit is being asked to defuse; preserve the rehearsal value of the deployment for the calendar after the visiting party leaves</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel accent">
+        <div class="panel-label">Reading Note</div>
+        <h3 class="panel-title">The <em>lenses</em> used.</h3>
+        <div class="munger-body">
+          <p><strong>What's driving this:</strong> An agenda war disguised as a state visit. The mechanism is host-side framing: Beijing has spent the two weeks before wheels-up naming the meeting as "the most pressing question, which is Taiwan" while Washington has been naming it "trade and fentanyl." Each side is contesting what the summit is about because the answer to that question already settles half the leaders' communique. The carrier deployments through the Bashi Channel and the Miyako Gap are not a blockade rehearsal in the next ninety days — they are the visible deterrent layer that gives the agenda framing its weight in the room. The ten new mainland incentives for Taiwanese firms and the cyber-account suspensions are the same instrument operating in the economic and informational registers. What Xi is preparing to extract is a Taiwan-shaped signal — One-China reaffirmation, arms-sales slowdown, FONOP cadence pull-back — framed as accommodation rather than concession because accommodation is what the visiting party can defend at home.</p>
+          <p><strong>What's not driving this:</strong> A change in the underlying military balance over the next quarter. The structural cost of an invasion or a blockade in the next ninety days has not moved this week, and the prediction-market floors on those outcomes will not move on the summit. Reading the carrier groups as the prelude to action misses the cleaner read: they are the staging that locks the agenda framing in, not the operational order. The signal is in the language the leaders use, not the squares the pieces occupy on the next inventory.</p>
+          <p style="margin-top: 10px;"><strong>What would break this reading:</strong></p>
+          <ul>
+            <li>The summit is cancelled or downgraded inside the next ten days — the agenda-framing race produced an impasse the principals could not paper over, and the ledger has tipped past the point where a deliverable photograph is worth the concession required to take it.</li>
+            <li>Trump publicly recites the One-China formulation in the leaders' joint statement on 15 May — the visiting party has chosen the cheaper-at-home concession and the Taiwan signal has moved from silence to language; the chip-and-arms-sales file is the next domino.</li>
+            <li>The PLAN carrier groups close to within fifty nautical miles of Taiwan during the summit window — Beijing's deterrent layer has crossed from staging to operational signalling, and the summit is being run as cover for a posture shift rather than a framing shift.</li>
+            <li>Taipei announces an accelerated Block-IV Harpoon delivery before 14 May — the Indo-Pacific Command and the Senate Armed Services have outflanked the West Wing on the arms-sales calendar, and the summit's agenda-shaping has been pre-empted by a US institutional move on the file the host wants slowed.</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>Sources used:</strong> Sun Tzu on subduing the enemy without fighting for the framing of the visit as a peace deliverable inside which an agenda concession is extracted; Confucius on the rectification of names for Beijing's deliberate naming of the room before the guest arrives; Greene's Laws 6 and 3 on courting attention while concealing intentions for the asymmetry between Trump's photograph instinct and Xi's agenda discipline; Voss on the leverage of the implicit deal for the silence-as-concession architecture Xi is preparing; Mearsheimer on the offshore balancer meeting the resident continental power and Lee Kuan Yew on the running Sino-American ledger for the structural backdrop in which the alliance system is paying down credibility on Iran and Europe simultaneously.</p>
+        </div>
+      </div>
+    </aside>
+  </article>
+
+  <!-- SECTION I — BET PANEL -->
+  <section class="bet-panel s1">
+    <div class="bet-head">
+      <div class="bet-label">Our reading · against the market</div>
+      <h3 class="bet-title">What we think — and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> Trump's visit to China by 30 June is now an operational matter rather than a calendar one — the C-17 advance party has landed, the dates are public, and absent a health event or a dramatic Hormuz reversal we sit very near the structural ceiling. A Chinese invasion of Taiwan inside the same window remains a structural floor risk: the chip stack is intact, the carriers are thinned but not absent, and the summit calendar itself reduces the political space for the move. A Chinese blockade of Taiwan inside the window sits one notch above invasion — the carrier deployments through the Bashi Channel and the Miyako Gap are quarantine-pattern rehearsals not blockade orders, and the structural cost of converting one into the other is unchanged. Per house discipline, the call is blind — Polymarket prices were not read.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="trump-china-jun30"
+             data-market-slug="will-trump-visit-china-by-june-30"
+             data-market-question="Will Trump visit China by June 30, 2026?"
+             data-market-resolves="2026-06-30"
+             data-stratagem-blind="96"
+             data-stratagem-value="96"
+             data-stratagem-because="Visit publicly set for May 14-15; advance C-17 has landed in Beijing; only a health event or sudden Hormuz reversal removes the date."
+             data-stratagem-rubric="POWER: Beijing has staged the visit, no PRC incentive to cancel | ECON: trade and fentanyl angle gives Trump domestic deliverable to take | INST: dates public, advance team operational, working-level set 13 May | STRAT: cancellation cost exceeds concession cost for both principals | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/will-trump-visit-china-by/will-trump-visit-china-by-june-30-247" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — Trump visit China by Jun 30
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="trump-china-jun30" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="trump-china-jun30" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="cn-taiwan-invade-jun30"
+             data-market-slug="will-china-invade-taiwan-by-june-30-2026"
+             data-market-question="Will China invade Taiwan by June 30, 2026?"
+             data-market-resolves="2026-06-30"
+             data-stratagem-blind="2"
+             data-stratagem-value="2"
+             data-stratagem-because="Summit calendar reduces political space for the move; PLA amphibious gap unchanged; chip and carrier deterrent intact this quarter."
+             data-stratagem-rubric="POWER: PLA amphibious capacity insufficient for assault inside 60 days | ECON: invasion would crater the export economy Beijing depends on | INST: ODNI assessment is no forcible unification near term | STRAT: summit week makes the move politically costlier than baseline | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/will-china-invade-taiwan-by-june-30-2026" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — China invades Taiwan by Jun 30
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="cn-taiwan-invade-jun30" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="cn-taiwan-invade-jun30" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="cn-taiwan-blockade-jun30"
+             data-market-slug="will-china-blockade-taiwan-by-june-30"
+             data-market-question="Will China blockade Taiwan by June 30, 2026?"
+             data-market-resolves="2026-06-30"
+             data-stratagem-blind="4"
+             data-stratagem-value="4"
+             data-stratagem-because="Carrier deployments are quarantine-pattern rehearsal not blockade order; structural cost of conversion unchanged; summit constrains escalation."
+             data-stratagem-rubric="POWER: PLAN can stage a quarantine but a sustained blockade still requires more lift | ECON: blockade would trip semiconductor cascade Beijing cannot absorb | INST: anti-secession law gives the legal pretext but not the political trigger | STRAT: rehearsal serves the agenda war, blockade order would foreclose it | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/will-china-blockade-taiwan-by-june-30" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — China blockades Taiwan by Jun 30
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="cn-taiwan-blockade-jun30" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="cn-taiwan-blockade-jun30" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION I — READER NOTES -->
+  <div class="reader-notes s1">
+    <div class="rn-head">Your notes · Section I</div>
+    <textarea data-note-id="sec-i" placeholder="Your reaction, disagreements, questions…"></textarea>
+  </div>
+
+  <!-- SECTION I — CLOSING QUOTE -->
+  <div class="article-quote q1">
+    <blockquote>
+      <span class="mark">&ldquo;</span>Beijing has named the file. Washington has changed the subject. Two weeks before the wheels-up the host has chosen the room — and the agenda war is the negotiation, with the Taiwan signal Xi is preparing to extract framed as accommodation rather than concession because accommodation is what the visiting party can defend at home.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Beijing Calendar</cite>
+  </div>
+
+  <!-- ================================= -->
+  <!-- SECTION II — ECONOMICS            -->
+  <!-- ================================= -->
+
+  <div class="section-div s2" id="sec-ii">
+    <div class="rom">II.</div>
+    <div class="title"><em>Economics</em> · The Ledger of Capital</div>
+    <div class="meta">
+      <div><strong>Filed</strong> Omaha / New York</div>
+      <div>Corporate Succession &middot; The First Annual Without Buffett at Centre Stage</div>
+    </div>
+  </div>
+
+  <article class="story s2">
+    <div>
+      <h2 class="headline">The Omaha <em>Succession</em></h2>
+      <p class="deck">At the CHI Health Center in Omaha on Saturday morning, Greg Abel chaired the first Berkshire Hathaway annual meeting since the company was founded at which Warren Buffett did not sit at the centre of the dais. Buffett was in the audience, in seat A-1, where six minutes after the meeting opened a jersey bearing the number 60 was hoisted into the rafters and a three-minute reel of his sixty years as CEO ran on the centre screen. Abel ran the rest of the day. He fielded six and a half hours of questions, ruled out a break-up of the conglomerate, addressed the $397 billion cash pile, and produced a Q1 profit number that doubled year on year on the back of insurance underwriting and the BNSF freight rebound. Attendance at the arena was visibly down; one half of the upper bowl was empty for the first time in fifteen years. Class B shares are off 12.4% since Buffett's December retirement announcement. The succession is not a deferred event. It is the operating regime.</p>
+      <div class="byline">From the Desk of <strong>Capital</strong><span class="sep">·</span>Filed <strong>Omaha &amp; New York</strong><span class="sep">·</span>4 May 2026</div>
+
+      <div class="article">
+        <p class="lead"><span class="dateline-intro">Omaha —</span><strong>T</strong>he room was the same. The carpets, the angled riser at the front of the floor, the closed-circuit cameras that have been broadcasting the meeting since 2016, the vintage-Coke kiosk by the south door, the See's Candies stand by the north. The chairs at the dais were not. Charlie Munger's chair was retired in 2024; Buffett's was retired this year. Greg Abel sat alone at the centre, with Ajit Jain to his left and the new vice-chairs from insurance, energy, and BNSF arrayed along the line. Buffett came on stage briefly, six minutes in, when his number went into the rafters. He spoke from the floor for under three minutes. "This is not my show today, but there are two anniversaries we are kind of celebrating." He sat down. The succession was visible in the room before any question was asked.</p>
+
+        <p>Read the meeting against the company's history. Berkshire's annual meeting has, since the early 1980s, been a single mechanism: a long Q&amp;A in which the principal teaches the franchise its own discipline through the answers, and the audience absorbs the discipline through the asking. The Q&amp;A is therefore not an investor-relations exercise but the renewal of a culture across forty thousand attendees and several million owners of the float. Buffett's gift to the franchise was that he made the discipline transmissible — by answering questions in plain language, on first principles, with no notes. The mechanism's question is whether the discipline transmits without him at the centre of it. Saturday's answer was that it does not transmit costlessly. Abel is competent, his command of the operating businesses is real, his style is calm and his arithmetic is sharp — but the chair is the chair, and the absence at the centre of it was the loudest thing in the room.</p>
+
+        <span class="emphasis">"All warfare is based on deception... appear weak when you are strong, and strong when you are weak." — Sun Tzu, <em>The Art of War</em>, I. The succession's discipline is the inverse: appear continuous when you are discontinuous. Abel ran the meeting on the script Buffett would have used; the script's effectiveness is now a function of who sits at the table, not of what the script says.</span>
+
+        <h3>The <em>break-up</em> question.</h3>
+
+        <p>Abel's most consequential answer landed forty minutes into the morning session, when an analyst from Bernstein asked whether Berkshire's structural-conglomerate form — insurance, freight, energy, retail, manufactures, the equity portfolio — could survive the post-Buffett discount. The answer was unambiguous: no break-up, no spin-off, no carve-out of the railway or the energy operations as standalone listings. The articulation was Abel's own — "the structure is the moat" — but the conclusion is Buffett's, repeated in every shareholder letter since the 2010 acquisition of BNSF. Munger's framework on the latticework of incentives makes the case explicit: the conglomerate's float-to-operating-asset transmission belt only runs because the same management that captures the insurance float also deploys it, and breaking the structure would cost Berkshire roughly four hundred basis points of after-tax return on equity through the loss of the internal-capital-allocation premium. The activist call to break Berkshire is the call that does not understand what Berkshire is. Abel named that publicly. The 12.4% share-price drop since December is now the first test of whether the market believes him.</p>
+
+        <p>Greene's Law 24 — <em>be the perfect courtier</em> — frames Abel's posture more precisely than the public coverage has caught. He has spent the past four months performing continuity rather than asserting authority: keeping the operating-business reporting structure unchanged, keeping the cash pile rather than deploying it, keeping the share-buyback discipline at Buffett's old threshold of intrinsic-value-times-1.2. The performance is the courtier's discipline against the founder's still-in-the-room presence. The cost is that no Abel-shaped capital deployment has yet been demonstrated. The cash pile at $397 billion is the largest in the company's history; the hyperscaler-capex cycle, the AI-data-centre power-grid build, the post-Iran-war energy infrastructure replacement — each is a deployment opportunity sized for a Berkshire response. The courtier-phase ends when the principal has departed; until Buffett does, Abel cannot lead without seeming to dishonour. The shareholder discount is the price of that asymmetry.</p>
+
+        <h3>The <em>cash</em> seam.</h3>
+
+        <p>The $397 billion cash pile is the structural fact under the meeting. Berkshire's cash position has compounded from $145 billion in 2022 to its current size while the equity portfolio has been net-sold across each of the last seven quarters — Apple was reduced by 67% across 2024, Bank of America by 35% in the second half of 2024, the index-ETF positions liquidated in the same window. Buffett's reading of the market in his last five Q&amp;As, and again in the 2024 letter, has been that the price of the typical American business is high enough that even a great franchise's owner-earnings yield does not clear the risk-free rate at 4.3%. La Rochefoucauld on patience: <em>nothing makes us less aware of our own risks than the imagined certainty of someone else's</em>. Berkshire's cash signal has not been one analyst's caution — it has been the most credible single-actor caution in the post-1980 American capital-market record. Abel inherits the implicit thesis. He must either deploy the cash on terms that vindicate it (a recession-priced acquisition, a regulated-utility roll-up, a private-credit-cycle bottom buy) or hold it through a regime in which holding cash at scale carries an opportunity cost the audience now charges to him rather than to Buffett.</p>
+
+        <p>Dalio's big-cycle framework gives the structural overlay. The current US cycle is in the late-stage of the long debt cycle — debt-service costs absorbing a rising share of fiscal capacity, central-bank optionality narrowed by sticky inflation, capital-market valuations elevated against owner-earnings yields. In each of the four prior late-stage US cycles since 1929, Berkshire's cash position has compounded at the slowest absolute rate but at the highest defensive rate against the next regime change. Abel inherits a balance sheet positioned for a regime change he has not been the named architect of, and his test is whether he can deploy the cash when the regime change arrives without trying to imitate the timing instinct of a partner he is no longer next to.</p>
+
+        <h3>What the <em>reading</em> names.</h3>
+
+        <p>Two layers carry the story. Coordination: a forty-year cultural transmission belt that ran through a single man's voice in a single room twice a year, now being asked to run through an institutional structure rather than a person. The mechanism survives the founder's exit by definition — the operating businesses, the insurance float, the contractual scaffolding around capital allocation — but the discount the market is pricing is the discount on the transmission belt's compression into something less personal and therefore less transmissible. Tactical: Abel's discipline of performing continuity has bought him the meeting, but each quarter the cash pile compounds without a deployment, the courtier-phase costs more. The break-up question is settled in language but unsettled in the price. What is not load-bearing today is any specific operational decision; the operating businesses are running. What is load-bearing is the question the audience asked in the absence of asking it: whether Berkshire is a company or whether it was a partnership.</p>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-label">The Actors</div>
+        <h3 class="panel-title">Who holds the <em>chair</em>.</h3>
+        <div class="actors">
+          <div class="actor">
+            <div class="actor-name">Greg Abel <span class="tag">BRK · Chairman &amp; CEO</span></div>
+            <div class="actor-meta">First Berkshire annual meeting as the principal at the centre of the dais; chaired six and a half hours of Q&amp;A; ruled out a break-up of the conglomerate and named the structure as the moat. Class B shares have fallen 12.4% since his December succession announcement. Has retained Buffett's reporting structure across the operating businesses unchanged.<span>Intent &middot; Perform continuity through the courtier phase while Buffett remains in the audience; preserve the cash pile until a regime-change deployment opportunity arrives; convert the post-meeting four-quarter cycle into the proof point that the conglomerate's structure can transmit Buffett's discipline without his voice</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Warren Buffett <span class="tag">BRK · Chairman Emeritus, seat A-1</span></div>
+            <div class="actor-meta">Stepped off the dais at the start of the meeting after the jersey hoist; spoke for under three minutes from the floor; framed the day as a celebration of two anniversaries. Owns 16% of the company and roughly 38% of the voting shares; his ongoing presence on the floor is the institutional asset and the institutional constraint of Abel's first year. His voting weight makes the structural-conglomerate question impossible to reopen on the equity ledger.<span>Intent &middot; Hand the franchise to its successor without unbalancing the cultural transmission; preserve the option of a brief intervention if Abel's posture diverges materially from the principles; complete the public exit gradually so the institutional discipline transmits before the founder's voice is removed from the room</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Ajit Jain <span class="tag">BRK · Vice Chair, Insurance</span></div>
+            <div class="actor-meta">Sat to Abel's left on the dais; carries the institutional memory of the insurance underwriting franchise and the float that funds the operating businesses. The Q1 doubling of insurance underwriting profit was the line under which the rest of the meeting's numbers held. His voice is the second-most-trusted in the room on capital-allocation discipline.<span>Intent &middot; Preserve the underwriting-discipline culture against the temptation, after Buffett's exit, to chase float through softer underwriting standards; backstop Abel's authority on capital allocation through the courtier phase; manage the actuarial cycle through the post-Iran-war catastrophe-reinsurance pricing reset</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Howard Buffett <span class="tag">BRK · Independent Director, future Chairman</span></div>
+            <div class="actor-meta">Sat in the front row, not the dais; designated by the 2024 board action as non-executive chairman after his father's eventual departure. Carries no operational authority but the structural family-shareholder voice. His role is the institutional firewall against any future activist break-up campaign.<span>Intent &middot; Hold the family-shareholder posture against any post-Buffett activist pressure; defer to Abel on operating decisions while preserving the chair's independence from management; convert the chairman role into the cultural-continuity instrument the board's 2024 decision was designed to install</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Todd Combs &amp; Ted Weschler <span class="tag">BRK · Investment Officers</span></div>
+            <div class="actor-meta">Run the smaller equity-portfolio sleeves and have been positioned for the past decade as the heirs to the equity-side allocation discipline. Their portfolios were the source of the Apple-trim trades through 2024; their authority over deployment of the $397 billion cash pile is now operational rather than nominal. The post-Buffett deployment will be Abel-Combs-Weschler in name and reputation.<span>Intent &middot; Hold the capital-allocation discipline against the temptation to deploy at current valuations; manage the political pressure of a cash pile that compounds without a deployment by sourcing private-market opportunities the public-market record does not show; protect the franchise's option-value through the next regime change</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Activist long shadow <span class="tag">External · Bernstein, Trian, Pershing</span></div>
+            <div class="actor-meta">No named campaign yet, but the post-Buffett conglomerate-discount thesis is the most-published Wall Street view of the company. Bernstein's 28 April note priced the structural-conglomerate discount at 11–14% of intrinsic value; the question on the floor on Saturday was the analyst proxy for that report. Buffett's voting share blocks any forced break-up, but the public pressure shapes the management posture.<span>Intent &middot; Frame the post-Buffett era as the moment the conglomerate's structural discount is finally available for the activist instrument; build the analyst case and the public narrative against the structure before the founder's voting share moves to the trust; preserve the option to launch a campaign in 2027 or beyond</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel accent">
+        <div class="panel-label">Reading Note</div>
+        <h3 class="panel-title">The <em>lenses</em> used.</h3>
+        <div class="munger-body">
+          <p><strong>What's driving this:</strong> A cultural-transmission problem dressed as a corporate succession. Berkshire's value-investing discipline ran for forty years through a single man's voice in a single room twice a year; the Q&amp;A was the mechanism by which the franchise's principles were renewed across forty thousand attendees and several million owners of the float. The mechanism's question is whether the discipline transmits without him at the centre. The 12.4% share-price discount since December is the market's first quantification of that problem; the half-empty upper bowl on Saturday is the same answer in attendance form. The structural conglomerate — insurance, freight, energy, retail, manufactures, the equity portfolio — survives the founder's exit because its contractual scaffolding does not depend on him; the cultural premium that compounded into the post-1980 equity record may not. Abel's posture of performing continuity is the right courtier discipline for year one; the cost is that no Abel-shaped capital deployment has yet been demonstrated, and the $397 billion cash pile is the visible accumulation of the principle that no such opportunity has yet cleared.</p>
+          <p><strong>What's not driving this:</strong> Any operational deterioration in the underlying businesses. Q1 profits doubled on insurance underwriting and BNSF freight; the operating businesses are running. Reading the share-price drop as an indictment of the operating performance misses the cleaner read: the discount is on the cultural-transmission belt, not on the cash flows. The next twelve months will resolve which of those two prices the market.</p>
+          <p style="margin-top: 10px;"><strong>What would break this reading:</strong></p>
+          <ul>
+            <li>Abel announces a $50 billion+ acquisition or capital deployment in the next two quarters that visibly bears his signature rather than Buffett's — the courtier phase has ended faster than the founder's-presence variable suggests it should, and the post-Buffett operating regime has begun to assert itself.</li>
+            <li>An activist campaign opens publicly against the conglomerate structure inside the next twelve months — the public-narrative pressure has crossed the threshold despite Buffett's voting block, and the structural-conglomerate question is being reopened on the equity ledger.</li>
+            <li>Buffett's health or capacity meaningfully changes inside 2026 and the chairman-emeritus role is curtailed — the courtier phase compresses into operational authority faster than Abel's preparation cycle has built for, and the discount widens before it narrows.</li>
+            <li>Class B shares recover to within 3% of the December peak inside ninety days — the market has decided the cultural-transmission problem is overpriced, and the discount was a trading anxiety rather than a structural one.</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>Sources used:</strong> Munger's latticework of incentives for the conglomerate's float-to-operating-asset transmission belt and the four-hundred-basis-point internal-capital-allocation premium that the structure captures; Sun Tzu on appearing continuous when the position is discontinuous for Abel's posture in the room; Greene's Law 24 on the perfect courtier for the discipline of performing continuity in the founder's still-in-the-room presence; La Rochefoucauld on patience and the imagined certainty of someone else's risks for Berkshire's $397 billion cash signal as the most credible single-actor caution in the post-1980 American capital-market record; Dalio's big-cycle framework for the structural overlay in which the balance sheet is positioned for a regime change Abel has not been the named architect of.</p>
+        </div>
+      </div>
+    </aside>
+  </article>
+
+  <!-- SECTION II — BET PANEL -->
+  <section class="bet-panel s2">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think — and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> A US recession by end of 2026 stays a tail risk on the current cycle: the labour market is decelerating but not breaking, the Iran-war oil shock is an asymmetric drag rather than a contraction trigger, and we sit at the lower end of recession probability. The S&amp;P 500 closing below $6,000 by December is the cautious end of the dispersion: index sits near $7,275 and a 17% drawdown without an earnings break is unusual, but the post-Buffett cash signal and sticky-inflation regime put the tail real, and we sit somewhat above the modal floor. The S&amp;P 500 making a new all-time high by 31 December is the inverse of the cash-signal thesis, but with index already inside 2% of the prior peak the path is short and we sit closer to the upper end of the range. Per house discipline, the call is blind — Polymarket prices were not read.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="us-recession-2026-may4"
+             data-market-slug="us-recession-by-end-of-2026"
+             data-market-question="US recession by end of 2026 (NBER or two negative quarters)?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="20"
+             data-stratagem-value="20"
+             data-stratagem-because="Labour market decelerating but not breaking; Q1 print resilient; oil shock asymmetric drag, carry unwind a tail risk not base case."
+             data-stratagem-rubric="POWER: AI capex is countercyclical, fiscal expansionary into 2026 | ECON: oil shock 0.2 ppt drag, two negative quarters needs second hit | INST: NBER lag pushes H2 contraction reading into 2027 anyway | STRAT: Berkshire cash signal flags risk but does not raise base case | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/us-recession-by-end-of-2026" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — US recession by end-2026
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="us-recession-2026-may4" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="us-recession-2026-may4" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="spx-close-under-6000"
+             data-market-slug="spx-close-dec-2026"
+             data-market-question="S&amp;P 500 closes below $6,000 on the final 2026 trading day?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="32"
+             data-stratagem-value="32"
+             data-stratagem-because="Index near 7275; a 17 pct drawdown without earnings break unusual; post-Buffett cash signal and sticky inflation make the tail real."
+             data-stratagem-rubric="POWER: Fed hawkish hold caps multiple expansion through summer | ECON: sticky inflation and oil pass-through compress real earnings | INST: dot plot keeps cuts back-loaded, valuations dependent on AI capex | STRAT: Berkshire cash pile is the most credible caution signal in 80 years | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/spx-close-dec-2026" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — SPX close below $6,000 by Dec 31
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="spx-close-under-6000" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="spx-close-under-6000" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="spx-ath-by-dec31"
+             data-market-slug="sp500-all-time-high-by-december-31"
+             data-market-question="S&amp;P 500 makes a new all-time high by December 31, 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="68"
+             data-stratagem-value="68"
+             data-stratagem-because="Index inside 2 pct of prior peak; AI capex cycle and earnings tailwind intact; only a Hormuz reversal or carry unwind keeps the path closed."
+             data-stratagem-rubric="POWER: AI capex cycle and hyperscaler earnings still compounding | ECON: nominal earnings beat consensus eight consecutive quarters | INST: index near peak, mechanical drift to ATH high inside 8 months | STRAT: short path to ATH, only hard shock breaks the tape | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/sp500-all-time-high-by-december-31" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — SPX new ATH by Dec 31
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="spx-ath-by-dec31" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="spx-ath-by-dec31" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION II — READER NOTES -->
+  <div class="reader-notes s2">
+    <div class="rn-head">Your notes · Section II</div>
+    <textarea data-note-id="sec-ii" placeholder="Your reaction, disagreements, questions…"></textarea>
+  </div>
+
+  <!-- SECTION II — CLOSING QUOTE -->
+  <div class="article-quote q2">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The succession is not a deferred event; it is the operating regime. Abel ran the meeting on the script Buffett would have used; the script's effectiveness is now a function of who sits at the table, not of what the script says. The discount the market is pricing is the discount on the transmission belt's compression into something less personal — and therefore less transmissible.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Omaha Succession</cite>
+  </div>
+
+  <!-- THE TAPE — LIVE MARKETS -->
+  <section class="tape">
+    <div class="tape-header">
+      <div class="tape-label">— The Tape —</div>
+      <h3 class="tape-title">Three <em>Mirrors</em> of Capital</h3>
+    </div>
+    <div class="tape-grid">
+
+      <!-- S&P 500 (via SPY ETF — free on TradingView) -->
+      <div class="tape-cell">
+        <div class="sym">
+          <span class="name">S&amp;P 500</span>
+          <span class="ticker">SPY · YTD</span>
+        </div>
+        <div class="tape-chart">
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22AMEX%3ASPY%22%2C%22dateRange%22%3A%22YTD%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22autosize%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+        <div class="tape-move">
+          <span class="tape-move-label">Last Session</span>
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/single-quote/?locale=en#%7B%22symbol%22%3A%22AMEX%3ASPY%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- TESLA -->
+      <div class="tape-cell">
+        <div class="sym">
+          <span class="name">Tesla</span>
+          <span class="ticker">TSLA · YTD</span>
+        </div>
+        <div class="tape-chart">
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22NASDAQ%3ATSLA%22%2C%22dateRange%22%3A%22YTD%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22autosize%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+        <div class="tape-move">
+          <span class="tape-move-label">Last Session</span>
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/single-quote/?locale=en#%7B%22symbol%22%3A%22NASDAQ%3ATSLA%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- BITCOIN -->
+      <div class="tape-cell">
+        <div class="sym">
+          <span class="name">Bitcoin</span>
+          <span class="ticker">BTC · YTD</span>
+        </div>
+        <div class="tape-chart">
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#%7B%22symbol%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22dateRange%22%3A%22YTD%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22autosize%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+        <div class="tape-move">
+          <span class="tape-move-label">Last Session</span>
+          <iframe
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+            src='https://s.tradingview.com/embed-widget/single-quote/?locale=en#%7B%22symbol%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22width%22%3A%22100%25%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Atrue%2C%22locale%22%3A%22en%22%7D'>
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+    <p class="tape-note">YTD trajectory · last session's open → close below each chart</p>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION III — EUROPE / GERMANY    -->
+  <!-- ================================= -->
+
+  <div class="section-div s3" id="sec-iii">
+    <div class="rom">III.</div>
+    <div class="title"><em>Europe</em> &middot; The Continental Ledger</div>
+    <div class="meta">
+      <div><strong>Filed</strong> Warsaw / Paris / Berlin</div>
+      <div>Alliance Architecture &middot; The Drawdown Begins, the Umbrella Is Discussed</div>
+    </div>
+  </div>
+
+  <article class="story s3">
+    <div>
+      <h2 class="headline">The Warsaw <em>Umbrella</em></h2>
+      <p class="deck">On Friday the Pentagon issued its formal order for the withdrawal of 5,000 US troops from Germany — the first concrete instrument of the rupture between Trump and Merz that opened with the Hormuz war and hardened across the past ten days. By Saturday morning Polish Prime Minister Donald Tusk had posted on X that "the greatest threat to the transatlantic community is not its external enemies, but the ongoing disintegration of our alliance," and confirmed that no Polish channel had received a signal that the 5,000 troops would be redeployed to NATO's eastern flank. By Saturday afternoon Tusk's office published the read-out of his Gdańsk meeting with Emmanuel Macron of two weeks earlier — the read-out had been held back pending the Pentagon's formal order — in which Paris and Warsaw agreed to begin joint nuclear-deterrence exercises and to study a "dispersed deployment" of French nuclear-weapons-carrier aircraft on Polish bases. Trump told reporters Saturday evening that further withdrawals from Italy and Spain are "probable." Three structural moves landed in seventy-two hours. The post-1945 alliance architecture is being rewired in public and on the calendar.</p>
+      <div class="byline">From the Desk of <strong>Europe</strong><span class="sep">·</span>Filed <strong>Warsaw &amp; Paris</strong><span class="sep">·</span>4 May 2026</div>
+
+      <div class="article">
+        <p class="lead"><span class="dateline-intro">Warsaw —</span><strong>T</strong>he Pentagon order is administrative; the political fact landed on Friday afternoon. Five thousand troops out of Germany — Ramstein remains, Stuttgart's EUCOM headquarters remains, the Grafenwöhr training rotations are unaffected, but the visible tooth of the brigade-combat-team posture begins to thin from Wiesbaden and Vilseck across the summer rotation. Trump's framing was that Germany "has been a free rider for forty years" and that allies who declined to underwrite the Hormuz blockade should not expect the same forward-deployed footprint. Merz's response was to confirm Berlin had been informed in advance and that Germany would absorb the move "without theatre." But theatre is not the question. The question is whether the European allies who have been told their forward-deployed protection is conditional begin to build the alternatives that have been theoretical for a decade. The Tusk read-out, the Macron Gdańsk language, and the explicit naming of "dispersed deployment" of French nuclear-capable Rafales in Poland are the answer in real time.</p>
+
+        <p>Read the rewiring as three moves on the same calendar. The first is the American withdrawal — the demonstration that the post-1945 forward-deployed posture is now a transactional one rather than a structural one. The second is the European hedge — the Macron-Tusk arrangement that begins to substitute the French force de frappe and the Polish territorial mass for the American extended-deterrence guarantee, on a working timetable rather than a White Paper. The third is the British posture — Sir Keir Starmer's commitment, announced last weekend, to maintain the British nuclear deterrent's CASD-with-NATO-tasking under any Trump withdrawal scenario, with London's discreet support for the French initiative behind the public language of transatlantic unity. The three moves do not yet add up to a European nuclear pillar. They add up to the architecture of one.</p>
+
+        <span class="emphasis">"Politics is the art of the possible; statesmanship is the art of making possible tomorrow what was impossible yesterday." — Talleyrand. The Macron initiative on the French umbrella has been published in successive forms since 2017; the Tusk-Macron Gdańsk read-out moves it from the seminar room to the operational schedule. The American withdrawal is what made the move possible. The withdrawal was not a French choice.</span>
+
+        <h3>The <em>umbrella</em> question.</h3>
+
+        <p>Mearsheimer's reading of the post-1945 alliance architecture is the first principle here. NATO is, in offensive-realist terms, an alliance that survived its 1991 expiry date because the United States chose to maintain it as the institutional carrier of its forward-deployed presence in Europe. The structural question for thirty-five years has been what Europe does if the carrier is withdrawn. The instinctive European answer for thirty-five years has been to defer the question — to free-ride, in the language Trump uses, on a guarantee whose costs were largely paid by Washington. The Trump withdrawal is the moment the deferral ends. The French nuclear umbrella is the only continental European instrument capable of substituting for extended deterrence at scale, and Macron has spent the second presidential term making the public case for it: the 2020 École de Guerre speech, the March 2024 announcement of "dispersed deployment" exercises, the Gdańsk meeting with Tusk on April 21. The architecture has been assembling itself in language for a decade. The Pentagon order on Friday is what converts language to schedule.</p>
+
+        <p>Dugin's reading of Eurasian land power, taken seriously rather than mocked, supplies the inverse vector. Russia's strategic culture has read the post-1991 NATO expansion as an unfinished negotiation in which each successive eastward step was a coordinate to be reversed. The American withdrawal is that reversal arriving from inside the alliance rather than from outside it. Moscow's incentive structure is therefore visible: do not exploit the moment loudly while the architecture is rewiring, lest the rewiring be reinforced by the visible threat — but do exploit it operationally on the eastern flank, where the gap between the American withdrawal and the European backfill is widest. The Russian Baltic-air-incursion pattern of late April is the operational signal. The Belarusian deployment of Iskander-M to Asipovichy on 2 May is the next.</p>
+
+        <h3>The <em>Berlin</em> seam.</h3>
+
+        <p>Aristotle on the constitution as the structure that organises the offices of a state and the offices that follow from it: the German constitutional architecture is the structural binding under the European response. Article 26 of the Basic Law forbids the planning of aggressive war; the post-1955 NATO integration has been Germany's answer to the territorial-defence question and the answer that has held the country's strategic culture inside the Atlantic frame. Merz's options, with the American withdrawal underway, are the narrow set the constitution permits: deeper European integration on the Macron model, a quiet expansion of the Bundeswehr into the gap, or — the option no Chancellor has named publicly — the question of a German nuclear posture inside an explicitly European framework. The last option is the one Friedrich Merz, as Konrad Adenauer's institutional heir, would once have rejected outright. His silence this week on the question is the institutional signal that the option is no longer ruled out by definition. La Rochefoucauld on silence: <em>silence is the safest course for any man to adopt who distrusts himself</em>. The Chancellor's silence on the Adenauer settlement is the largest non-event of the European week.</p>
+
+        <p>Helen Thompson's framework on the political economy of European energy and security under the post-2022 reordering supplies the macro overlay. The European industrial economy is structurally short of cheap energy, structurally long of debt-financed defence-budget commitments under the post-Munich-Security-Conference 2025 announcements, and structurally exposed to a US security guarantee whose price is now visibly being marked. Each European state is recalibrating its forward defence calendar against a fiscal envelope that the Iran war has tightened. Germany's debt-brake reform of 2025 carved out €100 billion for defence, but the political coalition behind that reform was assembled when the American guarantee was assumed; the assumption no longer holds, and the political coalition's durability is a real question into the autumn budget. Tusk's "disintegration" framing is the public language of a continental capital running the same arithmetic privately.</p>
+
+        <h3>What the <em>reading</em> names.</h3>
+
+        <p>Two layers carry the story. Structural: an alliance whose forward-deployed posture is being unwound in real time, leaving a European continent that must answer the extended-deterrence question its leaders have spent thirty-five years deferring. The arithmetic is impersonal; whoever sat in Washington in May 2026 would have produced some version of this pressure, and whoever sits in Paris, Warsaw, and Berlin must answer it now. Coordination: a French initiative that has been preparing the political ground for "European deterrence" since 2017 finds its operational opening in a single Pentagon order, and the Macron-Tusk Gdańsk read-out converts a decade of language into a six-month working calendar of joint exercises, dispersed-deployment studies, and quiet legal preparation. What is not load-bearing today is the question of NATO's formal dissolution. The institutional shell will not break; the substance flowing through it will. The umbrella now being discussed in Warsaw is the visible form of that change.</p>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="panel-label">The Actors</div>
+        <h3 class="panel-title">Who builds the <em>frame</em>.</h3>
+        <div class="actors">
+          <div class="actor">
+            <div class="actor-name">Donald Tusk <span class="tag">PL · Prime Minister</span></div>
+            <div class="actor-meta">Posted the "disintegration" framing on X on Saturday morning; published the held-back Gdańsk read-out with Macron the same afternoon. Has spent the past month reorienting Polish defence procurement away from American suppliers in selected categories. Carries the strongest political mandate in Warsaw's post-1989 history for a structural pivot in alliance posture; the parliamentary majority does not constrain the move.<span>Intent &middot; Convert the American withdrawal into the political pretext for the operational French-Polish nuclear-umbrella architecture; preserve Polish leverage with both Washington and Paris by remaining the only continental capital with the territorial-mass to host a dispersed deployment; manage the domestic political coalition through the autumn budget that will fund the new posture</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Emmanuel Macron <span class="tag">FR · President</span></div>
+            <div class="actor-meta">Has built the case for a European nuclear umbrella across the second presidential term — the 2020 École de Guerre speech, the March 2024 dispersed-deployment study, the Gdańsk meeting with Tusk on 21 April. The Force de frappe carries 290 strategic warheads under sole presidential authority; no parliamentary ratification is required for an extended-deterrence offer. The Trump withdrawal converts the language into a schedule.<span>Intent &middot; Convert the decade of European-deterrence advocacy into the operational architecture the moment makes possible; preserve French sovereignty over the umbrella's command-and-control while extending its political coverage to the eastern flank; manage the post-2027 election succession question by locking the architecture in before the term ends</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Friedrich Merz <span class="tag">DE · Chancellor</span></div>
+            <div class="actor-meta">Confirmed Berlin had been informed in advance of the Pentagon order; has not publicly named the option of a German nuclear posture inside a European framework. The CDU institutional position since Adenauer has rejected the option outright; Merz's silence this week is the visible departure. The 2025 debt-brake reform carved €100 billion for defence on the assumption of an intact American guarantee that no longer holds.<span>Intent &middot; Hold the Atlanticist line in public language while preparing the institutional ground for the European-deterrence option; absorb the troop withdrawal "without theatre" while building the fiscal coalition for the autumn budget; preserve the option of a quiet German contribution to the Macron umbrella without naming the question publicly</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Sir Keir Starmer <span class="tag">UK · Prime Minister</span></div>
+            <div class="actor-meta">Confirmed last weekend that the British nuclear deterrent's CASD-with-NATO-tasking continues under any Trump withdrawal scenario; London's diplomatic posture behind the public language has been quiet support for the French initiative. The British deterrent is the second European nuclear instrument and the only one with a US-supplied delivery system, which complicates the operational architecture of any Macron-Polish arrangement.<span>Intent &middot; Preserve the British nuclear instrument's operational independence under the existing US Trident framework; offer discreet political backing to the French initiative without committing UK assets to a continental command structure; protect the post-Brexit security partnership with both Paris and Washington against the rewiring</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Donald Trump <span class="tag">US · President</span></div>
+            <div class="actor-meta">Issued the formal Pentagon order on Friday; framed the withdrawal as the consequence of European refusal to underwrite the Hormuz blockade. Threatened further withdrawals from Italy and Spain on Saturday evening. The 1973 War Powers Act framework constrains rapid full withdrawal from NATO but not the unilateral repositioning of forward-deployed forces. Carries the political mandate for the move; the Senate-confirmation architecture that would block an Article 13 NATO exit does not block the troop redeployment.<span>Intent &middot; Demonstrate the transactional nature of the American security guarantee in real time on the European theatre; pressure allies to underwrite future US military operations through the threat of further withdrawals; preserve the political optionality of larger drawdowns without committing to the calendar that would force Senate engagement</span></div>
+          </div>
+          <div class="actor">
+            <div class="actor-name">Vladimir Putin <span class="tag">RU · President</span></div>
+            <div class="actor-meta">Has not commented publicly on the Pentagon order or the Tusk-Macron read-out. Russian operational signals on the eastern flank have escalated quietly across the past week — Belarus Iskander-M deployment to Asipovichy on 2 May, the Baltic-air-incursion pattern of late April, the Kaliningrad rotational reinforcements. The strategic culture reads the moment as the long-deferred reversal of the post-1991 NATO expansion.<span>Intent &middot; Exploit the gap between American withdrawal and European backfill operationally on the eastern flank without inviting the political reinforcement that loud exploitation would produce; preserve the optical posture of restraint while compounding the operational pressure; manage the Belarus-Kaliningrad axis as the visible reminder of the cost of the European backfill calendar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel accent">
+        <div class="panel-label">Reading Note</div>
+        <h3 class="panel-title">The <em>lenses</em> used.</h3>
+        <div class="munger-body">
+          <p><strong>What's driving this:</strong> An alliance architecture being unwound in real time, with the European continent finally being forced to answer the extended-deterrence question it has spent thirty-five years deferring. The mechanism is the asymmetry between American withdrawal speed and European backfill speed: the Pentagon order on Friday redraws the forward-deployed posture in months, while the French nuclear-umbrella option has been preparing politically for a decade and operationally for two years. Tusk's Saturday read-out converts the latent French preparation into a working schedule the moment the visible American move opens the political space. The umbrella does not yet exist; the schedule for one does, with joint exercises, a dispersed-deployment study, and the legal preparation for hosting French Rafales on Polish bases. Merz's silence on the German nuclear question — Adenauer's institutional settlement that no Chancellor has publicly reopened — is the structural signal of how far the rewiring is permitted to travel. The Russian eastern-flank operational pattern is the inverse vector: not loud exploitation, but quiet pressure on the gap before the backfill closes.</p>
+          <p><strong>What's not driving this:</strong> The formal dissolution of NATO. The institutional shell will not break — the Article 5 commitment remains, the Brussels machinery remains, the Senate-confirmation framework that gates a full US withdrawal under Article 13 remains. Reading the rewiring as a NATO collapse misses the cleaner read: the substance flowing through the institutional shell is changing, and the European nuclear pillar that did not exist on Thursday is being scheduled into existence on Saturday. The shell will house a different architecture than the one it was designed for in 1949.</p>
+          <p style="margin-top: 10px;"><strong>What would break this reading:</strong></p>
+          <ul>
+            <li>The Pentagon withdrawal order is reversed or paused inside ten days — Trump has decided the alliance signal has overshot the negotiation utility, and the European backfill calendar loses the visible American move that justified it; the Macron-Tusk schedule slows.</li>
+            <li>Macron publicly disavows the Polish-deployment language inside thirty days — the Élysée has read the political cost of the operational schedule as exceeding its strategic value, and the French umbrella reverts to the seminar-room posture of the past decade.</li>
+            <li>Merz publicly affirms the Adenauer settlement and rules out a German nuclear posture inside any European framework — the German constitutional architecture has held, and the European nuclear pillar is bilateral Franco-Polish rather than continental.</li>
+            <li>Russia executes a major operational escalation on the eastern flank — a Kaliningrad mobilisation, an Article 4 incident with Poland or the Baltics, a Belarus-axis deployment that crosses the threshold — and the rewiring is consumed by an immediate territorial-defence crisis rather than the deliberate backfill schedule.</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>Sources used:</strong> Mearsheimer on the post-1945 alliance architecture as the institutional carrier of American forward-deployed presence for the structural reading of why the question is now arriving; Talleyrand on statesmanship as making possible tomorrow what was impossible yesterday for the conversion of a decade of European-deterrence advocacy into a six-month working calendar; Aristotle on the constitution as the structure that organises the offices of a state for the German constitutional architecture under Merz's silence; La Rochefoucauld on silence as the safest course for the Chancellor's posture on the Adenauer settlement; Helen Thompson on European political economy under the post-2022 reordering for the fiscal envelope behind the autumn-budget question; Dugin on Eurasian land power for the inverse vector of Russia's strategic-cultural reading of the moment.</p>
+        </div>
+      </div>
+    </aside>
+  </article>
+
+  <!-- SECTION III — BET PANEL -->
+  <section class="bet-panel s3">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think — and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> Formal NATO dissolution before 2027 is a structural floor outcome; Article 5 does not unwind on a Pentagon repositioning order, the Senate-confirmation architecture blocks an Article 13 unilateral exit, and we sit at the very low end. A formal US withdrawal from NATO before 2027 is a degree more plausible than dissolution — Trump has the political mandate to put the question on the calendar — but the institutional brake is real and we sit at a low single-digit-into-low-teens probability. Any country leaving NATO in 2026 is a tail risk inside the current rewiring; the substance flowing through the institutional shell is changing, but no member capital has the institutional incentive to be the visible defector. We sit at a low floor on each. Per house discipline, the call is blind — Polymarket prices were not read.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="nato-dissolves-2027"
+             data-market-slug="nato-dissolves-before-2027"
+             data-market-question="NATO dissolves before 2027?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="2"
+             data-stratagem-value="2"
+             data-stratagem-because="Article 5 does not unwind on troop repositioning; Senate framework blocks Article 13 unilateral exit; institutional shell holds even as substance changes."
+             data-stratagem-rubric="POWER: Article 5 commitment intact, Senate gates full US exit | ECON: defence-industrial flows align with continued institutional shell | INST: dissolution requires unanimous member action no capital seeks | STRAT: Trump prefers visible repositioning to formal dissolution | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/nato-dissolves-before-2027" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — NATO dissolves before 2027
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="nato-dissolves-2027" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="nato-dissolves-2027" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="us-exit-nato-2027"
+             data-market-slug="will-us-withdraw-from-nato-before-2027"
+             data-market-question="Will the US withdraw from NATO before 2027?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="6"
+             data-stratagem-value="6"
+             data-stratagem-because="Trump has the mandate to put it on the calendar; 2023 NSAA requires two-thirds Senate vote; institutional brake real, threat-as-leverage strategy preferred."
+             data-stratagem-rubric="POWER: troop repositioning achievable unilaterally, full exit is not | ECON: tariffs and bilateral deals serve same political purpose without exit | INST: 2023 NSAA mandates two-thirds Senate vote, brake is structural | STRAT: threat as leverage outperforms exit, Trump preserves optionality | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/will-us-withdraw-from-nato-before-2027" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — US withdraws from NATO by 2027
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="us-exit-nato-2027" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="us-exit-nato-2027" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="any-leave-nato-2026"
+             data-market-slug="will-any-country-leave-nato-in-2025"
+             data-market-question="Will any country leave NATO by year-end 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="4"
+             data-stratagem-value="4"
+             data-stratagem-because="No member capital has the institutional incentive to be the visible defector; rewiring runs through the shell, not against it; Hungary the only soft tail."
+             data-stratagem-rubric="POWER: Hungary even under Magyar still constrained by EU defence convergence | ECON: defence procurement flows penalise visible defection | INST: Article 13 one-year notice has not been triggered by any capital | STRAT: rewiring runs inside the shell, not against it; no first-mover incentive | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/will-any-country-leave-nato-in-2025" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket — Any country leaves NATO by 2026
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="any-leave-nato-2026" data-field="value" placeholder="—">
+          <input class="yc-because" type="text" data-market-id="any-leave-nato-2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION III — READER NOTES -->
+  <div class="reader-notes s3">
+    <div class="rn-head">Your notes · Section III</div>
+    <textarea data-note-id="sec-iii" placeholder="Your reaction, disagreements, questions…"></textarea>
+  </div>
+
+  <!-- EXPORT BAR — Log your calls to the Ledger before closing the paper -->
+  <section class="export-bar" aria-label="Log predictions to Ledger">
+    <div class="eb-label">Crawl · your ledger</div>
+    <h3 class="eb-title">Log your <em>calls</em> before you close the paper.</h3>
+    <p class="eb-count" id="yc-count">No predictions filled yet — scroll back and stake a number on the ones you have a view on.</p>
+    <div class="eb-actions">
+      <button id="yc-export" class="eb-btn-primary" type="button" disabled>Copy to Ledger</button>
+      <button id="yc-export-beliefs" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy to Beliefs</button>
+      <button id="yc-export-notes" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy notes</button>
+    </div>
+    <div class="eb-status" id="yc-status"></div>
+    <div><button id="yc-clear" class="eb-clear" type="button">Clear this edition's fields</button></div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- PROLOGUE — WISDOM BEFORE THE NEWS -->
+  <!-- ================================= -->
+
+  <section class="below-fold prologue">
+    <div class="col">
+      <div class="sec-label">Law of the Day · No. 19</div>
+      <h3 class="sec-title">Know who you are <em>dealing</em> with: do not offend the wrong person.</h3>
+      <p>Greene's Nineteenth Law: the world is full of different people with different opinions about anything you might do. Trust your own instincts and choose the right opponent or partner — not all marks are alike. The Law's teaching applies, in a more institutional register, to the three stories on Monday's table. Beijing has chosen Trump as the visiting party because Trump is the American principal most likely to take a deliverable photograph in exchange for an agenda concession on Taiwan-shaped silence; Xi has read his counterparty correctly and prepared the room accordingly. Greg Abel has chosen the courtier's posture because Buffett is the founder least tolerable to dishonour through visible departure; he has read his still-in-the-room principal correctly. Donald Tusk has chosen Macron as the partner for the European nuclear architecture because Macron is the only continental leader with the constitutional authority to extend deterrence under sole executive command; Tusk has read his partner correctly. The shape of each move is determined by the reading of who sits across the table, not by the abstract logic of what would serve the moving party best.</p>
+      <p><em>Today's reading:</em> the calendar, the succession, and the umbrella. Each story is a different facet of the same Greene principle: power-relevant decisions are choices about whom to engage and on what footing, not abstract optimisations against a generic environment. Beijing's choice of agenda for the summit, Abel's choice of posture in the Omaha room, and Tusk's choice of partner in Gdańsk are each shaped first by the reading of the counterparty.</p>
+      <ul>
+        <li>The Beijing Calendar is the agenda war: host-side framing converting a state visit into a structural rebalancing on the running Sino-American ledger.</li>
+        <li>The Omaha Succession is the cultural-transmission problem: a forty-year discipline routed through one voice, now being asked to route through an institutional structure.</li>
+        <li>The Warsaw Umbrella is the alliance rewiring: a Pentagon order converting a decade of European-deterrence language into a six-month working schedule.</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">From the Classics</div>
+      <h3 class="sec-title">Sun Tzu &amp; <em>Talleyrand.</em></h3>
+      <blockquote class="classic-quote">The supreme art of war is to subdue the enemy without fighting. Therefore the skilful leader subdues the enemy's troops without any fighting; he captures their cities without laying siege to them; he overthrows their kingdom without lengthy operations in the field. With his forces intact he will dispute the mastery of the empire — and thus, without losing a man, his triumph will be complete.</blockquote>
+      <p class="attrib">— Sun Tzu &middot; The Art of War, III</p>
+      <blockquote class="classic-quote">Politics is the art of the possible; statesmanship is the art of making possible tomorrow what was impossible yesterday. Treaties are made to be observed only as long as they serve the interest that signed them; alliances last only as long as the asymmetry that produced them does. The diplomat's craft is to read which asymmetries are durable and which are passing — and to commit only to the first.</blockquote>
+      <p class="attrib">— Talleyrand &middot; (paraphrased, Mémoires)</p>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">The Practitioner's Note</div>
+      <h3 class="sec-title">Read the room <em>first</em>.</h3>
+      <p>The three stories on Monday's table are each about a principal who has read the counterparty correctly and shaped the move accordingly. Xi has read Trump as the visiting party most likely to trade Taiwan-shaped silence for a deliverable photograph, and has prepared the room — carriers on the Bashi-Miyako tracks, ten incentives for Taiwanese firms, the agenda named publicly as Taiwan — to convert the asymmetry into a structural concession. Abel has read Buffett as the founder whose continued presence makes any visible departure from the inherited script costly, and has chosen the courtier's discipline of performing continuity through the first year. Tusk has read Macron as the partner whose constitutional authority over the French nuclear instrument permits a working schedule rather than a White Paper, and has timed the published Gdańsk read-out to land inside seventy-two hours of the Pentagon order to lock the framing in. Each principal's first move was the reading. The visible action followed.</p>
+      <p><strong>In your own affairs:</strong> the reading of the counterparty is the move that comes before the move. Most strategic errors at scale are not errors of execution but errors of casting — engaging the wrong partner on the wrong footing, choosing an opponent whose strengths the chosen instrument cannot reach, mistaking the institutional incentive of the seat across the table for a personal preference of its occupant. La Rochefoucauld on the discipline: <em>the surest way to be deceived is to think oneself more clever than the others</em>. Read the seat first. Then the move.</p>
+      <p><strong>The hard question:</strong> in your own week, which of the moves you are about to make are shaped by an accurate reading of the counterparty's seat, and which are shaped by an abstract optimisation against a generic environment? Where have you assumed that the principal across the table will respond as the textbook says they should — when their actual incentive structure, read carefully, would predict a different response?</p>
+    </div>
+  </section>
+
+  <!-- SECTION III — CLOSING QUOTE -->
+  <div class="article-quote q3">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The institutional shell will not break; the substance flowing through it will. The umbrella now being discussed in Warsaw is the visible form of that change — a French initiative that has been preparing the political ground for European deterrence since 2017 finds its operational opening in a single Pentagon order, and converts a decade of language into a six-month working calendar.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Warsaw Umbrella</cite>
+  </div>
+
+  <!-- FULL PULL QUOTE -->
+  <div class="full-pull">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The reading of the counterparty is the move that comes before the move. Most strategic errors at scale are not errors of execution but errors of casting — engaging the wrong partner on the wrong footing, choosing an opponent whose strengths the chosen instrument cannot reach, mistaking the institutional incentive of the seat across the table for a personal preference of its occupant.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; House Maxim</cite>
+  </div>
+
+  <!-- REFLECTION -->
+  <footer class="reflection">
+    <div class="label">— Question for the Day —</div>
+    <p class="question">Three theatres on the Monday calendar, each one a question of casting. Xi Jinping is preparing the Beijing room for Trump's 14–15 May visit by naming Taiwan as the agenda publicly while Washington has been saying "trade and fentanyl"; the carriers in the Bashi Channel and the Miyako Gap are the staging that locks the framing in, and the agenda concession Xi is preparing to extract is silence-shaped because silence is what the visiting party can defend at home. Greg Abel chaired the first Berkshire annual meeting without Buffett at the centre of the dais; he ruled out a break-up, named the structure as the moat, and absorbed six and a half hours of questions on the post-Buffett discipline — the courtier's posture against a still-in-the-room founder, with $397 billion of cash compounding on the balance sheet awaiting an Abel-shaped deployment. The Pentagon ordered five thousand US troops out of Germany on Friday; Donald Tusk on Saturday published the held-back Gdańsk read-out with Emmanuel Macron and named the disintegration of the alliance, converting a decade of French-umbrella advocacy into a six-month working schedule of joint exercises and dispersed-deployment studies. Apply the test to your own week — <em>which of your moves this week are shaped by an accurate reading of the seat across the table, and which by an abstract optimisation against a generic environment? Where have you assumed the counterparty's response will follow the textbook when their actual incentive structure would predict a different one? And which of the framings now being prepared around you are the silence-shaped concessions you have not yet recognised as concessions?</em></p>
+  </footer>
+
+  <!-- COLOPHON -->
+  <div class="colophon">
+    <div>Folio 024 &middot; MMXXVI</div>
+    <div class="c">The Stratagem &middot; Private Edition &middot; R. Becker</div>
+    <div class="r">— fin —</div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const issueId   = document.body.dataset.issueId   || 'issue-unknown';
+  const issueDate = document.body.dataset.issueDate || new Date().toISOString().slice(0,10);
+  const issueNum  = (issueId.match(/\d+/) || ['?'])[0];
+  const countEl   = document.getElementById('yc-count');
+  const statusEl  = document.getElementById('yc-status');
+  const exportBtn = document.getElementById('yc-export');
+  const beliefsBtn= document.getElementById('yc-export-beliefs');
+  const clearBtn  = document.getElementById('yc-clear');
+  const notesBtn  = document.getElementById('yc-export-notes');
+
+  // 1) Render the Stratagem's call inside each slot from data- attributes
+  document.querySelectorAll('.bet-slot').forEach(slot => {
+    const card   = slot.querySelector('.bet-card');
+    const value  = card.dataset.stratagemValue;
+    const because= card.dataset.stratagemBecause;
+    if (!value) return;
+    const type = slot.querySelector('.your-call').dataset.callType || 'prob';
+    const display = (type === 'prob') ? `${value}%` : value;
+    const sc = document.createElement('div');
+    sc.className = 'stratagem-call';
+    sc.innerHTML =
+      `<div class="sc-head">The Stratagem's call</div>` +
+      `<div class="sc-value">${display}</div>` +
+      `<div class="sc-because">${because}</div>`;
+    slot.appendChild(sc);
+  });
+
+  // 2a) Wire auto-save on reader-notes textareas
+  const noteTAs = document.querySelectorAll('.reader-notes textarea');
+  const noteKeyFor = (noteId) => `notes:${issueId}:${noteId}`;
+  noteTAs.forEach(ta => {
+    const k = noteKeyFor(ta.dataset.noteId);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) ta.value = saved;
+    ta.addEventListener('input', () => {
+      if (ta.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, ta.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  // 2b) Wire auto-save on all inputs
+  const inputs = document.querySelectorAll('.your-call input');
+  const keyFor = (mid, field) => `ledger:${issueId}:${mid}:${field}`;
+  inputs.forEach(input => {
+    const k = keyFor(input.dataset.marketId, input.dataset.field);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) input.value = saved;
+    input.addEventListener('input', () => {
+      if (input.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, input.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  function collect() {
+    const out = [];
+    document.querySelectorAll('.bet-slot').forEach(slot => {
+      const card = slot.querySelector('.bet-card');
+      const yc   = slot.querySelector('.your-call');
+      const raw  = slot.querySelector('.yc-value').value.trim();
+      if (!raw) return;
+      const type = yc.dataset.callType || 'prob';
+      const display = (type === 'prob') ? `${raw}%` : raw;
+      const scVal = card.dataset.stratagemValue;
+      const stratagemDisplay = scVal ? ((type === 'prob') ? `${scVal}%` : scVal) : '—';
+      out.push({
+        mid: card.dataset.marketId,
+        question: card.dataset.marketQuestion,
+        resolves: card.dataset.marketResolves || 'TBD',
+        you: display,
+        stratagem: stratagemDisplay,
+        stratagemBecause: card.dataset.stratagemBecause || '',
+        market: card.dataset.marketOdds || '—',
+        because: slot.querySelector('.yc-because').value.trim()
+      });
+    });
+    return out;
+  }
+
+  function formatLedger(preds) {
+    return preds.map(p => {
+      const because = p.because ? `because ${p.because}` : `because —`;
+      return `- ${issueDate} → ${p.resolves} · YOU ${p.you} · STRATAGEM ${p.stratagem} · MARKET ${p.market} · ${p.question} · ${because} [market: Polymarket "${p.question}"]`;
+    }).join('\n');
+  }
+
+  function formatBeliefs(preds) {
+    return preds.map(p => {
+      const reason = p.because || '—';
+      return `#### ${issueDate} — ${p.question}\n**My call:** ${p.you}\n${reason}`;
+    }).join('\n\n');
+  }
+
+  function collectNotes() {
+    const out = [];
+    const headlines = document.querySelectorAll('.headline');
+    noteTAs.forEach((ta, i) => {
+      const text = ta.value.trim();
+      if (!text) return;
+      const hl = headlines[i] ? headlines[i].textContent.trim() : `Section ${i+1}`;
+      const rom = ['I', 'II', 'III'][i] || `${i+1}`;
+      out.push({ rom, headline: hl, text });
+    });
+    return out;
+  }
+
+  function formatNotes(notes) {
+    return notes.map(n => `#### ${n.rom}. ${n.headline}\n${n.text}`).join('\n\n');
+  }
+
+  function update() {
+    const n = collect().length;
+    const nn = collectNotes().length;
+    if (n === 0 && nn === 0) {
+      countEl.textContent = 'No predictions or notes yet — scroll back and engage with the stories.';
+      exportBtn.textContent = 'Copy to Ledger';
+      beliefsBtn.textContent = 'Copy to Beliefs';
+      notesBtn.textContent = 'Copy notes';
+    } else {
+      const parts = [];
+      if (n > 0) parts.push(`${n} call${n===1?'':'s'}`);
+      if (nn > 0) parts.push(`${nn} note${nn===1?'':'s'}`);
+      countEl.textContent = `You've logged ${parts.join(' and ')} this morning. Export while the reading is still fresh.`;
+      exportBtn.textContent = n > 0 ? `Copy ${n} call${n===1?'':'s'} to Ledger` : 'Copy to Ledger';
+      beliefsBtn.textContent = n > 0 ? `Copy ${n} belief${n===1?'':'s'}` : 'Copy to Beliefs';
+      notesBtn.textContent = nn > 0 ? `Copy ${nn} note${nn===1?'':'s'}` : 'Copy notes';
+    }
+    exportBtn.disabled = (n === 0);
+    beliefsBtn.disabled = (n === 0);
+    notesBtn.disabled = (nn === 0);
+  }
+
+  async function copyToClipboard(text, okMsg) {
+    try {
+      await navigator.clipboard.writeText(text);
+      statusEl.textContent = okMsg;
+    } catch (e) {
+      window.prompt('Clipboard blocked — copy this manually (Cmd+C, Enter):', text);
+      statusEl.textContent = 'Ready to paste.';
+    }
+  }
+
+  exportBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n` + formatLedger(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI The Ledger.md under ## Open`);
+  });
+
+  beliefsBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = formatBeliefs(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI Political Beliefs.md under ## Entries`);
+  });
+
+  notesBtn.addEventListener('click', () => {
+    const notes = collectNotes();
+    if (!notes.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n\n` + formatNotes(notes);
+    copyToClipboard(text, `✓ ${notes.length} note${notes.length===1?'':'s'} copied — paste into your vault`);
+  });
+
+  clearBtn.addEventListener('click', () => {
+    if (!confirm("Clear all filled fields for this issue? Only do this AFTER you've exported everything.")) return;
+    inputs.forEach(input => {
+      localStorage.removeItem(keyFor(input.dataset.marketId, input.dataset.field));
+      input.value = '';
+    });
+    noteTAs.forEach(ta => {
+      localStorage.removeItem(noteKeyFor(ta.dataset.noteId));
+      ta.value = '';
+    });
+    statusEl.textContent = 'Fields cleared.';
+    update();
+  });
+
+  update();
+})();
+</script>
+
+</body>
+</html>
