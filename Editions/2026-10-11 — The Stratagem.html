@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Stratagem — No. 179 · 10 October 2026</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#0e0c08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e0c08;
+  --ink-soft: #2a2620;
+  --ink-mid: #403a30;
+  --paper: #eee3ca;
+  --paper-alt: #e5d9bc;
+  --paper-deep: #d9cba8;
+  --paper-shade: #c9b98f;
+  --rule: rgba(14, 12, 8, 0.25);
+  --rule-soft: rgba(14, 12, 8, 0.14);
+  --accent: #6d1418;
+  --accent-2: #2d4a2f;   /* economics green */
+  --accent-3: #1c3a5f;   /* europe navy */
+  --muted: #736856;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 14, 'SOFT' 30;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.55;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 5%, rgba(109, 20, 24, 0.04), transparent 50%),
+    radial-gradient(ellipse at 90% 95%, rgba(14, 12, 8, 0.06), transparent 55%),
+    radial-gradient(ellipse at 60% 40%, rgba(201, 185, 143, 0.28), transparent 65%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.11;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.paper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 56px 80px;
+  position: relative;
+}
+
+/* ============ FOLIO ============ */
+.folio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.folio .c { text-align: center; }
+.folio .r { text-align: right; }
+
+/* ============ MASTHEAD ============ */
+.masthead {
+  text-align: center;
+  padding: 22px 0 14px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px double var(--ink);
+  position: relative;
+}
+.masthead::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 10px;
+  height: 1px;
+  background: var(--ink);
+}
+.mast-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'wght' 900;
+  font-size: clamp(60px, 12vw, 148px);
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+  margin-bottom: 6px;
+}
+.mast-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  font-variation-settings: normal;
+}
+.mast-subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.mast-sub-rule {
+  display: inline-block;
+  width: 40px; height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin: 0 12px 3px;
+}
+
+/* ============ DATELINE BAR ============ */
+.dateline-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 10px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 3px double var(--ink);
+  align-items: center;
+}
+.dateline-bar .center { text-align: center; color: var(--accent); font-weight: 700; }
+.dateline-bar .right { text-align: right; }
+.dateline-bar strong { color: var(--ink); font-weight: 700; }
+
+/* ============ INDEX / TOC ============ */
+.toc {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto 1fr;
+  gap: 16px;
+  padding: 16px 0 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.toc .num {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.toc .sec { font-weight: 700; color: var(--ink); }
+.toc a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.toc a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+/* ============ SECTION DIVIDER ============ */
+.section-div {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 26px;
+  align-items: center;
+  padding: 44px 0 20px;
+  margin-top: 20px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 28px;
+}
+.section-div .rom {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 84px;
+  line-height: 0.85;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+}
+.section-div.s2 .rom { color: var(--accent-2); }
+.section-div.s3 .rom { color: var(--accent-3); }
+
+.section-div .title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0;
+  font-size: 52px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.section-div .title em {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.section-div.s2 .title em { color: var(--accent-2); }
+.section-div.s3 .title em { color: var(--accent-3); }
+
+.section-div .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+.section-div .meta strong { color: var(--ink); }
+
+/* ============ STORY LAYOUT ============ */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 44px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.story .headline {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 0.96;
+  letter-spacing: -0.032em;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.story .headline em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .headline em { color: var(--accent-2); }
+.story.s3 .headline em { color: var(--accent-3); }
+
+.story .deck {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height: 1.34;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+
+.story .byline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+.story .byline strong { color: var(--ink); }
+.story .byline .sep { margin: 0 12px; color: var(--accent); }
+.story.s2 .byline .sep { color: var(--accent-2); }
+.story.s3 .byline .sep { color: var(--accent-3); }
+
+/* ARTICLE */
+.article {
+  column-count: 2;
+  column-gap: 34px;
+  column-rule: 1px solid var(--rule-soft);
+  font-size: 15px;
+  line-height: 1.58;
+  text-align: justify;
+  hyphens: auto;
+  color: var(--ink-soft);
+}
+.article p {
+  margin-bottom: 11px;
+  break-inside: avoid-column;
+}
+.article p.lead { font-size: 16.5px; line-height: 1.48; }
+.article .dateline-intro {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 8px;
+}
+.story.s2 .article .dateline-intro { color: var(--accent-2); }
+.story.s3 .article .dateline-intro { color: var(--accent-3); }
+
+.article p.lead::first-letter {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20, 'wght' 500;
+  font-weight: 500;
+  font-size: 80px;
+  float: left;
+  line-height: 0.82;
+  margin: 6px 11px 0 0;
+  color: var(--accent);
+  padding-right: 4px;
+}
+.story.s2 .article p.lead::first-letter { color: var(--accent-2); }
+.story.s3 .article p.lead::first-letter { color: var(--accent-3); }
+
+.article h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 21px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 16px 0 8px;
+  color: var(--ink);
+  break-after: avoid-column;
+}
+.article h3 em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .article h3 em { color: var(--accent-2); }
+.story.s3 .article h3 em { color: var(--accent-3); }
+
+.article strong { color: var(--ink); font-weight: 600; }
+.article .emphasis {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17.5px;
+  color: var(--ink);
+  display: block;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 14px;
+  margin: 10px 0;
+  break-inside: avoid-column;
+  line-height: 1.32;
+}
+.story.s2 .article .emphasis { border-left-color: var(--accent-2); }
+.story.s3 .article .emphasis { border-left-color: var(--accent-3); }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 22px; }
+
+.panel {
+  border: 1px solid var(--ink);
+  background: var(--paper-alt);
+  padding: 18px 20px 20px;
+  position: relative;
+}
+.panel.dark {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.panel.accent { background: var(--paper-deep); }
+
+.panel-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.story.s2 .panel-label { color: var(--accent-2); }
+.story.s3 .panel-label { color: var(--accent-3); }
+
+.panel.dark .panel-label {
+  color: var(--paper-deep);
+  border-bottom-color: rgba(238, 227, 202, 0.2);
+}
+
+.panel-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 23px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.panel.dark .panel-title { color: var(--paper); }
+.panel-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .panel-title em { color: var(--accent-2); }
+.story.s3 .panel-title em { color: var(--accent-3); }
+.panel.dark .panel-title em { color: #d68e92; }
+.story.s2 .panel.dark .panel-title em { color: #9cc6a0; }
+.story.s3 .panel.dark .panel-title em { color: #a5c3e6; }
+
+/* actors */
+.actors { display: flex; flex-direction: column; gap: 11px; }
+.actor {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.actor:last-child { border-bottom: none; padding-bottom: 0; }
+.actor-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 13.5px;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3px;
+}
+.actor-name .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+  background: var(--accent);
+  padding: 2px 6px 3px;
+  text-transform: uppercase;
+}
+.story.s2 .actor-name .tag { background: var(--accent-2); }
+.story.s3 .actor-name .tag { background: var(--accent-3); }
+.actor-meta {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.actor-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  display: block;
+  margin-top: 3px;
+}
+.story.s2 .actor-meta span { color: var(--accent-2); }
+.story.s3 .actor-meta span { color: var(--accent-3); }
+
+/* laws */
+.laws { display: flex; flex-direction: column; gap: 10px; }
+.law {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(238, 227, 202, 0.18);
+}
+.law:last-child { border-bottom: none; }
+.law-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144;
+  font-size: 28px;
+  line-height: 0.9;
+  color: #d68e92;
+  letter-spacing: -0.04em;
+  text-align: right;
+}
+.story.s2 .law-num { color: #9cc6a0; }
+.story.s3 .law-num { color: #a5c3e6; }
+.law-text { font-size: 12.5px; line-height: 1.38; color: var(--paper-deep); }
+.law-text strong {
+  display: block;
+  color: var(--paper);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* munger */
+.munger-body { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+.munger-body strong { color: var(--ink); }
+.munger-body ul { list-style: none; margin-top: 8px; }
+.munger-body li {
+  padding: 6px 0 6px 18px;
+  position: relative;
+  font-size: 12.5px;
+  line-height: 1.38;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.munger-body li:last-child { border-bottom: none; }
+.munger-body li::before {
+  content: '✦';
+  position: absolute;
+  left: 0; top: 6px;
+  color: var(--accent);
+  font-size: 9px;
+}
+.story.s2 .munger-body li::before { color: var(--accent-2); }
+.story.s3 .munger-body li::before { color: var(--accent-3); }
+
+/* ============ ARTICLE QUOTE (per section) ============ */
+.article-quote {
+  margin: 0 0 56px;
+  padding: 30px 20px 32px;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  --qc: var(--accent);
+}
+.article-quote.q2 { --qc: var(--accent-2); }
+.article-quote.q3 { --qc: var(--accent-3); }
+
+.article-quote::before {
+  content: '❦';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper);
+  padding: 0 14px;
+  color: var(--qc);
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.article-quote blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 32px);
+  line-height: 1.26;
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+.article-quote blockquote .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--qc);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+
+.article-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article-quote cite::before { content: '— '; color: var(--qc); }
+
+/* ============ BET PANEL — Polymarket integration ============ */
+.bet-panel {
+  margin: 0 0 48px;
+  padding: 26px 28px 28px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-alt);
+  --accent-bet: var(--accent);
+}
+.bet-panel.s2 { --accent-bet: var(--accent-2); }
+.bet-panel.s3 { --accent-bet: var(--accent-3); }
+
+.bet-head { text-align: center; margin-bottom: 14px; }
+.bet-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.bet-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.bet-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent-bet);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+
+.bet-claim {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto 22px;
+  text-align: center;
+}
+.bet-claim strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent-bet);
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.bet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.bet-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 14px 16px 12px;
+  text-decoration: none;
+  color: inherit;
+  min-height: 130px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.bet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 var(--accent-bet);
+}
+.bet-q {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 15px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.bet-odds-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-soft);
+}
+.bet-odds {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--accent-bet);
+}
+.bet-arrow {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent-bet);
+}
+.bet-foot {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  .bet-panel { padding: 20px 16px; }
+  .bet-grid { grid-template-columns: 1fr; gap: 10px; }
+  .bet-title { font-size: 21px; }
+  .bet-claim { font-size: 15.5px; }
+  .bet-card { min-height: 0; }
+}
+
+/* ============ YOUR CALL — prediction capture ============ */
+.bet-slot { display: flex; flex-direction: column; }
+.bet-slot .bet-card { border-bottom: 1px dashed var(--rule-soft); }
+
+.your-call {
+  border: 1px solid var(--ink);
+  border-top: none;
+  border-bottom: none;
+  background: var(--paper);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.your-call:last-child { border-bottom: 1px solid var(--ink); }
+
+/* The Stratagem's independent call */
+.stratagem-call {
+  border: 1px solid var(--ink);
+  border-top: 1px dashed var(--rule-soft);
+  background: var(--paper-alt);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.sc-head em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+.sc-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.sc-because {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.yc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.yc-row { display: flex; align-items: baseline; gap: 8px; }
+.your-call input {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  border: none;
+  border-bottom: 1px solid var(--rule-soft);
+  background: transparent;
+  padding: 2px 2px;
+  color: var(--ink);
+  outline: none;
+}
+.your-call input:focus { border-bottom-color: var(--accent-bet); }
+.your-call input::placeholder { color: var(--muted); opacity: 0.6; }
+.yc-value { font-weight: 700; }
+.your-call[data-call-type="prob"] .yc-value { width: 3em; text-align: center; }
+.your-call[data-call-type="date"] .yc-value { width: auto; font-weight: 500; color-scheme: light; }
+.your-call[data-call-type="text"] .yc-value { flex: 1; font-weight: 500; }
+.yc-because { flex: 1; font-family: 'Instrument Serif', serif !important; font-style: italic; font-size: 13px !important; font-weight: 400 !important; }
+.yc-suffix { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+
+/* Export bar — Ledger call-to-action */
+.export-bar {
+  margin: 56px 0 40px;
+  padding: 44px 36px 44px;
+  background: var(--paper-alt);
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  text-align: center;
+}
+.export-bar .eb-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.export-bar .eb-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 38px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+.export-bar .eb-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+.export-bar .eb-count {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 640px;
+  margin: 0 auto 26px;
+}
+.export-bar .eb-btn-primary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 18px 36px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.export-bar .eb-btn-primary:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.export-bar .eb-btn-primary:disabled { background: transparent; color: var(--muted); border-color: var(--rule); cursor: not-allowed; }
+.export-bar .eb-btn-secondary { background: transparent; color: var(--ink); }
+.export-bar .eb-btn-secondary:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.export-bar .eb-actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+.export-bar .eb-status {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-top: 16px;
+  min-height: 1.3em;
+}
+.export-bar .eb-clear {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+.export-bar .eb-clear:hover { color: var(--ink); }
+
+/* ============ READER NOTES — per-article comments ============ */
+.reader-notes {
+  margin: 0 0 48px;
+  padding: 22px 28px 24px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-alt);
+}
+.rn-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-bet, var(--accent));
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.reader-notes textarea {
+  width: 100%;
+  min-height: 80px;
+  max-height: 300px;
+  resize: vertical;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  padding: 12px 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+.reader-notes textarea:focus { border-color: var(--accent-bet, var(--accent)); }
+.reader-notes textarea::placeholder { color: var(--muted); opacity: 0.5; }
+@media (max-width: 640px) {
+  .reader-notes { padding: 16px 16px 18px; }
+  .reader-notes textarea { font-size: 14px; min-height: 60px; }
+}
+
+@media (max-width: 640px) {
+  .export-bar { padding: 30px 20px; margin: 36px 0 28px; }
+  .export-bar .eb-title { font-size: 27px; }
+  .export-bar .eb-count { font-size: 16px; }
+  .export-bar .eb-btn-primary { padding: 14px 24px; font-size: 11.5px; }
+}
+
+/* ============ THE TAPE — MARKETS ============ */
+.tape {
+  margin: -32px -56px 56px;
+  padding: 32px 40px 26px;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+}
+
+.tape-header {
+  text-align: center;
+  margin-bottom: 22px;
+  position: relative;
+}
+.tape-header::before,
+.tape-header::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 1px;
+  background: var(--accent-2);
+  opacity: 0.5;
+}
+.tape-header::before { left: calc(50% - 220px); }
+.tape-header::after  { right: calc(50% - 220px); }
+
+.tape-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.tape-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.tape-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent-2);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+
+.tape-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.tape-cell {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 14px 14px 4px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.tape-cell .sym {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.tape-cell .sym .name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.tape-cell .sym .ticker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--accent-2);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.tape-chart {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+.tape-chart iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move {
+  height: 96px;
+  margin-top: 8px;
+  border-top: 1px solid var(--rule-soft);
+  padding-top: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.tape-move iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move-label {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+}
+.tape-cell { min-height: 340px; }
+.tape-note {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+@media (max-width: 1000px) {
+  .tape { margin-left: -22px; margin-right: -22px; padding: 24px 18px 20px; }
+  .tape-grid { grid-template-columns: 1fr; }
+  .tape-header::before, .tape-header::after { display: none; }
+}
+
+/* ============ FULL PULL QUOTE ============ */
+.full-pull {
+  margin: 28px 0 42px;
+  padding: 36px 20px;
+  text-align: center;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+  position: relative;
+}
+.full-pull blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(26px, 3.5vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.full-pull .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+.full-pull cite {
+  display: block;
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.full-pull cite::before { content: '— '; color: var(--accent); }
+
+/* ============ BELOW THE FOLD ============ */
+.below-fold {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 38px;
+  padding-top: 32px;
+  border-top: 3px double var(--ink);
+}
+.below-fold.prologue {
+  padding-top: 38px;
+  padding-bottom: 28px;
+  margin-top: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.below-fold .col { padding-right: 8px; }
+.below-fold .col + .col { border-left: 1px solid var(--rule); padding-left: 30px; }
+
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.sec-label::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 26px;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.sec-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.below-fold p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.below-fold ul { list-style: none; counter-reset: romanlist; }
+.below-fold li {
+  counter-increment: romanlist;
+  padding: 8px 0 8px 30px;
+  position: relative;
+  font-size: 13px;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--rule-soft);
+  color: var(--ink-soft);
+}
+.below-fold li::before {
+  content: counter(romanlist, upper-roman) '.';
+  position: absolute;
+  left: 0; top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.classic-quote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 14px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+}
+.attrib {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* ============ REFLECTION ============ */
+.reflection {
+  margin-top: 48px;
+  padding: 44px 56px;
+  border-top: 3px double var(--ink);
+  border-bottom: 4px solid var(--ink);
+  text-align: center;
+  background: var(--paper-deep);
+  margin-left: -56px;
+  margin-right: -56px;
+}
+.reflection .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.reflection .question {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 34px);
+  line-height: 1.22;
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--ink);
+}
+
+/* ============ COLOPHON ============ */
+.colophon {
+  margin-top: 36px;
+  padding-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: 1px solid var(--rule-soft);
+}
+.colophon .c { text-align: center; color: var(--ink-soft); }
+.colophon .r { text-align: right; }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.folio, .masthead, .dateline-bar, .toc, .section-div, .story,
+.full-pull, .below-fold, .reflection, .colophon {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.folio        { animation-delay: 0.00s; }
+.masthead     { animation-delay: 0.05s; }
+.dateline-bar { animation-delay: 0.12s; }
+.toc          { animation-delay: 0.18s; }
+
+/* ============ RESPONSIVE — TABLET ============ */
+@media (max-width: 1000px) {
+  .paper { padding: 22px 28px 60px; }
+  .story { grid-template-columns: 1fr; gap: 32px; }
+  .article { column-count: 1; }
+  .toc { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div .meta { text-align: center; }
+  .below-fold { grid-template-columns: 1fr; gap: 28px; }
+  .below-fold .col + .col { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .folio, .dateline-bar { grid-template-columns: 1fr; gap: 4px; text-align: center; }
+  .folio .r, .dateline-bar .right { text-align: center; }
+  .reflection { margin-left: -28px; margin-right: -28px; padding: 36px 28px; }
+}
+
+/* ============ RESPONSIVE — PHONE ============ */
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; }
+  .paper { padding: 14px 16px 48px; }
+
+  .folio { font-size: 8.5px; letter-spacing: 0.15em; padding-bottom: 8px; gap: 2px; }
+
+  .masthead { padding: 14px 0 8px; }
+  .mast-title { font-size: 56px; letter-spacing: -0.04em; }
+  .mast-subtitle { font-size: 13px; letter-spacing: 0.02em; }
+  .mast-sub-rule { width: 22px; margin: 0 8px 2px; }
+
+  .dateline-bar { font-size: 9px; letter-spacing: 0.16em; padding: 8px 0; }
+
+  .toc { font-size: 11px; letter-spacing: 0.12em; padding: 12px 0 14px; }
+  .toc .num { font-size: 20px; }
+  .toc a { display: inline-block; padding: 4px 0; }
+
+  .below-fold { gap: 22px; padding-top: 24px; }
+  .below-fold .col + .col { padding-top: 20px; }
+  .sec-label { font-size: 9px; letter-spacing: 0.18em; }
+  .sec-title { font-size: 24px; }
+  .below-fold p { font-size: 14px; line-height: 1.55; }
+  .below-fold li { font-size: 13px; padding-left: 28px; }
+  .classic-quote { font-size: 17px; padding-left: 14px; }
+
+  .section-div { padding: 32px 0 16px; margin-top: 14px; gap: 6px; margin-bottom: 20px; }
+  .section-div .rom { font-size: 48px; }
+  .section-div .title { font-size: 28px; letter-spacing: -0.02em; }
+  .section-div .meta { font-size: 9px; letter-spacing: 0.16em; line-height: 1.6; }
+
+  .story { gap: 28px; margin-bottom: 44px; }
+  .story .headline { font-size: 34px; letter-spacing: -0.028em; line-height: 1; }
+  .story .deck { font-size: 16px; line-height: 1.35; }
+  .story .byline { font-size: 9px; letter-spacing: 0.14em; padding: 10px 0; }
+  .story .byline .sep { margin: 0 8px; }
+
+  .article { font-size: 15.5px; line-height: 1.58; text-align: left; hyphens: none; }
+  .article p.lead { font-size: 16px; line-height: 1.5; }
+  .article p.lead::first-letter { font-size: 60px; margin: 4px 8px 0 0; line-height: 0.85; }
+  .article h3 { font-size: 19px; margin: 14px 0 6px; }
+  .article .emphasis { font-size: 16px; padding-left: 12px; margin: 10px 0; }
+  .article .dateline-intro { font-size: 9px; letter-spacing: 0.14em; }
+
+  .sidebar { gap: 18px; }
+  .panel { padding: 16px 16px 18px; }
+  .panel-label { font-size: 8.5px; letter-spacing: 0.2em; }
+  .panel-title { font-size: 21px; }
+  .actor-name { font-size: 13px; flex-wrap: wrap; gap: 4px; }
+  .actor-name .tag { font-size: 8px; padding: 2px 5px 3px; }
+  .actor-meta { font-size: 12.5px; line-height: 1.42; }
+  .actor-meta span { font-size: 7.5px; letter-spacing: 0.12em; }
+  .law-num { font-size: 24px; }
+  .law-text { font-size: 12px; line-height: 1.38; }
+  .law-text strong { font-size: 10px; letter-spacing: 0.14em; }
+  .munger-body { font-size: 13px; }
+  .munger-body li { font-size: 12.5px; }
+
+  .article-quote { padding: 24px 12px 26px; margin-bottom: 44px; }
+  .article-quote blockquote { font-size: 20px; line-height: 1.28; }
+  .article-quote cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 12px; }
+
+  .tape { margin: -20px -16px 44px; padding: 24px 14px 18px; }
+  .tape-label { font-size: 9px; letter-spacing: 0.22em; }
+  .tape-title { font-size: 26px; }
+  .tape-grid { gap: 14px; }
+  .tape-cell { min-height: 300px; padding: 12px 12px 4px; }
+  .tape-chart { height: 180px; }
+  .tape-move { height: 92px; }
+  .tape-cell .sym .name { font-size: 16px; }
+  .tape-note { font-size: 8.5px; letter-spacing: 0.18em; }
+
+  .full-pull { margin: 24px 0 36px; padding: 28px 14px; }
+  .full-pull blockquote { font-size: 22px; line-height: 1.22; }
+  .full-pull cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 16px; }
+
+  .reflection { margin-left: -16px; margin-right: -16px; padding: 32px 18px; margin-top: 40px; }
+  .reflection .label { font-size: 9px; letter-spacing: 0.22em; }
+  .reflection .question { font-size: 22px; line-height: 1.26; }
+
+  .colophon { font-size: 8.5px; letter-spacing: 0.14em; gap: 4px; grid-template-columns: 1fr; text-align: center; }
+  .colophon .r, .colophon .c { text-align: center; }
+}
+
+/* Prevent accidental horizontal overflow */
+html, body { overflow-x: hidden; max-width: 100vw; }
+.paper { overflow-wrap: break-word; }
+</style>
+</head>
+<body data-issue-id="issue-180" data-issue-date="2026-10-11">
+
+<div class="paper">
+
+  <!-- FOLIO -->
+  <div class="folio">
+    <div>Vol. I &middot; No. 179</div>
+    <div class="c">Daily Edition &middot; Private</div>
+    <div class="r">Page 1 of 1</div>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <h1 class="mast-title">The <em>Stratagem</em></h1>
+    <div class="mast-subtitle">
+      <span class="mast-sub-rule"></span>
+      Power · Statecraft · Strategy · Virtue
+      <span class="mast-sub-rule"></span>
+    </div>
+  </header>
+
+  <!-- DATELINE -->
+  <div class="dateline-bar">
+    <div>Sunday &middot; <strong>11 October 2026</strong></div>
+    <div class="center">The Kunar-Helmand Line &middot; The Dealmaking Quarter &middot; The Berek Oath</div>
+    <div class="right">Reading time &asymp; 12 min</div>
+  </div>
+
+  <!-- INDEX / TOC -->
+  <nav class="toc">
+    <div class="num">I.</div>
+    <div><a href="#sec-i"><span class="sec">International</span> &middot; The Kunar-Helmand Line</a></div>
+    <div class="num">II.</div>
+    <div><a href="#sec-ii"><span class="sec">Economics</span> &middot; The Dealmaking Quarter</a></div>
+    <div class="num">III.</div>
+    <div><a href="#sec-iii"><span class="sec">Europe &amp; Germany</span> &middot; The Berek Oath</a></div>
+  </nav>
+
+    <!-- ================================= -->
+  <!-- SECTION I — INTERNATIONAL         -->
+  <!-- ================================= -->
+
+  <div class="section-div" id="sec-i">
+    <div class="rom">I.</div>
+    <div class="title"><em>International</em> &middot; The Theatre of Nations</div>
+    <div class="meta">
+      <div><strong>Filed</strong> the Prime Minister&rsquo;s Office at the Pakistan Secretariat in Islamabad (the Shehbaz Sharif desk whose Information Ministry on 1 October specifically announced the strikes as &ldquo;planned, calibrated&rdquo; intelligence-based operations against seven TTP camps along the Afghan border), the General Headquarters at Rawalpindi (General Asim Munir&rsquo;s army staff running the standing border-pacification doctrine against the Qatar-brokered October-2025 truce), the ISI directorate on Khyber Road (the standing agency pricing the Afghan-Taliban register against the TTP operational base in Kunar and Helmand), the Afghan Ministry of Foreign Affairs under Amir Khan Muttaqi in Kabul (the Taliban desk whose Zabihullah Mujahid specifically counted nine dead and three houses destroyed and specifically pledged retaliation), the Ministry of Defence at the Pul-e-Charkhi compound (the Taliban command structure running the standing counter-escalation cadence), the TTP Shura under Noor Wali Mehsud in a specifically-undisclosed Kunar location (the organisation whose cross-border attack cadence through the trailing month specifically prompted the Pakistani Information-Ministry naming), the Qatari foreign ministry in Doha (Mohammed bin Abdulrahman Al Thani&rsquo;s desk whose October-2025 mediated ceasefire the current strikes specifically price against), the Turkish foreign ministry in Ankara (Hakan Fidan&rsquo;s desk running the Istanbul-track follow-up talks that have specifically not produced a formal agreement since November 2025), with cross-files from the US Central Command headquarters in Tampa (the standing military-coordination register against the Pakistan-Afghan border zone), the Chinese Ministry of Foreign Affairs in Beijing (Wang Yi&rsquo;s desk whose standing CPEC-protection cadence specifically prices against both Islamabad and Kabul), the Iranian foreign ministry in Tehran (the Pezeshkian-era desk running the standing Afghanistan-neighbour register), the Indian Ministry of External Affairs at South Block (the Jaishankar desk whose standing position on the TTP-vs-Pakistan arithmetic specifically prices against the trailing-cycle Pulwama-and-Pahalgam register), and the UN mission at UNAMA in Kabul (the standing international-presence desk logging the civilian-casualty cadence against the strike-and-counter-strike register)</div>
+      <div>The Kunar-Helmand Line &middot; Ten days after Pakistan&rsquo;s Thursday 1 October air strikes in Afghanistan&rsquo;s Kunar and Helmand provinces specifically broke the three-month quiet that followed the Qatar-brokered October-2025 ceasefire, the border-pacification architecture specifically runs on an escalation cadence the trailing-decade Durand-Line register has specifically absorbed. Pakistani Information Minister Attaullah Tarar&rsquo;s announcement specifically named the operation as targeting seven TTP-and-affiliate camps; the Afghan Taliban&rsquo;s Zabihullah Mujahid specifically counted nine dead across three destroyed houses and specifically pledged retaliation; three rounds of Istanbul-track talks since November 2025 have specifically not produced a formal agreement; the TTP operational base inside Afghanistan specifically continues to run against the trailing-month cadence of cross-border attacks in Khyber-Pakhtunkhwa the Islamabad doctrine specifically prices as unacceptable. Read as border-security bulletin the file absorbs. Read as statecraft, the Kunar-Helmand Line is the specific moment at which a nuclear-armed state that specifically assembled the 2024-2026 border-strike doctrine against a non-state actor it specifically does not formally fight specifically runs the operation against a Taliban government that specifically denies the sanctuary and specifically commits to retaliation on each round. The reading draws on Clausewitz on the political-primacy-of-war through which Islamabad has specifically converted a counter-terrorism operation into a bilateral-escalation instrument; on Sun Tzu on the standing arithmetic of attacking the enemy&rsquo;s strategy before attacking his army; on Mearsheimer on the structural-anarchy pressure through which neither Kabul nor Islamabad specifically bears the cost of denying the TTP its operational register; on Greene&rsquo;s 15th Law on the specific limits of a crush-your-enemies-totally doctrine when the enemy specifically operates from a sovereign territory the hegemon of the dyad specifically does not control; and on Sun Tzu&rsquo;s further discipline on the specific instrument through which the superior force specifically fails to force the smaller counterpart to the specific concession the superior force specifically prices against its own operational cost.</div>
+    </div>
+  </div>
+
+  <article class="story">
+    <div>
+      <h2 class="headline">The Kunar-Helmand <em>Line</em></h2>
+      <p class="deck">Begin with the Thursday and the specifics. Thursday 1 October, the Pakistani Information Ministry announces that the Pakistan Air Force has conducted &ldquo;planned, calibrated&rdquo; strikes against seven camps in Afghanistan&rsquo;s Kunar and Helmand provinces belonging to the Tehrik-i-Taliban Pakistan and affiliated groups. By early Friday morning the Afghan Taliban&rsquo;s Zabihullah Mujahid has counted nine dead across three destroyed houses, pledged retaliation, and summoned the Pakistani charg&eacute; d&rsquo;affaires in Kabul. Three months of relative quiet, under the Qatari-brokered ceasefire that followed the border clashes of October 2025, specifically break. Three rounds of Istanbul-track follow-up talks through November 2025 and the first quarter of 2026 specifically did not produce a formal agreement. The TTP operational base inside the eastern Afghan provinces specifically continues to run against the trailing-month cadence of cross-border attacks in Khyber-Pakhtunkhwa and Balochistan the Islamabad doctrine specifically prices as unacceptable. Read as border-security bulletin the file absorbs. Read as statecraft, the Kunar-Helmand Line is the specific moment at which a nuclear-armed state that specifically assembled the 2024-through-2026 cross-border-strike doctrine against a non-state actor it specifically does not formally fight runs the operation against a Taliban government that specifically denies the sanctuary, specifically commits to retaliation on each round, and specifically does not bear the operational cost of denying the TTP its operational register.</p>
+
+      <h3 class="article-subhead">Clausewitz on <em>the war that will not stay politics</em>.</h3>
+      <p>Clausewitz&rsquo;s discipline on war-as-the-continuation-of-politics runs onto Islamabad&rsquo;s calibrated-strike doctrine with specific force. The Pakistani army under General Asim Munir has specifically assembled a political instrument through which the counter-terrorism operation against the TTP specifically carries the diplomatic cadence against Kabul: each strike specifically names a camp, specifically prices casualties in militant terms, specifically positions the operation as internal-to-Pakistan-security rather than as an act of war against Afghanistan. The Clausewitz corollary runs against the construction. A military operation whose political instrument the counterpart specifically does not absorb &mdash; the Taliban government specifically counts the dead as civilians, specifically names the operation as aggression against Afghan sovereignty, specifically pledges retaliation &mdash; specifically compresses into a bilateral-escalation register the originating state&rsquo;s doctrine specifically does not price for. The 2024-through-2026 strike cadence has specifically absorbed each round of this compression without specifically delivering the political-end-state the doctrine specifically assumes: the TTP operational base specifically continues, cross-border attacks specifically continue, the Kabul government specifically does not deliver the counter-terrorism cooperation the doctrine specifically names as its objective. The Clausewitz-reading of the Kunar-Helmand Line is specific: a war extended beyond the political window specifically compresses the political coalition that extended it, and Islamabad&rsquo;s current standing specifically absorbs the compression &mdash; the Shehbaz coalition arithmetic, the General Headquarters&rsquo; own political capital against the civilian register, the strategic-partnership architecture with Beijing on CPEC-corridor security &mdash; against the specifically-not-delivered political end-state. The specific tell inside the fortnight is whether the Taliban retaliation specifically carries operational depth against Pakistani regular forces (not against Pakistani settlements, which specifically prices as a counter-terror-tolerance-boundary rather than a sovereignty-breach) or specifically carries the standing propaganda-and-diplomatic-register alone; the former specifically carries the Clausewitz-compression; the latter specifically runs the standing escalation-cycle without yet specifically breaking its ceiling.</p>
+
+      <h3 class="article-subhead">Sun Tzu on <em>attacking strategy before army</em>.</h3>
+      <p>Sun Tzu&rsquo;s central discipline on attacking the enemy&rsquo;s strategy before attacking his army runs onto the Pakistani doctrine as a specifically-visible negative instrument. The Islamabad architecture specifically attacks the TTP army rather than the TTP strategy: the camps are hit; the operational base is specifically not denied; the strategic-depth-across-the-Durand-Line register the TTP specifically operates against is specifically not re-architected. Sun Tzu&rsquo;s further point: the superior force that specifically fails to compress its counterpart&rsquo;s strategic register specifically absorbs the operational cost of the running engagement without specifically carrying the political-end-state the superior force specifically prices against. The Qatari and Turkish mediated tracks specifically opened the strategic-engagement register Sun Tzu would price above the operational one: a mediated instrument through which the Taliban government specifically carries the counter-terrorism cooperation Islamabad specifically prices against (TTP leadership relocation inside Afghanistan under specific monitoring, specifically-named handover-and-prosecution instruments, specifically-named joint-border mechanisms the Durand Line sovereignty-dispute has specifically foreclosed), in exchange for the specific concession Islamabad specifically prices as unacceptable on standing-doctrine (formal Afghan Taliban recognition instruments, specifically-named development-aid resumption, specific Pakistani non-strike guarantees against named targets). The strategic-engagement register the mediated tracks specifically opened specifically did not close, and the operational register the strikes specifically run against specifically opens the next round. The Sun Tzu corollary: the superior force that specifically prefers the operational register to the strategic one specifically concedes the operational cost without specifically converting it into the political-end-state the strategic register alone can carry. The specific tell is whether Islamabad specifically returns to the Istanbul track within the fortnight (which would specifically price the Clausewitz-political-primacy restoration), or specifically carries another operational cycle without the mediated instrument (which specifically compounds the Sun-Tzu-strategy-before-army failure).</p>
+
+      <h3 class="article-subhead">Mearsheimer on <em>the structural-anarchy of non-state sanctuary</em>.</h3>
+      <p>Mearsheimer&rsquo;s offensive-realism discipline specifically prices the Durand-Line arithmetic through a structural anchor the mediated-track register specifically does not relieve. In a system of states operating under structural anarchy where neither counterpart specifically bears the cost of denying a non-state actor its operational register, the operational register specifically continues until a specifically-named external pressure specifically prices against both counterparts simultaneously. The Mearsheimer-reading of the Kunar-Helmand Line is specific. Islamabad specifically bears the direct cost of the TTP operation against Pakistani settlements and security forces; Kabul specifically bears the diplomatic cost of the Pakistani strikes against Afghan territory; neither counterpart specifically bears the opposing cost absent the specifically-named external pressure. The specific external pressure available in the trailing cycle has been: the Qatari-brokered mediated track (specifically compressed to the operational register since November 2025); the Chinese CPEC-corridor-protection pressure against both counterparts on behalf of the Beijing security investment (specifically opened through 2024 but specifically not converting into the formal-counterrorism-cooperation instrument Mearsheimer would price as decisive); the US-regional-counter-terrorism register (specifically compressed since the 2021 withdrawal and specifically running at diplomatic-background level). The structural-anarchy pressure the dyad specifically runs against is not specifically relieved absent a specifically-named Beijing-plus-Doha-plus-Washington convergence Mearsheimer would price as the single instrument that specifically carries the political-end-state. The specific tell is whether the Chinese Ministry of Foreign Affairs specifically names a specifically-visible position inside the fortnight (above the trailing-cycle neutral-concern cadence) or specifically does not, which specifically prices the structural-anarchy pressure against the operational cycle.</p>
+
+      <h3 class="article-subhead">Greene&rsquo;s 15th Law on <em>crushing the enemy that specifically does not sit on your ground</em>.</h3>
+      <p>Greene&rsquo;s 15th Law &mdash; crush your enemies totally &mdash; runs onto the Pakistani calibrated-strike doctrine with the standing instinct to run the operation to the operational limit the counterpart specifically does not fight against. The Greene point is that the Law carries specifically only when the enemy specifically operates from a ground the superior force specifically controls; the moment the enemy operates from a sovereign territory the superior force specifically does not control, the attempt to crush specifically delivers the operational cost without specifically delivering the political-end-state, and specifically opens the standing audience the superior force specifically has not accounted for (the sovereign counterpart whose territory the operation specifically transits). The Pakistani strike doctrine specifically runs the Law-15 architecture against a TTP operational base specifically inside an Afghan Taliban territory the standing bilateral register specifically does not accept the operation against. The Greene-corollary is specific: against an enemy whose ground you specifically do not control, the specific discipline is Law 22 &mdash; surrender to recover against the operational cost that specifically does not deliver the political-end-state, specifically convert the operational-register engagement into a mediated-track strategic-engagement register, specifically accept the specifically-named political cost of the mediated instrument to specifically avoid the specifically-named operational cost of the standing doctrine. The specific move Greene would price for Islamabad inside the fortnight is a specifically-named return to Istanbul track-two with a specifically-named Qatari mediator role, specifically against the standing doctrine the Information Ministry announcement specifically ran on 1 October.</p>
+
+      <h3 class="article-subhead">What the reading <em>expects</em>.</h3>
+      <p>Base case through the fortnight and into Q4: the Taliban retaliation specifically carries the standing propaganda-and-diplomatic register but specifically does not deliver an operational depth against Pakistani regular forces beyond the standing cross-border exchange cadence the trailing-cycle Durand-Line register specifically absorbs, with the specific tell being whether a specifically-named Pakistani-garrison or Pakistani-regular-forces engagement is specifically reported inside the fortnight; TTP operational attacks inside Khyber-Pakhtunkhwa and Balochistan specifically continue above the trailing-month baseline but specifically do not deliver a mass-casualty event against a major city on a magnitude that specifically re-opens the Islamabad doctrine beyond the current operational-strike register; the Qatari-mediated track specifically does not re-open at the political-principal level inside the fortnight, with the Istanbul-track continuity specifically limited to track-two diplomatic-contact level; the Chinese Ministry of Foreign Affairs specifically carries a neutral-concern-plus-stability-and-development framing against both counterparts without specifically naming a position above the trailing-cycle Beijing-register; the Shehbaz coalition arithmetic specifically absorbs no visible civilian-political cost inside the fortnight, with the standing General-Headquarters-primacy register specifically consolidating the operational-doctrine authority against the civilian register; the Taliban government specifically does not formally break the Istanbul-track-availability register despite the specifically-named pledge of retaliation, with the specific tell being whether Amir Khan Muttaqi specifically opens a specifically-named Qatari or Turkish side-channel within the week. What would collide the reading: a specifically-named Taliban retaliation against a Pakistani regular-forces position or garrison inside the fortnight that specifically breaks the standing cross-border exchange ceiling and specifically prices the Clausewitz-political-primacy compression; a specifically-named TTP operational mass-casualty event against an Islamabad, Lahore or Peshawar major-city target that specifically compresses the standing calibrated-strike doctrine against a Pakistani public register the operational cadence specifically does not currently absorb; a specifically-named Chinese Ministry-of-Foreign-Affairs statement specifically positioning Beijing against one counterpart above the trailing-cycle neutral-concern register, which would specifically re-open the Mearsheimer-external-pressure instrument; a specifically-named Qatari or Turkish re-opening of the Istanbul-track at political-principal level that specifically re-opens the mediated-track-strategic-engagement register the standing operational cycle specifically does not currently price; a specifically-named Afghan-Taliban leadership statement specifically naming a TTP-handover or Mehsud-relocation instrument the standing policy specifically does not permit, which would specifically compress the operational cadence against the strategic-engagement register. The base case is that the Kunar-Helmand Line specifically delivers a continuation of the standing operational-strike-plus-standing-retaliation cycle through the fortnight without specifically opening the mediated-track strategic-engagement register, and the structural-anarchy pressure the dyad specifically runs against specifically does not clear absent a specifically-named Beijing-plus-Doha convergence the fortnight does not currently price.</p>
+
+      <blockquote class="article-quote">&ldquo;To subdue the enemy without fighting is the acme of skill.&rdquo; &mdash; Sun Tzu, <em>The Art of War</em>, Chapter III &middot; on a Sunday on which Pakistani calibrated strikes against TTP camps in Kunar and Helmand specifically ran ten days into the escalation cycle without the mediated-track strategic-engagement register specifically re-opening.</blockquote>
+    </div>
+
+    <aside class="sidebar">
+      <div class="side-panel">
+        <div class="side-label">Actors</div>
+        <h4 class="side-title">Who <em>the line</em> names.</h4>
+        <ul class="actor-list">
+          <li><span class="actor-role">Shehbaz &middot; Islamabad</span> Prime Minister Shehbaz Sharif (PML-N, standing from the March-2024 coalition formation) &amp; the Pakistan Secretariat coordination with Information Minister Attaullah Tarar &mdash; the civilian principal whose office specifically announced the strikes but whose standing against the General-Headquarters-primacy register runs below the operational-doctrine principal. The tell is whether Islamabad specifically announces a return to Istanbul track-two with a specifically-named Qatari mediator role inside the fortnight, which would specifically carry the Greene-22 instrument against the standing Law-15 doctrine.</li>
+          <li><span class="actor-role">Munir &middot; Rawalpindi</span> General Asim Munir (Chief of Army Staff, Pakistan Army) &amp; the Rawalpindi General Headquarters &mdash; the operational principal who specifically owns the calibrated-strike doctrine the 1 October operation specifically ran, and whose standing political capital against the Shehbaz civilian register specifically consolidates with each operational cycle. The tell is whether Munir specifically authorises a specifically-named second-round strike within the fortnight, which would specifically compound the Clausewitz-political-primacy compression against the political-end-state the doctrine specifically has not delivered.</li>
+          <li><span class="actor-role">Muttaqi &middot; Kabul</span> Amir Khan Muttaqi (Foreign Minister, Islamic Emirate of Afghanistan) &amp; the Taliban Ministry of Foreign Affairs &mdash; the sovereign counterpart whose Zabihullah Mujahid specifically counted the casualties and specifically pledged retaliation. The tell is whether Muttaqi specifically opens a specifically-named Qatari or Turkish side-channel inside the week against the pledge-of-retaliation register, which would specifically preserve the Istanbul-track-availability register against the operational-cycle pressure.</li>
+          <li><span class="actor-role">Mehsud &middot; TTP shura</span> Noor Wali Mehsud (TTP emir) &amp; the Tehrik-i-Taliban Pakistan central shura in a specifically-undisclosed Kunar location &mdash; the non-state principal whose operational base inside eastern Afghanistan the Islamabad doctrine specifically prices against. The tell is whether the TTP specifically delivers a mass-casualty operational event against a major-city target inside the fortnight, which would specifically break the standing operational-attack ceiling and specifically compress the Islamabad doctrine against a Pakistani public register the cadence specifically does not currently absorb.</li>
+          <li><span class="actor-role">Al Thani &middot; Doha</span> Mohammed bin Abdulrahman Al Thani (Prime Minister and Foreign Minister of Qatar) &amp; the standing Doha mediated-track architecture &mdash; the mediator-principal whose October-2025 ceasefire the current operation specifically prices against. The tell is whether Doha specifically announces a specifically-named political-principal-level re-opening of the Istanbul track inside the fortnight, which would specifically carry the Sun-Tzu-strategy-before-army instrument against the standing operational cycle.</li>
+          <li><span class="actor-role">Wang Yi &middot; Beijing</span> Wang Yi (Minister of Foreign Affairs, People&rsquo;s Republic of China) &amp; the standing Chinese CPEC-corridor-protection cadence &mdash; the external-pressure principal whose standing against both counterparts the Mearsheimer-structural-anarchy register specifically prices as the decisive instrument. The tell is whether the Chinese Ministry of Foreign Affairs specifically names a position above the trailing-cycle neutral-concern cadence inside the fortnight, which would specifically re-open the external-pressure instrument the standing dyad specifically has not currently absorbed.</li>
+        </ul>
+      </div>
+
+      <div class="side-panel side-note">
+        <div class="side-label">Reading Note</div>
+        <h4 class="side-title">The <em>lenses</em> used.</h4>
+        <p><strong>What&rsquo;s driving this.</strong> Two layers do the real work. <em>Structural</em>: Mearsheimer&rsquo;s offensive-realism frame on the arithmetic of non-state sanctuary. Islamabad bears the direct operational cost of TTP attacks against Pakistani settlements and security forces; Kabul bears the diplomatic cost of Pakistani strikes against Afghan territory; neither counterpart bears the opposing cost absent specifically-named external pressure. The dyad&rsquo;s self-sustaining escalation cycle is a structural product of that asymmetry, not of either leadership&rsquo;s miscalculation. <em>Tactical</em>: Sun Tzu on attacking strategy before army. The Pakistani doctrine specifically attacks the TTP army rather than the TTP strategy &mdash; the camps are hit, the operational base is not denied, the strategic-depth-across-the-Durand-Line register is not re-architected. The Clausewitz corollary runs alongside: a military operation whose political instrument the counterpart specifically does not absorb specifically compresses into a bilateral-escalation register the originating state&rsquo;s doctrine specifically does not price for.</p>
+        <p><strong>What&rsquo;s not driving this.</strong> Not primarily a TTP-ideology story &mdash; the TTP operational base specifically runs on the Pashtun-tribal-geography-and-Durand-Line-sovereignty-dispute architecture the ideology specifically absorbs into but specifically does not generate. And it is not primarily an India-Pakistan-rivalry story; the Pulwama-and-Pahalgam register sits as the standing background against which Islamabad specifically prices its border-management reputation, but the specific operational cadence against Afghanistan specifically does not run through the Indian register.</p>
+        <p><strong>What would break this reading.</strong></p>
+        <ul>
+          <li>A specifically-named Taliban retaliation against a Pakistani regular-forces position or garrison inside the fortnight that specifically breaks the standing cross-border exchange ceiling and prices the Clausewitz-political-primacy compression.</li>
+          <li>A specifically-named TTP mass-casualty event against an Islamabad, Lahore or Peshawar major-city target that specifically compresses the standing calibrated-strike doctrine against a Pakistani public register the cadence specifically does not currently absorb.</li>
+          <li>A specifically-named Chinese Ministry-of-Foreign-Affairs statement specifically positioning Beijing against one counterpart above the trailing-cycle neutral-concern register, which would specifically re-open the Mearsheimer-external-pressure instrument.</li>
+          <li>A specifically-named Qatari or Turkish re-opening of the Istanbul-track at political-principal level that specifically re-opens the mediated-track-strategic-engagement register the standing operational cycle specifically does not currently price.</li>
+        </ul>
+        <p><strong>Sources used.</strong> Mearsheimer&rsquo;s offensive-realism supplies the single most load-bearing claim: the structural-anarchy pressure through which neither counterpart specifically bears the opposing cost is why the operational register specifically continues absent a specifically-named external pressure. Sun Tzu on attacking strategy before army names the Pakistani doctrine as a specifically-visible negative instrument: the superior force that specifically fails to compress its counterpart&rsquo;s strategic register specifically absorbs the operational cost without the political-end-state. Clausewitz on the political-primacy-of-war names the compression a military operation specifically absorbs when its political instrument the counterpart does not accept. Greene&rsquo;s 15th and 22nd Laws name the specific instinct the Pakistani doctrine specifically runs (Law 15 against an enemy whose ground it specifically does not control) and the specific move the Greene-reading would specifically price for Islamabad against the standing cadence (Law 22 &mdash; surrender to recover against the operational cost that specifically does not deliver the political-end-state).</p>
+      </div>
+    </aside>
+  </article>
+
+  <section class="bet-panel s1">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think &mdash; and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> a Pakistan-and-Afghanistan formal ceasefire by 31 December 2026 reads in the low band because the structural-anarchy pressure on the dyad specifically does not clear absent a Beijing-plus-Doha convergence the fortnight does not currently price and three rounds of Istanbul-track talks since November 2025 specifically did not produce a formal agreement; a specifically-named Taliban retaliation against Pakistani regular-forces positions inside the next thirty days reads in the moderate band because the Zabihullah Mujahid pledge-of-retaliation register specifically runs on operational-depth signalling against the standing cross-border exchange cadence; a specifically-named Pakistani second-round strike inside Afghan territory before 31 December 2026 reads in the high band because the Munir-Rawalpindi operational-doctrine primacy specifically consolidates with each cycle and the standing TTP-attack cadence specifically runs the operational trigger.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="pak-afg-ceasefire-dec2026"
+             data-market-slug=""
+             data-market-question="Will Pakistan and Afghanistan announce a publicly declared, mutually agreed formal ceasefire halting military engagement before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="12"
+             data-stratagem-value="12"
+             data-stratagem-because="Structural-anarchy pressure on dyad does not clear absent Beijing-plus-Doha convergence; three Istanbul rounds since Nov 2025 produced no formal agreement."
+             data-stratagem-rubric="POWER: neither counterpart bears the opposing cost; dyad self-sustains | ECON: Pakistan absorbs direct TTP operational cost through FY27 budget | INST: Istanbul-track remains at track-two diplomatic-contact level only | STRAT: Islamabad doctrine prefers operational register to mediated track | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Pakistan-Afghanistan formal ceasefire by Dec 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="pak-afg-ceasefire-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="pak-afg-ceasefire-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="taliban-retaliation-pak-regulars-nov2026"
+             data-market-slug=""
+             data-market-question="Will there be a reported Taliban-force attack on a Pakistani regular-forces position or garrison inside Pakistan before 10 November 2026?"
+             data-market-resolves="2026-11-10"
+             data-stratagem-blind="38"
+             data-stratagem-value="38"
+             data-stratagem-because="Mujahid pledge-of-retaliation register signals operational depth; standing cross-border-exchange cadence absorbs some but the ceiling is close."
+             data-stratagem-rubric="POWER: Taliban demonstrates capability to deter without full war | ECON: cross-border exchange runs below sustained-mobilisation threshold | INST: Taliban command specifically owns the retaliatory-signalling register | STRAT: calibrated response to Pakistan calibrated strike is the natural mirror | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Taliban strike on Pak regulars by Nov 10 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="taliban-retaliation-pak-regulars-nov2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="taliban-retaliation-pak-regulars-nov2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="pak-second-strike-afg-dec2026"
+             data-market-slug=""
+             data-market-question="Will Pakistan carry out another named strike inside Afghan territory before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="72"
+             data-stratagem-value="72"
+             data-stratagem-because="Munir-Rawalpindi operational-doctrine primacy consolidates each cycle; TTP-attack cadence runs the trigger; three strike cycles in 2026 already."
+             data-stratagem-rubric="POWER: General Headquarters political capital specifically rises with each strike | ECON: cost of a strike-cycle specifically absorbed inside standing defence budget | INST: calibrated-strike doctrine is the standing operational default | STRAT: Law-15 instinct consolidates against the Greene-22 instrument | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Pakistan second-strike by Dec 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="pak-second-strike-afg-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="pak-second-strike-afg-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="reader-notes s1">
+    <div class="rn-label">Reader&rsquo;s marginalia &middot; Section I</div>
+    <h4 class="rn-title">Your <em>note</em> on the Kunar-Helmand Line.</h4>
+    <textarea data-note-id="sec-i" placeholder="Which hostile actor in your own operating theatre specifically lives on a ground you do not control, so that each operational cycle you run specifically carries the direct cost without specifically delivering the political-end-state the doctrine specifically prices against? Which specifically-named strategic register would a mediated-track approach specifically open against the operational one you have specifically run, and which concession would you specifically owe to carry it? And which external principal is the only party whose standing position above your counterpart specifically relieves the structural-anarchy pressure the dyad has specifically absorbed through the trailing cycle &mdash; the one whose silence specifically funds your current losses and whose named statement would specifically clear them?"></textarea>
+  </div>
+
+  <div class="article-quote q1">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The useful thing to notice about the Kunar-Helmand Line is not whether a Taliban retaliation specifically prices the TTP-camp casualty figure at nine or at eighteen on the Mujahid-cadence through the fortnight. It is that a nuclear-armed state has specifically assembled a cross-border calibrated-strike doctrine against a non-state actor it specifically does not formally fight, run it against a Taliban government that specifically denies the sanctuary and specifically commits to retaliation on each round, and absorbed three such cycles in 2026 without specifically delivering the political-end-state the doctrine specifically prices against. Mearsheimer names the deepest claim: under structural anarchy where neither counterpart specifically bears the opposing cost of denying the TTP its operational register, the operational register specifically continues until a specifically-named external pressure specifically prices against both counterparts simultaneously. Sun Tzu names the mechanism of the failure: the superior force that specifically attacks the enemy army rather than the enemy strategy specifically absorbs the operational cost of the running engagement without specifically converting it into the political-end-state. Clausewitz names the compression: a military operation whose political instrument the counterpart specifically does not absorb specifically compresses into a bilateral-escalation register the originating state&rsquo;s doctrine specifically does not price for. Greene names the instinct: Law 15 against an enemy whose ground you specifically do not control specifically delivers the operational cost without the political-end-state. The reader who watches whether the strike-count moves from one to two inside October is reading the moment. The reader who watches whether Beijing specifically names a position above the neutral-concern cadence, whether Doha specifically re-opens the Istanbul track at political-principal level, whether Kabul specifically delivers an operational-depth retaliation against Pakistani regulars, and whether Islamabad specifically carries the Greene-22 return to mediated-track strategic engagement against the standing operational doctrine, is reading the substance the Line is sized to carry.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Kunar-Helmand Line</cite>
+  </div>
+
+
+
+
+
+  <div class="section-div s2" id="sec-ii">
+    <div class="rom">II.</div>
+    <div class="title"><em>Economics</em> &middot; The Ledger of Capital</div>
+    <div class="meta">
+      <div><strong>Filed</strong> the JPMorgan Chase investor-relations desk at 383 Madison Avenue (the Jamie Dimon office running the standing pre-release investor call cadence against the Tuesday 13 October 6:45 a.m. ET earnings release and 8:30 a.m. ET conference call), the Goldman Sachs headquarters at 200 West Street (David Solomon&rsquo;s desk whose own Q3 release opens before the market on the same Tuesday against the consensus revenue of roughly $17.4 billion and EPS of $15.39), the Citigroup headquarters at 388 Greenwich Street (Jane Fraser&rsquo;s desk running the Services and Markets split against the trailing cycle), the Wells Fargo office in San Francisco (the Charlie Scharf desk against the trailing-quarter cadence), the Bank of America tower on Bryant Park (the Brian Moynihan desk against the Q3-earnings sequencing), the Morgan Stanley headquarters at 1585 Broadway (the Ted Pick desk whose wealth-management-plus-institutional-securities split specifically carries the standing dealmaking-rebound register), the Federal Reserve Marriner Eccles Building (the Powell-and-Jefferson desk against the 27-28 October FOMC against a 3.75-4.00 per cent target range after the 16 September hike), the Treasury at 1500 Pennsylvania (the Bessent desk running the standing debt-issuance cadence against the trailing-cycle 30-year yield at 5.70), the SEC at 100 F Street (the Atkins desk against the standing bank-capital register), the OCC at 400 7th Street (the standing supervisor-of-record cadence running the capital-adequacy register against the Q3 release), with cross-files from the Chicago CME trading floor (the standing fed-funds-futures cadence against the WIRP-model probability register), the Nasdaq and NYSE opening-cadence desks (whose pre-market pricing on the Tuesday 13 release specifically carries the first audience signal), the standing sell-side research cadence at Goldman, Morgan Stanley, Jefferies and Autonomous (the preview-note architecture against the consensus EPS), the Matt-Levine-Money-Stuff desk at Bloomberg Opinion (the specifically-visible pricing-plumbing-and-securities-law reader whose Tuesday-morning column specifically absorbs the release), and the standing BIS and FSOC macroprudential cadence against the sovereign-plus-non-bank-financial-intermediary architecture</div>
+      <div>The Dealmaking Quarter &middot; With roughly 48 hours to the Tuesday 13 October pre-market open at which JPMorgan Chase, Goldman Sachs, Wells Fargo and Citigroup specifically release their Q3 2026 results, the Big-Six-banks reporting season specifically approaches a configuration in which the sell-side preview cadence prices a dealmaking rebound (Goldman consensus Q3 EPS of $15.39 and revenue of $17.4 billion, both up strongly year-over-year, both down sequentially from Q2&rsquo;s record), a net-interest-income cadence specifically running against a Federal Reserve target range of 3.75-4.00 per cent after the Powell hike on 16 September, and a long-end yield at the 30-year that has specifically carried 5.70 per cent against the ISM-Services Prices Paid of 74.0. The audience includes a Fed cadence that specifically opens the 27-28 October FOMC inside the fortnight, a US Treasury cadence that specifically runs the standing 2027-coupon-maturity issuance against the current curve, a non-bank-financial-intermediary bench whose private-credit and direct-lending books have specifically expanded against the trailing-cycle leveraged-loan register, and a hyperscaler-debt audience that specifically absorbed $121 billion of trailing-twelve-months issuance the Fund&rsquo;s GFSR has specifically not yet named as a systemic risk. Read as earnings-season bulletin the file absorbs. Read as statecraft, the Dealmaking Quarter is the specific moment at which the hegemon&rsquo;s commercial-and-investment-banking architecture specifically delivers its first full-quarter trading book since the September-16 hike and the first full read of the Fifty-Seventy Line against the real-economy register the Fed-staff and the bank CFOs specifically have to price inside Tuesday&rsquo;s calls. The reading draws on Munger&rsquo;s discipline on incentives through which the dealmaking-rebound narrative specifically runs ahead of the net-interest-margin and provisioning compression; on Dalio&rsquo;s Big-Cycle on the standing debt-service-to-revenue arithmetic of the hegemon that specifically prices against the yield curve the bank earnings specifically read against; on Buffett on the specific moat the hegemon&rsquo;s core deposit franchise specifically carries against the non-bank-financial-intermediary bench; on Levine on the specific plumbing through which the earnings-release-cadence specifically absorbs the audience signal in the pre-market open; and on Greene&rsquo;s 23rd Law on the specific instrument through which concentration of forces inside a single quarter specifically rewards the firm that specifically carries the dealmaking register against the firms that specifically do not.</div>
+    </div>
+  </div>
+
+  <article class="story">
+    <div>
+      <h2 class="headline">The Dealmaking <em>Quarter</em></h2>
+      <p class="deck">Begin with the Tuesday and the arithmetic. Tuesday 13 October, pre-market, the Big-Six-banks reporting season specifically opens with JPMorgan Chase at approximately 6:45 a.m. ET followed by its conference call at 8:30 a.m. ET, Goldman Sachs on the same morning before the open against a sell-side consensus of roughly $17.4 billion in revenue and $15.39 EPS, Citigroup and Wells Fargo rounding the morning tape. Three weeks and change from the Federal Reserve&rsquo;s next FOMC on 27-28 October against a target range of 3.75-4.00 per cent (the Powell desk having hiked 25 bp on 16 September), with the 30-year Treasury at 5.70 and the 10-year at 5.34, the ISM Services Prices Paid at 74.0 and the trailing-month CPI print above the Fed&rsquo;s own forward-guidance band. The sell-side preview-cadence specifically prices a dealmaking rebound against the trailing-quarter record on investment-banking fees, with a sequential compression against Q2 2026&rsquo;s record level and a year-over-year expansion driven by the leveraged-finance and M&amp;A-advisory lines. The Dealmaking Quarter is the specific moment at which the hegemon&rsquo;s commercial-and-investment-banking architecture specifically delivers its first full quarter&rsquo;s trading book against the September hike and the first full read of the Fifty-Seventy Line against the real-economy register the Fed-staff and the bank CFOs specifically have to price inside Tuesday&rsquo;s calls. The audience includes a Fed cadence that opens the 27-28 October FOMC inside the fortnight; a Treasury cadence that runs the standing 2027-coupon-maturity issuance against the current curve; a non-bank-financial-intermediary bench whose private-credit and direct-lending books have specifically expanded; a hyperscaler-debt audience that specifically absorbed $121 billion of trailing-twelve-months issuance; and a political-economy register in which the current administration specifically owns a Big-Six-banks-dependence the standing campaign cadence has specifically not acknowledged.</p>
+
+      <h3 class="article-subhead">Munger on <em>incentives and the dealmaking narrative</em>.</h3>
+      <p>Munger&rsquo;s central discipline on incentives runs onto the Dealmaking Quarter with specific force. The sell-side preview-cadence specifically prices a dealmaking rebound because the incentive-architecture of a sell-side analyst specifically favours the narrative that produces trading flow against the alternative one that specifically does not. The dealmaking rebound is specifically visible; the net-interest-margin compression against a 3.75-4.00 per cent target range is specifically less visible; the credit-provisioning cycle against a trailing-month US-consumer-credit-delinquency register at the 2010-cycle-high is specifically least visible of the three to the sell-side-preview audience. The Munger-reading is specific: the preview narrative specifically runs on the visible-and-rewarded register (dealmaking) at the expense of the structurally-more-load-bearing registers (NIM compression, provisioning). The practitioner-reader has to apply the independent discipline the sell-side-preview specifically does not: for each name, the trading-and-investment-banking-fees line is specifically what the audience will price in the opening thirty minutes of the pre-market, and the net-interest-income-and-provisioning line is specifically what will price the forward quarters against the Fed-cadence the FOMC opens inside the fortnight. The Munger-corollary: the specifically-named firms whose dealmaking-fees-to-net-interest-income ratio specifically runs above the Big-Six average (Goldman, Morgan Stanley) specifically carry the preview narrative; the specifically-named firms whose ratio specifically runs below the average (Wells Fargo, Bank of America) specifically do not, and the Tuesday-pre-market reaction specifically prices the differential against the sell-side consensus. The specific tell is whether JPMorgan&rsquo;s Q3 commentary specifically names the provisioning cycle above the dealmaking register (which would specifically carry the Munger-reading against the preview-cadence), or specifically defers to the standing dealmaking register (which specifically runs the preview-cadence into the Fed-FOMC-cadence of the fortnight).</p>
+
+      <h3 class="article-subhead">Dalio on <em>the Big-Cycle under a 5.70 curve</em>.</h3>
+      <p>Dalio&rsquo;s Big-Cycle discipline on the standing debt-service-to-revenue arithmetic of the hegemon runs through the Dealmaking Quarter against the specific curve the Fifty-Seventy Line reading has already named. The US-sovereign debt-service cadence specifically crossed the 20-per-cent-of-revenue threshold on the trailing-cycle CBO publication; the 30-year yield at 5.70 specifically prices the fiscal-capacity-pressure rather than inflation-expectations alone; the standing bank-balance-sheet AFS and HTM registers specifically absorb the duration cost of the long-end repricing (the 2023-SVB register specifically crystallised the architectural pressure the standing GAAP cadence specifically does not price). The Dalio-reading is specific. The Big-Six-banks Q3 cadence specifically has to carry the AFS mark-to-market compression against a Treasury curve that has specifically absorbed the September-16 hike against the 10-year-around-5.34 register; the HTM register specifically runs the standing unrealised-loss cadence the 2023 architecture made politically-visible; and the specifically-named deposit-cost cadence against a 3.75-4.00 per cent Fed-target specifically prices the deposit-franchise moat the trailing-cycle deposit-flow-register specifically compressed. The Dalio-corollary: in a Big-Cycle terminal-phase register, the specifically-named firm whose deposit-franchise specifically absorbs the long-end repricing without specifically running the AFS compression into GAAP earnings specifically carries the Buffett-moat defence; the firms whose deposit-franchise specifically does not absorb the repricing specifically run the AFS compression as a reserve-capital drawdown. The specific tell is whether any Big-Six bank specifically names the AFS mark-to-market as material inside the Q3 commentary, which would specifically carry the Big-Cycle terminal-phase register into the mainstream investor audience; the standing cadence specifically defers the register against the Q4 reporting cycle.</p>
+
+      <h3 class="article-subhead">Buffett on <em>the moat the deposit franchise is</em>.</h3>
+      <p>Buffett&rsquo;s discipline on the moat as the single defining instrument through which a franchise specifically absorbs the structural pressure of its operating register runs onto the hegemon&rsquo;s banking architecture with specific sharpness. The specifically-named Big-Six deposit franchises carry a specifically-visible moat the non-bank-financial-intermediary bench specifically does not: the FDIC insurance architecture, the standing payments-rails register, the Primary-Dealer status in the Treasury-auction cadence, the standing branch-and-ATM network against the operational-check register, the Lightning-and-Zelle-and-FedNow architecture against the standing high-frequency-settlement register, and the specifically-visible regulatory-cordon the Dodd-Frank-and-stress-test cadence specifically runs. The Buffett-reading is specific: the moat specifically prices the deposit-franchise against the private-credit and direct-lending bench whose trailing-cycle expansion the GFSR has specifically flagged; the specifically-named firms whose core-deposit-share of total funding specifically runs above the Big-Six average (JPMorgan, Wells Fargo, Bank of America) specifically carry the Buffett-moat; the firms whose core-deposit-share specifically runs below the average (Goldman, Morgan Stanley to a lesser extent) specifically run the trading-and-investment-banking-franchise register the standing dealmaking-rebound narrative specifically rewards. The Buffett-corollary: in a Big-Cycle register in which the long-end yield specifically prices against fiscal capacity rather than against inflation expectations alone, the deposit-franchise moat specifically carries the forward-quarters register against the trading-franchise one, and the Tuesday-and-Wednesday earnings sequencing specifically rewards the Buffett-moat holder against the trading-franchise one at the end of the week.</p>
+
+      <h3 class="article-subhead">Levine on <em>the pre-market pricing plumbing</em>.</h3>
+      <p>Matt Levine&rsquo;s discipline on the specific plumbing through which financial information specifically moves against the audience register names the precise mechanism by which the Tuesday 13 October 6:45 a.m. ET release specifically prices against the pre-market audience. The release-cadence specifically runs on a one-sentence headline (EPS, revenue, both against sell-side consensus) through the Bloomberg Terminal and PR Newswire feeds, with the full earnings release and investor-presentation deck specifically following within the two-minute window the sell-side algos specifically trade against. The Levine-reading is specific. The two-minute window specifically runs the audience that specifically prices the one-sentence headline against the consensus; the thirty-minute window specifically runs the audience that specifically prices the full release against the sell-side-model updates; the Powell-and-Jefferson FOMC audience specifically prices the earnings-season-aggregate against the forward-guidance register against the 27-28 October meeting. The Levine-corollary: a specifically-named earnings-print that specifically beats on the headline-EPS but specifically disappoints on net-interest-income or provisioning specifically opens a decoupling the pre-market algos specifically do not price inside the two-minute window but specifically do price inside the two-hour window; the standing sell-side-preview architecture specifically prices the headline, not the plumbing. The specific tell is whether the Tuesday 10 a.m. ET bank-equity-index tape specifically carries the opening-two-minute pricing or specifically reverses it against the two-hour window; the former specifically carries the dealmaking-rebound register, the latter specifically carries the NIM-and-provisioning register the Levine-plumbing specifically prices after the headline.</p>
+
+      <h3 class="article-subhead">Greene&rsquo;s 23rd Law on <em>concentrating force inside a quarter</em>.</h3>
+      <p>Greene&rsquo;s 23rd Law on concentration of forces runs specifically onto the dealmaking-rebound register. The trailing-cycle concentration of M&amp;A and equity-and-debt-capital-markets fees inside the Big-Three advisory franchises (Goldman, Morgan Stanley, JPMorgan) specifically compressed; the Q2 2026 record on Goldman&rsquo;s dealmaking line specifically carried the concentration of forces at the specific moment the broader-market deal pipeline specifically expanded against the Powell-cadence-of-the-cut; the Q3 2026 cadence specifically consolidates the concentration against the Big-Three bench. The Greene-reading is specific: the single firm whose Q3 dealmaking line specifically carries above the sell-side-consensus against the Q2-record register specifically carries the concentration-of-forces instrument the forward quarters specifically price against; the Big-Three bench whose Q3 dealmaking line specifically runs at or below consensus against Q2 specifically does not. The Greene-corollary: concentration-of-forces inside a single quarter specifically rewards the firm that specifically ran the capital-allocation discipline against the trailing-cycle cadence; the Q3 earnings print specifically reveals which Big-Three firm specifically carried the discipline against the standing pipeline. The specific tell is whether Goldman specifically delivers above the $17.4 billion revenue and $15.39 EPS consensus with the dealmaking line specifically delivering the Q2-record-adjacent register, or specifically runs below (which would specifically compress the sell-side preview narrative into a specifically-visible correction inside the Tuesday-pre-market).</p>
+
+      <h3 class="article-subhead">What the reading <em>expects</em>.</h3>
+      <p>Base case through the Tuesday 13 October release and into the 27-28 October FOMC: JPMorgan specifically delivers an EPS beat on the headline (consensus around $4.60-5.00 against the trailing-cycle beat-cadence) and a modest NIM-cadence disclosure the standing commentary specifically carries without specifically naming the provisioning cycle above the dealmaking register, with the stock-reaction specifically carrying the Buffett-moat and the Munger-visible-reward registers in the opening two-minute window; Goldman specifically delivers an EPS at or above the $15.39 consensus with the dealmaking line at or above the Q2-record-adjacent register, the sell-side preview-cadence specifically absorbed, and the stock-reaction specifically carrying the Greene-23 concentration-of-forces register into the pre-market; Citigroup specifically delivers a Services-and-Markets split that specifically carries the Fraser-restructuring register against a modest trailing-cycle delivery; Wells Fargo specifically delivers a net-interest-income print inside the sell-side range with the deposit-franchise register specifically visible against the Scharf-cost-discipline cadence; the Levine-plumbing specifically carries the two-minute-window reaction against the two-hour-window reaction without specifically opening a decoupling the sell-side algos specifically do not price; the Fed-FOMC-cadence specifically opens the 27-28 October meeting against a Fed-funds-futures register specifically pricing a 25-bp cut below 50 per cent and a hold inside 50-55 per cent against the standing earnings-season signal; the Big-Six-banks-equity-index specifically carries a modest-up tape against the week&rsquo;s open against the standing dealmaking-rebound register. What would collide the reading: a specifically-named Big-Six headline miss on JPMorgan or Goldman inside the Tuesday pre-market that specifically compresses the dealmaking-rebound narrative into a decoupling the Levine-plumbing specifically prices in the two-hour window; a specifically-named provisioning spike against the trailing-cycle US-consumer-credit-delinquency register that specifically opens the Dalio-Big-Cycle register into the mainstream investor audience; a specifically-named AFS mark-to-market disclosure on any Big-Six bank that specifically runs the 2023-SVB register into GAAP earnings and specifically compresses the deposit-franchise-moat register; a specifically-named Powell forward-guidance statement inside the earnings-week-plus-FOMC window that specifically runs against the Fed-funds-futures register and specifically compresses the Munger-visible-reward register; a specifically-named Chinese or sovereign-fund disclosure inside the earnings-week that specifically prices against the hegemon&rsquo;s deposit-franchise-moat architecture through a specifically-visible flow instrument the standing cadence has specifically not priced. The base case is that the Dealmaking Quarter specifically delivers a Munger-visible-reward register against the Big-Three bench and a Buffett-moat register against the Wells-and-JPM-and-BAC bench, the Fed-FOMC cadence specifically opens on the standing hold-with-cut-skew register, and the Dalio-Big-Cycle fiscal-capacity register specifically defers to the Q4-cadence against the current curve.</p>
+
+      <blockquote class="article-quote">&ldquo;Show me the incentive and I will show you the outcome.&rdquo; &mdash; Charlie Munger &middot; on a Sunday on which the Big-Six-banks Q3 2026 earnings specifically approached a Tuesday 13 October pre-market open against a Federal Reserve target range of 3.75-4.00 per cent, a 30-year Treasury yield at 5.70, and a dealmaking-rebound narrative the sell-side-preview cadence specifically ran ahead of the net-interest-margin and provisioning compression.</blockquote>
+    </div>
+
+    <aside class="sidebar">
+      <div class="side-panel">
+        <div class="side-label">Actors</div>
+        <h4 class="side-title">Who <em>the quarter</em> names.</h4>
+        <ul class="actor-list">
+          <li><span class="actor-role">Dimon &middot; JPMorgan</span> Jamie Dimon (Chairman and CEO, JPMorgan Chase) &amp; the 383 Madison investor-relations cadence &mdash; the principal whose Tuesday 6:45 a.m. ET release and 8:30 a.m. ET conference call specifically open the Big-Six Q3 reporting cadence against the standing dealmaking-rebound narrative and the net-interest-margin-and-provisioning compression. The tell is whether Dimon specifically names the provisioning cycle above the dealmaking register in the opening commentary, which would specifically carry the Munger-visible-reward register against the sell-side-preview cadence.</li>
+          <li><span class="actor-role">Solomon &middot; Goldman Sachs</span> David Solomon (CEO, Goldman Sachs) &amp; the 200 West Street dealmaking-and-markets desk &mdash; the principal whose Q3 release against a consensus $17.4 billion revenue and $15.39 EPS specifically prices the Greene-23 concentration-of-forces register. The tell is whether the dealmaking-fees-line specifically carries above or below the Q2-record-adjacent register, which would specifically price the Big-Three advisory franchise concentration against the trailing-cycle pipeline.</li>
+          <li><span class="actor-role">Fraser &middot; Citigroup</span> Jane Fraser (CEO, Citigroup) &amp; the 388 Greenwich Services-and-Markets split &mdash; the principal whose standing restructuring register specifically runs through the Q3 cadence against the trailing-cycle delivery. The tell is whether the Services line specifically delivers above the trailing-cycle run-rate against the standing restructuring-doubling cadence, which would specifically price the Fraser-architecture against the Big-Six-average audience.</li>
+          <li><span class="actor-role">Scharf &middot; Wells Fargo</span> Charlie Scharf (CEO, Wells Fargo) &amp; the standing cost-discipline cadence against the Scharf-era-regulatory-cordon register &mdash; the principal whose deposit-franchise-plus-net-interest-income cadence specifically carries the Buffett-moat register against the Big-Six bench. The tell is whether the net-interest-income print specifically delivers inside the sell-side range with the deposit-franchise register specifically visible, which would specifically carry the Buffett-moat against the Big-Three dealmaking register at the end of the week.</li>
+          <li><span class="actor-role">Powell &middot; the Fed</span> Jerome Powell (Chair, Federal Reserve) &amp; the FOMC cadence inside the fortnight &mdash; the principal whose 27-28 October FOMC meeting specifically absorbs the Big-Six earnings signal against the standing fed-funds-futures register. The tell is whether Powell specifically names any Q3-bank-earnings-aggregate as a specifically-named forward-guidance input inside a public remark between Tuesday 13 and the pre-FOMC blackout period, which would specifically compress the standard institutional-separation register the Fed specifically runs.</li>
+          <li><span class="actor-role">Bessent &middot; the Treasury</span> Scott Bessent (Secretary of the Treasury) &amp; the standing Treasury-debt-issuance cadence against the current curve &mdash; the hegemon-fiscal principal whose standing position specifically prices against the long-end yield the Big-Six AFS and HTM registers specifically absorb. The tell is whether Treasury specifically announces a quarterly-refunding-adjacent cadence that specifically prices the duration-mix against the 30-year above 5.70, which would specifically compound the Big-Cycle terminal-phase register against the earnings-season signal.</li>
+        </ul>
+      </div>
+
+      <div class="side-panel side-note">
+        <div class="side-label">Reading Note</div>
+        <h4 class="side-title">The <em>lenses</em> used.</h4>
+        <p><strong>What&rsquo;s driving this.</strong> Two layers do the real work. <em>Tactical</em>: Munger on incentives. The sell-side preview-cadence runs on a dealmaking-rebound narrative because the dealmaking line is specifically visible to the audience that specifically rewards it; the net-interest-margin compression and the provisioning cycle against the trailing-cycle consumer-credit-delinquency register are specifically less-visible and specifically more structurally load-bearing. The practitioner-reader has to apply the independent discipline the preview-cadence specifically does not. <em>Structural</em>: Dalio&rsquo;s Big-Cycle under a 5.70 long-end curve. The US debt-service-to-revenue cadence has crossed 20 per cent on the trailing CBO publication; the 30-year yield prices against fiscal capacity rather than against inflation expectations alone; the standing bank-balance-sheet AFS and HTM registers absorb the duration cost of the long-end repricing. The two layers compose: Munger names the misdirection of the audience, Dalio names what the audience is actually missing.</p>
+        <p><strong>What&rsquo;s not driving this.</strong> Not primarily a Powell-forward-guidance story &mdash; the 27-28 October FOMC sits inside the fortnight but the standing fed-funds-futures register specifically prices the hold-with-cut-skew configuration without the Big-Six earnings specifically breaking the register at the headline level. And it is not primarily a hyperscaler-AI-capex story; the $121 billion trailing-twelve-months issuance sits as the single-largest audience against the GFSR register, but the Q3 bank-earnings cadence specifically does not run the AI-capex register as the primary driver.</p>
+        <p><strong>What would break this reading.</strong></p>
+        <ul>
+          <li>A specifically-named Big-Six headline miss on JPMorgan or Goldman inside the Tuesday pre-market that specifically compresses the dealmaking-rebound narrative into a decoupling the Levine-plumbing prices in the two-hour window.</li>
+          <li>A specifically-named provisioning spike against the trailing-cycle US-consumer-credit-delinquency register that specifically opens the Dalio-Big-Cycle register into the mainstream investor audience.</li>
+          <li>A specifically-named AFS mark-to-market disclosure on any Big-Six bank that specifically runs the 2023-SVB register into GAAP earnings and specifically compresses the deposit-franchise-moat register.</li>
+          <li>A specifically-named Powell forward-guidance statement inside the earnings-week-plus-FOMC window that specifically runs against the Fed-funds-futures register and specifically compresses the Munger-visible-reward register.</li>
+        </ul>
+        <p><strong>Sources used.</strong> Munger on incentives supplies the single most load-bearing claim: the sell-side preview-cadence specifically runs the visible-and-rewarded register against the structurally-more-load-bearing one, and the practitioner-reader applies the discipline the sell-side specifically does not. Dalio on the Big-Cycle under a 5.70 long-end curve names the specific duration-cost the standing bank balance sheet specifically absorbs. Buffett on the deposit-franchise moat names the specifically-visible instrument through which the hegemon&rsquo;s banking architecture specifically carries the forward-quarters register against the non-bank-financial-intermediary bench. Levine on the pre-market pricing plumbing names the specific mechanism by which the headline-EPS specifically prices the opening-two-minute window and the plumbing specifically prices the two-hour window. Greene&rsquo;s 23rd Law on concentration-of-forces names the mechanism through which the single Q3 earnings print specifically reveals the Big-Three capital-allocation discipline against the pipeline.</p>
+      </div>
+    </aside>
+  </article>
+
+  <section class="bet-panel s2">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think &mdash; and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> JPMorgan Chase specifically beating its sell-side EPS consensus for Q3 2026 reads in the high band because the trailing-cycle beat-cadence specifically consolidates against the standing dealmaking-rebound register and the Munger-visible-reward architecture favours the headline over the plumbing; the Federal Reserve specifically holding its target range at 3.75-4.00 per cent on 28 October reads in the moderate band because the standing fed-funds-futures register specifically prices the hold-with-cut-skew configuration against the trailing-cycle inflation print and the Q3 bank-earnings signal does not specifically break the headline-level register; the S&amp;P 500 financials sector specifically closing the week after the Tuesday 13 release above its Friday 10 October close reads in the moderate-to-high band because the Munger-visible-reward register specifically carries the Big-Six-earnings-signal into the sector tape against the Levine-plumbing register inside the two-hour window.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="jpm-q3-2026-eps-beat"
+             data-market-slug=""
+             data-market-question="Will JPMorgan Chase report Q3 2026 adjusted EPS above the sell-side consensus estimate?"
+             data-market-resolves="2026-10-13"
+             data-stratagem-blind="74"
+             data-stratagem-value="74"
+             data-stratagem-because="Trailing-cycle beat-cadence consolidates; dealmaking-rebound register runs the headline; Dimon machinery and reserve-release optionality specifically favour the beat."
+             data-stratagem-rubric="POWER: Dimon franchise specifically owns the trading-and-IB-fees cadence | ECON: NIM compression real but offset by reserve-release optionality | INST: trailing six quarters specifically delivered consensus beats | STRAT: guidance anchored low in Q2 call; expectations specifically contained | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; JPMorgan Q3 EPS beat (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="jpm-q3-2026-eps-beat" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="jpm-q3-2026-eps-beat" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="fomc-hold-oct28-2026"
+             data-market-slug=""
+             data-market-question="Will the Federal Reserve hold its target range at 3.75-4.00 per cent at the 27-28 October 2026 FOMC meeting?"
+             data-market-resolves="2026-10-28"
+             data-stratagem-blind="55"
+             data-stratagem-value="55"
+             data-stratagem-because="Fed-funds-futures price hold-with-cut-skew; Q3 bank earnings do not break headline-level register; inflation print above forward-guidance band."
+             data-stratagem-rubric="POWER: Powell specifically owns the gradual-adjustment language | ECON: ISM Services Prices Paid 74.0 pressures the cut path | INST: Fed statement cadence specifically prefers one-at-a-time against two-cut path | STRAT: data-dependence framing preserves optionality in both directions | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/fed-decision-in-october-2026" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; FOMC holds on 28 October
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="fomc-hold-oct28-2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="fomc-hold-oct28-2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="xlf-week-up-oct17-2026"
+             data-market-slug=""
+             data-market-question="Will the S&amp;P 500 Financials sector close Friday 16 October 2026 above its Friday 10 October 2026 close?"
+             data-market-resolves="2026-10-17"
+             data-stratagem-blind="58"
+             data-stratagem-value="58"
+             data-stratagem-because="Munger-visible-reward register carries headline earnings into sector tape; Big-Six beats on headline drive positive pre-market reaction."
+             data-stratagem-rubric="POWER: Big-Six aggregate specifically owns the sector-weight into XLF | ECON: dealmaking-fees bias upward; NIM compression partially offset | INST: index rebalancing cadence specifically rewards headline beats within one week | STRAT: Levine-plumbing may reverse day-two but week-close commonly holds | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; XLF up on earnings week (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="xlf-week-up-oct17-2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="xlf-week-up-oct17-2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="reader-notes s2">
+    <div class="rn-label">Reader&rsquo;s marginalia &middot; Section II</div>
+    <h4 class="rn-title">Your <em>note</em> on the Dealmaking Quarter.</h4>
+    <textarea data-note-id="sec-ii" placeholder="Which visible-and-rewarded line in your own quarterly print specifically runs ahead of the structurally-more-load-bearing one the Munger-discipline specifically names, so that the audience that specifically prices the first specifically does not price the second until the next cycle delivers it against them? Which asset on your balance sheet specifically carries a duration cost the long-end repricing has absorbed below the GAAP line, and which disclosure would specifically open the 2023-SVB register into your mainstream investor audience? And which deposit-franchise-moat or non-moat position your own book carries specifically prices against the next quarter&rsquo;s cadence the way the Buffett-architecture specifically prices the Big-Six against the non-bank-financial-intermediary bench?"></textarea>
+  </div>
+
+  <div class="article-quote q2">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The useful thing to notice about the Dealmaking Quarter is not whether JPMorgan&rsquo;s Q3 EPS specifically prints $4.78 against a $4.62 consensus or Goldman&rsquo;s revenue specifically delivers $17.9 billion against a $17.4 billion consensus on the Tuesday-pre-market tape. It is that the hegemon&rsquo;s commercial-and-investment-banking architecture specifically delivers its first full quarter&rsquo;s book against a 3.75-4.00 per cent Fed target range, a 30-year Treasury at 5.70 per cent pricing against fiscal capacity rather than against inflation expectations alone, and a sell-side preview-cadence that specifically rewards the dealmaking line against the net-interest-margin-and-provisioning registers the next quarters specifically read against. Munger names the deepest claim: the sell-side preview-cadence specifically runs the visible-and-rewarded register against the structurally-more-load-bearing ones because the incentive-architecture of the audience specifically favours that misdirection. Dalio names the register the sell-side specifically does not price: the long-end OECD yields price against fiscal capacity, the standing bank-balance-sheet AFS and HTM registers absorb the duration cost, and the 2023-SVB register has specifically crystallised the architectural pressure the standing GAAP cadence specifically does not price. Buffett names the moat: the specifically-visible deposit-franchise architecture specifically carries the forward-quarters register against the non-bank-financial-intermediary bench. Levine names the plumbing: the Tuesday 6:45 a.m. ET release specifically prices the two-minute window against the headline, the two-hour window against the full release, and the audience that specifically reads one against the other specifically prices the decoupling. Greene names the concentration-of-forces: the Big-Three advisory franchises specifically reveal the capital-allocation discipline against the trailing-cycle pipeline. The reader who watches the opening-two-minute tape against the sell-side consensus is reading the moment. The reader who watches whether JPMorgan specifically names the provisioning cycle above the dealmaking register, whether Goldman&rsquo;s dealmaking line specifically carries the Q2-record-adjacent register, whether any Big-Six bank specifically names the AFS mark-to-market as material inside the commentary, and whether the Fed-FOMC cadence specifically absorbs the earnings-season signal through a Powell forward-guidance remark inside the window, is reading the substance the Quarter is sized to carry.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Dealmaking Quarter</cite>
+  </div>
+
+
+
+
+
+  <div class="section-div s3" id="sec-iii">
+    <div class="rom">III.</div>
+    <div class="title"><em>Europe &amp; Germany</em> &middot; The Continental Ledger</div>
+    <div class="meta">
+      <div><strong>Filed</strong> the Belweder presidential palace in Warsaw (President Karol Nawrocki&rsquo;s standing office since the 6 August 2025 oath against the Trzaskowski margin that converted the second-round June-cycle vote), the Prime Minister&rsquo;s Chancellery at Al. Ujazdowskie 1/3 (the Donald Tusk coalition cadence standing from the 13 December 2023 investiture through the June-2025 confidence vote), the Constitutional Tribunal at Al. Jana Chrystiana Szucha 12A (Bogdan &Sacute;wi&#281;czkowski&rsquo;s PiS-appointed presidency against the two sworn-in and four unsworn judges from the March 2026 round), the Sejm at Wiejska 4/6/8 (the lower chamber whose 4 September 2026 vote approved Maciej Berek as the newest TK nominee against the KO-PSL-Polska-2050-Lewica coalition arithmetic), the National Prosecutor&rsquo;s Office under Dariusz Korneluk (the standing investigation into the four excluded TK judges with the president specifically called as witness), the European Court of Human Rights in Strasbourg (whose Grand Chamber order specifically directed the TK to accept the four judges against the TK&rsquo;s standing refusal), the Council for a New Constitution at the Belweder annex (the Przy&#322;&#281;bska-chaired drafting body Nawrocki announced in May 2026 against the standing 1997 Constitution register), the European Commission in Berlaymont (the von-der-Leyen cadence running the standing Article-7 cordon and the Recovery and Resilience Facility disbursement register against the TK dispute), with cross-files from the Senate under Marsha&#322;ek Ma&#322;gorzata Kidawa-Blo&nacute;ska (the upper chamber running the standing legislative-cadence against the Nawrocki-veto register), the National Judicial Council under the post-neo-KRS 2024-reform architecture (the standing judicial-selection cadence against the Nawrocki-era appointments), the Prosecutor-General against the ECtHR filing (the standing institutional defender of the four-judges claim), the Venice Commission (the Council-of-Europe advisory body whose November 2024 opinion specifically ran on the Polish rule-of-law restoration cadence), and the standing polling cadences at IBRiS, Kantar, CBOS, OGB (the four public series through which the current audience prices the dual-executive-plus-TK standoff register)</div>
+      <div>The Berek Oath &middot; Thirty-seven days after the Sejm specifically approved Maciej Berek as the Tusk-coalition&rsquo;s latest Constitutional Tribunal nominee on 4 September 2026, the oath President Nawrocki has to administer for Berek to specifically take his seat specifically does not come, and the standing Polish dual-executive architecture specifically runs through the sixtieth consecutive week since the 6 August 2025 Nawrocki inauguration without the Constitutional Tribunal composition reconciling. The arithmetic: six judges elected by the Sejm against the pre-Nawrocki cadence (March 2026, four of them specifically denied the oath by Nawrocki and specifically denied entry to proceedings by TK President &Sacute;wi&#281;czkowski; two of them specifically sworn in before the Nawrocki accession); one further nominee the Sejm approved on 4 September 2026 (Berek) specifically awaiting the oath; a prosecutor-general investigation specifically opened into the four excluded judges with the president specifically called as witness and specifically not accused of wrongdoing; a Strasbourg Grand Chamber order specifically directing the Tribunal to accept the four judges the standing TK leadership specifically rejected; two senior TK officials specifically charged over the exclusion. Read as rule-of-law bulletin the file absorbs. Read as statecraft, the Berek Oath is the specific moment at which a Tusk-era civilian majority specifically continues to deliver its judicial-restoration instrument against a Nawrocki-era presidency the June-2025 margin specifically installed, and the standing TK as an institutional-veto body specifically does not reconcile against either executive. The reading draws on Aristotle on the specific mixed-regime stability test the dual-executive-plus-TK register specifically opens; on Confucius on the specific institutional-pledge the Tusk coalition specifically ran into government on and specifically has to deliver against the president&rsquo;s veto register; on Munger on the specifically-visible-reward architecture Nawrocki&rsquo;s refusal-to-administer-the-oath register specifically runs; on Mearsheimer on the Brussels-cordon-and-Strasbourg-register as the standing external-pressure instrument against the dyad; and on Greene&rsquo;s Third Law on the specific concealment-of-intentions the Przy&#322;&#281;bska-Council-for-a-New-Constitution register specifically runs against the standing 1997 Constitution architecture.</div>
+    </div>
+  </div>
+
+<article class="story">
+    <div>
+      <h2 class="headline">The Berek <em>Oath</em></h2>
+      <p class="deck">Begin with the date and the oath that is not given. Thirty-seven days ago, on 4 September 2026, the Sejm specifically approved Maciej Berek &mdash; a former minister in the Tusk Chancellery&rsquo;s government-affairs cadence &mdash; as the Tusk-coalition&rsquo;s next nominee to the Constitutional Tribunal. Thirty-seven days later, President Karol Nawrocki, in office since the 6 August 2025 inauguration against the Rafa&#322; Trzaskowski second-round margin, specifically has not administered the oath. The arithmetic is not technical. Six judges elected by the Sejm in March 2026 against the pre-Nawrocki cadence specifically approached the Belweder: two were sworn in before the Nawrocki accession and specifically sit; four remain unsworn and specifically do not sit, with TK President Bogdan &Sacute;wi&#281;czkowski (PiS-appointed, inherited) specifically denying them entry to proceedings. The European Court of Human Rights Grand Chamber specifically ordered the Tribunal to accept the four, the Tribunal specifically rejected the order, two of its senior officials specifically face charges over the exclusion, and the prosecutor-general has specifically called Nawrocki as witness in the parallel investigation without specifically accusing him of wrongdoing. The Berek nomination specifically compounds the standing stand-off into a seventh file. Read as institutional bulletin the file absorbs. Read as statecraft, the Berek Oath is the specific moment at which a Tusk-era parliamentary majority running on its post-2023 rule-of-law restoration mandate specifically delivers its judicial-restoration instrument against a Nawrocki-era presidency the June-2025 margin specifically installed, and the Constitutional Tribunal as an institutional-veto body specifically does not reconcile against either executive. The Berek Oath also opens the second phase: the Nawrocki Council for a New Constitution, chaired by former TK President Julia Przy&#322;&#281;bska, specifically announced in May 2026 under a 2030 draft-ready target, is now the standing counter-architecture against the 1997 Constitution the Tusk coalition specifically runs on. Thirty-seven days of silence on the oath is the public form of that opening.</p>
+
+      <h3 class="article-subhead">Aristotle on <em>the mixed-regime stability test the dual executive opens</em>.</h3>
+      <p>Aristotle&rsquo;s discipline on the mixed-regime stability test runs onto the Polish 1997-Constitution architecture with specifically different valence than onto the Western-European parliamentary register. The Polish polity carries a semi-presidential architecture in which the president is directly elected on a five-year cycle (independent of the parliamentary one), holds the veto instrument requiring a three-fifths parliamentary override the Tusk coalition specifically does not have, and specifically retains a residual competence over oaths of office, the national-security council, and the ambassadorial-nomination cadence. The 2023-2025 cycle specifically assembled an architecture in which a KO-plus-Trzecia-Droga-plus-Lewica government-coalition specifically ran against a PiS-aligned presidency (Duda through 2025, Nawrocki after August). The Aristotelian stability test specifically fails when one component of the mixed regime concludes the architecture no longer serves it; the Nawrocki accession specifically crystallised the configuration in which the presidency specifically does not accept the parliamentary mandate as controlling and the parliament specifically does not accept the presidency as controlling, and the Constitutional Tribunal specifically runs as the third component the dual-executive cannot specifically re-architect through either chamber or either office alone. The 4-September-Berek nomination specifically opens the mixed-regime stability test on the TK-composition register as the single-largest institutional battleground; the 37-day-silence specifically runs the test to the limit the standing 1997 architecture specifically allows. The Aristotelian corollary: the mixed-regime stability test is passed only through a specifically-named architecture-reconciling instrument that both components specifically accept; the Nawrocki Council for a New Constitution specifically announces that no such instrument will come from the presidential side under the current cycle, and the Tusk coalition specifically does not have the three-fifths override the alternative institutional path specifically requires.</p>
+
+      <h3 class="article-subhead">Confucius on <em>the pledge the coalition ran into government on</em>.</h3>
+      <p>Confucius&rsquo;s discipline on the pledge the ruler cannot afford to leave undelivered runs onto the Tusk coalition&rsquo;s standing commitment with specific sharpness. The 2023 KO-plus-Trzecia-Droga-plus-Lewica electoral programme specifically carried a rule-of-law-restoration pledge the trailing-cycle PiS architecture (the 2015-2023 TK capture, the KRS neo-reform, the Disciplinary Chamber at the Supreme Court) specifically converted into a public register the Tusk coalition specifically ran against. The specifically-named instruments the pledge contained were four: an amnesty for the TK&rsquo;s pre-2015 architecture against the three-judges-rotation PiS specifically ran; a KRS re-reform against the neo-KRS the 2024 bill specifically ran against Duda&rsquo;s standing veto register; a Supreme Court reform against the Disciplinary Chamber architecture; and the restoration of the standing judicial-independence register against the Article-7 cordon the European Commission specifically opened. The Confucian corollary: a ruler who specifically carries a specific pledge into office and specifically does not deliver it over three years of government specifically does not retain the credit of the audience that specifically wrote the pledge. The Tusk coalition specifically faces that register against the 2027 parliamentary cycle; the 37-day-silence on the Berek oath specifically crystallises the asymmetric cost: Nawrocki can specifically run the silence without paying the Confucian pledge-cost because he is not the ruler who specifically ran the pledge; Tusk specifically does.</p>
+
+      <h3 class="article-subhead">Munger on <em>the visible-reward architecture of the refusal</em>.</h3>
+      <p>Munger&rsquo;s central discipline on incentives names the mechanism through which Nawrocki&rsquo;s refusal-to-administer-the-oath specifically runs. The Polish presidency specifically does not carry a cost for the non-oath-administration in the Nawrocki-aligned PiS-and-Konfederacja audience: the audience specifically rewards the refusal as the standing anti-Tusk-cordon instrument, specifically prices the TK composition the pre-Nawrocki Sejm specifically produced as illegitimate against the PiS-era TK architecture, and specifically absorbs the Strasbourg Grand Chamber order and the senior-TK-officials-charges as external-cordon pressure the audience specifically expects a Polish president to resist. The Munger-reading is specific: the refusal-to-administer-the-oath is specifically visible and specifically rewarded; the administrative-cost of the standing TK composition sitting at four-of-six is specifically less visible to the audience that rewards the refusal; the long-horizon rule-of-law-register the Strasbourg-and-Venice-Commission audience specifically prices against is specifically absorbed by Nawrocki&rsquo;s audience as additional reward rather than as cost. The Munger-corollary: against an audience that specifically rewards the visible refusal, the standing instrument against which the refusal specifically compounds is the one that specifically converts the refusal into a specifically-visible cost in the Nawrocki-aligned register itself (a specifically-named EU-funds compression against a specifically-named Polish regional recipient, a specifically-named Supreme-Court-plus-TK-cross-reference that specifically opens the Supreme-Court-caseload the Nawrocki government relies on, a specifically-named parliamentary-impeachment-adjacent register through the Trybuna&#322; Stanu that specifically runs the president against the audience inside his own coalition). The specific tell inside the fortnight is whether the Tusk coalition specifically carries any Munger-cost-conversion instrument against the standing refusal, or specifically runs the standing Strasbourg-and-Berlaymont register against the refusal that specifically does not open the Munger-visible-cost architecture against the Nawrocki audience.</p>
+
+      <h3 class="article-subhead">Mearsheimer on <em>the Brussels and Strasbourg external-pressure instrument</em>.</h3>
+      <p>Mearsheimer&rsquo;s offensive-realism register on the standing external-pressure instrument runs onto the dual-executive-plus-TK stand-off with specific force. The 1997 Polish Constitution-and-TK architecture specifically operates inside the EU-and-Council-of-Europe cordon; the Article-7 instrument specifically opened against the PiS-era architecture through 2017-2023 specifically carried the single-largest external-pressure signal the trailing-cycle Polish executive specifically absorbed; the Recovery and Resilience Facility disbursement cadence specifically ran the fiscal-pressure instrument against the standing political cadence; the ECtHR Grand Chamber order specifically runs the judicial-pressure instrument against the TK standing refusal. The Mearsheimer-reading is specific. The Brussels-and-Strasbourg cordon specifically does not specifically bear the direct cost of the Polish TK-composition stand-off; the direct cost is specifically borne by the Polish judicial-architecture audience the dual-executive specifically runs against. The external-pressure instrument the trailing cycle has specifically opened has not specifically converted into the architecture-reconciling instrument the Aristotelian stability-test specifically names. The Mearsheimer-corollary: the single external-pressure instrument that specifically prices against both components of the dual-executive simultaneously is the EU-funds-compression register specifically run through the Berlaymont cadence against the standing Polish fiscal-register; the specifically-named RRF-conditionality-against-TK-composition instrument has specifically opened once in the 2024 cadence and specifically closed when Tusk delivered the first-tranche-release instrument; the standing instrument-set has specifically not opened a second iteration against the Nawrocki-era architecture. The specific tell inside Q4 2026 is whether the European Commission specifically opens a second-tranche-conditionality-against-TK-composition instrument against the standing Nawrocki refusal register, which would specifically re-open the Mearsheimer-external-pressure instrument against the dyad.</p>
+
+      <h3 class="article-subhead">Greene&rsquo;s Third Law on <em>the Przy&#322;&#281;bska Council and concealed intentions</em>.</h3>
+      <p>Greene&rsquo;s Third Law on concealing intentions runs specifically onto the Nawrocki Council for a New Constitution with specific sharpness. The Council was announced in May 2026 with the specifically-visible framing of a 2030 draft-ready target under former TK President Julia Przy&#322;&#281;bska, specifically against the standing 1997 Constitution the Tusk coalition specifically runs on. The Greene-reading is specific: the Council is not a specifically-visible instrument of 2026 constitutional change; it is specifically a long-horizon architecture-building instrument that specifically prices against the 2030 presidential cycle (end of the Nawrocki first term and the specific window inside which a specifically-named referendum-plus-new-constitution instrument could specifically run), and the 2026 silence-on-Berek-oath is specifically the public-form of the architecture-building. The Greene-further-point: the counterpart (the Tusk coalition) specifically does not price the Przy&#322;&#281;bska-Council as an immediate instrument because the public-form specifically does not reveal the 2030-cycle-registration; the counterpart specifically absorbs the 2026-silence against the standing 2027-parliamentary-cycle register and specifically does not open the specifically-named architecture-reconciling instrument the Aristotelian stability-test requires because the dual-executive specifically runs on the 2027-cycle rather than on the 2030-one. The Greene-corollary: against a counterpart whose intentions are specifically concealed inside a long-horizon architecture, the standing instrument is specifically to open a counter-architecture that specifically prices against the 2030-cycle rather than against the 2027-cycle alone; the specific tell inside Q4 2026 is whether the Tusk coalition specifically opens a counter-constitutional architecture (a specifically-named constitutional-reform instrument against the 1997 architecture, a specifically-named Senate-plus-Sejm-plus-Supreme-Court cross-reference against the TK) or specifically runs the trailing-cycle rule-of-law-restoration instrument against the 2027-cycle alone.</p>
+
+      <h3 class="article-subhead">What the reading <em>expects</em>.</h3>
+      <p>Base case through Q4 2026 and into the 2027 parliamentary-cycle approach: Nawrocki specifically does not administer the Berek oath inside the fortnight and specifically does not administer it before 31 December 2026, with the specific tell being whether the president specifically carries a specifically-visible reason-of-record (a specifically-named 2024-law-politicians-bar register against Berek&rsquo;s minister-cadence, a specifically-named Constitutional-Tribunal-sub judice register against the four-judges case) or specifically runs the silence-of-record cadence the trailing weeks have specifically carried; the four excluded TK judges specifically do not take seats inside the TK and specifically do not hear cases, with the specific tell being whether &Sacute;wi&#281;czkowski specifically absorbs or specifically defers to the ECtHR Grand Chamber order inside the Q4 cadence (the base case is specifically continued refusal); the prosecutor-general investigation specifically continues at the trailing-cycle cadence without a specifically-named Trybuna&#322; Stanu referral against the president inside the Q4 window, specifically because the Tusk coalition does not have the three-fifths constitutional-majority such a referral specifically requires; the European Commission specifically does not open a second-tranche RRF-conditionality-against-TK-composition instrument inside Q4 2026, specifically because the Berlaymont cadence specifically runs the standing first-tranche-release-plus-reform-monitoring register against the dual-executive without opening a new conditionality cycle on an active member-state; the Nawrocki Council for a New Constitution specifically continues its drafting cadence against the 2030-target without specifically publishing a visible-draft inside Q4, specifically because the architecture-building instrument specifically runs on long-horizon secrecy against short-horizon publicity; the Tusk coalition specifically continues the rule-of-law-restoration cadence through specific legislative instruments (an SN-reform follow-up, a specifically-named prosecutor-service-reform instrument, a specifically-named standing-advocate-general cadence) without specifically opening a counter-constitutional architecture against the 2030-cycle; the trailing-cycle polling cadence specifically absorbs the TK stand-off as background against the 2027-cycle rather than as foreground against the current cycle. What would collide the reading: a specifically-named Nawrocki administration of the Berek oath or of any one of the four excluded judges inside Q4 2026 that specifically breaks the standing refusal cadence against a specifically-named concession the Tusk coalition specifically pays (a specifically-named ambassadorial-nomination acceptance, a specifically-named national-security-council architecture, a specifically-named prosecutor-service-reform compromise); a specifically-named European Commission opening of a second-tranche RRF-conditionality-against-TK-composition instrument that specifically re-opens the Mearsheimer-external-pressure instrument; a specifically-named Trybuna&#322; Stanu referral against the president carried by the Sejm with a specifically-named cross-coalition arithmetic above the three-fifths threshold that specifically breaks the standing coalition-majority register; a specifically-named Przy&#322;&#281;bska-Council publication of a visible-draft of the new constitution that specifically opens the Greene-concealment register into the public cadence and specifically compresses the 2030-architecture against the 2027-cycle; a specifically-named Supreme-Court-ruling against the TK&rsquo;s standing refusal register that specifically carries the Polish-judicial-architecture register against the TK composition and specifically re-opens the four-judges-plus-Berek file through the SN cross-reference. The base case is that the Berek Oath specifically delivers a continuation of the dual-executive-plus-TK stand-off through Q4 2026 without specifically opening a reconciling instrument, that the Nawrocki Council for a New Constitution specifically continues long-horizon architecture-building against the 2030-cycle, and the Tusk coalition specifically runs the trailing-cycle rule-of-law-restoration register against the 2027-cycle without specifically opening a counter-constitutional architecture.</p>
+
+      <blockquote class="article-quote">&ldquo;Always make those above you feel comfortably superior. Do not go too far in displaying your talents, lest you accomplish the opposite &mdash; inspire fear and insecurity.&rdquo; &mdash; Robert Greene, <em>The 48 Laws of Power</em>, Law III (on concealing intentions) &middot; on a Sunday on which the Polish president&rsquo;s silence on the Berek nomination specifically ran into its thirty-eighth day against a Constitutional Tribunal composition the dual-executive architecture specifically does not reconcile.</blockquote>
+    </div>
+
+    <aside class="sidebar">
+      <div class="side-panel">
+        <div class="side-label">Actors</div>
+        <h4 class="side-title">Who <em>the oath</em> names.</h4>
+        <ul class="actor-list">
+          <li><span class="actor-role">Nawrocki &middot; Belweder</span> Karol Nawrocki (President of the Republic of Poland, standing from the 6 August 2025 inauguration against the Trzaskowski second-round margin) &amp; the Belweder presidential cadence &mdash; the principal whose refusal-to-administer-the-oath specifically runs the Munger-visible-reward architecture against his coalition audience. The tell is whether Nawrocki specifically opens a reason-of-record for the refusal inside Q4 (a specifically-named 2024-law-politicians-bar register, a specifically-named sub-judice-against-TK-cases register), or specifically continues the silence-of-record cadence the trailing weeks have carried.</li>
+          <li><span class="actor-role">Tusk &middot; Chancellery</span> Donald Tusk (Prime Minister, standing from the 13 December 2023 investiture) &amp; the KO-plus-Trzecia-Droga-plus-Lewica coalition cadence &mdash; the civilian-majority principal running the standing rule-of-law-restoration instrument against the Nawrocki veto register. The tell is whether Tusk specifically opens a Munger-cost-conversion instrument against the standing refusal (a specifically-named Supreme-Court-cross-reference, a specifically-named regional-funds compression instrument), or specifically runs the standing Strasbourg-Berlaymont-register that specifically does not open the visible-cost architecture against the Nawrocki audience.</li>
+          <li><span class="actor-role">Berek &middot; the nominee</span> Maciej Berek (TK nominee approved by the Sejm on 4 September 2026, former Chancellery government-affairs minister) &mdash; the specifically-named principal whose unsworn-oath specifically runs the thirty-eighth day. The tell is whether Berek specifically withdraws from the nomination inside Q4 against a specifically-named Tusk-side compromise, or specifically continues to await the oath against the standing refusal cadence.</li>
+          <li><span class="actor-role">&Sacute;wi&#281;czkowski &middot; the Tribunal</span> Bogdan &Sacute;wi&#281;czkowski (PiS-appointed President of the Constitutional Tribunal) &amp; the standing TK presidency against the four unsworn judges &mdash; the institutional principal running the standing refusal-of-entry register against the ECtHR Grand Chamber order. The tell is whether &Sacute;wi&#281;czkowski specifically absorbs or specifically defers to the Strasbourg order inside Q4; the base case is specifically continued refusal, but a specifically-named compromise under the two-TK-officials-charged register would specifically open the architecture-reconciling instrument the Aristotelian register requires.</li>
+          <li><span class="actor-role">Przy&#322;&#281;bska &middot; the Council</span> Julia Przy&#322;&#281;bska (former TK President, Chair of the Nawrocki Council for a New Constitution) &amp; the standing Belweder annex drafting cadence &mdash; the architect-principal whose long-horizon 2030-target instrument specifically opens the Greene-concealment register against the standing 1997-Constitution architecture. The tell is whether the Council specifically publishes a visible draft of the new constitution inside Q4 2026, which would specifically compress the 2030-architecture into the 2027-cycle public register.</li>
+          <li><span class="actor-role">von der Leyen &middot; Berlaymont</span> Ursula von der Leyen (President of the European Commission) &amp; the standing Article-7-and-RRF-conditionality cadence &mdash; the external-pressure principal whose Berlaymont cadence specifically runs the single instrument that specifically prices against both components of the dual-executive. The tell is whether the Commission specifically opens a second-tranche RRF-conditionality-against-TK-composition instrument against the Nawrocki-era architecture, which would specifically re-open the Mearsheimer-external-pressure instrument.</li>
+        </ul>
+      </div>
+
+      <div class="side-panel side-note">
+        <div class="side-label">Reading Note</div>
+        <h4 class="side-title">The <em>lenses</em> used.</h4>
+        <p><strong>What&rsquo;s driving this.</strong> Two layers do the real work. <em>Coordination</em>: Munger&rsquo;s discipline on the visible-reward architecture of the refusal. Nawrocki does not pay a cost for the non-oath-administration in the audience that specifically rewards him; the refusal is specifically visible and specifically rewarded, the administrative cost of the TK composition sitting at four-of-six is specifically less visible, and the long-horizon rule-of-law-register the Strasbourg-and-Berlaymont audience prices against is absorbed by his coalition as additional reward rather than cost. The Confucian corollary runs alongside: a Tusk coalition that specifically ran the rule-of-law restoration pledge into government cannot afford the pledge to go undelivered without losing the audience that wrote it. <em>Structural</em>: Aristotle on the mixed-regime stability test. The 1997 Constitution carries a semi-presidential architecture in which the president, directly elected on a cycle independent of parliament, holds the veto instrument and residual competences the parliamentary majority cannot override without three-fifths; the Nawrocki accession specifically crystallised the configuration in which neither executive accepts the other as controlling and the Constitutional Tribunal runs as the third component the dual-executive cannot re-architect alone.</p>
+        <p><strong>What&rsquo;s not driving this.</strong> Not primarily a corruption-adjacent story &mdash; the standing prosecutor-general investigations and the two senior TK officials charged specifically run as background pressure rather than as the proximate driver. And it is not primarily a Russia-Belarus-security-threat story; the eastern-border register sits as the standing background against which both executives specifically price their patriotic reputation, but the TK composition stand-off specifically runs through the internal institutional architecture rather than through the external-security one.</p>
+        <p><strong>What would break this reading.</strong></p>
+        <ul>
+          <li>A specifically-named Nawrocki administration of the Berek oath or of any of the four excluded judges inside Q4 2026 that breaks the refusal cadence against a specifically-named Tusk-side concession (an ambassadorial-nomination acceptance, a national-security-council architecture, a prosecutor-service compromise).</li>
+          <li>A specifically-named European Commission second-tranche RRF-conditionality-against-TK-composition instrument that re-opens the Mearsheimer-external-pressure register.</li>
+          <li>A specifically-named Przy&#322;&#281;bska-Council publication of a visible draft of the new constitution inside Q4 2026 that opens the Greene-concealment register into the public cadence and compresses the 2030-architecture against the 2027-cycle.</li>
+          <li>A specifically-named Supreme-Court ruling against the TK&rsquo;s standing refusal register that carries the Polish judicial architecture against the TK composition and re-opens the four-judges-plus-Berek file through the SN cross-reference.</li>
+        </ul>
+        <p><strong>Sources used.</strong> Munger on the visible-reward architecture of the refusal supplies the single most load-bearing claim: Nawrocki specifically does not pay a cost in the audience that rewards him, and the standing instrument against which the refusal compounds is the Munger-cost-conversion instrument the Tusk coalition has specifically not opened. Confucius on the pledge the ruler cannot afford to leave undelivered names the asymmetric cost: Tusk ran the pledge, Nawrocki did not. Aristotle on the mixed-regime stability test names the dual-executive-plus-TK configuration the 1997 architecture does not re-architect through either chamber or either office alone. Mearsheimer on the Brussels-and-Strasbourg external-pressure instrument names the single lever that prices against both executives, and the specifically-not-opened second-tranche RRF conditionality is where the lever specifically sits. Greene&rsquo;s Third Law on concealing intentions names the Przy&#322;&#281;bska-Council as a long-horizon 2030-target architecture the Tusk coalition specifically absorbs against the shorter 2027-cycle.</p>
+      </div>
+    </aside>
+  </article>
+
+  <section class="bet-panel s3">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think &mdash; and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> President Nawrocki specifically administering the oath to Maciej Berek before 31 December 2026 reads in the low band because the Munger-visible-reward architecture specifically favours the standing silence-of-record register and no observable Tusk-side cost-conversion instrument specifically opens inside Q4; the European Commission specifically opening a new RRF-conditionality instrument against Poland above the standing cadence before 31 March 2027 reads in the low-to-moderate band because the Berlaymont register specifically runs the first-tranche-release-plus-monitoring architecture against the dual-executive without opening a new conditionality cycle on an active member-state; Donald Tusk specifically remaining Prime Minister through the full 2027 parliamentary cycle to Autumn 2027 reads in the moderate-to-high band because the standing KO-plus-Trzecia-Droga-plus-Lewica coalition arithmetic specifically absorbs the Nawrocki veto register without opening a confidence-vote-adjacent register the trailing cycle has specifically absorbed.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="poland-berek-oath-dec2026"
+             data-market-slug=""
+             data-market-question="Will President Nawrocki administer the Constitutional Tribunal oath to Maciej Berek before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="14"
+             data-stratagem-value="14"
+             data-stratagem-because="Munger-visible-reward architecture favours standing silence; no Tusk-side cost-conversion instrument has opened inside Q4; four other judges still unsworn."
+             data-stratagem-rubric="POWER: Nawrocki audience specifically rewards the refusal register | ECON: non-oath-administration specifically bears no measurable cost against president | INST: Przy&#322;&#281;bska-Council long-horizon register fits with silence not oath | STRAT: Greene-Third-Law concealment favours continued silence not acceptance | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Berek oath administered by Dec 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="poland-berek-oath-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="poland-berek-oath-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="eu-rrf-poland-new-conditionality-mar2027"
+             data-market-slug=""
+             data-market-question="Will the European Commission open a new Recovery and Resilience Facility conditionality procedure against Poland tied specifically to Constitutional Tribunal composition before 31 March 2027?"
+             data-market-resolves="2027-03-31"
+             data-stratagem-blind="22"
+             data-stratagem-value="22"
+             data-stratagem-because="Berlaymont specifically does not open new conditionality cycles on an active member-state inside a running tranche; standing first-tranche-release-plus-monitoring runs."
+             data-stratagem-rubric="POWER: Commission reluctant to re-open Article-7-adjacent conditionality mid-tranche | ECON: funds flow during monitoring not withholding is default posture | INST: cross-college RRF reviews run on reform-benchmarks not president acts | STRAT: Commission reserves second-tranche-conditionality for larger violations | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; EU opens new RRF conditionality on Poland by Mar 2027 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="eu-rrf-poland-new-conditionality-mar2027" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="eu-rrf-poland-new-conditionality-mar2027" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="poland-tusk-pm-oct2027"
+             data-market-slug=""
+             data-market-question="Will Donald Tusk still be Prime Minister of Poland on 15 October 2027?"
+             data-market-resolves="2027-10-15"
+             data-stratagem-blind="66"
+             data-stratagem-value="66"
+             data-stratagem-because="Coalition arithmetic absorbs Nawrocki veto register without confidence-vote-adjacent register; June 2025 confidence vote already carried."
+             data-stratagem-rubric="POWER: KO-plus-Trzecia-Droga-plus-Lewica coalition specifically holds parliamentary majority | ECON: EU-funds flow specifically supports continued coalition register | INST: 2027 parliamentary cycle runs on autumn window after October-November | STRAT: Tusk-era rule-of-law restoration cadence runs toward election not off | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/next-prime-minister-of-poland" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Tusk PM through October 2027
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="poland-tusk-pm-oct2027" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="poland-tusk-pm-oct2027" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="reader-notes s3">
+    <div class="rn-label">Reader&rsquo;s marginalia &middot; Section III</div>
+    <h4 class="rn-title">Your <em>note</em> on the Berek Oath.</h4>
+    <textarea data-note-id="sec-iii" placeholder="Which counterpart in your own architecture holds a signing-pen whose refusal to sign specifically runs the Munger-visible-reward register against his audience without specifically paying any cost to yours, and which specifically-named cost-conversion instrument would you need to open to compress the refusal against his audience rather than against yours? Which long-horizon architecture is the counterpart specifically concealing behind the short-horizon silence &mdash; a draft of a different system, a 2030-register whose publication would compress its advantage &mdash; and would opening a counter-architecture against that longer cycle specifically price against your own register? And which external principal is the only party whose instrument prices against both components of your dual-executive-adjacent register at once, and why specifically has it not opened the second iteration of the lever the first iteration carried?"></textarea>
+  </div>
+
+
+
+  <section class="export-bar" aria-label="Log predictions to Ledger">
+    <div class="eb-label">Crawl &middot; your ledger</div>
+    <h3 class="eb-title">Log your <em>calls</em> before you close the paper.</h3>
+    <p class="eb-count" id="yc-count">No predictions filled yet &mdash; scroll back and stake a number on the ones you have a view on.</p>
+    <div class="eb-actions">
+      <button id="yc-export" class="eb-btn-primary" type="button" disabled>Copy to Ledger</button>
+      <button id="yc-export-beliefs" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy to Beliefs</button>
+      <button id="yc-export-notes" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy notes</button>
+    </div>
+    <div class="eb-status" id="yc-status"></div>
+    <div><button id="yc-clear" class="eb-clear" type="button">Clear this edition's fields</button></div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- PROLOGUE - WISDOM BEFORE THE NEWS -->
+  <!-- ================================= -->
+
+  <section class="below-fold prologue">
+    <div class="col">
+      <div class="sec-label">Law of the Day &middot; Munger &middot; <em>on incentives</em></div>
+      <h3 class="sec-title">Show me the incentive and I will show you the outcome. Today&rsquo;s three stories each stage the Law in a different grammar: a Pakistani cross-border strike doctrine whose General-Headquarters audience specifically rewards each operational cycle against a political-end-state the doctrine specifically does not deliver; a Big-Six banks earnings season whose sell-side preview architecture specifically rewards the dealmaking line against the net-interest-margin and provisioning registers the next quarters will specifically price against; a Polish president whose refusal to administer an oath specifically runs the visible-reward architecture against his coalition audience without specifically paying any cost to the long-horizon register the Strasbourg-and-Berlaymont cadence specifically prices against.</h3>
+      <p>The Kunar-Helmand Line is the specific moment at which a nuclear-armed state&rsquo;s calibrated-strike doctrine specifically runs an operational cycle against a sovereign counterpart whose territory it does not control, with the Munger-incentive architecture inside the General Headquarters specifically rewarding each cycle in Rawalpindi political capital against the specifically-not-delivered political-end-state the Sun-Tzu-attack-strategy-before-army discipline specifically prices. The Dealmaking Quarter is the specific window inside which the sell-side preview-cadence specifically rewards the dealmaking-rebound line because that line is specifically visible to the audience that specifically pays for the research against the structurally-more-load-bearing registers (NIM compression under 3.75-4.00 per cent, the Dalio-fiscal-capacity-pressure in the long-end at 5.70, the AFS mark-to-market the 2023-SVB register specifically crystallised) the next quarters will specifically price. The Berek Oath is the specific moment at which a Polish president specifically runs the Munger-visible-reward architecture of his refusal against the Nawrocki-aligned audience that specifically rewards it, specifically against the long-horizon rule-of-law-register the Strasbourg-and-Berlaymont cadence specifically prices against and the Tusk-coalition specifically has to deliver as the Confucian pledge the trailing-cycle government ran into office on.</p>
+      <p><em>Today&rsquo;s reading:</em> the Kunar-Helmand Line, the Dealmaking Quarter, the Berek Oath. Each rewards the reader who names the specific audience that specifically rewards the actor&rsquo;s current register and the specific structurally-more-load-bearing register the audience is specifically not pricing against.</p>
+      <ul>
+        <li>The Kunar-Helmand Line: Clausewitz on the political-primacy-of-war that specifically compresses when the counterpart does not absorb the political instrument; Sun Tzu on attacking the enemy&rsquo;s strategy before his army and the superior force that specifically fails to compress the counterpart&rsquo;s strategic register; Mearsheimer on structural anarchy and the external-pressure instrument that specifically prices against both counterparts simultaneously; Greene&rsquo;s 15th Law on crushing an enemy whose ground you specifically do not control and the Greene-22 counter-instrument the doctrine specifically does not currently carry.</li>
+        <li>The Dealmaking Quarter: Munger on incentives and the sell-side preview-cadence running the visible-and-rewarded register against the structurally-more-load-bearing ones; Dalio&rsquo;s Big-Cycle on the long-end OECD yields pricing against fiscal capacity and the AFS and HTM registers absorbing the duration cost; Buffett on the moat the deposit-franchise specifically carries against the non-bank-financial-intermediary bench; Levine on the specific plumbing through which the Tuesday pre-market prices the headline against the full release; Greene&rsquo;s 23rd Law on concentration of forces inside a single quarter.</li>
+        <li>The Berek Oath: Aristotle on the mixed-regime stability test the Polish semi-presidential architecture specifically opens through the TK composition register; Confucius on the pledge the Tusk coalition specifically ran into government on and specifically has to deliver; Munger on the visible-reward architecture of the Nawrocki refusal; Mearsheimer on the Brussels-and-Strasbourg external-pressure instrument; Greene&rsquo;s Third Law on the Przy&#322;&#281;bska-Council for a New Constitution as a long-horizon concealed-architecture register against the standing 1997 Constitution.</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">From the Classics</div>
+      <h3 class="sec-title">Munger &amp; <em>Sun Tzu</em>.</h3>
+      <blockquote class="classic-quote">Show me the incentive and I will show you the outcome. If you want to predict the behaviour of a person or an institution, do not ask what their statements say or what their principles sound like. Ask what rewards their current configuration delivers them for repeating the current behaviour, and ask what costs it specifically delivers them for changing it. The answer is almost always sufficient.</blockquote>
+      <p class="attrib">&mdash; Charlie Munger &middot; reads the Dealmaking Quarter and the Berek Oath at a single register. On Wall Street the sell-side preview-architecture specifically runs the visible-and-rewarded register because the audience that pays for the research specifically prices the dealmaking-rebound line more sharply than the NIM compression and provisioning cycle registers the structurally-more-load-bearing register specifically prices against. In Warsaw a sitting Polish president specifically runs the Munger-visible-reward architecture of his refusal to administer the Berek oath because the audience that rewards him specifically absorbs the refusal as the standing anti-Tusk-cordon instrument and specifically does not price the long-horizon rule-of-law-register the Strasbourg-and-Berlaymont cadence specifically prices against. The common pattern: an actor whose current register specifically rewards continuation against the structurally-more-load-bearing register the counterpart specifically prices against is specifically not moved by the counterpart&rsquo;s pressure alone; the move comes only when the counterpart specifically converts the pressure into a visible cost inside the actor&rsquo;s own reward-register.</p>
+      <blockquote class="classic-quote">To subdue the enemy without fighting is the acme of skill. The supreme excellence is not to win a hundred battles but to break the enemy&rsquo;s resistance without fighting. The highest form of generalship is to balk the enemy&rsquo;s plans; the next best is to prevent the junction of the enemy&rsquo;s forces; the next in order is to attack the enemy&rsquo;s army in the field; and the worst policy of all is to besiege walled cities.</blockquote>
+      <p class="attrib">&mdash; Sun Tzu &middot; reads the Kunar-Helmand Line. The Pakistani calibrated-strike doctrine specifically attacks the enemy army rather than the enemy strategy: the camps are hit; the operational base is not denied; the strategic-depth-across-the-Durand-Line register the TTP specifically operates against is not re-architected. The superior force that specifically prefers the operational register to the strategic one specifically concedes the operational cost without specifically converting it into the political-end-state the strategic register alone can carry. The mediated-track strategic-engagement register the Qatari and Turkish tracks specifically opened is the single instrument Sun Tzu would price above the operational one, and the doctrine specifically has not returned to it inside the fortnight.</p>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">The Practitioner&rsquo;s Note</div>
+      <h3 class="sec-title">A nuclear-armed state ten days into a cross-border strike doctrine whose operational cycle specifically does not deliver the political-end-state the doctrine specifically prices against. A hegemon banking architecture forty-eight hours from a Q3 earnings season whose sell-side preview specifically rewards the dealmaking line against the net-interest-margin-and-provisioning registers the next quarters will specifically price. A sitting Polish president thirty-eight days into a silence on an oath whose refusal specifically runs the visible-reward architecture of his audience without specifically paying any cost to the long-horizon register the counterpart specifically prices against. Three Munger-incentive moments, three different theatres, three audiences whose current register specifically rewards continuation against the structurally-more-load-bearing register the counterpart specifically prices against.</h3>
+      <p>Each story rewards the reader who names the specific audience that specifically rewards the actor&rsquo;s current register and the specific instrument through which the counterpart could specifically convert the pressure into a visible cost inside that audience. Kunar-Helmand Line: whether Beijing specifically names a position above the trailing-cycle neutral-concern cadence, whether Doha specifically re-opens the Istanbul track at political-principal level, whether Kabul specifically delivers an operational-depth retaliation against Pakistani regulars, and whether Islamabad specifically carries the Greene-22 return to mediated-track strategic engagement against the standing operational doctrine &mdash; these are the specific tells by which the Sun-Tzu-strategy-before-army register specifically opens or specifically does not. Dealmaking Quarter: whether JPMorgan specifically names the provisioning cycle above the dealmaking register inside Tuesday&rsquo;s commentary, whether Goldman&rsquo;s dealmaking line specifically carries the Q2-record-adjacent register, whether any Big-Six bank specifically names the AFS mark-to-market as material, and whether the Fed-FOMC cadence specifically absorbs the earnings signal through a Powell forward-guidance remark inside the window &mdash; these are the specific tells by which the Munger-visible-reward register specifically carries or specifically does not. Berek Oath: whether Nawrocki specifically opens a reason-of-record for the refusal, whether the European Commission specifically opens a second-tranche RRF-conditionality-against-TK-composition instrument, whether the Tusk coalition specifically opens a Munger-cost-conversion instrument against the standing refusal, and whether the Przy&#322;&#281;bska-Council specifically publishes a visible draft of a new constitution inside Q4 2026 &mdash; these are the specific tells by which the dual-executive-plus-TK stand-off specifically reconciles or specifically does not.</p>
+      <p><strong>In your own affairs:</strong> the discipline cuts three ways. When your current operational register specifically does not deliver the political-end-state the doctrine specifically prices against &mdash; the counterpart does not accept the operation, each cycle costs you more than it costs them, the mediated-track alternative sits visible and unopened &mdash; ask whether the specifically-named return to the strategic register (an uncomfortable concession on a flank your standing audience specifically expects you to hold) specifically opens the political-end-state your current cadence specifically does not. When your reporting cadence specifically rewards the visible line against the structurally-more-load-bearing one, ask which specifically-named line the practitioner-reader has to apply the independent discipline against &mdash; because the audience that specifically rewards the visible register specifically does not re-price the structural one until the next cadence specifically prices it against them. And when a counterpart&rsquo;s refusal specifically runs the Munger-visible-reward register against his audience without specifically paying any cost to yours, ask which specifically-named cost-conversion instrument you can open to compress the refusal against his audience rather than against yours &mdash; because an external pressure that specifically does not re-price inside the actor&rsquo;s own reward-register specifically does not move the actor.</p>
+    </div>
+  </section>
+  <!-- SECTION III - CLOSING QUOTE -->
+  <div class="article-quote q3">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The useful thing to notice about the Berek Oath is not whether President Nawrocki specifically administers an oath to Maciej Berek inside Q4 2026 or specifically carries the standing silence through the Christmas recess into the 2027 parliamentary-cycle approach. It is that a Polish semi-presidential architecture whose 1997 Constitution specifically assembled a dual-executive-plus-TK configuration the three-fifths override specifically does not reconcile has specifically delivered, through the thirty-eight-day silence on a specific oath, the public form of a Munger-visible-reward architecture inside the president&rsquo;s audience against a Confucian pledge inside the prime minister&rsquo;s. Aristotle names the deepest claim: the mixed-regime stability test specifically fails when one component concludes the architecture no longer serves it, and the Nawrocki accession specifically crystallised the configuration in which neither executive specifically accepts the other as controlling. Confucius names the asymmetric cost: Tusk ran the rule-of-law-restoration pledge into government and specifically has to deliver; Nawrocki did not, and specifically does not pay the pledge-cost of the silence. Munger names the audience-architecture: the refusal is specifically visible and specifically rewarded inside the Nawrocki coalition; the long-horizon rule-of-law-register the Strasbourg-and-Berlaymont audience specifically prices against is specifically absorbed as additional reward rather than as cost. Mearsheimer names the single external-pressure instrument that specifically prices against both executives: the EU-funds-conditionality cadence through Berlaymont, specifically not opened at the second-tranche-register against the Nawrocki-era architecture. Greene names the concealment: the Przy&#322;&#281;bska-Council for a New Constitution specifically runs a long-horizon 2030-target architecture-building instrument the Tusk coalition specifically absorbs against the shorter 2027-cycle. The reader who watches whether the Belweder specifically opens a reason-of-record is reading the moment. The reader who watches whether Berlaymont specifically opens a second-tranche RRF-conditionality-against-TK-composition instrument, whether the Tusk coalition specifically opens a Munger-cost-conversion instrument against the standing refusal, whether the Przy&#322;&#281;bska-Council specifically publishes a visible draft inside Q4, and whether the Supreme Court specifically rules against the TK&rsquo;s standing refusal register through a specifically-named SN cross-reference, is reading the substance the Oath is sized to carry.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Berek Oath</cite>
+  </div>
+  <!-- FULL PULL QUOTE -->
+  <div class="full-pull">
+    <blockquote>
+      <span class="mark">&ldquo;</span>Three Munger-incentive moments closed on the tape today, each a specific instance of how the audience that specifically rewards an actor&rsquo;s current register specifically does not price the structurally-more-load-bearing one the counterpart specifically prices against. From the Durand Line, ten days into a Pakistani calibrated-strike doctrine that specifically ran against seven TTP camps in Kunar and Helmand on Thursday 1 October, the General-Headquarters audience specifically rewards each operational cycle against a political-end-state the doctrine specifically does not deliver, with Clausewitz naming the compression of a military operation whose political instrument the counterpart specifically does not absorb, Sun Tzu naming the superior force that specifically attacks the enemy army rather than the enemy strategy, Mearsheimer naming the structural-anarchy pressure the external-pressure instrument has specifically not relieved, and Greene&rsquo;s 15th Law naming the standing instinct against an enemy whose ground the superior force specifically does not control. From New York, forty-eight hours from the Tuesday 13 October pre-market open at which JPMorgan Chase and Goldman Sachs specifically release Q3 2026 results against a Federal Reserve target range of 3.75-4.00 per cent, a 30-year Treasury at 5.70, and a sell-side preview-cadence that specifically rewards the dealmaking line against the net-interest-margin-and-provisioning registers the next quarters will specifically price, with Munger naming the visible-and-rewarded register the sell-side specifically runs, Dalio naming the long-end repricing against fiscal capacity the AFS and HTM registers specifically absorb, Buffett naming the deposit-franchise moat against the non-bank-financial-intermediary bench, Levine naming the two-minute-and-two-hour plumbing against the headline, and Greene&rsquo;s 23rd Law naming the concentration-of-forces inside a single quarter. From Warsaw, thirty-eight days into the Polish president&rsquo;s silence on the Berek oath, the Nawrocki-aligned audience specifically rewards the refusal register against a Tusk-coalition pledge the Confucian register specifically prices as the asymmetric cost, with Aristotle naming the mixed-regime stability test the dual-executive-plus-TK configuration specifically opens, Munger naming the visible-reward architecture of the refusal, Mearsheimer naming the Brussels-and-Strasbourg external-pressure instrument specifically not opened at the second-tranche register, and Greene&rsquo;s Third Law naming the Przy&#322;&#281;bska-Council as a long-horizon 2030-target architecture-building instrument the standing cycle specifically absorbs. Three Munger-incentive moments, three different theatres, three audiences whose current register specifically rewards continuation against the structurally-more-load-bearing register the counterpart specifically prices against &mdash; and three specific calendars (the next Taliban retaliation cycle, the Tuesday 13 October bank-earnings pre-market, the 31 December 2026 Berek-oath window) by which the specifically-named cost-conversion instrument either specifically compresses the actor&rsquo;s reward-register or specifically does not.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; House Maxim</cite>
+  </div>
+  <!-- REFLECTION -->
+  <footer class="reflection">
+    <div class="label">&mdash; Question for the Day &mdash;</div>
+    <p class="question">Three Munger-incentive moments closed on the tape today, each a specific instance of how the audience that specifically rewards an actor&rsquo;s current register specifically does not price the structurally-more-load-bearing one the counterpart specifically prices against. In the Durand Line a Pakistani calibrated-strike doctrine specifically ran ten days past Thursday 1 October against a political-end-state the doctrine specifically does not deliver, with Clausewitz naming the compression of the political-primacy-of-war when the counterpart does not absorb the political instrument, Sun Tzu naming the superior force that specifically attacks the enemy army rather than the enemy strategy, and Mearsheimer naming the structural-anarchy pressure the external-pressure instrument has specifically not relieved. In New York a hegemon banking architecture specifically approached a Tuesday 13 October pre-market open against a 3.75-4.00 per cent Fed target range, a 30-year Treasury at 5.70, and a sell-side preview-cadence that specifically rewards the dealmaking line against the net-interest-margin-and-provisioning registers, with Munger naming the visible-and-rewarded register the architecture specifically runs, Dalio naming the long-end repricing against fiscal capacity, Buffett naming the deposit-franchise moat, and Levine naming the pre-market plumbing against the headline. In Warsaw a sitting Polish president specifically ran the Munger-visible-reward architecture of his refusal to administer the Berek oath past the thirty-eighth day against a Tusk-coalition Confucian pledge the trailing cycle specifically carried into government, with Aristotle naming the mixed-regime stability test the dual-executive-plus-TK configuration specifically opens, Mearsheimer naming the Brussels-and-Strasbourg external-pressure instrument specifically not opened at the second-tranche register, and Greene&rsquo;s Third Law naming the Przy&#322;&#281;bska-Council as a long-horizon 2030-target concealment instrument. Where in your own operating register does your current cadence specifically fail to deliver the political-end-state your doctrine specifically prices against &mdash; and would the specifically-named return to a mediated strategic register specifically open what the operational register has specifically not? Which visible-and-rewarded line in your own print specifically runs ahead of the structurally-more-load-bearing register the next quarter will specifically price, and which specifically-named disclosure would specifically convert the plumbing into the headline inside your audience&rsquo;s window? And which counterpart&rsquo;s refusal specifically runs the Munger-visible-reward architecture against his audience without specifically paying any cost to yours, and which specifically-named cost-conversion instrument would you need to open to compress the refusal against his audience rather than against yours &mdash; because an external pressure that specifically does not re-price inside the actor&rsquo;s own reward-register specifically does not move the actor?</p>
+  </footer>
+  <!-- COLOPHON -->
+  <div class="colophon">
+    <div>Folio 180 &middot; MMXXVI</div>
+    <div class="c">The Stratagem &middot; Private Edition &middot; R. Becker</div>
+    <div class="r">&mdash; fin &mdash;</div>
+  </div>
+
+  </div>
+  </div>
+
+
+</div>
+
+
+<script>
+(function(){
+  const issueId   = document.body.dataset.issueId   || 'issue-unknown';
+  const issueDate = document.body.dataset.issueDate || new Date().toISOString().slice(0,10);
+  const issueNum  = (issueId.match(/\d+/) || ['?'])[0];
+  const countEl   = document.getElementById('yc-count');
+  const statusEl  = document.getElementById('yc-status');
+  const exportBtn = document.getElementById('yc-export');
+  const beliefsBtn= document.getElementById('yc-export-beliefs');
+  const clearBtn  = document.getElementById('yc-clear');
+  const notesBtn  = document.getElementById('yc-export-notes');
+
+  // 1) Render the Stratagem's call inside each slot from data- attributes
+  document.querySelectorAll('.bet-slot').forEach(slot => {
+    const card   = slot.querySelector('.bet-card');
+    const value  = card.dataset.stratagemValue;
+    const because= card.dataset.stratagemBecause;
+    if (!value) return;
+    const type = slot.querySelector('.your-call').dataset.callType || 'prob';
+    const display = (type === 'prob') ? `${value}%` : value;
+    const sc = document.createElement('div');
+    sc.className = 'stratagem-call';
+    sc.innerHTML =
+      `<div class="sc-head">The Stratagem's call</div>` +
+      `<div class="sc-value">${display}</div>` +
+      `<div class="sc-because">${because}</div>`;
+    slot.appendChild(sc);
+  });
+
+  // 2a) Wire auto-save on reader-notes textareas
+  const noteTAs = document.querySelectorAll('.reader-notes textarea');
+  const noteKeyFor = (noteId) => `notes:${issueId}:${noteId}`;
+  noteTAs.forEach(ta => {
+    const k = noteKeyFor(ta.dataset.noteId);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) ta.value = saved;
+    ta.addEventListener('input', () => {
+      if (ta.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, ta.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  // 2b) Wire auto-save on all inputs
+  const inputs = document.querySelectorAll('.your-call input');
+  const keyFor = (mid, field) => `ledger:${issueId}:${mid}:${field}`;
+  inputs.forEach(input => {
+    const k = keyFor(input.dataset.marketId, input.dataset.field);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) input.value = saved;
+    input.addEventListener('input', () => {
+      if (input.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, input.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  function collect() {
+    const out = [];
+    document.querySelectorAll('.bet-slot').forEach(slot => {
+      const card = slot.querySelector('.bet-card');
+      const yc   = slot.querySelector('.your-call');
+      const raw  = slot.querySelector('.yc-value').value.trim();
+      if (!raw) return;
+      const type = yc.dataset.callType || 'prob';
+      const display = (type === 'prob') ? `${raw}%` : raw;
+      const scVal = card.dataset.stratagemValue;
+      const stratagemDisplay = scVal ? ((type === 'prob') ? `${scVal}%` : scVal) : '—';
+      out.push({
+        mid: card.dataset.marketId,
+        question: card.dataset.marketQuestion,
+        resolves: card.dataset.marketResolves || 'TBD',
+        you: display,
+        stratagem: stratagemDisplay,
+        stratagemBecause: card.dataset.stratagemBecause || '',
+        market: card.dataset.marketOdds || '—',
+        because: slot.querySelector('.yc-because').value.trim()
+      });
+    });
+    return out;
+  }
+
+  function formatLedger(preds) {
+    return preds.map(p => {
+      const because = p.because ? `because ${p.because}` : `because —`;
+      return `- ${issueDate} → ${p.resolves} · YOU ${p.you} · STRATAGEM ${p.stratagem} · MARKET ${p.market} · ${p.question} · ${because} [market: Polymarket "${p.question}"]`;
+    }).join('\n');
+  }
+
+  function formatBeliefs(preds) {
+    return preds.map(p => {
+      const reason = p.because || '—';
+      return `#### ${issueDate} — ${p.question}\n**My call:** ${p.you}\n${reason}`;
+    }).join('\n\n');
+  }
+
+  function collectNotes() {
+    const out = [];
+    const headlines = document.querySelectorAll('.headline');
+    noteTAs.forEach((ta, i) => {
+      const text = ta.value.trim();
+      if (!text) return;
+      const hl = headlines[i] ? headlines[i].textContent.trim() : `Section ${i+1}`;
+      const rom = ['I', 'II', 'III'][i] || `${i+1}`;
+      out.push({ rom, headline: hl, text });
+    });
+    return out;
+  }
+
+  function formatNotes(notes) {
+    return notes.map(n => `#### ${n.rom}. ${n.headline}\n${n.text}`).join('\n\n');
+  }
+
+  function update() {
+    const n = collect().length;
+    const nn = collectNotes().length;
+    if (n === 0 && nn === 0) {
+      countEl.textContent = 'No predictions or notes yet — scroll back and engage with the stories.';
+      exportBtn.textContent = 'Copy to Ledger';
+      beliefsBtn.textContent = 'Copy to Beliefs';
+      notesBtn.textContent = 'Copy notes';
+    } else {
+      const parts = [];
+      if (n > 0) parts.push(`${n} call${n===1?'':'s'}`);
+      if (nn > 0) parts.push(`${nn} note${nn===1?'':'s'}`);
+      countEl.textContent = `You've logged ${parts.join(' and ')} this morning. Export while the reading is still fresh.`;
+      exportBtn.textContent = n > 0 ? `Copy ${n} call${n===1?'':'s'} to Ledger` : 'Copy to Ledger';
+      beliefsBtn.textContent = n > 0 ? `Copy ${n} belief${n===1?'':'s'}` : 'Copy to Beliefs';
+      notesBtn.textContent = nn > 0 ? `Copy ${nn} note${nn===1?'':'s'}` : 'Copy notes';
+    }
+    exportBtn.disabled = (n === 0);
+    beliefsBtn.disabled = (n === 0);
+    notesBtn.disabled = (nn === 0);
+  }
+
+  async function copyToClipboard(text, okMsg) {
+    try {
+      await navigator.clipboard.writeText(text);
+      statusEl.textContent = okMsg;
+    } catch (e) {
+      window.prompt('Clipboard blocked — copy this manually (Cmd+C, Enter):', text);
+      statusEl.textContent = 'Ready to paste.';
+    }
+  }
+
+  exportBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n` + formatLedger(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI The Ledger.md under ## Open`);
+  });
+
+  beliefsBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = formatBeliefs(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI Political Beliefs.md under ## Entries`);
+  });
+
+  notesBtn.addEventListener('click', () => {
+    const notes = collectNotes();
+    if (!notes.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n\n` + formatNotes(notes);
+    copyToClipboard(text, `✓ ${notes.length} note${notes.length===1?'':'s'} copied — paste into your vault`);
+  });
+
+  clearBtn.addEventListener('click', () => {
+    if (!confirm("Clear all filled fields for this issue? Only do this AFTER you've exported everything.")) return;
+    inputs.forEach(input => {
+      localStorage.removeItem(keyFor(input.dataset.marketId, input.dataset.field));
+      input.value = '';
+    });
+    noteTAs.forEach(ta => {
+      localStorage.removeItem(noteKeyFor(ta.dataset.noteId));
+      ta.value = '';
+    });
+    statusEl.textContent = 'Fields cleared.';
+    update();
+  });
+
+  update();
+})();
+</script>
+
+</body>
+</html>
