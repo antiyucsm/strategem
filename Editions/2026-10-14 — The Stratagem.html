@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Stratagem — No. 182 · 14 October 2026</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#0e0c08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e0c08;
+  --ink-soft: #2a2620;
+  --ink-mid: #403a30;
+  --paper: #eee3ca;
+  --paper-alt: #e5d9bc;
+  --paper-deep: #d9cba8;
+  --paper-shade: #c9b98f;
+  --rule: rgba(14, 12, 8, 0.25);
+  --rule-soft: rgba(14, 12, 8, 0.14);
+  --accent: #6d1418;
+  --accent-2: #2d4a2f;   /* economics green */
+  --accent-3: #1c3a5f;   /* europe navy */
+  --muted: #736856;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 14, 'SOFT' 30;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.55;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 5%, rgba(109, 20, 24, 0.04), transparent 50%),
+    radial-gradient(ellipse at 90% 95%, rgba(14, 12, 8, 0.06), transparent 55%),
+    radial-gradient(ellipse at 60% 40%, rgba(201, 185, 143, 0.28), transparent 65%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.11;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.paper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 56px 80px;
+  position: relative;
+}
+
+/* ============ FOLIO ============ */
+.folio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.folio .c { text-align: center; }
+.folio .r { text-align: right; }
+
+/* ============ MASTHEAD ============ */
+.masthead {
+  text-align: center;
+  padding: 22px 0 14px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px double var(--ink);
+  position: relative;
+}
+.masthead::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 10px;
+  height: 1px;
+  background: var(--ink);
+}
+.mast-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'wght' 900;
+  font-size: clamp(60px, 12vw, 148px);
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+  margin-bottom: 6px;
+}
+.mast-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  font-variation-settings: normal;
+}
+.mast-subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.mast-sub-rule {
+  display: inline-block;
+  width: 40px; height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin: 0 12px 3px;
+}
+
+/* ============ DATELINE BAR ============ */
+.dateline-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 10px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 3px double var(--ink);
+  align-items: center;
+}
+.dateline-bar .center { text-align: center; color: var(--accent); font-weight: 700; }
+.dateline-bar .right { text-align: right; }
+.dateline-bar strong { color: var(--ink); font-weight: 700; }
+
+/* ============ INDEX / TOC ============ */
+.toc {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto 1fr;
+  gap: 16px;
+  padding: 16px 0 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.toc .num {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.toc .sec { font-weight: 700; color: var(--ink); }
+.toc a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.toc a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+/* ============ SECTION DIVIDER ============ */
+.section-div {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 26px;
+  align-items: center;
+  padding: 44px 0 20px;
+  margin-top: 20px;
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 28px;
+}
+.section-div .rom {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 84px;
+  line-height: 0.85;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+}
+.section-div.s2 .rom { color: var(--accent-2); }
+.section-div.s3 .rom { color: var(--accent-3); }
+
+.section-div .title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0;
+  font-size: 52px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.section-div .title em {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.section-div.s2 .title em { color: var(--accent-2); }
+.section-div.s3 .title em { color: var(--accent-3); }
+
+.section-div .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+.section-div .meta strong { color: var(--ink); }
+
+/* ============ STORY LAYOUT ============ */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 44px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.story .headline {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 0.96;
+  letter-spacing: -0.032em;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.story .headline em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .headline em { color: var(--accent-2); }
+.story.s3 .headline em { color: var(--accent-3); }
+
+.story .deck {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height: 1.34;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+
+.story .byline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+.story .byline strong { color: var(--ink); }
+.story .byline .sep { margin: 0 12px; color: var(--accent); }
+.story.s2 .byline .sep { color: var(--accent-2); }
+.story.s3 .byline .sep { color: var(--accent-3); }
+
+/* ARTICLE */
+.article {
+  column-count: 2;
+  column-gap: 34px;
+  column-rule: 1px solid var(--rule-soft);
+  font-size: 15px;
+  line-height: 1.58;
+  text-align: justify;
+  hyphens: auto;
+  color: var(--ink-soft);
+}
+.article p {
+  margin-bottom: 11px;
+  break-inside: avoid-column;
+}
+.article p.lead { font-size: 16.5px; line-height: 1.48; }
+.article .dateline-intro {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 8px;
+}
+.story.s2 .article .dateline-intro { color: var(--accent-2); }
+.story.s3 .article .dateline-intro { color: var(--accent-3); }
+
+.article p.lead::first-letter {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20, 'wght' 500;
+  font-weight: 500;
+  font-size: 80px;
+  float: left;
+  line-height: 0.82;
+  margin: 6px 11px 0 0;
+  color: var(--accent);
+  padding-right: 4px;
+}
+.story.s2 .article p.lead::first-letter { color: var(--accent-2); }
+.story.s3 .article p.lead::first-letter { color: var(--accent-3); }
+
+.article h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 21px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 16px 0 8px;
+  color: var(--ink);
+  break-after: avoid-column;
+}
+.article h3 em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .article h3 em { color: var(--accent-2); }
+.story.s3 .article h3 em { color: var(--accent-3); }
+
+.article strong { color: var(--ink); font-weight: 600; }
+.article .emphasis {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17.5px;
+  color: var(--ink);
+  display: block;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 14px;
+  margin: 10px 0;
+  break-inside: avoid-column;
+  line-height: 1.32;
+}
+.story.s2 .article .emphasis { border-left-color: var(--accent-2); }
+.story.s3 .article .emphasis { border-left-color: var(--accent-3); }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 22px; }
+
+.panel {
+  border: 1px solid var(--ink);
+  background: var(--paper-alt);
+  padding: 18px 20px 20px;
+  position: relative;
+}
+.panel.dark {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.panel.accent { background: var(--paper-deep); }
+
+.panel-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.story.s2 .panel-label { color: var(--accent-2); }
+.story.s3 .panel-label { color: var(--accent-3); }
+
+.panel.dark .panel-label {
+  color: var(--paper-deep);
+  border-bottom-color: rgba(238, 227, 202, 0.2);
+}
+
+.panel-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 23px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.panel.dark .panel-title { color: var(--paper); }
+.panel-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.story.s2 .panel-title em { color: var(--accent-2); }
+.story.s3 .panel-title em { color: var(--accent-3); }
+.panel.dark .panel-title em { color: #d68e92; }
+.story.s2 .panel.dark .panel-title em { color: #9cc6a0; }
+.story.s3 .panel.dark .panel-title em { color: #a5c3e6; }
+
+/* actors */
+.actors { display: flex; flex-direction: column; gap: 11px; }
+.actor {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.actor:last-child { border-bottom: none; padding-bottom: 0; }
+.actor-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 13.5px;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3px;
+}
+.actor-name .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+  background: var(--accent);
+  padding: 2px 6px 3px;
+  text-transform: uppercase;
+}
+.story.s2 .actor-name .tag { background: var(--accent-2); }
+.story.s3 .actor-name .tag { background: var(--accent-3); }
+.actor-meta {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.actor-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  display: block;
+  margin-top: 3px;
+}
+.story.s2 .actor-meta span { color: var(--accent-2); }
+.story.s3 .actor-meta span { color: var(--accent-3); }
+
+/* laws */
+.laws { display: flex; flex-direction: column; gap: 10px; }
+.law {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(238, 227, 202, 0.18);
+}
+.law:last-child { border-bottom: none; }
+.law-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144;
+  font-size: 28px;
+  line-height: 0.9;
+  color: #d68e92;
+  letter-spacing: -0.04em;
+  text-align: right;
+}
+.story.s2 .law-num { color: #9cc6a0; }
+.story.s3 .law-num { color: #a5c3e6; }
+.law-text { font-size: 12.5px; line-height: 1.38; color: var(--paper-deep); }
+.law-text strong {
+  display: block;
+  color: var(--paper);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* munger */
+.munger-body { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+.munger-body strong { color: var(--ink); }
+.munger-body ul { list-style: none; margin-top: 8px; }
+.munger-body li {
+  padding: 6px 0 6px 18px;
+  position: relative;
+  font-size: 12.5px;
+  line-height: 1.38;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.munger-body li:last-child { border-bottom: none; }
+.munger-body li::before {
+  content: '✦';
+  position: absolute;
+  left: 0; top: 6px;
+  color: var(--accent);
+  font-size: 9px;
+}
+.story.s2 .munger-body li::before { color: var(--accent-2); }
+.story.s3 .munger-body li::before { color: var(--accent-3); }
+
+/* ============ ARTICLE QUOTE (per section) ============ */
+.article-quote {
+  margin: 0 0 56px;
+  padding: 30px 20px 32px;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  --qc: var(--accent);
+}
+.article-quote.q2 { --qc: var(--accent-2); }
+.article-quote.q3 { --qc: var(--accent-3); }
+
+.article-quote::before {
+  content: '❦';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper);
+  padding: 0 14px;
+  color: var(--qc);
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.article-quote blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 32px);
+  line-height: 1.26;
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+.article-quote blockquote .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--qc);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+
+.article-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article-quote cite::before { content: '— '; color: var(--qc); }
+
+/* ============ BET PANEL — Polymarket integration ============ */
+.bet-panel {
+  margin: 0 0 48px;
+  padding: 26px 28px 28px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-alt);
+  --accent-bet: var(--accent);
+}
+.bet-panel.s2 { --accent-bet: var(--accent-2); }
+.bet-panel.s3 { --accent-bet: var(--accent-3); }
+
+.bet-head { text-align: center; margin-bottom: 14px; }
+.bet-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.bet-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.bet-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent-bet);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+
+.bet-claim {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto 22px;
+  text-align: center;
+}
+.bet-claim strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent-bet);
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.bet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.bet-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 14px 16px 12px;
+  text-decoration: none;
+  color: inherit;
+  min-height: 130px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.bet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 var(--accent-bet);
+}
+.bet-q {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 15px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.bet-odds-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-soft);
+}
+.bet-odds {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--accent-bet);
+}
+.bet-arrow {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent-bet);
+}
+.bet-foot {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  .bet-panel { padding: 20px 16px; }
+  .bet-grid { grid-template-columns: 1fr; gap: 10px; }
+  .bet-title { font-size: 21px; }
+  .bet-claim { font-size: 15.5px; }
+  .bet-card { min-height: 0; }
+}
+
+/* ============ YOUR CALL — prediction capture ============ */
+.bet-slot { display: flex; flex-direction: column; }
+.bet-slot .bet-card { border-bottom: 1px dashed var(--rule-soft); }
+
+.your-call {
+  border: 1px solid var(--ink);
+  border-top: none;
+  border-bottom: none;
+  background: var(--paper);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.your-call:last-child { border-bottom: 1px solid var(--ink); }
+
+/* The Stratagem's independent call */
+.stratagem-call {
+  border: 1px solid var(--ink);
+  border-top: 1px dashed var(--rule-soft);
+  background: var(--paper-alt);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.sc-head em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+.sc-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.sc-because {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.yc-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bet);
+  font-weight: 700;
+}
+.yc-row { display: flex; align-items: baseline; gap: 8px; }
+.your-call input {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  border: none;
+  border-bottom: 1px solid var(--rule-soft);
+  background: transparent;
+  padding: 2px 2px;
+  color: var(--ink);
+  outline: none;
+}
+.your-call input:focus { border-bottom-color: var(--accent-bet); }
+.your-call input::placeholder { color: var(--muted); opacity: 0.6; }
+.yc-value { font-weight: 700; }
+.your-call[data-call-type="prob"] .yc-value { width: 3em; text-align: center; }
+.your-call[data-call-type="date"] .yc-value { width: auto; font-weight: 500; color-scheme: light; }
+.your-call[data-call-type="text"] .yc-value { flex: 1; font-weight: 500; }
+.yc-because { flex: 1; font-family: 'Instrument Serif', serif !important; font-style: italic; font-size: 13px !important; font-weight: 400 !important; }
+.yc-suffix { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+
+/* Export bar — Ledger call-to-action */
+.export-bar {
+  margin: 56px 0 40px;
+  padding: 44px 36px 44px;
+  background: var(--paper-alt);
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  text-align: center;
+}
+.export-bar .eb-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.export-bar .eb-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 38px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+.export-bar .eb-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+.export-bar .eb-count {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 640px;
+  margin: 0 auto 26px;
+}
+.export-bar .eb-btn-primary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 18px 36px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.export-bar .eb-btn-primary:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.export-bar .eb-btn-primary:disabled { background: transparent; color: var(--muted); border-color: var(--rule); cursor: not-allowed; }
+.export-bar .eb-btn-secondary { background: transparent; color: var(--ink); }
+.export-bar .eb-btn-secondary:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.export-bar .eb-actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+.export-bar .eb-status {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-top: 16px;
+  min-height: 1.3em;
+}
+.export-bar .eb-clear {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+.export-bar .eb-clear:hover { color: var(--ink); }
+
+/* ============ READER NOTES — per-article comments ============ */
+.reader-notes {
+  margin: 0 0 48px;
+  padding: 22px 28px 24px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-alt);
+}
+.rn-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-bet, var(--accent));
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.reader-notes textarea {
+  width: 100%;
+  min-height: 80px;
+  max-height: 300px;
+  resize: vertical;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  padding: 12px 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+.reader-notes textarea:focus { border-color: var(--accent-bet, var(--accent)); }
+.reader-notes textarea::placeholder { color: var(--muted); opacity: 0.5; }
+@media (max-width: 640px) {
+  .reader-notes { padding: 16px 16px 18px; }
+  .reader-notes textarea { font-size: 14px; min-height: 60px; }
+}
+
+@media (max-width: 640px) {
+  .export-bar { padding: 30px 20px; margin: 36px 0 28px; }
+  .export-bar .eb-title { font-size: 27px; }
+  .export-bar .eb-count { font-size: 16px; }
+  .export-bar .eb-btn-primary { padding: 14px 24px; font-size: 11.5px; }
+}
+
+/* ============ THE TAPE — MARKETS ============ */
+.tape {
+  margin: -32px -56px 56px;
+  padding: 32px 40px 26px;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+}
+
+.tape-header {
+  text-align: center;
+  margin-bottom: 22px;
+  position: relative;
+}
+.tape-header::before,
+.tape-header::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 1px;
+  background: var(--accent-2);
+  opacity: 0.5;
+}
+.tape-header::before { left: calc(50% - 220px); }
+.tape-header::after  { right: calc(50% - 220px); }
+
+.tape-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.tape-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.tape-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent-2);
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+
+.tape-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.tape-cell {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 14px 14px 4px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.tape-cell .sym {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.tape-cell .sym .name {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-variation-settings: 'opsz' 144;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.tape-cell .sym .ticker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--accent-2);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.tape-chart {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+.tape-chart iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move {
+  height: 96px;
+  margin-top: 8px;
+  border-top: 1px solid var(--rule-soft);
+  padding-top: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.tape-move iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.tape-move-label {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+}
+.tape-cell { min-height: 340px; }
+.tape-note {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+@media (max-width: 1000px) {
+  .tape { margin-left: -22px; margin-right: -22px; padding: 24px 18px 20px; }
+  .tape-grid { grid-template-columns: 1fr; }
+  .tape-header::before, .tape-header::after { display: none; }
+}
+
+/* ============ FULL PULL QUOTE ============ */
+.full-pull {
+  margin: 28px 0 42px;
+  padding: 36px 20px;
+  text-align: center;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  background: var(--paper-deep);
+  position: relative;
+}
+.full-pull blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(26px, 3.5vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.full-pull .mark {
+  font-family: 'Fraunces', serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+.full-pull cite {
+  display: block;
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.full-pull cite::before { content: '— '; color: var(--accent); }
+
+/* ============ BELOW THE FOLD ============ */
+.below-fold {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 38px;
+  padding-top: 32px;
+  border-top: 3px double var(--ink);
+}
+.below-fold.prologue {
+  padding-top: 38px;
+  padding-bottom: 28px;
+  margin-top: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.below-fold .col { padding-right: 8px; }
+.below-fold .col + .col { border-left: 1px solid var(--rule); padding-left: 30px; }
+
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.sec-label::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 20;
+  font-size: 26px;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.sec-title em {
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+  font-variation-settings: normal;
+}
+.below-fold p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.below-fold ul { list-style: none; counter-reset: romanlist; }
+.below-fold li {
+  counter-increment: romanlist;
+  padding: 8px 0 8px 30px;
+  position: relative;
+  font-size: 13px;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--rule-soft);
+  color: var(--ink-soft);
+}
+.below-fold li::before {
+  content: counter(romanlist, upper-roman) '.';
+  position: absolute;
+  left: 0; top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.classic-quote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 14px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+}
+.attrib {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* ============ REFLECTION ============ */
+.reflection {
+  margin-top: 48px;
+  padding: 44px 56px;
+  border-top: 3px double var(--ink);
+  border-bottom: 4px solid var(--ink);
+  text-align: center;
+  background: var(--paper-deep);
+  margin-left: -56px;
+  margin-right: -56px;
+}
+.reflection .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.reflection .question {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 34px);
+  line-height: 1.22;
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--ink);
+}
+
+/* ============ COLOPHON ============ */
+.colophon {
+  margin-top: 36px;
+  padding-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: 1px solid var(--rule-soft);
+}
+.colophon .c { text-align: center; color: var(--ink-soft); }
+.colophon .r { text-align: right; }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.folio, .masthead, .dateline-bar, .toc, .section-div, .story,
+.full-pull, .below-fold, .reflection, .colophon {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.folio        { animation-delay: 0.00s; }
+.masthead     { animation-delay: 0.05s; }
+.dateline-bar { animation-delay: 0.12s; }
+.toc          { animation-delay: 0.18s; }
+
+/* ============ RESPONSIVE — TABLET ============ */
+@media (max-width: 1000px) {
+  .paper { padding: 22px 28px 60px; }
+  .story { grid-template-columns: 1fr; gap: 32px; }
+  .article { column-count: 1; }
+  .toc { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .section-div .meta { text-align: center; }
+  .below-fold { grid-template-columns: 1fr; gap: 28px; }
+  .below-fold .col + .col { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .folio, .dateline-bar { grid-template-columns: 1fr; gap: 4px; text-align: center; }
+  .folio .r, .dateline-bar .right { text-align: center; }
+  .reflection { margin-left: -28px; margin-right: -28px; padding: 36px 28px; }
+}
+
+/* ============ RESPONSIVE — PHONE ============ */
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; }
+  .paper { padding: 14px 16px 48px; }
+
+  .folio { font-size: 8.5px; letter-spacing: 0.15em; padding-bottom: 8px; gap: 2px; }
+
+  .masthead { padding: 14px 0 8px; }
+  .mast-title { font-size: 56px; letter-spacing: -0.04em; }
+  .mast-subtitle { font-size: 13px; letter-spacing: 0.02em; }
+  .mast-sub-rule { width: 22px; margin: 0 8px 2px; }
+
+  .dateline-bar { font-size: 9px; letter-spacing: 0.16em; padding: 8px 0; }
+
+  .toc { font-size: 11px; letter-spacing: 0.12em; padding: 12px 0 14px; }
+  .toc .num { font-size: 20px; }
+  .toc a { display: inline-block; padding: 4px 0; }
+
+  .below-fold { gap: 22px; padding-top: 24px; }
+  .below-fold .col + .col { padding-top: 20px; }
+  .sec-label { font-size: 9px; letter-spacing: 0.18em; }
+  .sec-title { font-size: 24px; }
+  .below-fold p { font-size: 14px; line-height: 1.55; }
+  .below-fold li { font-size: 13px; padding-left: 28px; }
+  .classic-quote { font-size: 17px; padding-left: 14px; }
+
+  .section-div { padding: 32px 0 16px; margin-top: 14px; gap: 6px; margin-bottom: 20px; }
+  .section-div .rom { font-size: 48px; }
+  .section-div .title { font-size: 28px; letter-spacing: -0.02em; }
+  .section-div .meta { font-size: 9px; letter-spacing: 0.16em; line-height: 1.6; }
+
+  .story { gap: 28px; margin-bottom: 44px; }
+  .story .headline { font-size: 34px; letter-spacing: -0.028em; line-height: 1; }
+  .story .deck { font-size: 16px; line-height: 1.35; }
+  .story .byline { font-size: 9px; letter-spacing: 0.14em; padding: 10px 0; }
+  .story .byline .sep { margin: 0 8px; }
+
+  .article { font-size: 15.5px; line-height: 1.58; text-align: left; hyphens: none; }
+  .article p.lead { font-size: 16px; line-height: 1.5; }
+  .article p.lead::first-letter { font-size: 60px; margin: 4px 8px 0 0; line-height: 0.85; }
+  .article h3 { font-size: 19px; margin: 14px 0 6px; }
+  .article .emphasis { font-size: 16px; padding-left: 12px; margin: 10px 0; }
+  .article .dateline-intro { font-size: 9px; letter-spacing: 0.14em; }
+
+  .sidebar { gap: 18px; }
+  .panel { padding: 16px 16px 18px; }
+  .panel-label { font-size: 8.5px; letter-spacing: 0.2em; }
+  .panel-title { font-size: 21px; }
+  .actor-name { font-size: 13px; flex-wrap: wrap; gap: 4px; }
+  .actor-name .tag { font-size: 8px; padding: 2px 5px 3px; }
+  .actor-meta { font-size: 12.5px; line-height: 1.42; }
+  .actor-meta span { font-size: 7.5px; letter-spacing: 0.12em; }
+  .law-num { font-size: 24px; }
+  .law-text { font-size: 12px; line-height: 1.38; }
+  .law-text strong { font-size: 10px; letter-spacing: 0.14em; }
+  .munger-body { font-size: 13px; }
+  .munger-body li { font-size: 12.5px; }
+
+  .article-quote { padding: 24px 12px 26px; margin-bottom: 44px; }
+  .article-quote blockquote { font-size: 20px; line-height: 1.28; }
+  .article-quote cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 12px; }
+
+  .tape { margin: -20px -16px 44px; padding: 24px 14px 18px; }
+  .tape-label { font-size: 9px; letter-spacing: 0.22em; }
+  .tape-title { font-size: 26px; }
+  .tape-grid { gap: 14px; }
+  .tape-cell { min-height: 300px; padding: 12px 12px 4px; }
+  .tape-chart { height: 180px; }
+  .tape-move { height: 92px; }
+  .tape-cell .sym .name { font-size: 16px; }
+  .tape-note { font-size: 8.5px; letter-spacing: 0.18em; }
+
+  .full-pull { margin: 24px 0 36px; padding: 28px 14px; }
+  .full-pull blockquote { font-size: 22px; line-height: 1.22; }
+  .full-pull cite { font-size: 9px; letter-spacing: 0.18em; margin-top: 16px; }
+
+  .reflection { margin-left: -16px; margin-right: -16px; padding: 32px 18px; margin-top: 40px; }
+  .reflection .label { font-size: 9px; letter-spacing: 0.22em; }
+  .reflection .question { font-size: 22px; line-height: 1.26; }
+
+  .colophon { font-size: 8.5px; letter-spacing: 0.14em; gap: 4px; grid-template-columns: 1fr; text-align: center; }
+  .colophon .r, .colophon .c { text-align: center; }
+}
+
+/* Prevent accidental horizontal overflow */
+html, body { overflow-x: hidden; max-width: 100vw; }
+.paper { overflow-wrap: break-word; }
+</style>
+</head>
+<body data-issue-id="issue-183" data-issue-date="2026-10-14">
+
+<div class="paper">
+
+  <!-- FOLIO -->
+  <div class="folio">
+    <div>Vol. I &middot; No. 182</div>
+    <div class="c">Daily Edition &middot; Private</div>
+    <div class="r">Page 1 of 1</div>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <h1 class="mast-title">The <em>Stratagem</em></h1>
+    <div class="mast-subtitle">
+      <span class="mast-sub-rule"></span>
+      Power · Statecraft · Strategy · Virtue
+      <span class="mast-sub-rule"></span>
+    </div>
+  </header>
+
+  <!-- DATELINE -->
+  <div class="dateline-bar">
+    <div>Wednesday &middot; <strong>14 October 2026</strong></div>
+    <div class="center">The Riyadh Red Line &middot; The Mint Street Pivot &middot; The Lyc&eacute;e Compression</div>
+    <div class="right">Reading time &asymp; 12 min</div>
+  </div>
+
+  <!-- INDEX / TOC -->
+  <nav class="toc">
+    <div class="num">I.</div>
+    <div><a href="#sec-i"><span class="sec">International</span> &middot; The Riyadh Red Line</a></div>
+    <div class="num">II.</div>
+    <div><a href="#sec-ii"><span class="sec">Economics</span> &middot; The Mint Street Pivot</a></div>
+    <div class="num">III.</div>
+    <div><a href="#sec-iii"><span class="sec">Europe &amp; Germany</span> &middot; The Lyc&eacute;e Compression</a></div>
+  </nav>
+
+    <!-- ================================= -->
+  <!-- SECTION I — INTERNATIONAL         -->
+  <!-- ================================= -->
+
+  <div class="section-div" id="sec-i">
+    <div class="rom">I.</div>
+    <div class="title"><em>International</em> &middot; The Theatre of Nations</div>
+    <div class="meta">
+      <div><strong>Filed</strong> the Oval Office in Washington (President Donald J. Trump&rsquo;s desk running the Saturday-and-Sunday &ldquo;we&rsquo;re going to look at it&rsquo;&rsquo; cadence after the 10 October Riyadh-airport missile strike), the Royal Court at al-Yamamah in Riyadh (Crown Prince Mohammed bin Salman&rsquo;s desk running the standing Yemeni-coalition offensive against the Red-Sea coast after the trailing-cycle September Houthi push on Mukha and Bab-el-Mandeb), the Saudi Defence Ministry under Prince Khalid bin Salman (the standing al-Riyadh desk running the air-defence-and-retaliation register against the Patriot-and-THAAD intercept geometry over King-Khalid-International), the Saudi General Authority of Civil Aviation under Abdulaziz al-Duailej (the standing airport-closure register after the Terminals-3-and-4 strike), the Houthi Supreme Political Council under Mahdi al-Mashat in Sanaa (the standing claims-register whose Saturday communiqu&eacute; carried the Riyadh strike), the Houthi political-military cadence under Abdul-Malik al-Houthi (the standing Marran mountain-redoubt desk running the Iranian-supplied Qader-and-Palestine-ballistic-missile register), US Central Command under General Michael Kurilla (the MacDill desk running the standing Hormuz-blockade register since 13 July and the Gulf-of-Oman precision-munition cadence), the Pentagon under Secretary Pete Hegseth (the standing military-advice register against a potential Yemen theatre), the US State Department under Secretary Marco Rubio (the Foggy Bottom desk running the standing Saudi-and-Gulf-partner cadence), the Office of the Supreme Leader in Tehran under Ayatollah Khamenei (the standing Beit-Rahbari desk running the trailing-cycle Hormuz-closure cadence since the April-to-June and July-forward blockade windows), the IRGC Aerospace Force under Brig. Gen. Hajizadeh (the standing Qader-and-Shahed export register against the Houthi theatre), the UAE Presidential Court under Mohamed bin Zayed in Abu Dhabi (the standing coalition-adjacent register whose Southern Transitional Council proxy runs the Aden flank), the Egyptian Suez Canal Authority under Admiral Osama Rabie (the standing transit-fee register against the Hormuz-and-Red-Sea diversion cadence), the UK Maritime Trade Operations (UKMTO) desk at Dubai (the standing merchant-ship advisory register), with cross-files from the standing Lloyd&rsquo;s of London war-risk-premium cadence through Joint Hull Committee listings, the Brent-and-Dubai-crude register against the OPEC+ production configuration, the ratings cadence against the Saudi sovereign (Moody&rsquo;s A1, S&amp;P A+, Fitch A+), and the standing Washington-cum-Riyadh defence-cooperation framework through the Mutual Defence Agreement cadence</div>
+      <div>The Riyadh Red Line &middot; Four days after the Houthi missile strike against Terminals 3 and 4 at King Khalid International Airport in Riyadh on Saturday 10 October that specifically killed 12 and wounded more than 300 people &mdash; the deadliest attack on a Gulf-Arab capital since the US-Iran war opened in April &mdash; and three days after President Trump&rsquo;s &ldquo;we&rsquo;re going to look at it&rsquo;&rsquo; statement from the South Lawn specifically carried an &ldquo;we move very quickly&rdquo; coda, the Saudi-Yemeni-cum-US configuration specifically runs through the first moment at which the Trump administration specifically prices entry into a third active front against the standing Hormuz-blockade cadence that opened on 13 July 2026. The specifically-named compression carries four instruments. First, the Saudi-led coalition&rsquo;s September-and-October offensive against the Houthi western-Red-Sea gains (Mukha, Bab-el-Mandeb, the trailing-cycle August Hodeidah push) specifically opened a Houthi retaliation register against Saudi civilian-and-airport infrastructure above the 2019-to-2022 cadence. Second, the Saturday strike on Terminals 3 and 4 was the second Houthi hit on King-Khalid-International inside a fortnight after the 8 October strike that killed three (including a Saudia pilot), and the first in which the terminal-interior itself specifically absorbed the kinetic payload rather than the apron. Third, CENTCOM&rsquo;s standing Hormuz-blockade register specifically runs seven redirected and one disabled commercial vessel through the Monday-to-Monday Gulf-of-Oman cadence against the trailing-cycle 20-per-cent toll, with the standing Treasury OFAC primary-sanctions cadence specifically compressing the Iranian-oil flow against the Chinese-and-Indian off-taker register. Fourth, the specifically-named Trump &ldquo;we move very quickly&rdquo; cadence specifically opens an entry-register that the standing Hegseth-and-Rubio advice cadence specifically has to price against three structural constraints: the US naval posture already carrying the Hormuz-blockade-plus-air-wing-cum-SAG register, the Houthi-redoubt geography the trailing-cycle March 2025 air campaign specifically did not break, and the Chinese-and-Russian cross-reference against a widened Gulf theatre. Read as airport-attack bulletin the file absorbs. Read as statecraft, the Riyadh Red Line is the specific moment at which a hegemon already carrying one major theatre specifically prices entry into a second against a non-state proxy whose patron it specifically has not yet broken, and specifically asks whether the direct-instrument cadence absorbs or specifically overstretches the standing coalition register. The reading draws on Mearsheimer on the great-power overstretch register at which a hegemon with limited structural capacity specifically prices against a non-state proxy whose patron it specifically has not yet degraded to the breakout threshold; on Sun Tzu on the specifically-named discipline against prolonged campaigns and the specifically-named counsel against assaulting walled positions; on Greene&rsquo;s Law 23 on concentrating force against the center and Law 22 on surrendering-to-recover when the direct instrument runs the exhaustion cycle; on Dalio&rsquo;s big cycle on the imperial-overreach register against the trailing-cycle fiscal arithmetic; and on Lee Kuan Yew on the discipline between the direct instrument and the alliance-management cadence a Gulf-state principal specifically absorbs.</div>
+    </div>
+  </div>
+
+  <article class="story">
+    <div>
+      <h2 class="headline">The Riyadh <em>Red Line</em></h2>
+      <p class="deck">Begin with the Saturday and the terminal. Saturday 10 October 2026, roughly 18:30 local, a Houthi-fired ballistic missile penetrates the Patriot-and-THAAD intercept geometry above King Khalid International Airport in Riyadh and detonates on the Terminal-3-cum-Terminal-4 interior shared by the domestic cadence. The Saudi General Authority of Civil Aviation closes the airport. Twelve people are specifically named dead and more than three hundred wounded, among them critical cases on arrival to King Fahad Medical City. The strike is the second successful Houthi hit on the airport inside a fortnight after the Thursday 8 October strike that killed three (including a Saudia pilot), and the deadliest Houthi attack on a Gulf-Arab capital since the US-Iran war opened in April. On Sunday 11 October, President Trump specifically says from the South Lawn: &ldquo;We&rsquo;re going to look at it,&rdquo; followed by &ldquo;We just found out about the recent attack. So we&rsquo;ll make a decision. We move very quickly.&rdquo; Behind the sentence sits a specifically-visible configuration. CENTCOM has specifically carried the Hormuz naval blockade since 13 July 2026 under Trump&rsquo;s standing 20-per-cent-toll-plus-redirect register, with seven commercial vessels redirected and one disabled by Thursday 20 July; the Saudi-led coalition specifically pushed a September-and-October offensive against Houthi gains on the western Red-Sea coast (Mukha, Bab-el-Mandeb), triggering the Riyadh-cum-Jeddah retaliation register the trailing-cycle 2019-to-2022 cadence specifically did not carry; and the standing Pentagon register under Secretary Hegseth specifically runs the force-structure cadence through a Pacific-and-Gulf two-theatre configuration without the Yemen-air-campaign appropriation the March-2025 Rough Rider operation specifically closed on 6 May 2025. The Riyadh Red Line is the specific moment at which a hegemon already carrying one major theatre specifically prices entry into a second against a non-state proxy whose patron it specifically has not yet broken.</p>
+
+      <h3 class="article-subhead">Mearsheimer on <em>the overstretch register</em>.</h3>
+      <p>Mearsheimer&rsquo;s offensive-realism discipline on the great-power overstretch register runs onto the Trump &ldquo;we move very quickly&rdquo; cadence with specific sharpness. The claim: a hegemon with limited structural capacity against a non-state proxy whose patron it has specifically not yet degraded to the breakout threshold specifically prices entry into a second theatre against the standing capacity-and-opportunity-cost register of its primary one. The 2026 configuration delivers both ends. The US naval posture already carries the Hormuz-blockade-plus-air-wing-cum-Surface-Action-Group register that opened on 13 July; the Pacific-cum-Taiwan deterrence cadence specifically prices against a two-carrier-group deployment the April-to-June-2026 Iran air campaign specifically compressed; and the Houthi-redoubt geography (the Marran massif, the Sanaa-and-Saada mountain cadence, the Iranian-supplied Qader-and-Palestine-ballistic-missile register) specifically absorbed the March-2025 Rough Rider air campaign over 52 days without specifically breaking the organisation. The Mearsheimer corollary is specific: a direct US kinetic entry against the Houthis without first degrading the Iranian patron-register to the breakout threshold specifically runs the campaign into the trailing-cycle March-2025-to-May-2025 attrition register, in which the direct-instrument cost (a reported $1 billion inside the first three weeks against the standing stockpile cadence) specifically runs ahead of the political-register result. The specific tell inside the fortnight is whether a specifically-named CENTCOM Air-Tasking-Order against Yemeni fixed targets specifically opens above the standing Hormuz-blockade cadence, or whether Trump specifically runs the &ldquo;we&rsquo;ll make a decision&rdquo; register through the standing Saudi-direct-sales cadence (Patriot-interceptors, THAAD-reload, F-15EX-cum-F-35-package) without a direct US-strike register.</p>
+
+      <h3 class="article-subhead">Sun Tzu on <em>the walled position</em>.</h3>
+      <p>Sun Tzu&rsquo;s discipline on prolonged campaigns and the specifically-named counsel against assaulting walled positions runs onto the Yemeni theatre with specific force. The claim from the Attack-by-Stratagem chapter: when the general cannot restrain his impatience and specifically orders the direct assault on the fortified position, one-third of his men are slain and the position is specifically not taken. The Houthi-redoubt specifically is that position in the Sun-Tzu register: a non-state proxy whose military-and-political cadence specifically disperses into mountain-and-tunnel geography the direct air-and-cruise-missile instrument has specifically not broken through 52 days of March-to-May-2025 operations and specifically did not break through the Saudi-led 2015-to-2022 campaign at the cost of approximately $500 million per month to the Saudi exchequer. The Sun-Tzu corollary is specific: the direct US instrument specifically has to run through the Houthi-Iranian supply register (the Qader-and-Palestine export cadence through the Oman-and-Yemen-coast arrival register) at the specifically-named port-and-interdiction level rather than through the fixed-target air-campaign one. The deeper Sun-Tzu discipline, the one Trump&rsquo;s &ldquo;we move very quickly&rdquo; register specifically prices against, is that a campaign specifically opened inside the audience-visible register of a two-day news cycle after a specifically-visible civilian-casualty event specifically compresses the planning cadence into the exhaustion-cycle, and specifically does not deliver the political terms the proximate attack specifically prices against. The specific tell is whether the entry decision specifically runs through the National Security Council register above the two-week planning threshold, or specifically through the Oval-Office-plus-Saudi-call cadence inside the audience-visible register the Houthi strike specifically opened.</p>
+
+      <h3 class="article-subhead">Greene&rsquo;s Law 22 on <em>surrender to recover</em>.</h3>
+      <p>Greene&rsquo;s 48 Laws discipline on Law 22 &mdash; use the surrender tactic, transforming weakness into power &mdash; runs onto Trump&rsquo;s decision register in a non-obvious direction. The audience-visible configuration specifically prices against Law 15 (crush your enemy totally) and Law 23 (concentrate your forces); the direct-instrument reading would call for an air campaign against the Houthis after the Riyadh strike. The Greene-Law-22 reading is specific: the standing US-cum-Saudi configuration specifically carries the capability to deliver a kinetic response but specifically does not carry the capability to translate kinetic effect into political terms against a non-state proxy whose patron register the Hormuz-blockade already specifically compresses. The Law-22 move is specifically not retreat; it is the specifically-named conversion of the audience-visible civilian-casualty event into the structural-register cadence (Saudi Patriot-interceptor-and-THAAD-reload, a specifically-named F-35-package re-opening, a specifically-named CENTCOM-cum-Saudi joint-targeting cell against the Houthi command cadre, a specifically-named Iranian-asset tightening above the 13 July blockade register) that specifically compresses the Houthi operational register without specifically opening the second-front cost. The deeper Greene discipline, the one Law 22 specifically carries against Law 15 in this configuration, is that a hegemon whose fiscal arithmetic specifically compresses against a second-front cadence specifically has to run the compression through the proxy-register (the Saudi one), not the direct-instrument one. The specific tell is whether a specifically-named Saudi arms-package above the trailing-cycle cadence specifically opens inside the fortnight, or Trump specifically runs the direct-instrument register against the standing Pentagon-and-NSC counsel.</p>
+
+      <h3 class="article-subhead">Dalio on <em>the imperial-overreach register</em>.</h3>
+      <p>Dalio&rsquo;s big-cycle discipline on the imperial-overreach register runs onto the Trump-era US configuration with specific force. The claim: a late-cycle hegemon whose fiscal register specifically runs the 6.6-per-cent-of-GDP deficit above the structural-primary-balance baseline, whose military posture specifically carries the Pacific-and-Gulf two-theatre configuration against a declining industrial-base register, and whose alliance cadence specifically prices against both the Gulf-partner and the Pacific-partner cross-reference specifically approaches the overreach threshold at which a third active front specifically breaks the structural arithmetic. The 2026 configuration delivers both ends. The Hormuz blockade since 13 July has specifically carried a reported USD 1.2-to-1.6 billion monthly operating cost against the trailing-cycle naval-presence baseline; the Iran air campaign (April to June) specifically consumed the Patriot-GEM-T and THAAD-reload inventory below the standing Pacific-deterrence baseline; the standing FY2026 continuing-resolution register specifically does not open a Yemen-air-campaign supplemental appropriation above the March-2025 Rough Rider cost line. The Dalio corollary is specific: the second-front cadence specifically runs through the structural-fiscal register against a trailing-cycle Treasury-market cadence that the standing 10-year yield-and-dollar register specifically prices; a specifically-named open-ended Yemen air campaign specifically opens the overreach-register above the trailing-cycle baseline. The specific tell is whether a specifically-named FY2027 Yemen-cum-Gulf supplemental specifically opens inside Q4 above the trailing-cycle continuing-resolution baseline, or specifically runs the Saudi-direct-sales cadence through the standing Mutual-Defence-Agreement framework without a direct US appropriation.</p>
+
+      <h3 class="article-subhead">What the reading <em>expects</em>.</h3>
+      <p>Base case through the fortnight and into Q4-and-Q1 2027: Trump specifically runs the &ldquo;we&rsquo;ll make a decision&rdquo; register through the standing Saudi-direct-sales cadence (Patriot-interceptor-and-THAAD-reload, F-35-package re-opening, specifically-named joint-targeting cell against the Houthi command cadre) without specifically opening a direct US-strike register against Houthi fixed targets inside the fortnight, with the specific tell being whether an Air-Tasking-Order against Yemeni fixed targets specifically opens above the standing Hormuz-blockade cadence; the Saudi-led coalition specifically runs the September-and-October offensive against the Houthi western-Red-Sea gains without specifically opening a Hodeidah-port direct-assault cadence, with the specific tell being whether a specifically-named UAE-cum-Southern-Transitional-Council Aden-flank push specifically opens above the trailing cadence; CENTCOM specifically runs the Hormuz-blockade register through the Chinese-and-Indian off-taker cadence without specifically opening a direct maritime-interdiction above the Monday-to-Monday redirect-and-disable baseline; the standing Lloyd&rsquo;s war-risk premium cadence specifically runs above the April-to-June baseline against the Red-Sea-and-Hormuz register, with the specific tell being whether a specifically-named insurance-syndicate withdrawal from the Gulf-of-Oman transit opens above the trailing baseline; the Brent-and-Dubai-crude register specifically runs the standing 85-to-90-dollar band without specifically opening a Riyadh-strike supply-shock premium above the April-cycle baseline; Trump specifically does not open a specifically-named direct-ground register against the Houthis inside Q4, with the specific tell being whether a specifically-named Pentagon-cum-SOCOM special-operations deployment above the trailing cadence opens; the standing Khamenei-and-IRGC cadence specifically runs the Houthi-supply register through the Oman-and-Yemen-coast arrival cadence without specifically opening a direct Iranian-ballistic-missile register against Riyadh-cum-Jeddah; and the standing Hegseth-and-Rubio advice cadence specifically prices the direct-strike register below the Saudi-arms-package threshold. What would collide the reading: a specifically-named Trump executive order opening an Air-Tasking-Order against Yemeni fixed targets inside the fortnight above the Hormuz-blockade cadence; a specifically-named Houthi strike against the Aramco-Abqaiq-cum-Khurais register above the September-2019 cadence; a specifically-named Iranian direct-ballistic-missile register against the Saudi capital above the proxy register; a specifically-named Chinese-cum-Russian naval cross-reference against the Hormuz-blockade register; a specifically-named Saudi-cum-UAE direct-ground deployment against the Hodeidah port register above the standing offensive cadence. The base case is that the Riyadh Red Line specifically runs through the Saudi-direct-sales cadence rather than the direct US-strike register, that the Mearsheimer overstretch register specifically prices the second-front cost below the hegemon&rsquo;s willingness-to-pay threshold inside Q4, and that the Sun-Tzu walled-position discipline specifically carries the Houthi theatre as the specifically-named counsel against assaulting the fortified position.</p>
+
+      <blockquote class="article-quote">&ldquo;There is no instance of a country having benefited from prolonged warfare.&rdquo; &mdash; Sun Tzu, <em>The Art of War</em>, Chapter II &middot; on a Wednesday on which the Riyadh terminal register specifically carried its first direct kinetic hit, Trump specifically ran the &ldquo;we move very quickly&rdquo; cadence against the standing Hormuz-blockade register, and the Houthi-redoubt geography specifically absorbed the trailing-cycle 52-day Rough Rider air campaign.</blockquote>
+    </div>
+
+    <aside class="sidebar">
+      <div class="side-panel">
+        <div class="side-label">Actors</div>
+        <h4 class="side-title">Who <em>the Red Line</em> names.</h4>
+        <ul class="actor-list">
+          <li><span class="actor-role">Trump &middot; the Oval</span> President Donald J. Trump (US) &amp; the Sunday &ldquo;we&rsquo;re going to look at it&rdquo; register from the South Lawn &mdash; the hegemon-principal whose entry-decision specifically prices against the standing Hormuz-blockade cadence and the Pacific-deterrence opportunity-cost. The tell is whether an Air-Tasking-Order against Yemeni fixed targets specifically opens inside the fortnight, or the register runs the Saudi-direct-sales cadence through the standing Mutual-Defence-Agreement framework.</li>
+          <li><span class="actor-role">MBS &middot; al-Yamamah</span> Crown Prince Mohammed bin Salman (Saudi Arabia) &amp; the standing Royal-Court-cum-Defence-Ministry cadence after the September-and-October Red-Sea-coast offensive &mdash; the coalition-principal whose standing September push on Mukha and Bab-el-Mandeb specifically opened the Houthi retaliation register. The tell is whether a Hodeidah-port direct-assault cadence specifically opens inside Q4 above the trailing offensive register, or MBS specifically runs the direct-sales-plus-US-air-defence cadence.</li>
+          <li><span class="actor-role">Abdul-Malik &middot; Marran</span> Houthi leader Abdul-Malik al-Houthi &amp; the standing Sanaa-and-Saada political-military cadence &mdash; the proxy-principal whose Qader-and-Palestine-ballistic-missile register specifically carried the second successful Riyadh strike inside a fortnight. The tell is whether an Aramco-Abqaiq-cum-Khurais register strike opens above the September-2019 cadence, or the Houthi cadence specifically compresses to the Saudi-airport-cum-naval register.</li>
+          <li><span class="actor-role">Kurilla &middot; CENTCOM</span> General Michael E. Kurilla (US Central Command) &amp; the standing MacDill desk running the Hormuz-blockade register since 13 July &mdash; the operational-principal whose seven-redirect-plus-one-disable baseline specifically runs the maritime-interdiction register. The tell is whether a direct maritime-interdiction above the Monday-to-Monday baseline opens inside the fortnight, or Kurilla specifically runs the standing redirect-and-disable cadence.</li>
+          <li><span class="actor-role">Khamenei &middot; Beit-Rahbari</span> Supreme Leader Ayatollah Ali Khamenei (Iran) &amp; the IRGC Aerospace Force under Brig. Gen. Hajizadeh &mdash; the patron-principal whose Qader-and-Shahed export cadence specifically supplies the Houthi ballistic register. The tell is whether a specifically-named direct Iranian-ballistic-missile register against Riyadh-cum-Jeddah opens above the proxy register, or the Iranian cadence specifically runs the Houthi cadence as the audience-visible instrument.</li>
+          <li><span class="actor-role">Hegseth &middot; the Pentagon</span> Secretary Pete Hegseth (US Defence) &amp; the standing Office-of-the-Secretary cadence &mdash; the counsel-principal whose force-structure register specifically prices against a Pacific-and-Gulf two-theatre configuration. The tell is whether a specifically-named FY2027 Yemen-cum-Gulf supplemental opens inside Q4, or Hegseth specifically runs the standing Mutual-Defence-Agreement-plus-direct-sales cadence against the direct-entry register.</li>
+        </ul>
+      </div>
+
+      <div class="side-panel side-note">
+        <div class="side-label">Reading Note</div>
+        <h4 class="side-title">The <em>lenses</em> used.</h4>
+        <p><strong>What&rsquo;s driving this.</strong> Two layers do the real work. <em>Structural</em>: Mearsheimer on the great-power overstretch register. A hegemon already carrying the Hormuz-blockade since 13 July, with the April-to-June Iran air campaign having specifically compressed Patriot-GEM-T and THAAD-reload inventory below the standing Pacific-deterrence baseline, specifically approaches the capacity-and-opportunity-cost ceiling at which a third active front breaks the structural arithmetic. The direct US entry into the Yemeni theatre specifically has to run against a Houthi-redoubt geography the 52-day March-2025 Rough Rider air campaign specifically did not break and the Saudi-led 2015-to-2022 campaign specifically absorbed at approximately $500 million per month. <em>Tactical</em>: Greene&rsquo;s Law 22 on surrender-to-recover. The audience-visible register prices for direct kinetic response, but the structural register specifically rewards converting the civilian-casualty event into Saudi-direct-sales cadence (Patriot-and-THAAD reload, F-35-package re-opening, joint-targeting cell against the Houthi command cadre) and tighter Iranian-asset interdiction &mdash; because the hegemon cannot translate kinetic effect into political terms against a non-state proxy whose patron the Hormuz-blockade already compresses.</p>
+        <p><strong>What&rsquo;s not driving this.</strong> Not primarily a Houthi-strategic-success story &mdash; the organisation specifically does not have the capacity to force the political terms it wants out of Saudi Arabia or the US; the Riyadh strike runs through the audience-visible retaliation register against the Saudi Red-Sea-coast offensive, not a theory-of-victory. And it is not primarily an Iran-deterrence story in isolation; the Hormuz blockade since 13 July already runs the primary Iranian-compression instrument, and a Yemen-air-campaign specifically does not compound on it inside Q4 above the trailing-cycle Rough Rider baseline.</p>
+        <p><strong>What would break this reading.</strong></p>
+        <ul>
+          <li>A specifically-named Trump executive order opening an Air-Tasking-Order against Yemeni fixed targets inside the fortnight above the Hormuz-blockade cadence.</li>
+          <li>A specifically-named Houthi strike against the Aramco-Abqaiq-cum-Khurais register above the September-2019 cadence that specifically forces a direct US air-and-naval entry.</li>
+          <li>A specifically-named Iranian direct-ballistic-missile register against Riyadh-cum-Jeddah above the proxy register that specifically converts the second-front register into the standing Iran theatre.</li>
+          <li>A specifically-named Chinese-cum-Russian naval cross-reference against the Hormuz-blockade register that specifically compresses the US willingness-to-widen the Gulf theatre.</li>
+        </ul>
+        <p><strong>Sources used.</strong> Mearsheimer on the overstretch register supplies the load-bearing structural claim: a hegemon whose industrial-and-fiscal base is already carrying one active major theatre specifically prices entry into a second against the capacity-and-opportunity-cost of its primary one, and the Pacific-cum-Gulf two-theatre configuration specifically prices below the willingness-to-pay threshold for an open-ended Yemen campaign. Sun Tzu on the walled position names the Yemeni-redoubt geography the direct instrument specifically has not broken through 52 days of March-to-May 2025 operations and specifically did not break through the Saudi-led 2015-to-2022 campaign. Greene&rsquo;s Law 22 on surrender-to-recover names the Trump decision-register: convert the audience-visible civilian-casualty event into the structural-register Saudi-direct-sales cadence rather than open the second-front cost. Dalio on the imperial-overreach register names the fiscal-and-posture arithmetic the direct-entry register specifically runs against: a 6.6-per-cent-of-GDP deficit, a trailing-cycle naval presence already running the Hormuz-blockade monthly cost, and a continuing-resolution register that specifically has not opened a Yemen-air-campaign supplemental.</p>
+      </div>
+    </aside>
+  </article>
+
+  <section class="bet-panel s1">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think &mdash; and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> the United States specifically conducting a direct air or missile strike against a target inside Yemen before 31 December 2026 reads in the moderate-to-low band because the Mearsheimer overstretch register specifically prices the second-front cost below the hegemon&rsquo;s willingness-to-pay threshold, the Sun-Tzu walled-position discipline specifically carries the Houthi-redoubt as the counsel against assaulting the fortified position, and the Greene-Law-22 register specifically rewards the Saudi-direct-sales cadence over the direct-instrument cadence; the Houthis specifically striking the Saudi Aramco Abqaiq-cum-Khurais register before 31 December 2026 reads in the low band because the trailing-cycle 2019 September cadence specifically has not reopened despite the Red-Sea-coast offensive and because the Houthi targeting cadence specifically runs the airport-and-naval register as the audience-visible instrument; a specifically-named US-and-Houthi ceasefire agreement declared before 31 December 2026 reads in the very-low band because the Riyadh strike specifically opens the retaliation register rather than the negotiation one and because the standing CENTCOM Hormuz-blockade cadence specifically prices against a Houthi political-cadence re-engagement inside Q4.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="us-strike-yemen-dec2026"
+             data-market-slug=""
+             data-market-question="Will the United States conduct a direct air or missile strike against a target inside Yemen before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="36"
+             data-stratagem-value="36"
+             data-stratagem-because="Trump moves quickly rhetoric runs below Pentagon-counsel threshold; Saudi-direct-sales cadence preferred; Hormuz blockade is primary Iranian compression."
+             data-stratagem-rubric="POWER: Pacific-and-Gulf two-theatre caps willingness-to-pay | ECON: FY2027 continuing resolution no Yemen supplemental yet | INST: NSC and Hegseth advice runs below direct-strike threshold | STRAT: Greene Law 22 rewards proxy register over direct instrument | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/will-the-us-conduct-military-strikes-against-the-houthis-in-2026" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; US strike against Houthis in Yemen by Dec 31
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="us-strike-yemen-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="us-strike-yemen-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="houthi-aramco-strike-dec2026"
+             data-market-slug=""
+             data-market-question="Will the Houthis successfully strike the Saudi Aramco Abqaiq or Khurais facilities before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="12"
+             data-stratagem-value="12"
+             data-stratagem-because="2019 cadence has not reopened despite Red Sea offensive; Houthi targeting runs airport and naval register as audience-visible instrument."
+             data-stratagem-rubric="POWER: Patriot-and-THAAD intercept geometry defends Eastern Province | ECON: Riyadh register prices higher political cost than oil register | INST: IRGC supply cadence runs ballistic register below Abqaiq class | STRAT: Houthi targeting prefers audience-visible airport register | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Houthi strike on Aramco Abqaiq by Dec 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="houthi-aramco-strike-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="houthi-aramco-strike-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="us-houthi-ceasefire-dec2026"
+             data-market-slug=""
+             data-market-question="Will the United States and the Houthis declare a formal ceasefire agreement before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="8"
+             data-stratagem-value="8"
+             data-stratagem-because="Riyadh strike opens retaliation not negotiation register; Hormuz blockade prices against Houthi political re-engagement; Saudi offensive runs active."
+             data-stratagem-rubric="POWER: Houthi political-cadence runs through Iranian patron register | ECON: Hormuz blockade since July 13 compresses Iranian capacity | INST: May 2025 ceasefire framework specifically expired on US-Iran war | STRAT: audience-visible retaliation register runs above negotiation register | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; US-Houthi ceasefire by Dec 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="us-houthi-ceasefire-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="us-houthi-ceasefire-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="reader-notes s1">
+    <div class="rn-label">Reader&rsquo;s marginalia &middot; Section I</div>
+    <h4 class="rn-title">Your <em>note</em> on the Riyadh Red Line.</h4>
+    <textarea data-note-id="sec-i" placeholder="Which audience-visible civilian-casualty event has specifically compressed your own planning cadence into a two-day news-cycle decision window &mdash; and which structural-register conversion (the proxy register, the arms-package register, the supply-interdiction register) specifically absorbs the audience pressure without specifically opening the direct-instrument cost? Where in your own operating theatre does the overstretch register already price a second-front cost against the trailing-cycle fiscal-and-capacity baseline; which walled position does the direct instrument specifically have to assault; and which Sun-Tzu or Greene-Law-22 move would specifically route the compression through the counterpart&rsquo;s patron register rather than through the proximate retaliation register the audience specifically expects?"></textarea>
+  </div>
+
+  <div class="article-quote q1">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The useful thing to notice about the Riyadh Red Line is not whether the 10 October terminal death-count specifically closes at twelve, fourteen or sixteen by Thursday, and not whether Trump specifically pronounces the direct-instrument sentence inside the fortnight. It is that a hegemon already carrying the Hormuz naval blockade since 13 July, with the April-to-June Iran air campaign specifically compressing Patriot-GEM-T and THAAD-reload inventory below the standing Pacific-deterrence baseline, is specifically pricing entry into a second theatre against a non-state proxy whose patron it has specifically not yet degraded to the breakout threshold &mdash; after the second successful Houthi missile hit on King-Khalid-International inside a fortnight. Mearsheimer names the deepest claim: a hegemon with limited structural capacity specifically prices entry into a second theatre against the capacity-and-opportunity-cost register of its primary one, and the Pacific-cum-Gulf two-theatre configuration specifically runs below the willingness-to-pay threshold for an open-ended Yemen campaign the 52-day March-2025 Rough Rider operation specifically failed to close. Sun Tzu names the terrain: the Marran-and-Sanaa-and-Saada mountain-and-tunnel geography is the walled position the direct air-and-cruise-missile instrument has specifically not broken through two previous campaigns, and the Attack-by-Stratagem chapter&rsquo;s counsel against assaulting fortified positions sits inside the planning cadence rather than against it. Greene&rsquo;s Law 22 names the audience-visible-to-structural conversion: the civilian-casualty event rewards a Saudi-direct-sales cadence (Patriot-and-THAAD reload, F-35-package re-opening, specifically-named joint-targeting cell against the Houthi command cadre, tighter Iranian-asset interdiction above the 13 July blockade register) that specifically compresses the Houthi operational register without specifically opening the second-front cost. Dalio names the arithmetic: a 6.6-per-cent-of-GDP deficit, a trailing-cycle naval presence already running the Hormuz-blockade monthly cost, and a continuing-resolution register that specifically has not opened a Yemen-air-campaign supplemental specifically prices against the direct-instrument register. The reader who watches the daily Riyadh-and-Houthi-strike bulletin is reading the moment. The reader who watches whether an Air-Tasking-Order against Yemeni fixed targets specifically opens inside the fortnight, whether a specifically-named FY2027 Yemen-cum-Gulf supplemental appropriation opens above the continuing-resolution baseline, whether a specifically-named Iranian direct-ballistic-missile register against Riyadh-cum-Jeddah specifically converts the second-front register into the standing Iran theatre, whether a specifically-named Houthi strike against the Aramco Abqaiq-cum-Khurais register opens above the 2019 September cadence, and whether a specifically-named Chinese-cum-Russian naval cross-reference against the Hormuz-blockade register compresses the US willingness-to-widen the Gulf theatre, is reading the substance the Red Line is sized to carry.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Riyadh Red Line</cite>
+  </div>
+
+
+
+
+  <div class="section-div s2" id="sec-ii">
+    <div class="rom">II.</div>
+    <div class="title"><em>Economics</em> &middot; The Ledger of Capital</div>
+    <div class="meta">
+      <div><strong>Filed</strong> the Reserve Bank of India at Mint Street in Mumbai (Governor Sanjay Malhotra&rsquo;s desk running the Wednesday 7 October MPC decision raising the repo rate twenty-five basis points to 5.50 per cent and the stance-pivot from &ldquo;neutral&rdquo; to &ldquo;calibrated tightening&rdquo;), the Monetary Policy Committee six-member cadence (unanimous on the hike, four-to-two on the stance pivot with the external-member cadence under Dr. Nagesh Kumar and Dr. Saugata Bhattacharya running the dissent register), Deputy Governor for Monetary Policy Michael Debabrata Patra (the standing policy-cum-research cadence), Deputy Governor Rajeshwar Rao (the standing financial-stability register), the Ministry of Finance under Minister Nirmala Sitharaman at North Block (the standing fiscal-and-growth register against a 4.4-per-cent-of-GDP FY2027 deficit target and a 7.1-per-cent GDP growth cadence), the Chief Economic Adviser V. Anantha Nageswaran (the standing economic-survey register), the Prime Minister&rsquo;s Office under Narendra Modi at South Block (the standing political-register against the Bihar-and-Bengal election cycles and the trailing-cycle 2024 Lok Sabha coalition arithmetic), the Securities and Exchange Board under Chairperson Madhabi Puri Buch (the standing capital-markets register against the Nifty-and-Sensex reaction function), the IRDAI and PFRDA cadences (the standing insurance-and-pension register against the ten-year G-Sec cadence), with cross-files from the Ministry of External Affairs under Minister S. Jaishankar (the standing Delhi-and-Washington register against the Iranian-oil import compression under the Hormuz-blockade cadence), the Ministry of Petroleum under Minister Hardeep Puri (the standing crude-import register against a 85-plus-dollar Brent cadence), the Chinese-and-Indian off-taker register against Iranian oil under the standing OFAC primary-sanctions cadence, the Mumbai Interbank Offered Rate (MIBOR) cadence, the ten-year G-Sec open at approximately 7.25 per cent on the Monday-and-Tuesday cadence, the ratings register (Moody&rsquo;s Baa3, S&amp;P BBB-, Fitch BBB-), the standing CPI-and-WPI release register through the MoSPI Monday 13 October print, and the IMF-and-World-Bank Bangkok Annual-Meetings cadence under the standing Article-IV-cum-WEO register against the Indian sovereign</div>
+      <div>The Mint Street Pivot &middot; One week after the Reserve Bank of India&rsquo;s Monetary Policy Committee specifically raised the repo rate twenty-five basis points to 5.50 per cent and specifically pivoted the stance from &ldquo;neutral&rdquo; to &ldquo;calibrated tightening&rdquo; on Wednesday 7 October &mdash; the first rate hike since February 2023 and the first stance-pivot of the Modi-second-term central-bank cadence &mdash; the Indian monetary register specifically runs through a configuration whose structural pressure the trailing-cycle five-and-a-quarter-year cadence has specifically not carried since the pre-pandemic cycle. The specifically-named compression carries four instruments. First, retail CPI inflation specifically rose from 4.45 per cent in July 2026 to 4.82 per cent in August and the DBS-and-SBI consensus specifically prices the September print at the 5.65-to-5.70 per cent band against a 4-per-cent-plus-or-minus-2 target the RBI specifically carries through the April-2026-to-March-2031 window; the Monday 13 October MoSPI release specifically prints inside the top end of the band. Second, the FY2027 CPI forecast specifically rose from 5.0 to 5.2 per cent against a trailing-cycle Dalio-big-cycle cadence that specifically prices against the standing Hormuz-blockade cadence through the Brent-and-Dubai crude register at 85-plus dollars. Third, the Indian crude import register (approximately 86 per cent of consumption, with India as the second-largest Iranian-oil off-taker before the April blockade) specifically carries the compression through the Russian-cum-Saudi-cum-UAE substitution register against the trailing-cycle Chabahar-and-Mumbai arrival cadence. Fourth, the stance pivot specifically opens the register for a second-and-third-rate-hike cadence through the 3-5 December and the February 2027 MPC meetings against the trailing-cycle MUFG-and-DBS consensus that specifically prices the standing cycle below the 6-per-cent terminal register. Read as policy-decision bulletin the file absorbs. Read as statecraft, the Mint Street Pivot is the specific moment at which a middle-order emerging economy whose growth register specifically runs ahead of the structural inflation-and-fiscal baseline specifically pivots the central-bank cadence into the tightening register against the exogenous Hormuz-blockade-cum-crude-register pressure that specifically compresses its import-cost arithmetic. The reading draws on Dalio&rsquo;s big cycle on the emerging-economy monetary-pivot register against an exogenous commodity-shock cadence; on Munger&rsquo;s mental models on the incentive-caused bias of a central-bank cadence running the stance-register against a political-register expectation; on Lee Kuan Yew on the small-state-cum-first-order-economy discipline between the monetary-register and the industrial-and-energy-sovereignty cadence; on Clausewitz on the specifically-named friction register at which a domestic policy cadence specifically meets an exogenous shock; and on Confucius on the political-economic ethics of a central-bank register against the household-basket cost.</div>
+    </div>
+  </div>
+
+  <article class="story">
+    <div>
+      <h2 class="headline">The Mint Street <em>Pivot</em></h2>
+      <p class="deck">Begin with the Wednesday and the number. Wednesday 7 October 2026, 10:00 IST, the Reserve Bank of India&rsquo;s six-member Monetary Policy Committee votes unanimously to raise the repo rate by twenty-five basis points to 5.50 per cent, and splits four-to-two to pivot the stance from &ldquo;neutral&rdquo; to &ldquo;calibrated tightening.&rdquo; The Standing Deposit Facility rises to 5.25, the Marginal Standing Facility and Bank Rate to 5.75. The hike is the first since February 2023 and the first stance-pivot of the Modi-second-term central-bank cadence under Governor Sanjay Malhotra (appointed December 2024). Behind the number sits a specifically-visible compression. Headline CPI inflation rose from 4.45 per cent in July 2026 to 4.82 per cent in August, with the DBS and SBI consensus pricing the Monday 13 October MoSPI September print at the 5.65-to-5.70 per cent band against a 4-per-cent-plus-or-minus-2 tolerance; the FY2027 CPI forecast rose from 5.0 to 5.2 per cent at the same meeting. The pressure is primarily exogenous. The standing CENTCOM Hormuz-blockade cadence since 13 July 2026 and the US-Iran war have compressed Iranian-oil availability against the Indian import register (approximately 86 per cent of consumption, India as second-largest Iranian-oil off-taker before April); the Russian-cum-Saudi-cum-UAE substitution register runs the Dubai-and-Brent benchmark at the 85-plus-dollar band, with the Rupee at the standing 88.5-per-dollar cadence against the trailing-cycle 85-level baseline. The Malhotra MPC statement specifically names elevated crude, geopolitical tensions, and renewed domestic inflation pressure. SBI Research expects CPI to cross 6.5 per cent in October and November; Bank of Baroda expects 50-to-75 basis points of additional hikes starting in December. The Mint Street Pivot is the specific moment at which a middle-order emerging economy whose growth register specifically runs ahead of the structural inflation-and-fiscal baseline specifically pivots the central-bank cadence into the tightening register against an exogenous Hormuz-blockade-cum-crude-register compression that its own instruments specifically cannot reach.</p>
+
+      <h3 class="article-subhead">Dalio on <em>the emerging-economy monetary pivot</em>.</h3>
+      <p>Dalio&rsquo;s big-cycle discipline on the emerging-economy monetary-pivot register runs onto the Mint Street decision with specific sharpness. The claim: an emerging economy whose growth register specifically runs above the structural inflation-and-current-account baseline specifically carries the monetary pivot through the exogenous commodity-and-dollar cadence rather than through the domestic demand-register. The 2026 configuration delivers both ends. The Indian current-account deficit specifically ran at 1.1 per cent of GDP in Q2 FY2027 against a trailing-cycle 0.7-per-cent baseline, specifically driven by the crude-import compression under the Hormuz-blockade register; the Rupee specifically compressed from 85-per-dollar in April 2026 to the standing 88.5-per-dollar cadence against the DXY-and-Treasury-yield register; the ten-year G-Sec specifically opened at approximately 7.25 per cent on the Monday-and-Tuesday cadence against a trailing-cycle 6.95 baseline. The Dalio corollary is specific: the Mint Street Pivot is specifically not a domestic-demand compression instrument (the Indian consumer-and-credit cadence runs below the overheating threshold); it is a currency-and-import-cost defence instrument against the exogenous crude-and-dollar register. The specific tell is whether the Rupee specifically breaks below 90.0 against the dollar inside the fortnight, which would specifically open a second-and-third rate-hike cadence through the 3-5 December MPC meeting above the trailing-cycle MUFG-and-DBS consensus; a specifically-named compression at the 90-plus level specifically prices the Dalio-emerging-economy monetary-pivot above the standing calibrated-tightening register.</p>
+
+      <h3 class="article-subhead">Munger on <em>the incentive-caused bias of the stance</em>.</h3>
+      <p>Munger&rsquo;s discipline on incentive-caused bias runs onto the Malhotra stance-pivot with specific force. The claim: when an institutional cadence specifically has to run against an exogenous shock the institution&rsquo;s own instruments specifically cannot reach, the register that absorbs the political-cum-market expectation is specifically the stance register rather than the policy-rate one. The 2026 configuration delivers that. The twenty-five-basis-point hike is specifically small against the DBS September-print forecast of 5.7-per-cent CPI; the terminal rate the SBI-and-Bank-of-Baroda cadence specifically prices (6.0-to-6.25 per cent through Q1 FY2028) is specifically small against the trailing-cycle 2022-and-2023 cadence that specifically ran the repo-rate from 4.00 to 6.50 across fourteen months. The Munger reading is specific: the stance-pivot from neutral to calibrated-tightening on the four-to-two cadence specifically carries the market-expectation register against the policy-rate register, and the specifically-named audience-visible instrument the Mumbai-and-Delhi primary-dealer-and-foreign-portfolio cadence specifically reads is the stance one, not the twenty-five-basis-point one. The Munger corollary: the specifically-named incentive of the central-bank cadence is to run the audience-visible-register compression against the exogenous shock without specifically compressing the growth-register through the full policy-rate pivot the trailing-cycle 2022-and-2023 cadence specifically carried. The specific tell is whether the two-dissenting-external-members cadence (Kumar and Bhattacharya on the stance) specifically expands into a hike-dissent register at the 3-5 December meeting against the specifically-named Malhotra-and-Patra internal register, or specifically absorbs inside the trailing-cycle consensus register.</p>
+
+      <h3 class="article-subhead">Lee Kuan Yew on <em>the energy-sovereignty discipline</em>.</h3>
+      <p>LKY&rsquo;s discipline on the small-state-cum-first-order-economy register between the monetary and the industrial-and-energy-sovereignty cadence runs onto the Indian configuration with specific sharpness that the Western-literature-only reading obscures. The LKY claim: an economy whose growth register specifically runs through an import-cost-of-energy register the sovereign specifically does not control carries the structural variable through the energy-sovereignty cadence (strategic reserves, diversified sourcing, nuclear-and-renewable domestic register) rather than through the monetary one. The 2026 configuration delivers the LKY register in the specifically-visible register. India&rsquo;s strategic petroleum reserve runs the specifically-named 9.5-day register against the IEA 90-day benchmark; the Russian-oil import share specifically runs at approximately 38 per cent against the trailing-cycle 2021 1-per-cent baseline; the UAE-and-Saudi share specifically absorbed the Iranian compression above the trailing-cycle 2024 baseline; the Chabahar-port cadence specifically does not run as the alternative-arrival register that the trailing-cycle 2016 bilateral cadence specifically opened. The LKY corollary is specific: the Mint Street Pivot specifically runs the monetary-register against an energy-sovereignty register the trailing-cycle has specifically not expanded above the Dalio-crude-shock threshold; the structural counter-balance specifically has to run through the FY2027 Union Budget energy-security register (specifically-named strategic-petroleum-reserve expansion through Chandikhol-and-Padur, nuclear-cum-Jaitapur-and-Kudankulam cadence, hydrogen-and-renewable register through PM Surya Ghar). The specific tell is whether the Modi cabinet specifically opens a strategic-petroleum-reserve expansion cadence above the standing 2017-and-2024 register inside the FY2027 budget cycle, or specifically runs the import-register through the ad-hoc substitution cadence the trailing-cycle April-to-October register specifically has carried.</p>
+
+      <h3 class="article-subhead">Confucius on <em>the household-basket ethics</em>.</h3>
+      <p>Confucius&rsquo; discipline on the political-economic ethics of the household basket runs onto the Mint Street Pivot with specific force. The Analects&rsquo; standing claim: when the people are poor, the ruler cannot be rich; when the people are rich, the ruler cannot be poor. The Confucian corollary is specific: a monetary register whose primary audience-visible compression specifically runs through the household-basket cost of the median-and-below-median consumer specifically prices against the political-register discipline the trailing-cycle Modi cadence specifically has carried through the Jan Dhan-cum-Direct-Benefit-Transfer cadence. The Indian CPI basket specifically runs 45.9 per cent on food-and-beverages (the specifically-named highest share among G-20 economies), with vegetables at 6.0, pulses at 2.4, cereals at 9.7, and edible oils at 2.9; the compression specifically runs through the median-rural-and-urban basket that specifically carries the Modi political-register. The Confucian reading is specific: the twenty-five-basis-point hike specifically is the smallest instrument that specifically runs the Malhotra register against the household-basket cost without specifically compressing the trailing-cycle MGNREGA-and-PM-Awas political-register below the Bihar-and-Bengal cycle threshold. The specific tell is whether the Modi cabinet specifically opens a food-and-beverage-and-fuel subsidy-register above the standing FY2026 cadence through the November-and-December-and-January Union Budget cadence, or specifically runs the monetary-register as the standalone compression instrument against the household-basket register inside Q4.</p>
+
+      <h3 class="article-subhead">What the reading <em>expects</em>.</h3>
+      <p>Base case through the fortnight and into Q4-and-Q1 FY2027: the Monday 13 October MoSPI CPI print specifically runs inside the 5.6-to-5.8-per-cent band on the standing food-and-beverage-register compression, with the specific tell being whether the vegetables-and-cereals cadence specifically prints above the trailing-cycle August 7.5-and-6.9 register; the Rupee specifically runs the 88-to-89-per-dollar band against the standing DXY-and-Treasury-yield cadence without specifically breaking below 90 inside the fortnight, with the specific tell being whether the RBI specifically opens an intervention cadence above the standing $668 billion forex-reserve register through the Monday-and-Tuesday OFF-OTC cadence; the 3-5 December MPC specifically carries a second twenty-five-basis-point hike to 5.75 against a 4-to-2 or 5-to-1 vote, with the specific tell being whether the two-external-member stance-dissent cadence specifically expands into a hike-dissent register; the February 2027 MPC specifically holds at 5.75 against a specifically-named crude-cum-rupee-stability cadence or specifically carries the third hike to 6.00, with the specific tell being whether SBI-and-Bank-of-Baroda consensus specifically compresses the terminal register below 6.00 inside Q1 FY2028; the standing ten-year G-Sec specifically runs the 7.20-to-7.40 band against the Monday-and-Tuesday cadence without specifically opening a 7.50-plus register; the Nifty-and-Sensex specifically carries the trailing-cycle 85000-and-26500 register through the Q3 FY2027 earnings cadence without specifically breaking below the standing BSE-and-NSE 90-day moving-average register; the standing Treasury-and-OFAC primary-sanctions cadence specifically does not open a direct Indian-off-taker-register against the standing Chinese-cum-Indian cadence inside Q4; the Modi cabinet specifically does not open a food-and-beverage-and-fuel subsidy-register above the FY2026 cadence inside the fortnight. What would collide the reading: a specifically-named Rupee-break below 90 inside the fortnight that specifically opens the Dalio-emerging-economy monetary-pivot above the standing calibrated-tightening register; a specifically-named Brent-cum-Dubai-crude break above 95 inside the fortnight on a Riyadh-escalation cadence that specifically opens the Dalio-crude-shock register above the Russian-cum-Saudi substitution cadence; a specifically-named OFAC primary-sanctions register against the Indian off-taker cadence inside Q4 that specifically compresses the import register below the trailing cycle; a specifically-named Bihar-and-Bengal election-cycle fiscal register above the standing cadence that specifically opens the Confucian-household-basket register above the monetary-register discipline; a specifically-named Chinese-cum-Russian naval cross-reference against the Hormuz-blockade cadence that specifically closes the Iranian-oil substitution register inside Q4. The base case is that the Mint Street Pivot specifically delivers a second twenty-five-basis-point hike inside Q4 on the 3-5 December MPC, that the Dalio-emerging-economy monetary-pivot specifically runs the currency-and-import-cost defence instrument above the domestic-demand register, and that the LKY energy-sovereignty discipline specifically carries the structural counter-balance through the FY2027 Union Budget cadence rather than the monetary register alone.</p>
+
+      <blockquote class="article-quote">&ldquo;In the midst of chaos, there is also opportunity.&rdquo; &mdash; Sun Tzu, <em>The Art of War</em>, Chapter V &middot; on a Wednesday on which the Mint Street cadence specifically carried the first repo-rate hike since February 2023 against a Hormuz-blockade-cum-crude-register compression, the Rupee specifically ran the 88.5-per-dollar cadence against the standing April 85-level baseline, and the Monday MoSPI September print specifically opened the 5.65-to-5.70 CPI band against the 4-per-cent-plus-or-minus-2 tolerance.</blockquote>
+    </div>
+
+    <aside class="sidebar">
+      <div class="side-panel">
+        <div class="side-label">Actors</div>
+        <h4 class="side-title">Who <em>the pivot</em> names.</h4>
+        <ul class="actor-list">
+          <li><span class="actor-role">Malhotra &middot; Mint Street</span> Governor Sanjay Malhotra (RBI, from December 2024) &amp; the standing Mumbai desk &mdash; the central-bank-principal whose Wednesday 7 October MPC decision specifically carried the first repo-rate hike since February 2023 and the first stance-pivot of the Modi-second-term cadence. The tell is whether the 3-5 December MPC specifically carries a second twenty-five-basis-point hike to 5.75, or specifically runs the standing calibrated-tightening register at the hold.</li>
+          <li><span class="actor-role">Patra &middot; Deputy Governor</span> Deputy Governor Michael Debabrata Patra (Monetary Policy) &amp; the standing research-cum-policy cadence &mdash; the technical-principal whose statement framing specifically carries the stance-pivot register against the standing crude-and-dollar cadence. The tell is whether the standing MPC minutes-and-speech register specifically opens a terminal-rate signal above the SBI-and-Bank-of-Baroda consensus inside Q4.</li>
+          <li><span class="actor-role">Sitharaman &middot; North Block</span> Minister Nirmala Sitharaman (Finance) &amp; the standing Ministry-of-Finance cadence against a 4.4-per-cent-of-GDP FY2027 deficit target &mdash; the fiscal-principal whose Union-Budget cadence specifically runs the energy-sovereignty-and-household-basket counter-balance against the monetary register. The tell is whether a food-and-beverage-and-fuel subsidy-register opens above the standing FY2026 cadence inside Q4 against the Bihar-and-Bengal electoral cycle.</li>
+          <li><span class="actor-role">Puri &middot; Petroleum</span> Minister Hardeep Singh Puri (Petroleum and Natural Gas) &amp; the standing crude-import register &mdash; the energy-principal whose cadence specifically runs the Russian-cum-Saudi-cum-UAE substitution register against the Iranian-oil compression under the Hormuz-blockade cadence. The tell is whether a specifically-named strategic-petroleum-reserve expansion cadence opens above the trailing-cycle Chandikhol-and-Padur register inside Q4.</li>
+          <li><span class="actor-role">Modi &middot; South Block</span> Prime Minister Narendra Modi (BJP, third term from June 2024) &amp; the PMO political register &mdash; the executive-principal whose electoral-cycle cadence specifically prices the household-basket register against the monetary one. The tell is whether a specifically-named Bihar-and-Bengal campaign fiscal-register opens above the standing FY2026 cadence inside the enactment calendar.</li>
+          <li><span class="actor-role">Kumar &amp; Bhattacharya &middot; MPC externals</span> External members Dr. Nagesh Kumar and Dr. Saugata Bhattacharya &amp; the two-dissent stance-register &mdash; the counter-register principals whose four-to-two stance-dissent specifically opened the audience-visible-expectation register against the Malhotra-and-Patra internal cadence. The tell is whether the two-dissent cadence specifically expands into a hike-dissent at the 3-5 December MPC, or specifically absorbs inside the trailing-cycle consensus register.</li>
+        </ul>
+      </div>
+
+      <div class="side-panel side-note">
+        <div class="side-label">Reading Note</div>
+        <h4 class="side-title">The <em>lenses</em> used.</h4>
+        <p><strong>What&rsquo;s driving this.</strong> Two layers do the real work. <em>Structural</em>: Dalio on the emerging-economy monetary pivot. An emerging economy whose growth runs above the structural inflation-and-current-account baseline carries the pivot through the exogenous commodity-and-dollar cadence rather than through domestic demand. The visible 2026 variables place the compression on the external side: a 1.1-per-cent-of-GDP current-account deficit, a Rupee at 88.5 against the dollar after April&rsquo;s 85 baseline, a ten-year G-Sec at 7.25, and India&rsquo;s crude import at ~86 per cent of consumption with Iranian supply compressed by the Hormuz blockade since 13 July. The Mint Street Pivot is a currency-and-import-cost defence instrument, not a domestic-demand compression. <em>Tactical</em>: Munger on incentive-caused bias of the stance. The twenty-five-basis-point hike is small against a 5.65-to-5.70 CPI print; the stance-pivot from neutral to calibrated-tightening on a four-to-two vote is what the primary-dealer-and-foreign-portfolio cadence specifically reads, not the policy-rate itself. The audience is the market-expectation register, and the four-to-two is the specifically-named signal device.</p>
+        <p><strong>What&rsquo;s not driving this.</strong> Not primarily a domestic-overheating story &mdash; Indian consumer-credit, bank-lending and MGNREGA registers run below the overheating threshold, and the compression is specifically external. And it is not primarily an inflation-expectations story in isolation; the household-and-market expectations register runs below the ten-year G-Sec breakeven at 4.3 per cent, specifically because the shock is read as exogenous rather than structural.</p>
+        <p><strong>What would break this reading.</strong></p>
+        <ul>
+          <li>A specifically-named Rupee-break below 90 inside the fortnight that opens the Dalio emerging-economy pivot above the calibrated-tightening register.</li>
+          <li>A specifically-named Brent-and-Dubai-crude break above 95 inside the fortnight on a Riyadh-escalation cadence that opens the Dalio-crude-shock register above the Russian-and-Saudi substitution cadence.</li>
+          <li>A specifically-named OFAC primary-sanctions action against the Indian off-taker cadence inside Q4 that compresses the import register below the trailing cycle.</li>
+          <li>A specifically-named Bihar-and-Bengal election-cycle fiscal subsidy-register above the standing FY2026 cadence that opens the Confucian-household-basket register above the monetary discipline.</li>
+        </ul>
+        <p><strong>Sources used.</strong> Dalio on the emerging-economy monetary pivot supplies the load-bearing claim: when the compression is exogenous (crude, dollar, current account), the pivot runs through the currency-and-import-cost defence register, not through a domestic-demand compression. Munger on incentive-caused bias names why the stance-pivot is the audience-visible instrument rather than the twenty-five-basis-point number: the primary-dealer-and-foreign-portfolio cadence reads the stance, and the four-to-two split is the specifically-named signal device. Lee Kuan Yew on energy-sovereignty names the structural counter-balance the monetary register alone cannot deliver: a 9.5-day strategic reserve against the IEA 90-day benchmark, a Russian-oil share at 38 per cent against the trailing-cycle one, and the Chabahar-and-Jaitapur register as the specifically-named FY2027-budget instrument. Confucius on the household-basket ethics names the political-register discipline the monetary cadence specifically runs against: a 45.9-per-cent food-and-beverage CPI weight makes the median-rural-and-urban basket the specifically-named register the Modi political-cadence specifically has to carry through the Bihar-and-Bengal cycle.</p>
+      </div>
+    </aside>
+  </article>
+
+  <section class="bet-panel s2">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think &mdash; and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> the Reserve Bank of India specifically raising its policy repo rate at the 3-5 December 2026 MPC meeting reads in the moderate-to-high band because the Dalio emerging-economy monetary-pivot register specifically runs through the currency-and-import-cost defence instrument, the September CPI print specifically opens the 5.65-to-5.70 band inside the tolerance, and the stance-pivot specifically primes the second hike as the market-expectation register; the Indian Rupee specifically closing above 90.0 against the US dollar on any trading day before 31 December 2026 reads in the moderate band because the standing Hormuz-blockade cadence specifically compresses the import register and the trailing-cycle April-to-October 85-to-88.5 compression specifically prices the register inside the window; headline CPI inflation printing above 6.0 per cent year-on-year on any monthly print before 31 January 2027 reads in the moderate-to-high band because the SBI-and-Bank-of-Baroda consensus specifically prices the October-and-November register above the 6.5 threshold against the standing crude-cadence and food-and-beverage register.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="rbi-hike-dec2026"
+             data-market-slug=""
+             data-market-question="Will the Reserve Bank of India raise its policy repo rate at the 3-5 December 2026 MPC meeting?"
+             data-market-resolves="2026-12-05"
+             data-stratagem-blind="62"
+             data-stratagem-value="62"
+             data-stratagem-because="Stance-pivot primes second hike; September CPI opens 5.65-5.70 band; Rupee at 88.5 against dollar runs currency-defence register."
+             data-stratagem-rubric="POWER: MPC four-to-two stance-pivot cadence primes hike register | ECON: Rupee at 88.5 and crude at 85-plus force import-cost defence | INST: SBI and Bank of Baroda consensus prices 50-75bps hike cycle | STRAT: Malhotra calibrated-tightening audience-visible to primary dealers | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; RBI hike at Dec 3-5 MPC (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="rbi-hike-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="rbi-hike-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="usdinr-above-90-dec2026"
+             data-market-slug=""
+             data-market-question="Will the US dollar close above 90.00 Indian Rupee on any trading day before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="54"
+             data-stratagem-value="54"
+             data-stratagem-because="Hormuz blockade compresses import register; April-October 85-to-88.5 compression trajectory prices 90 inside window; RBI intervention is finite."
+             data-stratagem-rubric="POWER: DXY-and-Treasury-yield cadence runs dollar strength | ECON: 1.1pc current-account deficit compresses rupee register | INST: RBI 668bn forex reserve runs intervention below sustained defence | STRAT: calibrated-tightening is defensive signal not deterrent | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; USD/INR above 90 by Dec 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="usdinr-above-90-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="usdinr-above-90-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="india-cpi-above-6-jan2027"
+             data-market-slug=""
+             data-market-question="Will India headline CPI inflation print above 6.0pc year-on-year on any monthly MoSPI release before 31 January 2027?"
+             data-market-resolves="2027-01-31"
+             data-stratagem-blind="68"
+             data-stratagem-value="68"
+             data-stratagem-because="SBI and Bank of Baroda consensus prices October and November above 6.5 threshold; food-and-beverage register at 45.9 weight runs vegetables and cereals cadence."
+             data-stratagem-rubric="POWER: exogenous Hormuz blockade compresses crude register | ECON: 45.9pc food-and-beverage weight magnifies supply shocks | INST: RBI 2-to-6pc tolerance band holds through FY2031 window | STRAT: supply-side shocks run above monetary-register discipline | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; India CPI above 6pc on any print by Jan 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="india-cpi-above-6-jan2027" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="india-cpi-above-6-jan2027" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="reader-notes s2">
+    <div class="rn-label">Reader&rsquo;s marginalia &middot; Section II</div>
+    <h4 class="rn-title">Your <em>note</em> on the Mint Street Pivot.</h4>
+    <textarea data-note-id="sec-ii" placeholder="Which exogenous shock specifically compresses the import-cost arithmetic in your own operating theatre &mdash; and does the central-bank-or-equivalent register specifically carry the pivot through the currency-and-import-cost defence instrument, through the domestic-demand compression, or through the stance-register as the audience-visible signal rather than the policy-rate one? Which audience inside your political-economic configuration is the smallest instrument specifically sized for, and which four-to-two or five-to-one split carries the market-expectation register rather than the policy-register itself? And where in your own position does the energy-sovereignty-or-equivalent counter-balance specifically have to run through the budget cadence rather than the monetary register alone, and which specifically-named instrument (strategic-reserve expansion, substitution-cadence, long-dated domestic-production register) carries the structural counter-balance inside the window the monetary pivot specifically runs on?"></textarea>
+  </div>
+
+  <div class="article-quote q2">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The useful thing to notice about the Mint Street Pivot is not whether the Monday 13 October MoSPI CPI print specifically closes at 5.65 or 5.72, and not whether the 3-5 December MPC vote specifically runs four-to-two or five-to-one on the second hike. It is that a middle-order emerging economy whose growth register specifically runs ahead of the structural inflation-and-current-account baseline has specifically pivoted the central-bank cadence into the tightening register against an exogenous Hormuz-blockade-cum-crude-register compression that its own instruments specifically cannot reach &mdash; the first hike since February 2023 and the first stance-pivot of the Modi-second-term cadence. Dalio names the deepest claim: when the compression is exogenous (crude, dollar, current-account), the pivot specifically runs through the currency-and-import-cost defence register rather than through a domestic-demand compression; a 1.1-per-cent-of-GDP current-account deficit, a Rupee at 88.5 against the dollar, and India as the second-largest Iranian-oil off-taker before April specifically price the register. Munger names the audience: the twenty-five-basis-point hike is specifically small; the stance-pivot from neutral to calibrated-tightening on a four-to-two split is what the Mumbai-and-Delhi primary-dealer-and-foreign-portfolio cadence specifically reads. LKY names the counter-balance test: the monetary register cannot deliver the energy-sovereignty cadence the trailing-cycle 9.5-day strategic reserve against the IEA 90-day benchmark specifically prices against, and the FY2027 Union Budget specifically has to carry the structural counter-balance through Chandikhol-and-Padur expansion, Jaitapur-and-Kudankulam nuclear cadence, and the hydrogen-and-renewable register. Confucius names the ethics: a 45.9-per-cent food-and-beverage CPI weight makes the median-rural-and-urban basket the register the Modi political-cadence specifically has to carry through the Bihar-and-Bengal cycle. The reader who watches the Monday MoSPI print is reading the moment. The reader who watches whether the Rupee specifically breaks below 90 inside the fortnight, whether the 3-5 December MPC specifically carries a second hike to 5.75, whether a specifically-named strategic-petroleum-reserve expansion opens above the standing Chandikhol-and-Padur cadence, whether the Modi cabinet opens a food-and-beverage subsidy-register above the FY2026 cadence, and whether an OFAC primary-sanctions register against the Indian off-taker cadence opens inside Q4, is reading the substance the Pivot is sized to carry.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Mint Street Pivot</cite>
+  </div>
+
+
+
+
+  <div class="section-div s3" id="sec-iii">
+    <div class="rom">III.</div>
+    <div class="title"><em>Europe &amp; Germany</em> &middot; The Continental Ledger</div>
+    <div class="meta">
+      <div><strong>Filed</strong> the H&ocirc;tel de Matignon on Rue de Varenne (Prime Minister S&eacute;bastien Lecornu&rsquo;s office running the standing crisis-cum-reform register against the student protest cadence into its sixth week), the Ministry of National Education at 110 Rue de Grenelle (Education Minister &Eacute;lisabeth Borne&rsquo;s desk running the trailing-cycle teacher-shortage-and-schedule register against the specifically-named 735-schools-closed cadence of 7 October), the Ministry of the Interior at Place Beauvau (Minister Bruno Retailleau&rsquo;s desk running the standing public-order register through the approximately 6,100 arrests since mid-September), the Ministry of Higher Education under Minister Patrick Hetzel (the standing &Eacute;ducation-sup&eacute;rieure register against the 30 university-blockade cadence), the National Assembly Speaker&rsquo;s desk at the Palais Bourbon under Yann&euml;l Agalede (the standing lower-house register against the two no-confidence motions January 2026 and the standing deficit-and-budget cadence), the Senate under President G&eacute;rard Larcher at Luxembourg (the standing upper-house register), the &Eacute;lys&eacute;e Palace at 55 Rue du Faubourg Saint-Honor&eacute; under President Emmanuel Macron (the standing head-of-state register against a May-2027 presidential-election horizon and the trailing-cycle five-prime-ministers-in-two-years cadence from Attal-Barnier-Bayrou-Lecornu-and-Lecornu-again), the Rassemblement National under Marine Le Pen and Jordan Bardella (the standing opposition register from the right whose polling specifically runs above 32 per cent against the Macron-camp 20-per-cent register), La France Insoumise under Jean-Luc M&eacute;lenchon and Mathilde Panot (the standing opposition register from the left running the parallel-protest cadence), the Union syndicale lyc&eacute;enne under Colin Champion (the standing high-school-student-union register against the Blanquer-and-trailing-cycle Attal baccalaureate-and-schedule register), the Union nationale lyc&eacute;enne under Mano Aaraj Nithi (the standing second-order high-school register against the specifically-named baccalaureate reform cadence), with cross-files from the Trades Union Confederation CFDT and CGT under Marylise L&eacute;on and Sophie Binet (the standing parent-and-teacher sympathy-register), the Agence France Tr&eacute;sor desk running the standing OAT-and-BTAN primary-dealer register at the 10-year French-German spread at approximately 92 basis points, the Fitch-and-Moody&rsquo;s-and-S&amp;P ratings cadences (AA-, Aa3, AA-), the Banque de France register against the standing fiscal-and-growth cadence, and the Court-of-Audit Cour des comptes cadence under First President Pierre Moscovici</div>
+      <div>The Lyc&eacute;e Compression &middot; Thirty days after S&eacute;bastien Lecornu&rsquo;s 14 September reappointment to Matignon as Macron&rsquo;s fifth prime minister in under two years and seven days after the specifically-named 7 October mobilisation day on which the Interior Ministry specifically counted 250,000 demonstrators (the high-school student union specifically counted 450,000) and specifically closed 735 schools nationwide, the French political-economic configuration specifically runs through a secondary-education-cum-governance crisis the trailing-cycle Fifth-Republic cadence has specifically not carried on this register since the June-2016-labour-law and the November-2018-Gilets-jaunes cycles. The specifically-named compression carries four instruments. First, a student-protest cadence specifically opened in mid-September at the Lyc&eacute;e Henri-IV-and-Louis-le-Grand Paris register and specifically ran nationwide through blockades at approximately 700 secondary schools and 30 university campuses through the week of 6-11 October, with Interior-Ministry total arrests reaching approximately 6,100 and the specifically-named La Voix du Nord case of a 15-year-old losing a hand to a dispersal grenade in the Nord d&eacute;partement. Second, the student-demand register specifically names three instruments: the specifically-named teacher-shortage cadence against the 2024-and-2025 teacher-recruitment competitive-examination compression, the specifically-named classroom-overcrowding register above the OECD baseline, and the specifically-named 10-hour school-day cadence under the trailing-cycle Attal baccalaureate-schedule register. Third, the Lecornu government specifically ran a 1 October crisis meeting and specifically pledged initial reform proposals by end-October against a Finance Ministry fiscal register specifically compressed above the trailing-cycle 5.5-per-cent-of-GDP FY2026 deficit cadence and the standing OAT-and-Bund spread at approximately 92 basis points. Fourth, the standing Macron-camp cadence specifically carries the May-2027 presidential-election horizon against a polling register in which Le Pen&rsquo;s RN specifically runs above 32 per cent, M&eacute;lenchon&rsquo;s LFI specifically runs above 18 per cent, and the Macron-camp specifically carries approximately 20 per cent. Read as school-protest bulletin the file absorbs. Read as statecraft, the Lyc&eacute;e Compression is the specific moment at which a late-cycle democratic configuration whose institutional architecture specifically absorbed a generation of consolidation specifically opens the counter-register through the audience the trailing cycle specifically has not addressed. The reading draws on Aristotle on the regime-stability register at which the youth-cohort cadence specifically opens the polity-cum-democracy counter-register; on Dalio&rsquo;s big cycle on the late-cycle democratic configuration under the standing debt-and-fragmentation cadence; on Mearsheimer on the structural-capacity register a European great-power specifically runs through its domestic-political-economic baseline; on Greene&rsquo;s Law 11 on keeping-people-dependent and the specifically-named reversal when the dependency cadence specifically breaks; and on La Rochefoucauld on the self-interest beneath principle in both the government and the opposition register.</div>
+    </div>
+  </div>
+
+  <article class="story">
+    <div>
+      <h2 class="headline">The Lyc&eacute;e <em>Compression</em></h2>
+      <p class="deck">Begin with the Tuesday and the schools. Tuesday 7 October 2026, the Interior Ministry under Minister Bruno Retailleau specifically counts 250,000 demonstrators across France; the Union syndicale lyc&eacute;enne specifically counts 450,000; the Education Ministry under Minister &Eacute;lisabeth Borne specifically reports 735 secondary schools shut by blockades across the Paris, Lille, Marseille, Lyon, Nantes and Bordeaux academies, with 30 universities under partial blockade. Six weeks after a mid-September mobilisation specifically opened at the Lyc&eacute;e Henri-IV-and-Louis-le-Grand Paris register against the specifically-named teacher-shortage, classroom-overcrowding and 10-hour-school-day cadence, the student-protest configuration specifically runs through a register the trailing-cycle Fifth-Republic cadence has specifically not carried since the June-2016-labour-law and November-2018-Gilets-jaunes cycles. The Interior Ministry specifically counts approximately 6,100 arrests since mid-September, with the La Voix du Nord case of a 15-year-old specifically losing a hand to a dispersal grenade in the Nord d&eacute;partement, and the student unions specifically naming the arrest-register as the primary mobilisation accelerant. Prime Minister S&eacute;bastien Lecornu &mdash; reappointed to Matignon on 14 September 2026 as Macron&rsquo;s fifth prime minister in under two years after the trailing-cycle Attal-Barnier-Bayrou-Lecornu-first-tenure cadence &mdash; specifically ran a 1 October crisis meeting at Matignon and specifically pledged initial reform proposals by end-October against the standing education-budget register. Behind the register sits a specifically-visible fiscal-and-political configuration. The Finance Ministry specifically runs a FY2026 deficit above the 5.5-per-cent-of-GDP baseline and specifically faces a January-and-February 2026 pair of no-confidence motions already survived at narrow margins; the standing Macron-camp cadence specifically carries the May-2027 presidential-election horizon against a Le Pen-RN cadence specifically polling above 32 per cent, an LFI cadence specifically running above 18 per cent, and a Macron-camp register specifically at approximately 20 per cent. The Lyc&eacute;e Compression is the specific moment at which a late-cycle democratic configuration whose institutional architecture specifically absorbed a generation of consolidation specifically opens the counter-register through the audience the trailing cycle specifically has not addressed.</p>
+
+      <h3 class="article-subhead">Aristotle on <em>the youth-cohort counter-register</em>.</h3>
+      <p>Aristotle&rsquo;s discipline on the regime-stability register at the political-economic configuration of the youth-cohort runs onto the French configuration with specific sharpness. The Politics claim: when the governing register specifically compresses the youth-cohort through an institutional cadence the political-register specifically does not re-open to it, the counter-register specifically opens through the youth-cohort cadence; the stability test is specifically whether the governing register specifically re-opens the institutional cadence or specifically carries the compression through the counter-register. The 2026 French configuration delivers both ends. The trailing-cycle Blanquer-and-Attal baccalaureate reform cadence specifically compressed the schedule-and-examination register through the Parcoursup higher-education-selection cadence, specifically running the 10-hour-school-day baseline against the OECD median; the teacher-recruitment competitive-examination cadence specifically compressed the available-teacher baseline through the trailing-cycle Education-Ministry budget cadence, specifically opening the classroom-overcrowding register; the standing deficit-and-fiscal register specifically runs the Finance-Ministry cadence against the Education-Ministry resource-register. The Aristotelian corollary is specific: the Lecornu government specifically has to re-open the institutional cadence (through specifically-named teacher-recruitment-and-school-infrastructure instruments inside the end-October reform proposals) or specifically absorb the counter-register through the governing-cadence compression. The specific tell inside the fortnight is whether the end-October Lecornu reform package specifically carries a teacher-recruitment expansion above the FY2026 budget cadence (at least 15,000 posts above the trailing baseline), a school-infrastructure instrument above the standing R&eacute;gion-Grand-Est and &Icirc;le-de-France register, or specifically runs the reform-register below the structural-expenditure threshold inside the Finance-Ministry fiscal-consolidation cadence.</p>
+
+      <h3 class="article-subhead">Dalio on <em>the late-cycle democratic configuration</em>.</h3>
+      <p>Dalio&rsquo;s big-cycle discipline on the late-cycle democratic configuration under the standing debt-and-fragmentation cadence runs onto the French register with specific force. The Dalio claim: a late-cycle democracy whose fiscal register specifically runs above the structural-primary-balance baseline, whose political fragmentation specifically compresses the governing-coalition cadence through the five-prime-ministers-in-two-years register, and whose external-register specifically runs the alliance-pressure through the trailing-cycle Ukraine-aid-and-defence-industrial-base cadence specifically approaches the counter-register threshold at which the youth-cohort-or-equivalent register specifically opens the trailing-cycle institutional-protest cadence. The 2026 French configuration delivers all three. The FY2026 deficit specifically ran above 5.5 per cent of GDP against the trailing-cycle 3-per-cent Maastricht baseline; the political-fragmentation register specifically carries five prime ministers since the June-2024 dissolution; the OAT-and-Bund spread specifically opened at 92 basis points against the trailing-cycle 60-level baseline and the Fitch-and-Moody&rsquo;s-and-S&amp;P cadences specifically carry the trailing AA-level register through the November-and-December review cycle. The Dalio corollary is specific: the Lyc&eacute;e Compression specifically opens the Dalio counter-register against the Macron-era political cadence at the specifically-named three-way opposition register (RN, LFI, student-cum-teacher cohort) that specifically carries the Dalio late-cycle democratic configuration. The specific tell inside Q4 is whether the end-October Lecornu reform package specifically delivers a settlement with the student-and-teacher cohort through a specifically-named joint-register instrument, or specifically opens the parallel-opposition cadence between the RN-and-LFI registers across the November-and-December Budget cycle.</p>
+
+      <h3 class="article-subhead">Greene&rsquo;s Law 11 on <em>keeping people dependent</em>.</h3>
+      <p>Greene&rsquo;s 48 Laws discipline on Law 11 &mdash; keep people dependent on you &mdash; runs onto the French governance configuration in a specifically-visible reversal. The Greene claim: an executive register specifically holds against a counter-register when the counter-register specifically depends on the executive-register for the specifically-named instrument it specifically needs (resource, legitimation, protection, status); the reversal, which is the standing French configuration, is when the dependency-register specifically breaks and the counter-register specifically absorbs the instrument through its own cadence. The trailing-cycle Macron-era political register specifically ran the Law-11 cadence on the youth-cohort through the Parcoursup higher-education-selection cadence, the standing France Travail employment-register and the trailing-cycle digital-euro register. The 2026 configuration specifically breaks the dependency-register: the youth-cohort specifically runs the Lyc&eacute;e protest cadence outside the Macron-era institutional cadence; the parent-and-teacher cohort through CFDT-and-CGT and FSU-FO sympathy-registers specifically absorbs the counter-register; and the LFI-cum-RN opposition register specifically absorbs the political cadence outside the Macron-camp register. The Greene corollary is specific: the Lecornu government specifically has to re-open the dependency-register through the end-October reform package (specifically-named teacher-recruitment, school-infrastructure and schedule-register instruments) or specifically absorb the counter-register through the governing-cadence compression. The specific tell is whether the Lecornu package specifically carries the dependency-register instrument above the structural-expenditure threshold, or specifically runs the reform-register through the trailing-cycle Finance-Ministry fiscal-consolidation cadence.</p>
+
+      <h3 class="article-subhead">La Rochefoucauld on <em>self-interest beneath principle</em>.</h3>
+      <p>La Rochefoucauld&rsquo;s discipline on the self-interest beneath the public pretension of principle runs onto both the government and the opposition register with specific force. The La Rochefoucauld claim: a political register specifically runs on self-interest when the counterfactual (the alternative-governing-register) specifically carries the political-economic cost the standing-register specifically does not. The 2026 French configuration delivers both ends. The RN-cum-LFI opposition register specifically runs on the principle-register (youth-support, teacher-support, anti-Macron-cum-anti-Lecornu) against the Macron-camp cadence; the specifically-named political-economic cost of carrying the governing-register under the standing deficit-and-fragmentation cadence is specifically absorbed by the trailing cycle without the opposition specifically paying the governing-register cost. The La Rochefoucauld corollary is specific: the opposition-register specifically operates in the register of principle-plus-institutional-counterweight that specifically does not carry the governing-cost against the executive-register; the Macron-camp-cum-Lecornu register specifically runs the governing-cost register against the standing youth-cohort protest-register and the standing OAT-and-Bund spread register. The La-Rochefoucauld reading is not that principle is absent from either side &mdash; it is that the political-economic cost the counter-register specifically does not pay is specifically the register that carries the standing cadence. The specific tell inside Q1 2027 is whether the student-cohort specifically absorbs the end-October Lecornu reform package into a settlement register, or specifically runs the trailing-cycle anti-Macron register through the May-2027 presidential-election horizon.</p>
+
+      <h3 class="article-subhead">What the reading <em>expects</em>.</h3>
+      <p>Base case through the fortnight and into Q4-and-Q1 2027: the Lecornu government specifically delivers an end-October reform package carrying a specifically-named teacher-recruitment expansion above the FY2026 budget cadence (at least 10,000 posts above the trailing baseline) and a specifically-named school-infrastructure instrument through the standing R&eacute;gion-and-D&eacute;partement cadence, without specifically carrying a Parcoursup-and-baccalaureate-schedule reversal above the structural-expenditure threshold, with the specific tell being whether the primary student-union register (USL and UNL) specifically absorbs the package into a settlement register inside the fortnight; the standing student-protest cadence specifically compresses below the 7 October mobilisation baseline inside the fortnight without specifically opening a general-strike cadence through the CFDT-and-CGT-and-FSU-FO register, with the specific tell being whether a specifically-named parent-and-teacher sympathy strike opens above the 1 October 300,000-worker baseline; the Lecornu government specifically runs the standing lower-chamber configuration through the November-and-December Budget cycle without specifically falling to a third no-confidence motion, with the specific tell being whether the Socialist Party under Olivier Faure specifically absorbs or specifically pivots inside the Budget cadence; the OAT-and-Bund spread specifically runs the 85-to-100-basis-point band through Q4 against the standing Fitch-and-Moody&rsquo;s-and-S&amp;P review cycle without specifically opening a one-notch downgrade below AA-; the Macron-camp cadence specifically runs the May-2027 presidential-election horizon against the trailing-cycle 20-per-cent polling baseline without specifically opening a Macron-resignation register; the RN-and-LFI opposition registers specifically run the parallel-opposition cadence through the Budget cycle without specifically consolidating a cross-aisle register; the standing EU-and-NATO cross-reference specifically runs the French external-register through the trailing-cycle Ukraine-aid-and-defence-industrial-base cadence without specifically opening a direct instrument against the Lyc&eacute;e cadence. What would collide the reading: a specifically-named Lecornu-fall through a third no-confidence motion inside Q4 that specifically opens the May-2027 register inside the window; a specifically-named general-strike cadence above the 1 October 300,000-worker baseline inside the fortnight that specifically opens the Gilets-jaunes-adjacent register against the governing cadence; a specifically-named ratings action against the French sovereign inside Q4 that specifically opens the Dalio late-cycle register against the OAT-and-Bund spread above the 100-basis-point register; a specifically-named Macron-resignation register inside Q4 that specifically opens the May-2027 presidential-election horizon inside the window; a specifically-named Parcoursup-and-baccalaureate-schedule reversal register above the structural-expenditure threshold that specifically opens the fiscal-consolidation register against the Education-Ministry cadence. The base case is that the Lyc&eacute;e Compression specifically delivers an end-October Lecornu reform package absorbed by the primary student-union register, that the Aristotelian youth-cohort counter-register specifically compresses below the 7 October mobilisation baseline inside the fortnight, and that the Dalio late-cycle democratic configuration specifically runs the OAT-and-Bund spread through the Q4 review cycle without specifically opening the ratings-action register.</p>
+
+      <blockquote class="article-quote">&ldquo;The young are heated by Nature as drunken men by wine.&rdquo; &mdash; Aristotle, <em>Rhetoric</em>, Book II &middot; on a Wednesday on which the Lecornu government specifically ran the end-October reform-package cadence against a 735-school-shut baseline, a 6,100-arrest cadence since mid-September, and a May-2027 presidential-election horizon under a Macron-camp polling register specifically at approximately 20 per cent against RN&rsquo;s 32-plus and LFI&rsquo;s 18-plus.</blockquote>
+    </div>
+
+    <aside class="sidebar">
+      <div class="side-panel">
+        <div class="side-label">Actors</div>
+        <h4 class="side-title">Who <em>the Compression</em> names.</h4>
+        <ul class="actor-list">
+          <li><span class="actor-role">Lecornu &middot; Matignon</span> Prime Minister S&eacute;bastien Lecornu (independent, reappointed 14 September 2026 after the first tenure that lasted 27 days in October 2025) &amp; the standing Rue-de-Varenne cadence &mdash; the executive-principal whose end-October reform-package cadence specifically prices against the student-cohort protest register. The tell is whether the primary student-union register specifically absorbs the package into a settlement register, or specifically runs the trailing-cycle anti-Lecornu register through the May-2027 horizon.</li>
+          <li><span class="actor-role">Borne &middot; Rue de Grenelle</span> Education Minister &Eacute;lisabeth Borne (independent, former PM) &amp; the standing 110-Rue-de-Grenelle cadence &mdash; the technical-principal whose teacher-recruitment-and-school-infrastructure register specifically carries the Aristotelian institutional cadence against the youth-cohort counter-register. The tell is whether the specifically-named 15,000-teacher-recruitment-and-school-infrastructure cadence opens above the FY2026 budget baseline, or specifically runs the reform-register below the structural-expenditure threshold.</li>
+          <li><span class="actor-role">Macron &middot; the &Eacute;lys&eacute;e</span> President Emmanuel Macron (La R&eacute;publique En Marche-cum-Renaissance, from 2017) &amp; the standing head-of-state register against the May-2027 horizon &mdash; the executive-principal whose five-prime-ministers-in-two-years cadence specifically prices the Dalio political-fragmentation register. The tell is whether a specifically-named Macron-resignation register opens inside Q4, or the standing cadence runs the May-2027 horizon through the trailing-cycle 20-per-cent polling baseline.</li>
+          <li><span class="actor-role">Le Pen-Bardella &middot; RN</span> Marine Le Pen and Jordan Bardella (Rassemblement National) &amp; the standing opposition register from the right at 32-plus-per-cent polling &mdash; the opposition-principal whose cadence specifically runs the May-2027 register against the Macron-camp cadence. The tell is whether the RN specifically opens a cross-aisle register with LFI through the Budget cycle, or specifically runs the parallel-opposition cadence through the trailing-cycle horizon.</li>
+          <li><span class="actor-role">M&eacute;lenchon-Panot &middot; LFI</span> Jean-Luc M&eacute;lenchon and Mathilde Panot (La France Insoumise) &amp; the standing opposition register from the left at 18-plus-per-cent polling &mdash; the opposition-principal whose cadence specifically runs the parallel-protest register through the student-and-teacher-union cadence. The tell is whether LFI specifically opens a Nouveau Front Populaire-cum-NUPES register through the November-and-December Budget cycle, or specifically runs the parallel-opposition cadence.</li>
+          <li><span class="actor-role">Champion-Aaraj &middot; USL-UNL</span> Colin Champion (Union syndicale lyc&eacute;enne) and Mano Aaraj Nithi (Union nationale lyc&eacute;enne) &amp; the standing high-school-student-union register against the Blanquer-and-trailing-Attal baccalaureate cadence &mdash; the youth-cohort principals whose cadence specifically carries the primary mobilisation register. The tell is whether the Union registers specifically absorb the end-October Lecornu package into a settlement register, or specifically open a November-and-December mobilisation cadence above the 7 October 450,000 baseline.</li>
+        </ul>
+      </div>
+
+      <div class="side-panel side-note">
+        <div class="side-label">Reading Note</div>
+        <h4 class="side-title">The <em>lenses</em> used.</h4>
+        <p><strong>What&rsquo;s driving this.</strong> Two layers do the real work. <em>Structural</em>: Dalio on the late-cycle democratic configuration. A FY2026 deficit above 5.5 per cent of GDP against a 3-per-cent Maastricht baseline, a political fragmentation that has specifically carried five prime ministers since the June-2024 dissolution, an OAT-and-Bund spread opening at 92 basis points against a 60-level trailing baseline, and a three-way opposition polling cadence (RN 32-plus, LFI 18-plus, Macron-camp 20) specifically price the Dalio counter-register against the Macron-era political cadence. The youth-cohort is the specifically-visible register through which the trailing-cycle institutional protest cadence opens. <em>Tactical</em>: Greene&rsquo;s Law 11 reversal on keeping-people-dependent. The Macron-era cadence specifically ran dependency-registers (Parcoursup, France Travail) that specifically broke in 2026; the student-cohort runs the Lyc&eacute;e protest cadence outside the Macron institutional cadence, the parent-and-teacher cohort absorbs the sympathy-register through CFDT-and-CGT and FSU-FO, and the LFI-and-RN opposition register absorbs the political cadence outside the Macron-camp register. The Lecornu government specifically has to re-open the dependency-register through the end-October reform package, or specifically absorb the counter-register through the governing-cadence compression.</p>
+        <p><strong>What&rsquo;s not driving this.</strong> Not primarily an immigration-and-identity story on the Trocadero-and-Bardella model &mdash; the student demands run through the teacher-shortage, classroom-overcrowding and schedule register, not the trailing-cycle immigration-and-security register. And it is not primarily a Ukraine-aid-and-defence-industrial-base compression story in isolation; the Franco-German cadence specifically carries the trailing-cycle Ukraine-aid register above the Lyc&eacute;e register inside Q4, and the EU-and-NATO cross-reference specifically runs below a direct instrument against the Lyc&eacute;e cadence.</p>
+        <p><strong>What would break this reading.</strong></p>
+        <ul>
+          <li>A specifically-named Lecornu-fall through a third no-confidence motion inside Q4 that opens the May-2027 register inside the window.</li>
+          <li>A specifically-named general-strike cadence above the 1 October 300,000-worker baseline inside the fortnight that opens the Gilets-jaunes-adjacent register.</li>
+          <li>A specifically-named ratings action against the French sovereign inside Q4 that opens the OAT-and-Bund spread above the 100-basis-point register.</li>
+          <li>A specifically-named Macron-resignation register inside Q4 that opens the May-2027 presidential-election horizon inside the window.</li>
+        </ul>
+        <p><strong>Sources used.</strong> Dalio on the late-cycle democratic configuration supplies the load-bearing structural claim: a deficit at 5.5-plus per cent of GDP, five prime ministers in under two years, an OAT-and-Bund spread at 92 basis points, and a three-way opposition polling register specifically open the Dalio counter-register against the Macron-era political cadence. Aristotle on the youth-cohort counter-register names the stability test: the trailing-cycle Blanquer-and-Attal baccalaureate reform cadence compressed the schedule-and-examination register through Parcoursup, and the Lecornu government specifically has to re-open the institutional cadence or absorb the counter-register through the governing-cadence compression. Greene&rsquo;s Law 11 reversal names the dependency-register that specifically broke in 2026: the Macron-era instruments (Parcoursup, France Travail) specifically have not held the youth-cohort inside the institutional cadence, and the Lecornu reform package specifically has to re-open the dependency-register. La Rochefoucauld names the self-interest: the RN-and-LFI opposition specifically operates in the principle-plus-institutional-counterweight register without carrying the governing-cost, and the Macron-camp-cum-Lecornu register specifically runs the governing-cost against the standing youth-cohort and the OAT-and-Bund spread register.</p>
+      </div>
+    </aside>
+  </article>
+
+  <section class="bet-panel s3">
+    <div class="bet-head">
+      <div class="bet-label">Our reading &middot; against the market</div>
+      <h3 class="bet-title">What we think &mdash; and what the <em>crowd</em> prices.</h3>
+    </div>
+    <p class="bet-claim"><strong>Our call</strong> S&eacute;bastien Lecornu ceasing to be Prime Minister of France before 31 December 2026 reads in the moderate band because the standing lower-chamber configuration specifically carries the November-and-December Budget cycle through the trailing-cycle Socialist cross-aisle cadence, the end-October reform package specifically opens the Aristotelian institutional-cadence re-opening, but the January-and-February 2026 pair of no-confidence motions specifically primes a third-motion register at narrow margins; the OAT-and-Bund 10-year spread specifically closing above 100 basis points on any trading day before 31 December 2026 reads in the moderate-to-high band because the standing 92-basis-point register specifically runs the Dalio late-cycle democratic configuration against the Fitch-and-Moody&rsquo;s-and-S&amp;P November-and-December review cycle; Emmanuel Macron specifically resigning as President of France before the May 2027 scheduled election reads in the very-low band because the standing head-of-state register specifically runs the five-prime-ministers-in-two-years cadence as the trailing-cycle political-register absorption instrument rather than a resignation-register and because the Macron-era institutional cadence specifically prices against the pre-term resignation.</p>
+    <div class="bet-grid">
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="fr-lecornu-out-dec2026"
+             data-market-slug=""
+             data-market-question="Will S&eacute;bastien Lecornu cease to be Prime Minister of France before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="38"
+             data-stratagem-value="38"
+             data-stratagem-because="Budget cycle primes third no-confidence motion at narrow margin; student settlement register compresses opposition; Socialist cross-aisle cadence narrow."
+             data-stratagem-rubric="POWER: Macron cannot easily replace fifth PM in two years cadence | ECON: 5.5pc deficit forces Budget confrontation inside window | INST: January motions survived at 271-of-289 narrow margin | STRAT: student settlement register compresses LFI mobilisation leverage | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/lecornu-out-as-french-pm-by-dec-31-2026" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Lecornu out as French PM by Dec 31
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="fr-lecornu-out-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="fr-lecornu-out-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="fr-oat-spread-100-dec2026"
+             data-market-slug=""
+             data-market-question="Will the French-German 10-year OAT-Bund spread close above 100 basis points on any trading day before 31 December 2026?"
+             data-market-resolves="2026-12-31"
+             data-stratagem-blind="62"
+             data-stratagem-value="62"
+             data-stratagem-because="Standing 92bps already proximal; Dalio late-cycle register runs Budget cycle against ratings review window; political fragmentation prices risk premium."
+             data-stratagem-rubric="POWER: Franco-German spread tracks political-fragmentation cadence | ECON: 5.5pc deficit and 115pc debt-to-GDP structural | INST: Fitch-Moody-S&P November-December review window live | STRAT: Budget confrontation signals risk premium to primary dealers | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; OAT-Bund spread above 100bps by Dec 31 (market not located)
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="fr-oat-spread-100-dec2026" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="fr-oat-spread-100-dec2026" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+      <div class="bet-slot">
+        <div class="bet-card bet-card-link"
+             data-market-id="fr-macron-resign-may2027"
+             data-market-slug=""
+             data-market-question="Will Emmanuel Macron resign as President of France before the May 2027 scheduled election?"
+             data-market-resolves="2027-05-01"
+             data-stratagem-blind="9"
+             data-stratagem-value="9"
+             data-stratagem-because="Head-of-state runs five-PM cadence as absorption instrument not resignation; institutional cadence specifically prices against pre-term resignation."
+             data-stratagem-rubric="POWER: Fifth Republic head-of-state register absorbs through PM rotation | ECON: resignation triggers legislative uncertainty against OAT register | INST: 1958 Constitution does not require resignation on political crisis | STRAT: May 2027 horizon lets opposition fatigue before election | OUTSIDE: n/a, market price not read | SYNTH: blind call only, no market read">
+          <a href="https://polymarket.com/event/macron-out-before-may-2027" target="_blank" rel="noopener"
+             style="display:block;padding:24px 16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none">
+            Polymarket &mdash; Macron resigns before May 2027 election
+          </a>
+        </div>
+        <div class="your-call" data-call-type="prob">
+          <input class="yc-value" type="text" data-market-id="fr-macron-resign-may2027" data-field="value" placeholder="&mdash;">
+          <input class="yc-because" type="text" data-market-id="fr-macron-resign-may2027" data-field="because" placeholder="reasoning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="reader-notes s3">
+    <div class="rn-label">Reader&rsquo;s marginalia &middot; Section III</div>
+    <h4 class="rn-title">Your <em>note</em> on the Lyc&eacute;e Compression.</h4>
+    <textarea data-note-id="sec-iii" placeholder="Which dependency-register inside your own operating theatre specifically broke in the trailing cycle &mdash; and which specifically-named audience (the youth-cohort, the parent-and-teacher cohort, the regional-cum-municipal cadence) specifically opened the counter-register through its own instruments rather than through the executive-register ones? Where in your own position does the Aristotelian institutional cadence specifically have to re-open through a specifically-named resource-register instrument (a teacher-recruitment expansion, a school-infrastructure cadence, a schedule-register reversal), and which fiscal-register constraint specifically prices against the re-opening? And where in your political-economic configuration does the Dalio late-cycle democratic register specifically run through a three-way opposition cadence that specifically compresses the governing coalition&rsquo;s runway below the trailing-cycle horizon, and which specifically-named settlement-register would specifically absorb the youth-cohort or counter-register compression as a one-cycle event rather than as a standing cadence?"></textarea>
+  </div>
+
+
+
+  <section class="export-bar" aria-label="Log predictions to Ledger">
+    <div class="eb-label">Crawl &middot; your ledger</div>
+    <h3 class="eb-title">Log your <em>calls</em> before you close the paper.</h3>
+    <p class="eb-count" id="yc-count">No predictions filled yet &mdash; scroll back and stake a number on the ones you have a view on.</p>
+    <div class="eb-actions">
+      <button id="yc-export" class="eb-btn-primary" type="button" disabled>Copy to Ledger</button>
+      <button id="yc-export-beliefs" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy to Beliefs</button>
+      <button id="yc-export-notes" class="eb-btn-primary eb-btn-secondary" type="button" disabled>Copy notes</button>
+    </div>
+    <div class="eb-status" id="yc-status"></div>
+    <div><button id="yc-clear" class="eb-clear" type="button">Clear this edition's fields</button></div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- PROLOGUE - WISDOM BEFORE THE NEWS -->
+  <!-- ================================= -->
+
+  <section class="below-fold prologue">
+    <div class="col">
+      <div class="sec-label">Law of the Day &middot; Sun Tzu &middot; <em>on the walled position and the counter-register</em></div>
+      <h3 class="sec-title">The Attack-by-Stratagem chapter&rsquo;s standing counsel: the general who cannot restrain his impatience specifically orders the direct assault, one-third of his men are slain, and the position specifically is not taken. Today&rsquo;s three stories each run a different grammar of the law: a hegemon pricing entry into a Yemeni-redoubt theatre against the standing Hormuz-blockade and the Pacific-cum-Gulf two-theatre capacity; a middle-order emerging economy pivoting the central-bank cadence against an exogenous crude-and-dollar compression the monetary register specifically cannot reach; a late-cycle democratic configuration whose institutional architecture specifically opens the counter-register through the youth-cohort audience the trailing cycle specifically has not addressed.</h3>
+      <p>The Riyadh Red Line is the specific moment at which a hegemon already carrying one major theatre specifically prices entry into a second against a non-state proxy whose patron it specifically has not yet broken, with the specific tell being whether an Air-Tasking-Order against Yemeni fixed targets specifically opens above the standing Hormuz-blockade cadence inside the fortnight. The Mint Street Pivot is the specific moment at which a middle-order emerging economy whose growth register specifically runs ahead of the structural inflation-and-fiscal baseline specifically pivots the central-bank cadence into the tightening register against an exogenous Hormuz-blockade-cum-crude-register compression, with the specific tell being whether the 3-5 December MPC specifically carries a second twenty-five-basis-point hike to 5.75 and whether the Rupee specifically breaks below 90 inside the fortnight. The Lyc&eacute;e Compression is the specific moment at which a late-cycle democratic configuration specifically opens the counter-register through the youth-cohort audience the trailing cycle specifically has not addressed, with the specific tell being whether the end-October Lecornu reform package specifically absorbs the primary student-union register into a settlement cadence and whether the OAT-and-Bund spread specifically opens above 100 basis points inside Q4.</p>
+      <p><em>Today&rsquo;s reading:</em> the Riyadh Red Line, the Mint Street Pivot, the Lyc&eacute;e Compression. Each rewards the reader who names the specifically-named audience inside the political-economic register whose compression the trailing cycle specifically has not addressed, and names the specifically-visible counter-register through which the compression specifically either runs or stalls.</p>
+      <ul>
+        <li>The Riyadh Red Line: Mearsheimer on the great-power overstretch register at which a hegemon with limited structural capacity specifically prices against a non-state proxy whose patron it specifically has not yet degraded; Sun Tzu on the walled-position discipline and prolonged campaigns; Greene&rsquo;s Law 22 on surrender-to-recover through the proxy register rather than the direct instrument; Dalio on the imperial-overreach register against the trailing-cycle fiscal arithmetic; LKY on the alliance-management cadence a Gulf-state principal specifically absorbs.</li>
+        <li>The Mint Street Pivot: Dalio on the emerging-economy monetary-pivot register against an exogenous commodity-and-dollar cadence; Munger on the incentive-caused bias of the stance-register as the audience-visible instrument rather than the policy-rate one; Lee Kuan Yew on the energy-sovereignty discipline the monetary register specifically cannot deliver; Confucius on the political-economic ethics of the central-bank register against the household-basket cost; Clausewitz on the friction register at which a domestic policy cadence specifically meets an exogenous shock.</li>
+        <li>The Lyc&eacute;e Compression: Aristotle on the youth-cohort counter-register and the regime-stability test; Dalio on the late-cycle democratic configuration under the standing debt-and-fragmentation cadence; Greene&rsquo;s Law 11 on keeping-people-dependent and the specifically-named reversal when the dependency cadence specifically breaks; La Rochefoucauld on the self-interest beneath principle in both the government and the opposition register; Mearsheimer in the margin on the structural-capacity register a European great-power specifically runs through its domestic-political-economic baseline.</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">From the Classics</div>
+      <h3 class="sec-title">Sun Tzu &amp; <em>Aristotle</em>.</h3>
+      <blockquote class="classic-quote">The worst policy is to attack cities. Attack cities only when there is no alternative. The preparation of mantlets, movable shelters, and various implements of war, will take up three whole months; and the piling up of mounds over against the walls will take three months more. If the general is unable to control his impatience, and orders his men to swarm up the wall like ants, with the result that one-third of his men are slain, while the town still remains untaken. Such are the disastrous effects of a siege. Therefore the skillful leader subdues the enemy&rsquo;s troops without any fighting; he captures their cities without laying siege to them; he overthrows their kingdom without lengthy operations in the field.</blockquote>
+      <p class="attrib">&mdash; Sun Tzu, <em>The Art of War</em>, Chapter III &middot; reads the Riyadh Red Line at a single register. The Houthi-redoubt in the Marran massif and the Sanaa-and-Saada mountain-and-tunnel geography is specifically the walled position the direct air-and-cruise-missile instrument has specifically not broken through two previous campaigns: the 2015-to-2022 Saudi-led offensive at approximately $500 million per month, and the March-to-May 2025 US Rough Rider campaign at a reported $1 billion in three weeks against the trailing-cycle Pentagon stockpile. The Attack-by-Stratagem chapter&rsquo;s standing counsel against the impatient assault specifically prices against Trump&rsquo;s &ldquo;we move very quickly&rdquo; cadence from the South Lawn, and the specifically-named Greene-Law-22 move routes the compression through the Saudi-direct-sales cadence (Patriot-and-THAAD reload, F-35-package re-opening, joint-targeting cell against the Houthi command cadre) and tighter Iranian-asset interdiction, rather than the direct-instrument register the audience-visible civilian-casualty event specifically prices for.</p>
+      <blockquote class="classic-quote">The young are heated by Nature as drunken men by wine. They have strong passions, and they tend to gratify them indiscriminately. Of the bodily desires, it is the sexual by which they are most swayed and in which they show absence of self-control. They are changeful too, and fickle in their desires, which are as transitory as they are vehement; for their wishes are keen without being permanent, like a sick man&rsquo;s fits of hunger and thirst. They are passionate, irascible, and apt to be carried away by their impulses. They are high-minded, for they have not yet been humbled by life, nor have they experienced the force of circumstances.</blockquote>
+      <p class="attrib">&mdash; Aristotle, <em>Rhetoric</em>, Book II &middot; reads the Lyc&eacute;e Compression at a single register. The French student cohort&rsquo;s Lyc&eacute;e protest cadence specifically carries the Aristotelian youth-cohort register against an institutional cadence the trailing-cycle Blanquer-and-Attal baccalaureate reform specifically compressed through Parcoursup and the 10-hour school-day register. The Aristotelian stability test is specifically whether the governing register specifically re-opens the institutional cadence through a specifically-named teacher-recruitment-and-school-infrastructure instrument, or specifically carries the compression through the governing-cadence absorption register. The 7 October mobilisation (250,000-to-450,000 count, 735 schools shut, 6,100 arrests since mid-September) is the counter-register&rsquo;s audience-visible signal; the end-October Lecornu reform package is the governing-cadence response. The reading &mdash; and the stability of the Fifth-Republic political configuration &mdash; specifically turns on whether the two cadences specifically converge inside the fortnight or specifically diverge through the November-and-December Budget cycle.</p>
+    </div>
+
+    <div class="col">
+      <div class="sec-label">The Practitioner&rsquo;s Note</div>
+      <h3 class="sec-title">A hegemon already carrying the Hormuz naval blockade since 13 July pricing entry into a Yemeni-redoubt theatre after a Houthi airport strike that killed twelve in a Gulf-Arab capital. A middle-order emerging economy specifically pivoting the central-bank cadence against an exogenous Hormuz-blockade-cum-crude compression its own instruments specifically cannot reach. A late-cycle democratic configuration whose institutional architecture specifically opens the counter-register through 735 shut schools and 6,100 arrests after the trailing-cycle Blanquer-and-Attal baccalaureate reform compressed the youth-cohort through Parcoursup. Three moments, three theatres, three counter-registers through which the trailing cycle specifically has to run or specifically compress.</h3>
+      <p>Each story rewards the reader who names the specific counter-register and the specific audience the governing cadence specifically has to re-open or specifically absorb. Riyadh Red Line: whether an Air-Tasking-Order against Yemeni fixed targets specifically opens above the standing Hormuz-blockade cadence inside the fortnight, whether a specifically-named FY2027 Yemen-cum-Gulf supplemental appropriation opens above the continuing-resolution baseline, whether an Iranian direct-ballistic-missile register against Riyadh-cum-Jeddah opens above the proxy register, whether a Houthi strike against the Aramco Abqaiq-cum-Khurais register opens above the 2019 September cadence, and whether a Chinese-cum-Russian naval cross-reference against the Hormuz-blockade compresses the US willingness-to-widen the Gulf theatre &mdash; these are the specific tells by which the Mearsheimer overstretch register either compresses or specifically opens. Mint Street Pivot: whether the Rupee specifically breaks below 90 inside the fortnight, whether the 3-5 December MPC specifically carries a second hike to 5.75, whether a specifically-named strategic-petroleum-reserve expansion opens above the Chandikhol-and-Padur cadence, whether the Modi cabinet opens a food-and-beverage subsidy-register above the FY2026 cadence, and whether an OFAC primary-sanctions register against the Indian off-taker cadence opens inside Q4 &mdash; these are the specific tells by which the Dalio emerging-economy monetary-pivot register either carries or specifically compresses. Lyc&eacute;e Compression: whether the end-October Lecornu reform package specifically absorbs the primary student-union register into a settlement cadence, whether a specifically-named general-strike cadence above the 1 October 300,000-worker baseline opens inside the fortnight, whether the OAT-and-Bund spread specifically opens above 100 basis points inside Q4, whether a third no-confidence motion specifically opens inside the Budget cycle, and whether a specifically-named ratings action against the French sovereign opens inside Q4 &mdash; these are the specific tells by which the Aristotelian youth-cohort counter-register either compresses or specifically carries through the May-2027 horizon.</p>
+      <p><strong>In your own affairs:</strong> the discipline cuts three ways. When your direct instrument specifically prices entry into a theatre against a counterpart whose patron you specifically have not yet broken, measure the Mearsheimer overstretch cost first and route the compression through the proxy-cum-supply-interdiction register before the direct-instrument one &mdash; because the Attack-by-Stratagem chapter&rsquo;s standing counsel against the walled position specifically prices against the audience-visible civilian-casualty event. When an exogenous compression specifically runs the import-cost or supply-cost arithmetic ahead of your own instruments, pivot the audience-visible register (the stance, the signal, the symbol) first and reserve the policy-rate or primary-instrument compression for the second-and-third round &mdash; because the primary-dealer-and-foreign-portfolio cadence specifically reads the stance ahead of the number. And when the trailing-cycle institutional cadence specifically has broken the dependency-register that specifically held your audience inside the executive-register, measure your runway by whether the end-October-or-equivalent reform package specifically absorbs the counter-register through a specifically-named resource-and-institutional instrument above the structural-expenditure threshold, or specifically carries the compression through the governing-cadence absorption register through the next electoral window.</p>
+    </div>
+  </section>
+  <!-- SECTION III - CLOSING QUOTE -->
+  <div class="article-quote q3">
+    <blockquote>
+      <span class="mark">&ldquo;</span>The useful thing to notice about the Lyc&eacute;e Compression is not whether the Interior Ministry 250,000-count or the Union syndicale lyc&eacute;enne 450,000-count specifically carries the Monday-and-Tuesday headline, and not whether the end-October Lecornu reform package specifically opens at 10,000-or-15,000 teacher-recruitment posts above the FY2026 budget baseline. It is that a late-cycle democratic configuration whose institutional architecture specifically absorbed a generation of consolidation under the Macron-era political cadence has specifically opened the counter-register through the youth-cohort audience the trailing cycle specifically has not addressed &mdash; with 735 schools shut, 6,100 arrests since mid-September, 30 university campuses blockaded, and Prime Minister S&eacute;bastien Lecornu now the fifth prime minister in under two years. Dalio names the deepest claim: a FY2026 deficit above 5.5 per cent of GDP against the 3-per-cent Maastricht baseline, a political-fragmentation register specifically carrying five prime ministers since the June-2024 dissolution, an OAT-and-Bund spread opening at 92 basis points, and a three-way opposition polling cadence (RN 32-plus, LFI 18-plus, Macron-camp 20) specifically open the Dalio counter-register against the Macron-era political cadence. Aristotle names the stability test: the trailing-cycle Blanquer-and-Attal baccalaureate reform cadence compressed the schedule-and-examination register through Parcoursup, and the Lecornu government specifically has to re-open the institutional cadence through the end-October reform package or specifically absorb the counter-register through the governing-cadence compression. Greene&rsquo;s Law 11 names the reversal: the Macron-era dependency-registers (Parcoursup, France Travail) specifically broke in 2026; the youth-cohort runs the Lyc&eacute;e protest cadence outside the Macron institutional cadence, and the LFI-and-RN opposition register absorbs the political cadence outside the Macron-camp register. La Rochefoucauld names the self-interest: the RN-and-LFI opposition register specifically operates in the principle-plus-institutional-counterweight register without carrying the governing-cost against the executive-register. The reader who watches the daily protest-and-arrest bulletin is reading the moment. The reader who watches whether the end-October Lecornu package specifically absorbs the primary student-union register into a settlement cadence, whether a specifically-named general-strike cadence above the 1 October 300,000-worker baseline opens inside the fortnight, whether a third no-confidence motion opens inside the Budget cycle, whether the OAT-and-Bund spread opens above 100 basis points inside Q4, and whether a specifically-named ratings action against the French sovereign opens inside the November-and-December review cycle, is reading the substance the Compression is sized to carry.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; on the Lyc&eacute;e Compression</cite>
+  </div>
+  <!-- FULL PULL QUOTE -->
+  <div class="full-pull">
+    <blockquote>
+      <span class="mark">&ldquo;</span>Three counter-register moments closed on the tape today, each a specific instance of how a governing register specifically meets its political-economic ceiling at the audience the trailing cycle specifically has not addressed. From Riyadh, four days after a Houthi ballistic missile penetrated the Patriot-and-THAAD intercept geometry above King Khalid International Airport and detonated inside Terminals 3 and 4, killing twelve and wounding more than three hundred in the deadliest Gulf-Arab capital strike since the US-Iran war opened in April, a hegemon already carrying the Hormuz naval blockade since 13 July specifically priced entry into a second active theatre against a non-state proxy whose patron it specifically has not yet broken, with Mearsheimer naming the great-power overstretch register against a Pacific-cum-Gulf two-theatre configuration, Sun Tzu naming the walled-position discipline against the Marran-and-Sanaa-and-Saada mountain-redoubt geography the 2015-to-2022 Saudi-led campaign and the 52-day March-2025 Rough Rider operation specifically did not break, Greene&rsquo;s Law 22 on surrender-to-recover through the Saudi-direct-sales cadence rather than the direct-instrument register, Dalio naming the imperial-overreach arithmetic a 6.6-per-cent-of-GDP deficit and a continuing-resolution register without a Yemen supplemental specifically price against, and LKY naming the alliance-management cadence a Gulf-state principal specifically absorbs. From Mumbai, one week after the Reserve Bank of India specifically raised the repo rate twenty-five basis points to 5.50 per cent and specifically pivoted the stance from neutral to calibrated-tightening on the first hike since February 2023, a middle-order emerging economy specifically pivoted the central-bank cadence against the Hormuz-blockade-cum-crude-register compression its own instruments specifically cannot reach, with Dalio naming the emerging-economy monetary-pivot through the currency-and-import-cost defence register, Munger naming the incentive-caused bias of the stance-register as the audience-visible instrument against the primary-dealer-and-foreign-portfolio cadence, LKY naming the energy-sovereignty discipline the monetary register specifically cannot deliver through a 9.5-day strategic reserve against the IEA 90-day benchmark, Confucius naming the household-basket register at a 45.9-per-cent food-and-beverage CPI weight, and Clausewitz naming the friction register at which a domestic policy cadence specifically meets an exogenous shock. From Paris, seven days after the 7 October mobilisation specifically counted 250,000-to-450,000 demonstrators and specifically shut 735 schools against the trailing-cycle Blanquer-and-Attal baccalaureate reform cadence, a late-cycle democratic configuration whose institutional architecture specifically absorbed a generation of consolidation specifically opened the counter-register through the youth-cohort audience the trailing cycle specifically has not addressed, with Aristotle naming the youth-cohort counter-register and the regime-stability test, Dalio naming the late-cycle democratic configuration under a five-prime-ministers-in-two-years cadence and an OAT-and-Bund spread at 92 basis points, Greene&rsquo;s Law 11 reversal on the dependency-register the Macron-era instruments specifically broke in 2026, La Rochefoucauld naming the self-interest beneath principle in both the government and the opposition register, and Mearsheimer in the margin on the structural-capacity register a European great-power specifically runs through its domestic-political-economic baseline. Three moments, three theatres, three counter-registers &mdash; and three specific calendars (the fortnight-and-FY2027-supplemental horizon in the Gulf, the 3-5 December MPC and the Monday MoSPI print in Mumbai, the end-October Lecornu reform package and the November-and-December Budget cycle in Paris) by which the governing cadence either specifically re-opens the institutional register or specifically absorbs the compression through the counter-register.<span class="mark">&rdquo;</span>
+    </blockquote>
+    <cite>The Stratagem &middot; House Maxim</cite>
+  </div>
+  <!-- REFLECTION -->
+  <footer class="reflection">
+    <div class="label">&mdash; Question for the Day &mdash;</div>
+    <p class="question">Three counter-register moments closed on the tape today, each a specific instance of how a governing register specifically meets its political-economic ceiling at the audience the trailing cycle specifically has not addressed. In the Gulf a hegemon already carrying the Hormuz naval blockade since 13 July specifically priced entry into a second active theatre against a non-state proxy whose patron it specifically has not yet broken, after a Houthi ballistic missile killed twelve inside Terminals 3 and 4 of King Khalid International Airport, with Mearsheimer naming the great-power overstretch register, Sun Tzu naming the walled-position discipline, Greene&rsquo;s Law 22 naming the Saudi-direct-sales cadence, Dalio naming the imperial-overreach arithmetic, and LKY naming the alliance-management cadence. In India a middle-order emerging economy specifically pivoted the central-bank cadence against the Hormuz-blockade-cum-crude-register compression its own instruments specifically cannot reach, after a twenty-five-basis-point hike to 5.50 and the stance-pivot to calibrated-tightening on the first hike since February 2023, with Dalio naming the emerging-economy monetary-pivot, Munger naming the incentive-caused bias of the stance-register, LKY naming the energy-sovereignty discipline, Confucius naming the household-basket register, and Clausewitz naming the friction register. In France a late-cycle democratic configuration whose institutional architecture specifically absorbed a generation of consolidation specifically opened the counter-register through the youth-cohort audience the trailing cycle specifically has not addressed, after 735 schools shut and 6,100 arrests under the Lecornu-fifth-prime-ministers-in-two-years cadence, with Aristotle naming the youth-cohort counter-register, Dalio naming the late-cycle democratic configuration, Greene&rsquo;s Law 11 reversal naming the dependency-register broken in 2026, La Rochefoucauld naming the self-interest beneath principle, and Mearsheimer in the margin on the structural-capacity register. Where in your own operating theatre does the direct instrument specifically price entry against a counterpart whose patron you specifically have not yet broken &mdash; and which Sun-Tzu walled-position discipline or Greene-Law-22 move would specifically route the compression through the proxy-cum-supply-interdiction register rather than through the direct-instrument one the audience-visible event specifically prices against? Which exogenous shock specifically runs the import-cost or supply-cost arithmetic ahead of your own instruments inside your political-economic register, and does the audience-visible stance-register compression specifically absorb the market-expectation register ahead of the policy-rate or primary-instrument one? And where in your own position has the trailing-cycle institutional cadence specifically broken the dependency-register that specifically held your audience inside the executive-register, and which specifically-named resource-and-institutional instrument above the structural-expenditure threshold would specifically re-open the dependency-register as a one-cycle event rather than specifically absorb the counter-register through the governing-cadence compression into the next electoral window?</p>
+  </footer>
+  <!-- COLOPHON -->
+  <div class="colophon">
+    <div>Folio 183 &middot; MMXXVI</div>
+    <div class="c">The Stratagem &middot; Private Edition &middot; R. Becker</div>
+    <div class="r">&mdash; fin &mdash;</div>
+  </div>
+
+
+  </div>
+  </div>
+
+
+</div>
+
+
+<script>
+(function(){
+  const issueId   = document.body.dataset.issueId   || 'issue-unknown';
+  const issueDate = document.body.dataset.issueDate || new Date().toISOString().slice(0,10);
+  const issueNum  = (issueId.match(/\d+/) || ['?'])[0];
+  const countEl   = document.getElementById('yc-count');
+  const statusEl  = document.getElementById('yc-status');
+  const exportBtn = document.getElementById('yc-export');
+  const beliefsBtn= document.getElementById('yc-export-beliefs');
+  const clearBtn  = document.getElementById('yc-clear');
+  const notesBtn  = document.getElementById('yc-export-notes');
+
+  // 1) Render the Stratagem's call inside each slot from data- attributes
+  document.querySelectorAll('.bet-slot').forEach(slot => {
+    const card   = slot.querySelector('.bet-card');
+    const value  = card.dataset.stratagemValue;
+    const because= card.dataset.stratagemBecause;
+    if (!value) return;
+    const type = slot.querySelector('.your-call').dataset.callType || 'prob';
+    const display = (type === 'prob') ? `${value}%` : value;
+    const sc = document.createElement('div');
+    sc.className = 'stratagem-call';
+    sc.innerHTML =
+      `<div class="sc-head">The Stratagem's call</div>` +
+      `<div class="sc-value">${display}</div>` +
+      `<div class="sc-because">${because}</div>`;
+    slot.appendChild(sc);
+  });
+
+  // 2a) Wire auto-save on reader-notes textareas
+  const noteTAs = document.querySelectorAll('.reader-notes textarea');
+  const noteKeyFor = (noteId) => `notes:${issueId}:${noteId}`;
+  noteTAs.forEach(ta => {
+    const k = noteKeyFor(ta.dataset.noteId);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) ta.value = saved;
+    ta.addEventListener('input', () => {
+      if (ta.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, ta.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  // 2b) Wire auto-save on all inputs
+  const inputs = document.querySelectorAll('.your-call input');
+  const keyFor = (mid, field) => `ledger:${issueId}:${mid}:${field}`;
+  inputs.forEach(input => {
+    const k = keyFor(input.dataset.marketId, input.dataset.field);
+    const saved = localStorage.getItem(k);
+    if (saved !== null) input.value = saved;
+    input.addEventListener('input', () => {
+      if (input.value === '') localStorage.removeItem(k);
+      else localStorage.setItem(k, input.value);
+      statusEl.textContent = '';
+      update();
+    });
+  });
+
+  function collect() {
+    const out = [];
+    document.querySelectorAll('.bet-slot').forEach(slot => {
+      const card = slot.querySelector('.bet-card');
+      const yc   = slot.querySelector('.your-call');
+      const raw  = slot.querySelector('.yc-value').value.trim();
+      if (!raw) return;
+      const type = yc.dataset.callType || 'prob';
+      const display = (type === 'prob') ? `${raw}%` : raw;
+      const scVal = card.dataset.stratagemValue;
+      const stratagemDisplay = scVal ? ((type === 'prob') ? `${scVal}%` : scVal) : '—';
+      out.push({
+        mid: card.dataset.marketId,
+        question: card.dataset.marketQuestion,
+        resolves: card.dataset.marketResolves || 'TBD',
+        you: display,
+        stratagem: stratagemDisplay,
+        stratagemBecause: card.dataset.stratagemBecause || '',
+        market: card.dataset.marketOdds || '—',
+        because: slot.querySelector('.yc-because').value.trim()
+      });
+    });
+    return out;
+  }
+
+  function formatLedger(preds) {
+    return preds.map(p => {
+      const because = p.because ? `because ${p.because}` : `because —`;
+      return `- ${issueDate} → ${p.resolves} · YOU ${p.you} · STRATAGEM ${p.stratagem} · MARKET ${p.market} · ${p.question} · ${because} [market: Polymarket "${p.question}"]`;
+    }).join('\n');
+  }
+
+  function formatBeliefs(preds) {
+    return preds.map(p => {
+      const reason = p.because || '—';
+      return `#### ${issueDate} — ${p.question}\n**My call:** ${p.you}\n${reason}`;
+    }).join('\n\n');
+  }
+
+  function collectNotes() {
+    const out = [];
+    const headlines = document.querySelectorAll('.headline');
+    noteTAs.forEach((ta, i) => {
+      const text = ta.value.trim();
+      if (!text) return;
+      const hl = headlines[i] ? headlines[i].textContent.trim() : `Section ${i+1}`;
+      const rom = ['I', 'II', 'III'][i] || `${i+1}`;
+      out.push({ rom, headline: hl, text });
+    });
+    return out;
+  }
+
+  function formatNotes(notes) {
+    return notes.map(n => `#### ${n.rom}. ${n.headline}\n${n.text}`).join('\n\n');
+  }
+
+  function update() {
+    const n = collect().length;
+    const nn = collectNotes().length;
+    if (n === 0 && nn === 0) {
+      countEl.textContent = 'No predictions or notes yet — scroll back and engage with the stories.';
+      exportBtn.textContent = 'Copy to Ledger';
+      beliefsBtn.textContent = 'Copy to Beliefs';
+      notesBtn.textContent = 'Copy notes';
+    } else {
+      const parts = [];
+      if (n > 0) parts.push(`${n} call${n===1?'':'s'}`);
+      if (nn > 0) parts.push(`${nn} note${nn===1?'':'s'}`);
+      countEl.textContent = `You've logged ${parts.join(' and ')} this morning. Export while the reading is still fresh.`;
+      exportBtn.textContent = n > 0 ? `Copy ${n} call${n===1?'':'s'} to Ledger` : 'Copy to Ledger';
+      beliefsBtn.textContent = n > 0 ? `Copy ${n} belief${n===1?'':'s'}` : 'Copy to Beliefs';
+      notesBtn.textContent = nn > 0 ? `Copy ${nn} note${nn===1?'':'s'}` : 'Copy notes';
+    }
+    exportBtn.disabled = (n === 0);
+    beliefsBtn.disabled = (n === 0);
+    notesBtn.disabled = (nn === 0);
+  }
+
+  async function copyToClipboard(text, okMsg) {
+    try {
+      await navigator.clipboard.writeText(text);
+      statusEl.textContent = okMsg;
+    } catch (e) {
+      window.prompt('Clipboard blocked — copy this manually (Cmd+C, Enter):', text);
+      statusEl.textContent = 'Ready to paste.';
+    }
+  }
+
+  exportBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n` + formatLedger(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI The Ledger.md under ## Open`);
+  });
+
+  beliefsBtn.addEventListener('click', () => {
+    const preds = collect();
+    if (!preds.length) return;
+    const text = formatBeliefs(preds);
+    copyToClipboard(text, `✓ ${preds.length} copied — paste into @AI Political Beliefs.md under ## Entries`);
+  });
+
+  notesBtn.addEventListener('click', () => {
+    const notes = collectNotes();
+    if (!notes.length) return;
+    const text = `### Issue ${issueNum} — ${issueDate}\n\n` + formatNotes(notes);
+    copyToClipboard(text, `✓ ${notes.length} note${notes.length===1?'':'s'} copied — paste into your vault`);
+  });
+
+  clearBtn.addEventListener('click', () => {
+    if (!confirm("Clear all filled fields for this issue? Only do this AFTER you've exported everything.")) return;
+    inputs.forEach(input => {
+      localStorage.removeItem(keyFor(input.dataset.marketId, input.dataset.field));
+      input.value = '';
+    });
+    noteTAs.forEach(ta => {
+      localStorage.removeItem(noteKeyFor(ta.dataset.noteId));
+      ta.value = '';
+    });
+    statusEl.textContent = 'Fields cleared.';
+    update();
+  });
+
+  update();
+})();
+</script>
+
+</body>
+</html>
